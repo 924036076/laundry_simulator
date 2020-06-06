@@ -34,4 +34,4 @@ func _unhandled_input(event: InputEvent) -> void:
 	# For debugging pathfinding purposes:
 	#var new_path = nav2d.get_simple_path(player.global_position, event.global_position, true)
 	#line2d.points = new_path
-	player.set_path(event.global_position)
+	player.set_target_location(event.global_position)

@@ -8,7 +8,7 @@ enum size {small, medium, large} #TODO: something with size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_particles()
+	update_particles()
 
 func can_wash():
 	return dirty
@@ -19,13 +19,13 @@ func can_dry():
 func wash():
 	dirty = false
 	wet = true
-	set_particles()
+	update_particles()
 	
 func dry():
 	wet = false
-	set_particles()
+	update_particles()
 	
-func set_particles():
+func update_particles():
 	print("setting particles")
 	$"Dirt Particles".emitting = dirty
 	$"Drip Particles".emitting = wet

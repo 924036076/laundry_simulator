@@ -2,7 +2,7 @@ extends Area2D
 
 var default_modulation = Color(1,1,1,1)
 var selected_modulation = Color(1,1,0.5,1)
-var is_target = false
+var is_target = false setget set_target
 var laundry = null
 var interactable = true
 var laundry_available = false
@@ -29,7 +29,6 @@ func _calculate_radius():
 
 func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
-		"player entered me"
 		player_in_range = true
 		if is_target:
 			print("haiii player (from me, the interactable)")
@@ -41,9 +40,6 @@ func _on_Interactable_body_entered(body):
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
 		player_in_range = false
-	
-func _on_Interactable_body_shape_entered(_a, _b, _c, _d):
-	print("what a lovely shape has entered")
 	
 func load_laundry(laundry_in):
 	print("loading!")

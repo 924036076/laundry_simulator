@@ -5,7 +5,7 @@
 [ext_resource path="res://levels/base_level/white floor.png" type="Texture" id=3]
 [ext_resource path="res://models/dryer/Dryer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://models/counter/Counter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NavigationPolygon" id=1]

@@ -23,11 +23,12 @@ func _physics_process(delta: float) -> void:
 func move_along_path(distance : float) -> void:
 	var start_point : = global_position
 
-	for _i in range(path.size()):
+	while path.size():
 		var distance_to_next : = start_point.distance_to(path[0])
 		if distance <= distance_to_next and distance >= 0.0:
 			var move_rotation = get_angle_to(path[0])
 			var motion = Vector2(speed,0).rotated(move_rotation)
+# warning-ignore:return_value_discarded
 			move_and_slide(motion)
 			break
 		elif path.size() == 1 && distance > distance_to_next:
@@ -38,7 +39,7 @@ func move_along_path(distance : float) -> void:
 		start_point = path[0]
 		path.remove(0)
 		
-func set_path(new_target : Vector2) -> void:
+func set_target_location(new_target : Vector2) -> void:
 	target = new_target
 	path = navNode.get_simple_path(global_position, new_target)
 	if path.size() == 0:
@@ -53,7 +54,6 @@ func interact(body, objct_laundry_bool):
 		laundry = body.unload_laundry()
 		laundry.position = offset
 		add_child(laundry)
-	
 	elif laundry and !objct_laundry_bool:
 		print("take it! it smells")
 		remove_child(laundry)
@@ -73,4 +73,4 @@ func _on_Interactable_click(body):
 	else:
 		var distance = global_position.distance_to(target_objct.global_position)
 		var new_target = target_objct.global_position.linear_interpolate(global_position, target_objct.radius/distance)
-		set_path(new_target)
+		set_target_location(new_target)
