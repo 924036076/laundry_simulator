@@ -35,7 +35,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[node name="Washer" instance=ExtResource( 2 )]
+[node name="Washer" groups=[
+"InteractableObjects",
+] instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="2"]

@@ -31,11 +31,8 @@ func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
 		player_in_range = true
 		if is_target:
-			print("haiii player (from me, the interactable)")
 			if interactable:
 				body.interact(self, laundry_available)
-		else:
-			print("but I'm not the target :(")
 			
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
@@ -71,4 +68,10 @@ func set_target(boolean):
 		$Sprite.modulate = selected_modulation
 	else:
 		$Sprite.modulate = default_modulation
+		
+func reset():
+	if laundry:
+		laundry.queue_free()
+	laundry = null
+	laundry_available = false
 

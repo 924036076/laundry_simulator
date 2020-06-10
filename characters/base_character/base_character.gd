@@ -10,13 +10,12 @@ var navNode
 var path : = PoolVector2Array() 
 var speed : = 150
 export(NodePath) var navNodePath
+signal end_of_path
 
 func _ready() -> void:
 	set_physics_process(false)
 	if !navNode:
 		navNode = get_node(navNodePath)
-	print("base character nav initialization")
-	print(navNode)
 	
 func _physics_process(delta: float) -> void:
 	move_along_path(speed*delta)
@@ -40,19 +39,19 @@ func move_along_path(distance : float) -> void:
 			#position = path[0]
 			
 			set_physics_process(false)
-			print('reached the end')
+			emit_signal("end_of_path")
 			break
 		distance -= distance_to_next
 		start_point = path[0]
 		path.remove(0)
-		print('loop iteration')
 		
 func set_target_location(new_target : Vector2) -> void:
-	print("new target!")
 	target = new_target
-	print(navNode)
 	path = navNode.get_simple_path(global_position, new_target)
 	if path.size() == 0:
 		print("you sent me an empty array!")
 		return
 	set_physics_process(true)
+
+func _on_end_of_path():
+	pass # Replace with function body.

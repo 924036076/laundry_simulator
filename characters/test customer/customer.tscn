@@ -7,29 +7,30 @@
 [ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 41.3064
+radius = 37.3546
 
 [node name="Customer" instance=ExtResource( 1 )]
 z_index = 1
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 script = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="." index="3"]
+[node name="Bumper" type="Area2D" parent="." index="3"]
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="." index="4"]
-wait_time = 25.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Ticket" parent="." index="5" instance=ExtResource( 5 )]
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Interactable_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_Interactable_body_exited"]
+[connection signal="area_entered" from="Bumper" to="." method="_on_Bumper_area_entered"]
+[connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
+[connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

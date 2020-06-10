@@ -28,3 +28,5 @@ func load_laundry(laundry_in):
 	.load_laundry(laundry_in)
 	emit_signal("returned")
 	print("returned")
+	
+	

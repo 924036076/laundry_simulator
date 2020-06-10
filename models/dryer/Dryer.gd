@@ -19,3 +19,9 @@ func _finish_load():
 	$AnimationPlayer.play("idle")
 	laundry.visible = true
 	laundry_available = true
+
+func reset():
+	.reset()
+	$AnimationPlayer.play("idle")
+	$Timer.stop()
+	interactable = true
