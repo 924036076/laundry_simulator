@@ -3,26 +3,26 @@ extends Node2D
 onready var nav2d : Navigation2D = $Navigation2D
 onready var line2d : Line2D = $Line2D
 onready var player : Sprite = $Objects/Player
-var counters_in
-var counters_out # Distinction between type of counters will go away in future
+onready var register : StaticBody2D = $Objects/Register
+var counters
+#var customers
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	counters_in = $Objects/Counters_In.get_children()
-	counters_out = $Objects/Counters_Out.get_children()
-	generate_laundry()
+	counters = $Objects/Counters.get_children()
+	#customers = $Objects/Customers.get_children()
+	initialize_level()
 	
 			
-func generate_laundry():
-	# Mostly for debugging purposes right now
-	# Will have customers come in with laundry for actual gameplay
-	for counter in counters_in:
+func initialize_level():
+	for counter in counters:
 		var laundry = preload("res://models/laundry/laundry.tscn").instance()
-		counter.load_laundry(laundry)
+		counter.load_laundry(laundry) #debug
 		counter.connect("click", $Objects/Player, "_on_Interactable_click")
 		
-	for counter in counters_out:
-		counter.connect("click", $Objects/Player, "_on_Interactable_click")
+	var target = register.global_position
+	$Spawner.init($Navigation2D, target, player)
+	
 
 # Called when player clicks on screen but not on an interactable
 func _unhandled_input(event: InputEvent) -> void:

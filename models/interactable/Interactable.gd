@@ -63,6 +63,7 @@ func _unhandled_input(event):
 	if mouse_over and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
 		get_tree().set_input_as_handled()
 		emit_signal("click", self)
+		print("click signal!")
 		
 func set_target(boolean):
 	is_target = boolean
