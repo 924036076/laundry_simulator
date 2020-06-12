@@ -17,7 +17,7 @@ func _ready():
 			
 func initialize_level():
 	for counter in counters:
-		var laundry = preload("res://models/laundry/laundry.tscn").instance()
+		#var laundry = preload("res://models/laundry/laundry.tscn").instance()
 		#counter.load_laundry(laundry) #debug
 		counter.connect("click", $Objects/Player, "_on_Interactable_click")
 	var target = register.global_position

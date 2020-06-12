@@ -118,7 +118,7 @@ position = Vector2( 242.746, 129.2 )
 
 [node name="Spawner" type="Node2D" parent="."]
 light_mask = 3
-position = Vector2( -102.443, 144.448 )
+position = Vector2( 14.557, 147.448 )
 script = ExtResource( 10 )
 
 [node name="Timer" type="Timer" parent="Spawner"]

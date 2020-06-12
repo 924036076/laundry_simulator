@@ -1,6 +1,6 @@
 extends "res://Characters/base_character/base_character.gd"
 
-var return_destination : Vector2 setget set_return_destination
+var return_destination : Vector2 
 var register : Vector2 
 var my_laundry
 enum State {entering, waiting, leaving}
@@ -14,7 +14,7 @@ signal score
 func _ready():
 	._ready()
 	set_physics_process(false)
-	speed = 100
+	speed = 100 # TODO: have different levels of speed and remove this magic number
 	my_laundry = preload("res://models/laundry/laundry.tscn").instance()
 	$Bumper.load_laundry(my_laundry)
 	$Bumper.connect("released", self, "drop_off")
@@ -24,25 +24,39 @@ func _ready():
 	current_state = State.entering
 	print("entering is " + str(State.entering) + " and waiting is " + str(State.waiting))
 
-func set_id(id : int):
+func init(node : Navigation2D, id : int, destination : Vector2, wait_time : float):
+	navNode = node
+	set_laundry_id(id)
+	return_destination = destination
+	$Timer.set_wait_time(wait_time)
+
+func set_laundry_id(id : int):
 	if my_laundry:
 		my_laundry.id = id
 		$Ticket/Label.text = str(id)
 	else:
 		print_debug("ERROR: no laundry to give id")
 
-func set_nav_node(node : Navigation2D):
-	navNode = node
-	print(navNode)
-
 func send_off(destination : Vector2):
 	register = destination
 	set_target_location(register)
 	$Bumper.interactable = true
+	var overlapping_customers = check_for_customers()
+	while overlapping_customers:
+		yield(get_tree().create_timer(.5), "timeout")
+		overlapping_customers = check_for_customers()
+	$Bumper.monitorable = true
 	current_state = State.entering
 
-func set_return_destination(destination : Vector2):
-	return_destination = destination
+	get_parent().get_parent().move_to_end(self)
+
+func check_for_customers():
+	var overlapping_customers = false
+	var overlapping_areas = $Bumper.get_overlapping_areas()
+	for area in overlapping_areas:
+		if area.get_name() == $Bumper.get_name():
+			overlapping_customers = true
+	return overlapping_customers
 	
 func drop_off():
 	$Bumper.interactable = false
@@ -63,6 +77,8 @@ func leave_store():
 	current_state = State.leaving
 	set_target_location(return_destination)
 	emit_signal("leaving", get_index())
+	$Bumper.set_deferred("monitorable", false)
+	$Sprite.visible = false
 
 func assess_laundry():
 	print("hmmm maybe")
@@ -75,10 +91,8 @@ func assess_laundry():
 
 func _on_Timer_timeout():
 	print("WHERE'S MY LAUNDRY??")
-	set_target_location(register)
-	$Bumper.interactable = true
-	current_state = State.entering
-	get_parent().get_parent().move_to_end(self)
+	$Sprite.visible = true
+	send_off(register)
 
 func _on_Bumper_area_entered(area : Area2D):
 	if area.get_name() == $Bumper.get_name(): # in another customer's grill

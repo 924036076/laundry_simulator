@@ -14,7 +14,7 @@ signal end_of_path
 
 func _ready() -> void:
 	set_physics_process(false)
-	if !navNode:
+	if !navNode and navNodePath:
 		navNode = get_node(navNodePath)
 	
 func _physics_process(delta: float) -> void:
