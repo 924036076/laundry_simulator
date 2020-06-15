@@ -7,12 +7,12 @@
 [ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 37.3546
+radius = 44.1688
 
 [node name="Customer" instance=ExtResource( 1 )]
 z_index = 1
-collision_layer = 2
-collision_mask = 4
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="1"]
@@ -20,6 +20,7 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
 [node name="Bumper" type="Area2D" parent="." index="3"]
+collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]

@@ -45,4 +45,8 @@ func set_target_location(destination : Vector2):
 		
 func enable(input : bool):
 	enabled = input
+	
+func reset():
+	if laundry:
+		laundry.queue_free()
 

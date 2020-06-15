@@ -1,9 +1,7 @@
 extends Node2D
 
 onready var nav2d : Navigation2D = $Navigation2D
-onready var line2d : Line2D = $Line2D
 onready var player : Sprite = $Objects/Player
-onready var register : StaticBody2D = $Objects/Register
 var counters
 #var customers
 
@@ -20,13 +18,15 @@ func initialize_level():
 		#var laundry = preload("res://models/laundry/laundry.tscn").instance()
 		#counter.load_laundry(laundry) #debug
 		counter.connect("click", $Objects/Player, "_on_Interactable_click")
-	var target = register.global_position
-	$Spawner.init($Navigation2D, target, player)
+	$Spawner.init($Navigation2D, player)
 
 # Called when player clicks on screen but not on an interactable
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
+	
+	if event.button_index == BUTTON_RIGHT:
+		$Spawner.create_and_send_customer()
 	
 	if event.button_index != BUTTON_LEFT or not event.pressed:
 		return
@@ -42,6 +42,7 @@ func _on_HUD_new_game():
 	$Clock.reset()
 	$Clock.start()
 	refresh_interactables()
+	player.reset()
 	player.enable(true)
 
 func refresh_interactables():

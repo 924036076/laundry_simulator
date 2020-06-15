@@ -1,10 +1,11 @@
 extends CanvasLayer
 
 signal new_game
-var game_over_msg = "Game Over"
+var game_over_msg = "Day End"
+var new_game_button = "Restart"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Score.visible = false
+	#$Score.visible = false
 	show_overlay(null)
 
 func show_overlay(score):
@@ -15,6 +16,7 @@ func show_overlay(score):
 		$Score.text = str(score)
 		$Score.visible = true
 		$Title.text = game_over_msg
+		$Button.text = new_game_button
 		
 	$Title.visible = true
 	
