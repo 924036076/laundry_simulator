@@ -1,14 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://game_utils/MoneyLabel.gd" type="Script" id=1]
-[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://models/money_label/MoneyLabel.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:percent_visible")
 tracks/0/interp = 1
@@ -22,8 +21,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "static"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:percent_visible")
 tracks/0/interp = 1
@@ -39,21 +37,23 @@ tracks/0/keys = {
 
 [node name="MoneyLabel" type="Node2D"]
 z_index = 2
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -0.513336
-margin_top = 0.513336
-margin_right = 39.4867
-margin_bottom = 22.5133
-custom_fonts/font = SubResource( 3 )
+margin_left = -20.5337
+margin_top = -10.2668
+margin_right = 19.4663
+margin_bottom = 11.7332
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.545098, 0.0666667, 1 )
 text = "$50"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "static"
-"anims/New Anim" = SubResource( 1 )
-anims/static = SubResource( 2 )
+"anims/New Anim" = SubResource( 2 )
+anims/static = SubResource( 3 )

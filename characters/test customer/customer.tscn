@@ -10,20 +10,28 @@
 radius = 44.1688
 
 [node name="Customer" instance=ExtResource( 1 )]
+position = Vector2( 0.146393, 0 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 4 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( -0.271858, 7.14686 )
+
 [node name="Sprite" parent="." index="1"]
+position = Vector2( -5.9979, 4.09402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
+flip_h = true
 
 [node name="Bumper" type="Area2D" parent="." index="3"]
+position = Vector2( -8.36243, 2.09061 )
 collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
+position = Vector2( 5.81374, 0.193714 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="." index="4"]
@@ -31,7 +39,6 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Ticket" parent="." index="5" instance=ExtResource( 5 )]
-[connection signal="area_entered" from="Bumper" to="." method="_on_Bumper_area_entered"]
 [connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

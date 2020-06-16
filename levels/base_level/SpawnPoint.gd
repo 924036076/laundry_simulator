@@ -51,10 +51,13 @@ func _on_Timer_timeout():
 	$CustomerTimer.set_wait_time(rand_range(next_customer_min, next_customer_max))
 
 func create_and_send_customer(num : int):
-	for i in range(num):
+	for _i in range(num):
 		send_customer(create_customer())
 			
 func reset():
+	for child in $Customers.get_children():
+		child.queue_free()
+	waiting_customers = []
 	next_id = 0
 
 func start():
@@ -65,11 +68,13 @@ func start():
 func stop():
 	$CustomerTimer.stop()
 	$WaitTimer.stop()
-	for child in $Customers.get_children():
-		child.queue_free()
 	queued_customers = []
-	waiting_customers = []
 
+func get_angry():
+	if waiting_customers:
+		for customer in waiting_customers:
+			customer.storm_off()
+			
 func _on_Clock_new_hour(hour : int):
 	if hour >= LAST_CUSTOMER_HOUR:
 		$CustomerTimer.stop()

@@ -4,6 +4,7 @@ var wet = false
 var dirty = true
 var bloody = false
 var soiled = false
+var starting_cleanliness : float = 1
 var highest_unfinished_score : float = 0.25
 enum size {small, medium, large} #TODO: something with size
 var id : int
@@ -11,6 +12,7 @@ var id : int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_particles()
+	starting_cleanliness = assess_cleanliness()
 
 func can_wash():
 	return dirty
@@ -49,6 +51,15 @@ func assess_cleanliness() -> float:
 	if cleanliness < 1:
 		cleanliness = min(cleanliness, highest_unfinished_score)
 	return cleanliness
+	
+func score_laundry() -> float:
+	# TODO: integrate laundry scoring function to only give money when clothes
+	# are better off than they started
+	var score : float = 0.0
+	var current_cleanliness = assess_cleanliness()
+	if current_cleanliness > starting_cleanliness:
+		score = current_cleanliness - starting_cleanliness
+	return score
 	
 func show_ticket():
 	$Ticket/Label.text = str(id)

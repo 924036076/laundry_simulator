@@ -52,5 +52,6 @@ func refresh_interactables():
 func _on_Clock_day_over():
 	$Clock.stop()
 	$Spawner.stop()
+	$Spawner.get_angry()
 	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
 	player.enable(false)

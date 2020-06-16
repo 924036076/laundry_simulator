@@ -6,7 +6,12 @@ var my_laundry
 enum State {entering, waiting, leaving}
 var current_state
 var score_multiplier : int = 50
-var money_label_offset = Vector2(-15, -52)
+var money_label_offset = Vector2(0, -40)
+var expression_offset = Vector2(0, -52)
+var score : float = 0
+var cleanliness_pct : float = 0
+var happy_cutoff : float = 0.9
+var mad_cutoff : float = 0.25
 
 signal leaving
 signal score
@@ -19,7 +24,9 @@ func _ready():
 	speed = 100 # TODO: have different levels of speed and remove this magic number
 	my_laundry = preload("res://models/laundry/laundry.tscn").instance()
 	$Bumper.load_laundry(my_laundry)
+# warning-ignore:return_value_discarded
 	$Bumper.connect("released", self, "drop_off")
+# warning-ignore:return_value_discarded
 	$Bumper.connect("returned", self, "receive_order")
 	$Ticket.visible = false
 	print("customer initialized and reporting for duty!")
@@ -41,6 +48,7 @@ func set_laundry_id(id : int):
 		print_debug("ERROR: no laundry to give id")
 	
 func drop_off():
+	set_physics_process(false)
 	print("dropped off!")
 	$Bumper.interactable = false
 	$Ticket.visible = true
@@ -53,6 +61,10 @@ func receive_order():
 	$Bumper.interactable = false
 	$Ticket.visible = false
 	assess_laundry()
+	if cleanliness_pct >= happy_cutoff or cleanliness_pct < mad_cutoff:
+		var expression = emote(cleanliness_pct)
+		yield(expression, "animation_finished")
+	show_money_earned(score, cleanliness_pct)
 	leave_store()
 	
 func leave_store():
@@ -63,25 +75,39 @@ func leave_store():
 
 func assess_laundry():
 	print("hmmm maybe")
-	var score : float = 0.0
-	var cleanliness_pct : float = 0.0
 	if $Bumper.laundry == my_laundry:
 		print("it's my order!")
 		cleanliness_pct = my_laundry.assess_cleanliness()
 		score = cleanliness_pct * score_multiplier
-
 	emit_signal("score", score)
-	print("your score is: " + str(score))
-	var label = preload("res://game_utils/MoneyLabel.tscn").instance()
+	
+# warning-ignore:shadowed_variable
+func show_money_earned(score : float, percent : float):
+	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
 	add_child(label)
 	label.position = money_label_offset
-	label.display("$" + str(round(score)), cleanliness_pct)
-
+	label.display("$" + str(round(score)), percent)
+	
+func emote(percentage):
+	# May handle more than one emotion in future
+	var expression = preload("res://characters/expressions/Expression.tscn").instance()
+	expression.position = expression_offset
+	add_child(expression)
+	if percentage >= happy_cutoff:
+		expression.play("happy")
+	elif percentage < mad_cutoff:
+		expression.play("mad")
+	return expression
+	
+func storm_off():
+	var expression = emote(0.0)
+	yield(expression, "animation_finished")
+	leave_store()
+	
 func _on_Timer_timeout():
 	print("WHERE'S MY LAUNDRY??")
 	emit_signal("returning", self)
 	$Bumper.interactable = true
-	#send_off(register)
 
 func _on_end_of_path():
 	if current_state != State.leaving:
