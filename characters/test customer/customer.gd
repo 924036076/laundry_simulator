@@ -6,6 +6,7 @@ var my_laundry
 enum State {entering, waiting, leaving}
 var current_state
 var score_multiplier : int = 50
+var money_label_offset = Vector2(-15, -52)
 
 signal leaving
 signal score
@@ -24,6 +25,7 @@ func _ready():
 	print("customer initialized and reporting for duty!")
 	current_state = State.entering
 	print("entering is " + str(State.entering) + " and waiting is " + str(State.waiting))
+
 
 func init(node : Navigation2D, id : int, wait_time : float):
 	navNode = node
@@ -62,14 +64,18 @@ func leave_store():
 func assess_laundry():
 	print("hmmm maybe")
 	var score : float = 0.0
+	var cleanliness_pct : float = 0.0
 	if $Bumper.laundry == my_laundry:
 		print("it's my order!")
-		score = my_laundry.assess_cleanliness() * score_multiplier
+		cleanliness_pct = my_laundry.assess_cleanliness()
+		score = cleanliness_pct * score_multiplier
+
 	emit_signal("score", score)
 	print("your score is: " + str(score))
 	var label = preload("res://game_utils/MoneyLabel.tscn").instance()
 	add_child(label)
-	label.display("$" + str(score), my_laundry.assess_cleanliness())
+	label.position = money_label_offset
+	label.display("$" + str(round(score)), cleanliness_pct)
 
 func _on_Timer_timeout():
 	print("WHERE'S MY LAUNDRY??")

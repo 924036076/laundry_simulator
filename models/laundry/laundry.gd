@@ -4,7 +4,7 @@ var wet = false
 var dirty = true
 var bloody = false
 var soiled = false
-var conditions = [wet, dirty, bloody, soiled]
+var highest_unfinished_score : float = 0.25
 enum size {small, medium, large} #TODO: something with size
 var id : int
 
@@ -38,14 +38,17 @@ func update_particles():
 	$"Drip Particles".visible = wet
 	
 func assess_cleanliness() -> float:
+	var conditions = [wet, dirty, bloody, soiled]
 	var max_score : int = conditions.size()
 	var score : float = 0.0
 	
 	for state in conditions:
 		if !state: score += 1
-	
-	print("I'm the laundry and I say I'm about " + str(score/max_score*100) + "% finished")
-	return score/max_score
+		print(state)
+	var cleanliness = score/max_score
+	if cleanliness < 1:
+		cleanliness = min(cleanliness, highest_unfinished_score)
+	return cleanliness
 	
 func show_ticket():
 	$Ticket/Label.text = str(id)
