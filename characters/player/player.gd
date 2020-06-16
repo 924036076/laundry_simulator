@@ -49,4 +49,7 @@ func enable(input : bool):
 func reset():
 	if laundry:
 		laundry.queue_free()
+		laundry = null
+	if target_objct:
+		target_objct = null
 

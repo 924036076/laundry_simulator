@@ -10,7 +10,7 @@ func load_laundry(laundry_in):
 	if laundry.can_dry():
 		$AnimationPlayer.play("running")
 		laundry.visible = false
-		laundry_available = false
+		interactable = false
 		laundry.dry()
 		$Timer.start()
 		yield($Timer, "timeout")
@@ -18,7 +18,7 @@ func load_laundry(laundry_in):
 func _finish_load():
 	$AnimationPlayer.play("idle")
 	laundry.visible = true
-	laundry_available = true
+	interactable = true
 
 func reset():
 	.reset()

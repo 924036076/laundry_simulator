@@ -6,6 +6,7 @@ func _ready():
 	
 func reset():
 	score = 0
+	format_score()
 
 func format_score():
 	set_text("$" + str(score))
