@@ -61,9 +61,8 @@ func receive_order():
 	$Bumper.interactable = false
 	$Ticket.visible = false
 	assess_laundry()
-	if cleanliness_pct >= happy_cutoff or cleanliness_pct < mad_cutoff:
-		var expression = emote(cleanliness_pct)
-		yield(expression, "animation_finished")
+	var expression = emote(cleanliness_pct)
+	yield(expression, "animation_finished")
 	show_money_earned(score, cleanliness_pct)
 	leave_store()
 	
@@ -97,6 +96,8 @@ func emote(percentage):
 		expression.play("happy")
 	elif percentage < mad_cutoff:
 		expression.play("mad")
+	else:
+		expression.play("twitchy")
 	return expression
 	
 func storm_off():
