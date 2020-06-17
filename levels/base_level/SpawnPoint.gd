@@ -10,7 +10,7 @@ var customer_wait_max : float = 30.0
 var queued_customers = []
 var waiting_customers = []
 var max_customers : int
-var starting_customers : int = 3
+var starting_customers : int = 2
 var new_customers_on_timeout : int = 1
 
 var LAST_CUSTOMER_HOUR : int = 14

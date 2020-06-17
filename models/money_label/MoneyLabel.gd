@@ -21,8 +21,8 @@ func display(message : String, percent : float):
 	print(percent)
 	$Label.add_color_override("font_color", color)
 
-	$Label.visible = true
 	$Label.text = message
+	$Label.visible = true
 	$AnimationPlayer.play("New Anim")
 	print(message)
 
