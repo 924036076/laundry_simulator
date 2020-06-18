@@ -13,7 +13,7 @@ var max_customers : int
 var starting_customers : int = 2
 var new_customers_on_timeout : int = 1
 
-var LAST_CUSTOMER_HOUR : int = 14
+var LAST_CUSTOMER_HOUR : int = 16
 
 func init(node : Navigation2D, body : KinematicBody2D):
 	navNode = node
@@ -47,8 +47,11 @@ func manage_queue():
 	_move_line()
 
 func _on_Timer_timeout():
-	create_and_send_customer(new_customers_on_timeout)
-	$CustomerTimer.set_wait_time(rand_range(next_customer_min, next_customer_max))
+	if queued_customers and queued_customers.size() > 2:
+		print("not generating another customer now")
+	else:
+		create_and_send_customer(new_customers_on_timeout)
+		$CustomerTimer.set_wait_time(rand_range(next_customer_min, next_customer_max))
 
 func create_and_send_customer(num : int):
 	for _i in range(num):
@@ -83,6 +86,7 @@ func _move_line():
 	#assert(len(waiting_customers) <= len($WaitingSpots.get_child_count()))
 	for i in range(len(waiting_customers)):
 		waiting_customers[i].set_target_location($WaitingSpots.get_child(i).global_position)
+		waiting_customers[i].decrement_patience()
 
 func handle_leaving(customer):
 	var index = waiting_customers.find(customer)

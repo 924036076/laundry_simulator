@@ -11,6 +11,10 @@ var expression_offset = Vector2(0, -52)
 var score : float = 0
 var cleanliness_pct : float = 0
 var FURIOUS : float = 0.0
+var patience : float = 1.2
+var patience_unit : float = 0.02
+var patience_lower_cutoff : float = 0.2
+var patience_upper_cutoff : float = 0.6
 
 signal leaving
 signal score
@@ -31,7 +35,6 @@ func _ready():
 	print("customer initialized and reporting for duty!")
 	current_state = State.entering
 	print("entering is " + str(State.entering) + " and waiting is " + str(State.waiting))
-
 
 func init(node : Navigation2D, id : int, wait_time : float):
 	navNode = node
@@ -72,11 +75,11 @@ func leave_store():
 	emit_signal("leaving", self)
 
 func assess_laundry():
-	print("hmmm maybe")
 	if $Bumper.laundry == my_laundry:
-		print("it's my order!")
 		cleanliness_pct = my_laundry.assess_cleanliness()
-		score = cleanliness_pct * score_multiplier
+		score = cleanliness_pct * score_multiplier * patience
+		print("patrience: ", patience)
+	stop_patience_particles()
 	emit_signal("score", score)
 	
 # warning-ignore:shadowed_variable
@@ -94,6 +97,7 @@ func emote(happiness_pct: float):
 	return expression
 	
 func storm_off():
+	stop_patience_particles()
 	var expression = emote(FURIOUS)
 	yield(expression, "animation_finished")
 	leave_store()
@@ -107,3 +111,17 @@ func _on_end_of_path():
 	if current_state != State.leaving:
 		current_state = State.waiting
 
+func decrement_patience():
+	patience -= patience_unit
+	if patience < patience_upper_cutoff:
+		$PatienceParticles.emitting = true
+		if patience < patience_lower_cutoff:
+			$PatienceParticles.set_param(CPUParticles2D.PARAM_SCALE, 2)
+			$PatienceParticles.set_param(CPUParticles2D.PARAM_ANIM_SPEED, 2)
+			if patience <= 0:
+				storm_off()
+
+func stop_patience_particles():
+	$PatienceParticles.emitting = false
+	$PatienceParticles.visible = false
+	patience = 5

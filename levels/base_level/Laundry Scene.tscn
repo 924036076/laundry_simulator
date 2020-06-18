@@ -236,6 +236,7 @@ position = Vector2( 932.255, 0 )
 script = ExtResource( 8 )
 
 [node name="MinuteTimer" type="Timer" parent="Clock"]
+wait_time = 1.5
 
 [node name="RichTextLabel" type="Label" parent="Clock"]
 margin_left = 0.144

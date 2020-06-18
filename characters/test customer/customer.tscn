@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/test customer/random customerv2.png" type="Texture" id=2]
 [ext_resource path="res://characters/test customer/Area2D.gd" type="Script" id=3]
 [ext_resource path="res://characters/test customer/customer.gd" type="Script" id=4]
 [ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/expressions/exclamation mark.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 44.1688
+radius = 48.879
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Customer" instance=ExtResource( 1 )]
 position = Vector2( 0.146393, 0 )
@@ -31,7 +35,7 @@ collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
-position = Vector2( 5.81374, 0.193714 )
+position = Vector2( 7.51654, 3.93989 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="." index="4"]
@@ -39,6 +43,18 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Ticket" parent="." index="5" instance=ExtResource( 5 )]
+
+[node name="PatienceParticles" type="CPUParticles2D" parent="." index="6"]
+position = Vector2( 0, -45 )
+emitting = false
+amount = 1
+lifetime = 2.0
+preprocess = 0.5
+texture = ExtResource( 6 )
+spread = 46.93
+gravity = Vector2( 0, 0 )
+scale_amount = 1.25
+scale_amount_curve = SubResource( 2 )
 [connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
