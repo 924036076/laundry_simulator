@@ -112,7 +112,7 @@ func _on_end_of_path():
 		current_state = State.waiting
 
 func decrement_patience():
-	patience -= patience_unit
+	patience -= patience_unit 
 	if patience < patience_upper_cutoff:
 		$PatienceParticles.emitting = true
 		if patience < patience_lower_cutoff:
@@ -124,4 +124,4 @@ func decrement_patience():
 func stop_patience_particles():
 	$PatienceParticles.emitting = false
 	$PatienceParticles.visible = false
-	patience = 5
+	patience = 1

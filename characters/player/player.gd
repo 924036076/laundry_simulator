@@ -4,7 +4,7 @@ var enabled : bool = false
 
 func interact(body, objct_laundry_bool):
 	print("time to make some decisions")
-	#$TransferSoundPlayer.play() # TODO: get better sound
+	$TransferSoundPlayer.play() # TODO: get better sound
 	if !laundry and objct_laundry_bool:  
 		print("mine now!")
 		laundry = body.unload_laundry()
