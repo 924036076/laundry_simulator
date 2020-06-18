@@ -10,8 +10,7 @@ var money_label_offset = Vector2(0, -40)
 var expression_offset = Vector2(0, -52)
 var score : float = 0
 var cleanliness_pct : float = 0
-var happy_cutoff : float = 0.9
-var mad_cutoff : float = 0.25
+var FURIOUS : float = 0.0
 
 signal leaving
 signal score
@@ -87,21 +86,15 @@ func show_money_earned(score : float, percent : float):
 	label.position = money_label_offset
 	label.display("$" + str(round(score)), percent)
 	
-func emote(percentage):
-	# May handle more than one emotion in future
+func emote(happiness_pct: float):
 	var expression = preload("res://characters/expressions/Expression.tscn").instance()
 	expression.position = expression_offset
 	add_child(expression)
-	if percentage >= happy_cutoff:
-		expression.play("happy")
-	elif percentage < mad_cutoff:
-		expression.play("mad")
-	else:
-		expression.play("twitchy")
+	expression.set_and_play(happiness_pct)
 	return expression
 	
 func storm_off():
-	var expression = emote(0.0)
+	var expression = emote(FURIOUS)
 	yield(expression, "animation_finished")
 	leave_store()
 	

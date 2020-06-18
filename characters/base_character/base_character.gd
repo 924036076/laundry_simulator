@@ -8,7 +8,7 @@ var laundry = null
 
 var navNode
 var path : = PoolVector2Array() 
-var speed : = 150
+var speed : = 175
 export(NodePath) var navNodePath
 signal end_of_path
 

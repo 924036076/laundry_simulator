@@ -35,6 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	player.set_target_location(event.global_position)
 
 func _on_HUD_new_game():
+	player.reset()
+	player.enable(true)
 	$HUD.hide_overlay()
 	$Spawner.reset()
 	$Spawner.start()
@@ -42,8 +44,6 @@ func _on_HUD_new_game():
 	$Clock.reset()
 	$Clock.start()
 	refresh_interactables()
-	player.reset()
-	player.enable(true)
 
 func refresh_interactables():
 	print("REFRESHING")

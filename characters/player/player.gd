@@ -4,6 +4,7 @@ var enabled : bool = false
 
 func interact(body, objct_laundry_bool):
 	print("time to make some decisions")
+	$TransferSoundPlayer.play()
 	if !laundry and objct_laundry_bool:  
 		print("mine now!")
 		laundry = body.unload_laundry()
@@ -17,7 +18,6 @@ func interact(body, objct_laundry_bool):
 	target_objct.set_target(false)
 	target_objct = null
 	set_target_location(global_position) #stop moving once interact
-		
 		
 func set_targetobjct(body : Area2D):
 	if target_objct:
@@ -51,5 +51,6 @@ func reset():
 		laundry.queue_free()
 		laundry = null
 	if target_objct:
+		target_objct.set_target(false)
 		target_objct = null
 

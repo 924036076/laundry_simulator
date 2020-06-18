@@ -244,6 +244,9 @@ margin_bottom = 42.0
 custom_fonts/font = ExtResource( 11 )
 custom_colors/font_color = Color( 0.419608, 0.407843, 0.407843, 1 )
 text = "13:50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 13 )
