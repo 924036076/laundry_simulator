@@ -48,7 +48,7 @@ func refresh_interactables():
 	print("REFRESHING")
 	get_tree().call_group("InteractableObjects", "reset")
 	
-func _on_Clock_day_over():
+func _on_day_over():
 	$Clock.stop()
 	$Spawner.stop()
 	$Spawner.get_angry()

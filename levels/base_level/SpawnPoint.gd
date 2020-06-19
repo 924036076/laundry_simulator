@@ -12,6 +12,9 @@ var waiting_customers = []
 var max_customers : int
 var starting_customers : int = 2
 var new_customers_on_timeout : int = 1
+var customers_created : int = 0
+var customers_served : int = 0
+signal day_over
 
 var LAST_CUSTOMER_HOUR : int = 16
 
@@ -34,12 +37,15 @@ func create_customer():
 	customer.add_to_group("dropping_off")
 	
 	next_id += 1
-	
+	customers_created += 1
 	return customer
 
 func send_customer(customer):
 	#all customers (new and returning) go to queue first
 	queued_customers.append(customer)
+
+func _on_WaitTimer_timeout():
+	manage_queue()
 
 func manage_queue():
 	if !waiting_customers or len(waiting_customers) < max_customers:
@@ -109,9 +115,9 @@ func change_customer_group(customer : KinematicBody2D):
 	elif customer.is_in_group("picking_up"):
 		customer.remove_from_group("picking_up")
 		customer.add_to_group("satisfied_customers")
-		
-func _on_WaitTimer_timeout():
-	manage_queue()
+		customers_served += 1
+		if customers_served >= customers_created:
+			emit_signal("day_over")
 
 func _on_Clock_almost_closing():
 	get_tree().call_group("limbo", "last_call")
