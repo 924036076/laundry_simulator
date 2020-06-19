@@ -28,9 +28,10 @@ func create_customer():
 	
 	# Connect the appropriate signals
 	customer.connect("leaving", self, "handle_leaving")
-	customer.connect("returning", self, "send_customer")
+	customer.connect("returning", self, "handle_entering")
 	customer.connect("score", get_parent().get_node("Events"), "update_score")
 	customer.get_node("Bumper").connect("click", player, "_on_Interactable_click")
+	customer.add_to_group("dropping_off")
 	
 	next_id += 1
 	
@@ -81,9 +82,7 @@ func get_angry():
 func _on_Clock_new_hour(hour : int):
 	if hour >= LAST_CUSTOMER_HOUR:
 		$CustomerTimer.stop()
-	#if hour >= LAST_CUSTOMER_HOUR - 1:
 		
-
 func _move_line():
 	#assert(len(waiting_customers) <= len($WaitingSpots.get_child_count()))
 	for i in range(len(waiting_customers)):
@@ -92,11 +91,27 @@ func _move_line():
 
 func handle_leaving(customer):
 	var index = waiting_customers.find(customer)
-	print("index is: " + str(index))
-	print("before: ", waiting_customers.size())
 	waiting_customers.remove(index)
-	print("after: ", waiting_customers.size())
 	customer.set_target_location(global_position)
-
+	change_customer_group(customer)
+	
+func handle_entering(customer):
+	change_customer_group(customer)
+	send_customer(customer)
+	
+func change_customer_group(customer : KinematicBody2D):
+	if customer.is_in_group("dropping_off"):
+		customer.remove_from_group("dropping_off")
+		customer.add_to_group("limbo")
+	elif customer.is_in_group("limbo"):
+		customer.remove_from_group("limbo")
+		customer.add_to_group("picking_up")
+	elif customer.is_in_group("picking_up"):
+		customer.remove_from_group("picking_up")
+		customer.add_to_group("satisfied_customers")
+		
 func _on_WaitTimer_timeout():
 	manage_queue()
+
+func _on_Clock_almost_closing():
+	get_tree().call_group("limbo", "last_call")

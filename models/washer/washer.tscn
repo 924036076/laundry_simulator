@@ -110,7 +110,7 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2( 1.58235, 0 )
+position = Vector2( 4.63326, 0 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 3

@@ -40,7 +40,7 @@ script = ExtResource( 4 )
 position = Vector2( -0.271858, 7.14686 )
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2( -5.9979, 4.09402 )
+position = Vector2( -8, 4.094 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 flip_h = true

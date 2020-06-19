@@ -93,15 +93,22 @@ func emote(happiness_pct: float):
 	
 func storm_off():
 	stop_patience_particles()
-	var expression = emote(FURIOUS)
-	yield(expression, "animation_finished")
+	if score == 0:
+		var expression = emote(FURIOUS)
+		yield(expression, "animation_finished")
 	leave_store()
 	
 func _on_Timer_timeout():
-	print("WHERE'S MY LAUNDRY??")
+	back_to_store()
+	
+func back_to_store():
 	emit_signal("returning", self)
 	$Bumper.interactable = true
 	$Bumper.set_state_pickup()
+	
+func last_call():
+	$Timer.stop()
+	back_to_store()
 
 func decrement_patience():
 	patience -= patience_unit 

@@ -24,10 +24,8 @@ func initialize_level():
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
-	
 	if event.button_index == BUTTON_RIGHT:
-		$Spawner.create_and_send_customer()
-	
+		$Spawner.create_and_send_customer(1)
 	if event.button_index != BUTTON_LEFT or not event.pressed:
 		return
 

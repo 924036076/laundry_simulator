@@ -9,6 +9,7 @@ var CLOSING_HOUR : int = 19
 
 signal new_hour
 signal day_over
+signal almost_closing
 
 func _ready():
 	reset()
@@ -21,6 +22,8 @@ func _on_MinuteTimer_timeout():
 		minutes = 0
 		hours += 1
 		emit_signal("new_hour", hours)
+		if hours >= CLOSING_HOUR - 1:
+			emit_signal("almost_closing")
 		if hours >= CLOSING_HOUR:
 			emit_signal("day_over")
 	update_ui()
