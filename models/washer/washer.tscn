@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://models/washer/washing machine.png" type="Texture" id=1]
 [ext_resource path="res://models/interactable/Interactable.tscn" type="PackedScene" id=2]
@@ -46,12 +46,13 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ) ]
+"values": [ Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "shake"
 length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -62,8 +63,45 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( -5, 0 ), Vector2( 0, 0 ), Vector2( 5, 0 ), Vector2( 0, 0 ) ]
 }
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Sprite:position" ]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "shake"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 210, 42 )
+states/running/node = SubResource( 7 )
+states/running/position = Vector2( 386, 42 )
+transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
+
+[sub_resource type="AnimationNodeBlendTree" id=11]
+graph_offset = Vector2( -349.805, 66.5071 )
+nodes/Blend/node = SubResource( 4 )
+nodes/Blend/position = Vector2( 340, 140 )
+nodes/Shake/node = SubResource( 5 )
+nodes/Shake/position = Vector2( 100, 220 )
+nodes/StateMachine/node = SubResource( 10 )
+nodes/StateMachine/position = Vector2( 20, -60 )
+nodes/output/position = Vector2( 540, 200 )
+node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 1, "Shake" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="Washer" groups=[
 "InteractableObjects",
@@ -71,11 +109,10 @@ tracks/0/keys = {
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2( -2, 0 )
+position = Vector2( 0.139936, 0.183179 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 3
-frame = 1
 
 [node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 5.0
@@ -86,4 +123,11 @@ playback_speed = 2.0
 anims/idle = SubResource( 1 )
 anims/running = SubResource( 2 )
 anims/shake = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Blend/blend_amount = 0.5
+parameters/StateMachine/playback = SubResource( 12 )
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]
