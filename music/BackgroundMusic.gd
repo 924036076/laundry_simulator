@@ -8,5 +8,6 @@ func _ready():
 func restart():
 	# Stops the song loop (if playing) and starts the intro
 	# Song Loop listens for the intro to finish, then plays and loops indefinitely
-	$SongLoop.stop() 
-	$SongIntro.play()
+	if $SongLoop.playing:
+		$SongLoop.stop() 
+		$SongIntro.play()
