@@ -10,7 +10,7 @@
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2( 1.34152, 0 )
+position = Vector2( -4.19109, 0 )
 texture = ExtResource( 2 )
 
 [node name="AnimationTree" parent="." index="5"]

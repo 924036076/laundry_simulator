@@ -5,6 +5,7 @@ extends "res://models/interactable/Interactable.gd"
 # var b = "text"
 signal released
 signal returned
+signal disallowed_customer_action
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,5 +37,5 @@ func set_state_pickup():
 	can_give = false
 	can_receive = true
 	
-	
-	
+func disallowed_action():
+	emit_signal("disallowed_customer_action")

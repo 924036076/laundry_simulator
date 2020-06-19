@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/test customer/random customerv2.png" type="Texture" id=2]
@@ -7,10 +7,26 @@
 [ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=5]
 [ext_resource path="res://characters/expressions/exclamation mark.png" type="Texture" id=6]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -8, 4.094 ), Vector2( -4, 4.094 ), Vector2( -8, 4.094 ), Vector2( -4, 4.094 ), Vector2( -5.9979, 4.09402 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 48.879
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Customer" instance=ExtResource( 1 )]
@@ -29,6 +45,9 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 flip_h = true
 
+[node name="AnimationPlayer" parent="." index="2"]
+anims/shake = SubResource( 1 )
+
 [node name="Bumper" type="Area2D" parent="." index="3"]
 position = Vector2( -8.36243, 2.09061 )
 collision_mask = 2
@@ -36,7 +55,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
 position = Vector2( 7.51654, 3.93989 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="." index="4"]
 wait_time = 10.0
@@ -54,7 +73,8 @@ texture = ExtResource( 6 )
 spread = 46.93
 gravity = Vector2( 0, 0 )
 scale_amount = 1.25
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 3 )
 [connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
+[connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
