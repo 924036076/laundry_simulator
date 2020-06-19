@@ -118,6 +118,5 @@ func stop_patience_particles():
 	$PatienceParticles.visible = false
 	patience = 1
 
-
 func _on_Bumper_disallowed_customer_action():
 	$AnimationPlayer.play("shake")

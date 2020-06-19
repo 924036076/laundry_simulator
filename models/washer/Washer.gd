@@ -28,10 +28,12 @@ func _start_load():
 	laundry.visible = false
 	interactable = false
 	state_machine.travel("running")
+	$AudioStreamPlayer.play()
 	$Timer.start()
 
 func _finish_load():
 	state_machine.travel("idle")
+	$AudioStreamPlayer.stop()
 	laundry.visible = true
 	interactable = true
 	

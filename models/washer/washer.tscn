@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://models/washer/washing machine.png" type="Texture" id=1]
 [ext_resource path="res://models/interactable/Interactable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/washer/Washer.gd" type="Script" id=3]
+[ext_resource path="res://models/washer/washerLoop.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -91,7 +92,7 @@ states/running/position = Vector2( 386, 42 )
 transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
 
 [sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( -349.805, 66.5071 )
+graph_offset = Vector2( -349.805, 193.507 )
 nodes/Blend/node = SubResource( 4 )
 nodes/Blend/position = Vector2( 340, 140 )
 nodes/Shake/node = SubResource( 5 )
@@ -109,11 +110,10 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2( -2.58628, 0 )
+position = Vector2( 1.58235, 0 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 3
-frame = 6
 
 [node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 5.0
@@ -131,4 +131,8 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Blend/blend_amount = 0.5
 parameters/StateMachine/playback = SubResource( 12 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource( 4 )
+volume_db = -10.0
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]
