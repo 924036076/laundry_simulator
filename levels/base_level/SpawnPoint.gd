@@ -81,6 +81,8 @@ func get_angry():
 func _on_Clock_new_hour(hour : int):
 	if hour >= LAST_CUSTOMER_HOUR:
 		$CustomerTimer.stop()
+	#if hour >= LAST_CUSTOMER_HOUR - 1:
+		
 
 func _move_line():
 	#assert(len(waiting_customers) <= len($WaitingSpots.get_child_count()))

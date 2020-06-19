@@ -3,22 +3,41 @@ extends "res://characters/base_character/base_character.gd"
 var enabled : bool = false
 
 func interact(body, objct_laundry_bool):
-	print("time to make some decisions")
-	$TransferSoundPlayer.play() # TODO: get better sound
-	if !laundry and objct_laundry_bool:  
-		print("mine now!")
-		laundry = body.unload_laundry()
-		laundry.position = offset
-		add_child(laundry)
-	elif laundry and !objct_laundry_bool:
-		print("take it! it smells")
-		remove_child(laundry)
-		body.load_laundry(laundry)
-		laundry = null
+	# unallowed to interact scenarios
+	# either body is not interactable, or it can only give and the player's hands are full
+	if !body.interactable or (body.can_give and !body.can_receive and laundry):  
+		$UnallowedSoundPlayer.play()
+		body.disallowed_action()
+	else:	# allowed to interact: swap laundry loads
+		$TransferSoundPlayer.play()
+		var player_laundry = null
+		var object_laundry = null
+		if body.can_receive:
+			player_laundry = unload_laundry()
+		if body.can_give and !laundry:
+			object_laundry = body.unload_laundry()
+		load_laundry(object_laundry)
+		body.load_laundry(player_laundry)
+	
 	target_objct.set_target(false)
 	target_objct = null
 	set_target_location(global_position) #stop moving once interact
-		
+
+func unload_laundry():
+	if !laundry:
+		return null
+	var laundry_out = laundry
+	remove_child(laundry)
+	laundry = null
+	return laundry_out
+	
+func load_laundry(laundry_in):
+	if !laundry_in:
+		return
+	laundry = laundry_in
+	laundry.position = offset
+	add_child(laundry)
+	
 func set_targetobjct(body : Area2D):
 	if target_objct:
 		target_objct.set_target(false)
@@ -32,8 +51,8 @@ func _on_Interactable_click(body):
 		
 	print("got your signal " + str(body.get_name()))
 	set_targetobjct(body)
-	if target_objct.player_in_range and target_objct.interactable:
-		interact(target_objct, target_objct.laundry_available)
+	if target_objct.player_in_range:
+		interact(target_objct, target_objct.laundry_available)	
 	else:
 		var distance = global_position.distance_to(target_objct.global_position)
 		var new_target = target_objct.global_position.linear_interpolate(global_position, target_objct.radius/distance)

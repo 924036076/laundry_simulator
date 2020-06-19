@@ -28,3 +28,4 @@ func hide_overlay():
 
 func _on_Button_pressed():
 	emit_signal("new_game")
+	$AudioStreamPlayer.play()

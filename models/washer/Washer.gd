@@ -6,6 +6,8 @@ func _ready():
 	
 func load_laundry(laundry_in):
 	.load_laundry(laundry_in)
+	if !laundry:
+		return
 	laundry.position = offset
 	if laundry.can_wash():
 		$AnimationPlayer.play("running")
@@ -25,3 +27,6 @@ func reset():
 	$AnimationPlayer.play("idle")
 	$Timer.stop()
 	interactable = true
+	
+func disallowed_action():
+	$AnimationPlayer.play("shake")

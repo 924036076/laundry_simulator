@@ -5,6 +5,8 @@ var selected_modulation = Color(1,1,0.5,1)
 var is_target = false setget set_target
 var laundry = null
 var interactable = true
+var can_give = true
+var can_receive = true
 var laundry_available = false
 var player_in_range = false
 var mouse_over = false
@@ -31,22 +33,23 @@ func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
 		player_in_range = true
 		if is_target:
-			if interactable:
-				body.interact(self, laundry_available)
+			body.interact(self, laundry_available)
 			
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
 		player_in_range = false
 	
 func load_laundry(laundry_in):
-	print("loading!")
+	if !laundry_in:
+		return
 	laundry = laundry_in
 	add_child(laundry)
 	laundry_available = true
 	laundry.position = offset
 
 func unload_laundry():
-	print("unloading!")
+	if !laundry:
+		return null
 	var laundry_to_give = laundry
 	remove_child(laundry)
 	laundry = null
@@ -74,4 +77,7 @@ func reset():
 		laundry.queue_free()
 	laundry = null
 	laundry_available = false
+	
+func disallowed_action():
+	pass
 

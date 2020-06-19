@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://levels/base_level/Laundry Scene.gd" type="Script" id=1]
 [ext_resource path="res://levels/base_level/tile floor.png" type="Texture" id=2]
@@ -8,11 +8,12 @@
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://levels/base_level/Clock.gd" type="Script" id=8]
-[ext_resource path="res://game_utils/background.wav" type="AudioStream" id=9]
+[ext_resource path="res://music/BackgroundMusic.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/base_level/SpawnPoint.gd" type="Script" id=10]
 [ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=11]
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://levels/base_level/HUD.gd" type="Script" id=13]
+[ext_resource path="res://characters/player/transfer.wav" type="AudioStream" id=14]
 [ext_resource path="res://levels/base_level/Events.gd" type="Script" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
@@ -296,13 +297,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 14 )
+
 [node name="Events" type="Node" parent="."]
 script = ExtResource( 15 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -7.068
-autoplay = true
+[node name="BackgroundMusic" parent="." instance=ExtResource( 9 )]
 [connection signal="click" from="Machines/Washer" to="Objects/Player" method="_on_Interactable_click"]
 [connection signal="click" from="Machines/Washer2" to="Objects/Player" method="_on_Interactable_click"]
 [connection signal="click" from="Machines/Dryer" to="Objects/Player" method="_on_Interactable_click"]

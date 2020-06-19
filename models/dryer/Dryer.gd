@@ -6,6 +6,8 @@ func _ready():
 
 func load_laundry(laundry_in):
 	.load_laundry(laundry_in)
+	if !laundry:
+		return
 	laundry.position = offset
 	if laundry.can_dry():
 		$AnimationPlayer.play("running")

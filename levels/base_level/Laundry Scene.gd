@@ -44,6 +44,7 @@ func _on_HUD_new_game():
 	$Clock.reset()
 	$Clock.start()
 	refresh_interactables()
+	$BackgroundMusic.restart()
 
 func refresh_interactables():
 	print("REFRESHING")

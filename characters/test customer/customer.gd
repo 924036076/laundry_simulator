@@ -3,8 +3,6 @@ extends "res://characters/base_character/base_character.gd"
 var return_destination : Vector2 
 var register : Vector2 
 var my_laundry
-enum State {entering, waiting, leaving}
-var current_state
 var score_multiplier : int = 50
 var money_label_offset = Vector2(0, -40)
 var expression_offset = Vector2(0, -52)
@@ -28,13 +26,12 @@ func _ready():
 	my_laundry = preload("res://models/laundry/laundry.tscn").instance()
 	$Bumper.load_laundry(my_laundry)
 # warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	$Bumper.connect("released", self, "drop_off")
 # warning-ignore:return_value_discarded
 	$Bumper.connect("returned", self, "receive_order")
 	$Ticket.visible = false
 	print("customer initialized and reporting for duty!")
-	current_state = State.entering
-	print("entering is " + str(State.entering) + " and waiting is " + str(State.waiting))
 
 func init(node : Navigation2D, id : int, wait_time : float):
 	navNode = node
@@ -59,7 +56,6 @@ func drop_off():
 	leave_store()
 	
 func receive_order():
-	print("received order!")
 	$Bumper.interactable = false
 	$Ticket.visible = false
 	assess_laundry()
@@ -70,7 +66,6 @@ func receive_order():
 	
 func leave_store():
 	print("leaving!")
-	current_state = State.leaving
 	set_target_location(return_destination)
 	emit_signal("leaving", self)
 
@@ -106,10 +101,7 @@ func _on_Timer_timeout():
 	print("WHERE'S MY LAUNDRY??")
 	emit_signal("returning", self)
 	$Bumper.interactable = true
-
-func _on_end_of_path():
-	if current_state != State.leaving:
-		current_state = State.waiting
+	$Bumper.set_state_pickup()
 
 func decrement_patience():
 	patience -= patience_unit 
