@@ -1,29 +1,7 @@
-extends "res://models/interactable/Interactable.gd"
+extends "res://models/washer/Washer.gd"
 
-func _ready():
-	._ready()
-	offset = Vector2(0,5)
+func can_run() -> bool:
+	return laundry.can_dry()
 
-func load_laundry(laundry_in):
-	.load_laundry(laundry_in)
-	if !laundry:
-		return
-	laundry.position = offset
-	if laundry.can_dry():
-		$AnimationPlayer.play("running")
-		laundry.visible = false
-		interactable = false
-		laundry.dry()
-		$Timer.start()
-		yield($Timer, "timeout")
-
-func _finish_load():
-	$AnimationPlayer.play("idle")
-	laundry.visible = true
-	interactable = true
-
-func reset():
-	.reset()
-	$AnimationPlayer.play("idle")
-	$Timer.stop()
-	interactable = true
+func _change_laundry_state():
+	laundry.dry()
