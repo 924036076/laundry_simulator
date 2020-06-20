@@ -30,7 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	player.set_targetobjct(null)
-	player.set_target_location(event.global_position)
+	player.set_target_location(get_global_mouse_position())
 
 func _on_HUD_new_game():
 	player.reset()
