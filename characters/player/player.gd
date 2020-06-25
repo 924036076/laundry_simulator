@@ -2,7 +2,7 @@ extends "res://characters/base_character/base_character.gd"
 
 var enabled : bool = false
 
-func interact(body, objct_laundry_bool):
+func interact(body):
 	# unallowed to interact scenarios
 	# either body is not interactable, or it can only give and the player's hands are full
 	if !body.interactable or (body.can_give and !body.can_receive and laundry):  
@@ -48,11 +48,10 @@ func set_targetobjct(body : Area2D):
 func _on_Interactable_click(body):
 	if !enabled:
 		return
-		
-	print("got your signal " + str(body.get_name()))
+
 	set_targetobjct(body)
 	if target_objct.player_in_range:
-		interact(target_objct, target_objct.laundry_available)	
+		interact(target_objct)	
 	else:
 		var distance = global_position.distance_to(target_objct.global_position)
 		var new_target = target_objct.global_position.linear_interpolate(global_position, target_objct.radius/distance)

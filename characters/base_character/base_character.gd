@@ -5,6 +5,8 @@ var target_objct = null
 var target = Vector2()
 var velocity = Vector2()
 var laundry = null
+var animated = false
+var animationState : AnimationNodeStateMachinePlayback
 
 var navNode
 var path : = PoolVector2Array() 
@@ -28,10 +30,7 @@ func move_along_path(distance : float) -> void:
 		if distance <= distance_to_next and distance >= 0.0:
 			var move_rotation = get_angle_to(path[0])
 			var motion = Vector2(speed,0).rotated(move_rotation)
-			if motion.x > 0:
-				$Sprite.flip_h = true
-			else:
-				$Sprite.flip_h = false
+			update_sprite(motion)
 # warning-ignore:return_value_discarded
 			move_and_slide(motion)
 			break
@@ -44,7 +43,19 @@ func move_along_path(distance : float) -> void:
 		distance -= distance_to_next
 		start_point = path[0]
 		path.remove(0)
-		
+
+func update_sprite(motion : Vector2):
+	if !animated:
+		if motion.x > 0:
+			$Sprite.flip_h = true
+		else:
+			$Sprite.flip_h = false
+		return
+	var motion_vector = motion.normalized()
+	$AnimationTree.set("parameters/Idle/blend_position", motion_vector)
+	$AnimationTree.set("parameters/Move/blend_position", motion_vector)
+	animationState.travel("Move")
+
 func set_target_location(new_target : Vector2) -> void:
 	target = new_target
 	path = navNode.get_simple_path(global_position, new_target)
@@ -54,4 +65,6 @@ func set_target_location(new_target : Vector2) -> void:
 	set_physics_process(true)
 
 func _on_end_of_path():
-	pass # Replace with function body.
+	set_physics_process(false)
+	if animated:
+		animationState.travel("Idle")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://models/interactable/Interactable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/counter/Counter.gd" type="Script" id=2]
+[ext_resource path="res://models/counter/counterv2.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -23,6 +24,12 @@ tracks/0/keys = {
 "InteractableObjects",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 2
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/shake = SubResource( 1 )

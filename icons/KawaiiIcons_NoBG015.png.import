@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex"
+path="res://.import/KawaiiIcons_NoBG015.png-4c0b05cfda969d0dc02b653e9d5842b1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/dryer/dryer.png"
-dest_files=[ "res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex" ]
+source_file="res://icons/KawaiiIcons_NoBG015.png"
+dest_files=[ "res://.import/KawaiiIcons_NoBG015.png-4c0b05cfda969d0dc02b653e9d5842b1.stex" ]
 
 [params]
 

@@ -4,7 +4,7 @@ var state_machine : AnimationNodeStateMachinePlayback
 
 func _ready():
 	._ready()
-	offset = Vector2(0,5)
+	offset = Vector2(0,-18)
 	state_machine = $AnimationTree["parameters/StateMachine/playback"]
 	state_machine.start("idle")
 	$AnimationTree.set("parameters/Blend/blend_amount", 0)
@@ -41,6 +41,7 @@ func reset():
 	.reset()
 	state_machine.travel("idle")
 	$Timer.stop()
+	$AudioStreamPlayer.stop()
 	interactable = true
 	
 func disallowed_action():

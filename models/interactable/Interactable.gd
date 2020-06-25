@@ -17,8 +17,8 @@ signal click
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("mouse_entered", self, "_mouse_over", [true])
-	connect("mouse_exited", self, "_mouse_over", [false])
+	#connect("mouse_entered", self, "_mouse_over", [true])
+	#connect("mouse_exited", self, "_mouse_over", [false])
 	_calculate_radius()
 
 func _calculate_radius():
@@ -33,7 +33,7 @@ func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
 		player_in_range = true
 		if is_target:
-			body.interact(self, laundry_available)
+			body.interact(self)
 			
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
@@ -63,7 +63,6 @@ func _unhandled_input(event):
 	if mouse_over and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
 		get_tree().set_input_as_handled()
 		emit_signal("click", self)
-		print("click signal!")
 		
 func set_target(boolean):
 	is_target = boolean
@@ -81,3 +80,8 @@ func reset():
 func disallowed_action():
 	pass
 
+func _on_mouse_entered():
+	mouse_over = true
+
+func _on_mouse_exited():
+	mouse_over = false

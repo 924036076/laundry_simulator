@@ -12,8 +12,10 @@ script = ExtResource( 4 )
 stream = ExtResource( 3 )
 volume_db = -7.068
 autoplay = true
+bus = "music"
 
 [node name="SongLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "music"
 script = ExtResource( 1 )
 [connection signal="finished" from="SongIntro" to="SongLoop" method="_on_SongIntro_finished"]

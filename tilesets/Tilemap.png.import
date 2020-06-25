@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex"
+path="res://.import/Tilemap.png-8d80ea1ba8e7344afc452dfaa8093b0e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/dryer/dryer.png"
-dest_files=[ "res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex" ]
+source_file="res://tilesets/Tilemap.png"
+dest_files=[ "res://.import/Tilemap.png-8d80ea1ba8e7344afc452dfaa8093b0e.stex" ]
 
 [params]
 

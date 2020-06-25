@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/test customer/random customerv2.png" type="Texture" id=2]
@@ -28,6 +28,8 @@ radius = 48.879
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
 
 [node name="Customer" instance=ExtResource( 1 )]
 position = Vector2( 0.146393, 0 )
@@ -74,7 +76,12 @@ spread = 46.93
 gravity = Vector2( 0, 0 )
 scale_amount = 1.25
 scale_amount_curve = SubResource( 3 )
+
+[node name="AnimationTree" parent="." index="7"]
+parameters/playback = SubResource( 4 )
 [connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
+[connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Bumper" to="Bumper" method="_on_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

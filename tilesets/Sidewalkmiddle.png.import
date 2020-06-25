@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex"
+path="res://.import/Sidewalkmiddle.png-0c9b2bfef5a1b181456c26e38adc62fd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/dryer/dryer.png"
-dest_files=[ "res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex" ]
+source_file="res://tilesets/Sidewalkmiddle.png"
+dest_files=[ "res://.import/Sidewalkmiddle.png-0c9b2bfef5a1b181456c26e38adc62fd.stex" ]
 
 [params]
 

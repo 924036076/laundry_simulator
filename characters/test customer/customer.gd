@@ -13,6 +13,7 @@ var patience : float = 1.2
 var patience_unit : float = 0.02
 var patience_lower_cutoff : float = 0.2
 var patience_upper_cutoff : float = 0.6
+var received_laundry : bool = false
 
 signal leaving
 signal score
@@ -48,7 +49,6 @@ func set_laundry_id(id : int):
 	
 func drop_off():
 	set_physics_process(false)
-	print("dropped off!")
 	$Bumper.interactable = false
 	$Ticket.visible = true
 	my_laundry.show_ticket()
@@ -62,10 +62,10 @@ func receive_order():
 	var expression = emote(cleanliness_pct)
 	yield(expression, "animation_finished")
 	show_money_earned(score, cleanliness_pct)
+	received_laundry = true
 	leave_store()
 	
 func leave_store():
-	print("leaving!")
 	set_target_location(return_destination)
 	emit_signal("leaving", self)
 
@@ -127,3 +127,8 @@ func stop_patience_particles():
 
 func _on_Bumper_disallowed_customer_action():
 	$AnimationPlayer.play("shake")
+	
+func _on_end_of_path():
+	._on_end_of_path()
+	if global_position.distance_to(return_destination) <= 0.25 and received_laundry:
+		queue_free()

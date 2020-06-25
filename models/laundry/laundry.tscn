@@ -10,8 +10,6 @@ _data = [ Vector2( 0.04, 0.988636 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.525 ), 0.0, 0
 [node name="laundry" type="Node2D"]
 position = Vector2( -0.376328, 0.752632 )
 scale = Vector2( 1.25, 1.25 )
-z_index = 5
-z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

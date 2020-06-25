@@ -1,7 +1,8 @@
 extends Node2D
 
 onready var nav2d : Navigation2D = $Navigation2D
-onready var player : Sprite = $Objects/Player
+onready var player : KinematicBody2D = $Objects/Player
+onready var cat : KinematicBody2D = $Objects/Cat
 var counters
 #var customers
 
@@ -10,7 +11,6 @@ func _ready():
 	counters = $Objects/Counters.get_children()
 	#customers = $Objects/Customers.get_children()
 	initialize_level()
-	$HUD
 	
 			
 func initialize_level():
@@ -31,16 +31,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	player.set_targetobjct(null)
 	player.set_target_location(get_global_mouse_position())
+	#cat.set_target_location(get_global_mouse_position())
 
 func _on_HUD_new_game():
 	player.reset()
 	player.enable(true)
 	$HUD.hide_overlay()
-	$Spawner.reset()
-	$Spawner.start()
+	$Spawner.restart()
 	$MoneyLabel.reset()
-	$Clock.reset()
-	$Clock.start()
+	$Clock.restart()
 	refresh_interactables()
 	$BackgroundMusic.restart()
 
@@ -53,4 +52,13 @@ func _on_day_over():
 	$Spawner.stop()
 	$Spawner.get_angry()
 	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
+	player.enable(false)
+
+func _on_RestartDay_restart_button_pressed():
+	$Clock.stop()
+	$Spawner.stop()
+	$Spawner.reset()
+	refresh_interactables()
+	$HUD.show_overlay(null)
+	player.reset()
 	player.enable(false)

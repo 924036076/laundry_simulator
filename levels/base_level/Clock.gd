@@ -13,8 +13,6 @@ signal almost_closing
 
 func _ready():
 	reset()
-	update_ui()
-
 
 func _on_MinuteTimer_timeout():
 	minutes += 10
@@ -44,3 +42,9 @@ func stop():
 func reset():
 	hours = STARTING_HOUR
 	minutes = STARTING_MINUTE
+	update_ui()
+	
+func restart():
+	reset()
+	start()
+

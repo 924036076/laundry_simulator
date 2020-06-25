@@ -38,6 +38,7 @@ func create_customer():
 	
 	next_id += 1
 	customers_created += 1
+	#print("customers created: ", customers_created)
 	return customer
 
 func send_customer(customer):
@@ -69,11 +70,17 @@ func reset():
 		child.queue_free()
 	waiting_customers = []
 	next_id = 0
+	customers_created = 0
+	customers_served = 0
 
 func start():
 	create_and_send_customer(starting_customers)
 	$CustomerTimer.start()
 	$WaitTimer.start()
+	
+func restart():
+	reset()
+	start()
 	
 func stop():
 	$CustomerTimer.stop()
@@ -96,11 +103,12 @@ func _move_line():
 		waiting_customers[i].decrement_patience()
 
 func handle_leaving(customer):
-	var index = waiting_customers.find(customer)
-	waiting_customers.remove(index)
-	customer.set_target_location(global_position)
 	change_customer_group(customer)
-	
+	var index = waiting_customers.find(customer)
+	if index >=0:
+		waiting_customers.remove(index)
+		customer.set_target_location(global_position)
+
 func handle_entering(customer):
 	change_customer_group(customer)
 	send_customer(customer)
@@ -116,6 +124,7 @@ func change_customer_group(customer : KinematicBody2D):
 		customer.remove_from_group("picking_up")
 		customer.add_to_group("satisfied_customers")
 		customers_served += 1
+		#print("customers served: ", customers_served)
 		if customers_served >= customers_created:
 			emit_signal("day_over")
 

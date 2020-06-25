@@ -46,7 +46,6 @@ func assess_cleanliness() -> float:
 	
 	for state in conditions:
 		if !state: score += 1
-		print(state)
 	var cleanliness = score/max_score
 	if cleanliness < 1:
 		cleanliness = min(cleanliness, highest_unfinished_score)
