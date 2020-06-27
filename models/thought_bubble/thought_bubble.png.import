@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/island counter.png-997ac7e7872c2469e32b2c1a5418a4ae.stex"
+path="res://.import/thought_bubble.png-6935e58dd20e351543fad523e70edbcc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/counter/island counter.png"
-dest_files=[ "res://.import/island counter.png-997ac7e7872c2469e32b2c1a5418a4ae.stex" ]
+source_file="res://models/thought_bubble/thought_bubble.png"
+dest_files=[ "res://.import/thought_bubble.png-6935e58dd20e351543fad523e70edbcc.stex" ]
 
 [params]
 

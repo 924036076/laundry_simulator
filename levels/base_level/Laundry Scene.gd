@@ -42,6 +42,7 @@ func _on_HUD_new_game():
 	$Clock.restart()
 	refresh_interactables()
 	$BackgroundMusic.restart()
+	cat.choose_action()
 
 func refresh_interactables():
 	print("REFRESHING")
@@ -62,3 +63,16 @@ func _on_RestartDay_restart_button_pressed():
 	$HUD.show_overlay(null)
 	player.reset()
 	player.enable(false)
+
+func _on_Cat_mischief():
+	# give cat counter location with laundry
+	var location = Vector2.ZERO
+	for counter in counters:
+		if counter.laundry_available:
+			location = counter.get_jump_launch_position()
+	cat.manage_mischief(location)
+
+func _on_Cat_shedding():
+	for counter in counters:
+		if counter.cat_in_range:
+			counter.cat_shedding()

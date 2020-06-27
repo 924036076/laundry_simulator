@@ -4,7 +4,6 @@ var return_destination : Vector2
 var register : Vector2 
 var my_laundry
 var score_multiplier : int = 50
-var money_label_offset = Vector2(0, -40)
 var expression_offset = Vector2(0, -52)
 var score : float = 0
 var cleanliness_pct : float = 0
@@ -16,7 +15,6 @@ var patience_upper_cutoff : float = 0.6
 var received_laundry : bool = false
 
 signal leaving
-signal score
 signal returning
 
 # Called when the node enters the scene tree for the first time.
@@ -75,14 +73,7 @@ func assess_laundry():
 		score = cleanliness_pct * score_multiplier * patience
 		print("patrience: ", patience)
 	stop_patience_particles()
-	emit_signal("score", score)
-	
-# warning-ignore:shadowed_variable
-func show_money_earned(score : float, percent : float):
-	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
-	add_child(label)
-	label.position = money_label_offset
-	label.display("$" + str(round(score)), percent)
+	#emit_signal("score", score)  # added to base class
 	
 func emote(happiness_pct: float):
 	var expression = preload("res://characters/expressions/Expression.tscn").instance()
@@ -132,3 +123,6 @@ func _on_end_of_path():
 	._on_end_of_path()
 	if global_position.distance_to(return_destination) <= 0.25 and received_laundry:
 		queue_free()
+
+func _on_Bumper_modulate(modulation : Color):
+	$Sprite.modulate = modulation

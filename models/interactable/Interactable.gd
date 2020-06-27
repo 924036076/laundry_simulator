@@ -1,14 +1,15 @@
 extends Area2D
 
-var default_modulation = Color(1,1,1,1)
-var selected_modulation = Color(1,1,0.5,1)
+var default_modulation = Color(1, 1, 1, 1)
+var selected_modulation = Color(0.83, 1, 0.89, 1)
 var is_target = false setget set_target
 var laundry = null
-var interactable = true
+var interactable = true setget set_interactable
 var can_give = true
 var can_receive = true
 var laundry_available = false
 var player_in_range = false
+var cat_in_range = false
 var mouse_over = false
 var radius = 0.0
 var offset = Vector2(0,0)
@@ -31,13 +32,19 @@ func _calculate_radius():
 
 func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
+		print("player just entered: ", name)
 		player_in_range = true
 		if is_target:
 			body.interact(self)
+	if body.get_name() == "Cat":
+		cat_in_range = true
 			
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
+		print("player just exited: ", name)
 		player_in_range = false
+	if body.get_name() == "Cat":
+		cat_in_range = false
 	
 func load_laundry(laundry_in):
 	if !laundry_in:
@@ -66,10 +73,7 @@ func _unhandled_input(event):
 		
 func set_target(boolean):
 	is_target = boolean
-	if is_target:
-		$Sprite.modulate = selected_modulation
-	else:
-		$Sprite.modulate = default_modulation
+	modulate()
 		
 func reset():
 	if laundry:
@@ -80,8 +84,20 @@ func reset():
 func disallowed_action():
 	pass
 
+func modulate():
+	if is_target or mouse_over and interactable:
+		$Sprite.modulate = selected_modulation
+	else:
+		$Sprite.modulate = default_modulation
+
 func _on_mouse_entered():
 	mouse_over = true
-
+	modulate()
+	
 func _on_mouse_exited():
 	mouse_over = false
+	modulate()
+	
+func set_interactable(boolean):
+	interactable = boolean
+	modulate()

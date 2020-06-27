@@ -82,6 +82,7 @@ parameters/playback = SubResource( 4 )
 [connection signal="body_entered" from="Bumper" to="Bumper" method="_on_Interactable_body_entered"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Interactable_body_exited"]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
+[connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
 [connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Bumper" to="Bumper" method="_on_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

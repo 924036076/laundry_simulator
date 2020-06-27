@@ -120,30 +120,30 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 ] instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 2
 frame = 5
 
-[node name="Timer" type="Timer" parent="." index="3"]
+[node name="Timer" type="Timer" parent="." index="2"]
 wait_time = 5.0
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 playback_speed = 2.0
 anims/idle = SubResource( 1 )
 anims/running = SubResource( 2 )
 anims/shake = SubResource( 3 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Blend/blend_amount = 0.0
 parameters/StateMachine/playback = SubResource( 12 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 4 )
 volume_db = -10.0
 bus = "soundfx"

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-var offset = Vector2(50, 0) # where the laundry goes
+var laundry_offset = Vector2(50, 0) 
+var money_label_offset = Vector2(0, -40)
 var target_objct = null
 var target = Vector2()
 var velocity = Vector2()
@@ -13,6 +14,7 @@ var path : = PoolVector2Array()
 var speed : = 175
 export(NodePath) var navNodePath
 signal end_of_path
+signal score
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -36,7 +38,6 @@ func move_along_path(distance : float) -> void:
 			break
 		elif path.size() == 1 && distance > distance_to_next:
 			#position = path[0]
-			
 			set_physics_process(false)
 			emit_signal("end_of_path")
 			break
@@ -68,3 +69,11 @@ func _on_end_of_path():
 	set_physics_process(false)
 	if animated:
 		animationState.travel("Idle")
+		
+# warning-ignore:shadowed_variable
+func show_money_earned(score : float, percent : float = 1):
+	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
+	add_child(label)
+	label.position = money_label_offset
+	label.display("$" + str(round(score)), percent)
+	emit_signal("score", score)

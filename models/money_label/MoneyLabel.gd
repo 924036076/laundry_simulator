@@ -4,8 +4,8 @@ var good = Color(.01, .61, .09, 1)
 var meh = Color(.81, .43, .15, 1)
 var bad = Color(.83, .13, .04, 1)
 
-func _ready():
-	$AnimationPlayer.play("static")
+#func _ready():
+#	$AnimationPlayer.play("static")
 
 func display(message : String, percent : float):
 	var color : Color
@@ -20,9 +20,10 @@ func display(message : String, percent : float):
 		print("is okay!")
 	print(percent)
 	$Label.add_color_override("font_color", color)
-
 	$Label.text = message
-	$Label.visible = true
-	$AnimationPlayer.play("New Anim")
+	$AnimationPlayer.play("show_self")
 	print(message)
 
+func _on_animation_finished(anim_name):
+	if anim_name == "show_self":
+		queue_free()

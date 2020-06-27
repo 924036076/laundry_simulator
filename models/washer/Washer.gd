@@ -20,13 +20,14 @@ func load_laundry(laundry_in):
 
 func _change_laundry_state():
 	laundry.wash()
+	laundry.dehairify()
 	
 func can_run() -> bool:
 	return laundry.can_wash()
 	
 func _start_load():
 	laundry.visible = false
-	interactable = false
+	set_interactable(false)
 	state_machine.travel("running")
 	$AudioStreamPlayer.play()
 	$Timer.start()
@@ -35,7 +36,7 @@ func _finish_load():
 	state_machine.travel("idle")
 	$AudioStreamPlayer.stop()
 	laundry.visible = true
-	interactable = true
+	set_interactable(true)
 	
 func reset():
 	.reset()

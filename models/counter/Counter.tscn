@@ -23,13 +23,20 @@ tracks/0/keys = {
 [node name="Counter" groups=[
 "InteractableObjects",
 ] instance=ExtResource( 1 )]
+collision_mask = 5
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 vframes = 2
 hframes = 2
 frame = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 anims/shake = SubResource( 1 )
+
+[node name="JumpLaunch" type="Node2D" parent="." index="3"]
+position = Vector2( 0, -61.5118 )
+
+[node name="SleepLocation" type="Node2D" parent="." index="4"]
+position = Vector2( -0.396835, -18.652 )

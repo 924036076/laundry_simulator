@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://models/thought_bubble/thought_bubble.png" type="Texture" id=1]
+[ext_resource path="res://models/thought_bubble/bubbles.png" type="Texture" id=2]
+[ext_resource path="res://models/thought_bubble/ThoughtBubble.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bubble1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bubble2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpeechBubble:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="ThoughtBubble" type="Node2D"]
+z_index = 2
+script = ExtResource( 3 )
+
+[node name="Bubble1" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 2
+
+[node name="Bubble2" type="Sprite" parent="."]
+visible = false
+position = Vector2( -1, -15.0816 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 2
+frame = 1
+
+[node name="SpeechBubble" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -28.3187 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+vframes = 2
+hframes = 2
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

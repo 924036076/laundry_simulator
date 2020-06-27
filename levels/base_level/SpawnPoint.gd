@@ -6,7 +6,7 @@ var next_id : int = 0
 var next_customer_min : float = 3.0
 var next_customer_max : float = 15.0
 var customer_wait_min : float = 20.0
-var customer_wait_max : float = 30.0
+var customer_wait_max : float = 32.0
 var queued_customers = []
 var waiting_customers = []
 var max_customers : int

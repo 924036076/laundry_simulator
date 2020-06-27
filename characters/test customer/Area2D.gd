@@ -6,6 +6,7 @@ extends "res://models/interactable/Interactable.gd"
 signal released
 signal returned
 signal disallowed_customer_action
+signal modulate
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,3 +40,9 @@ func set_state_pickup():
 	
 func disallowed_action():
 	emit_signal("disallowed_customer_action")
+	
+func modulate():
+	if mouse_over and interactable:
+		emit_signal("modulate", selected_modulation)
+	else:
+		emit_signal("modulate", default_modulation)

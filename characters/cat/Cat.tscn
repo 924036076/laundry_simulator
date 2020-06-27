@@ -1,11 +1,15 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://characters/cat/cat.png" type="Texture" id=1]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/cat/Cat.gd" type="Script" id=3]
+[ext_resource path="res://models/thought_bubble/ThoughtBubble.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/cat/fluff.png" type="Texture" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "curl_up"
+[sub_resource type="CircleShape2D" id=1]
+radius = 18.1706
+
+[sub_resource type="Animation" id=2]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -20,25 +24,8 @@ tracks/0/keys = {
 "values": [ 13, 14, 15, 16, 17, 18 ]
 }
 
-[sub_resource type="Animation" id=2]
-length = 0.25
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
 [sub_resource type="Animation" id=3]
-length = 0.25
-loop = true
+length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -46,15 +33,28 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ 24, 29 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_done_reacting"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.25
-loop = true
+length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -62,10 +62,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 7 ]
+"values": [ 24, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_done_reacting"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -81,10 +95,91 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 10 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=6]
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "jump_forward"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32, 30 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_jump_start"
+}, {
+"args": [  ],
+"method": "_on_end_of_path"
+} ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -100,7 +195,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0, 1 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -116,7 +211,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 4 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -132,7 +227,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=13]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -148,8 +243,23 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "rude_awakening"
+[sub_resource type="Animation" id=14]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 1, 7, 12 ]
+}
+
+[sub_resource type="Animation" id=15]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -164,8 +274,7 @@ tracks/0/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "sleep"
+[sub_resource type="Animation" id=16]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -179,8 +288,37 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "uncurl"
+[sub_resource type="Animation" id=17]
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 24, 25 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_done_thinking"
+} ]
+}
+
+[sub_resource type="Animation" id=18]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -195,8 +333,7 @@ tracks/0/keys = {
 "values": [ 19, 17, 16, 15, 14, 13, 12 ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "wake_up"
+[sub_resource type="Animation" id=19]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -211,8 +348,7 @@ tracks/0/keys = {
 "values": [ 18, 19, 20, 19, 20, 19 ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "working"
+[sub_resource type="Animation" id=20]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -228,42 +364,62 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [node name="Cat" instance=ExtResource( 2 )]
-scale = Vector2( 2, 2 )
+position = Vector2( 0, 10 )
 collision_layer = 4
 collision_mask = 4
 script = ExtResource( 3 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( -0.111366, -11.5817 )
+shape = SubResource( 1 )
+
 [node name="Sprite" parent="." index="1"]
+position = Vector2( -0.66893, -13.9732 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-vframes = 5
-hframes = 5
+vframes = 6
+hframes = 6
 frame = 4
 
 [node name="AnimationPlayer" parent="." index="2"]
 playback_speed = 0.5
-anims/curl_up = SubResource( 1 )
-anims/idle_down = SubResource( 2 )
-anims/idle_left = SubResource( 3 )
-anims/idle_right = SubResource( 4 )
-anims/idle_up = SubResource( 5 )
-anims/mov_down = SubResource( 6 )
-anims/mov_left = SubResource( 7 )
-anims/mov_right = SubResource( 8 )
-anims/mov_up = SubResource( 9 )
-anims/rude_awakening = SubResource( 13 )
-anims/sleep = SubResource( 10 )
-anims/uncurl = SubResource( 11 )
-anims/wake_up = SubResource( 14 )
-anims/working = SubResource( 15 )
+anims/curl_up = SubResource( 2 )
+anims/disappointed = SubResource( 3 )
+anims/excited = SubResource( 4 )
+anims/idle_down = SubResource( 5 )
+anims/idle_left = SubResource( 6 )
+anims/idle_right = SubResource( 7 )
+anims/idle_up = SubResource( 8 )
+anims/jump_forward = SubResource( 9 )
+anims/mov_down = SubResource( 10 )
+anims/mov_left = SubResource( 11 )
+anims/mov_right = SubResource( 12 )
+anims/mov_up = SubResource( 13 )
+anims/patrol = SubResource( 14 )
+anims/rude_awakening = SubResource( 15 )
+anims/sleep = SubResource( 16 )
+anims/thinking = SubResource( 17 )
+anims/uncurl = SubResource( 18 )
+anims/wake_up = SubResource( 19 )
+anims/working = SubResource( 20 )
 
 [node name="AnimationTree" parent="." index="3"]
-active = true
-parameters/playback = SubResource( 12 )
+parameters/playback = SubResource( 21 )
 
 [node name="WaitTimer" type="Timer" parent="." index="4"]
 wait_time = 3.0
 one_shot = true
+
+[node name="ThoughtBubble" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( -1.70588, -41.4681 )
+
+[node name="Shedding" type="CPUParticles2D" parent="." index="6"]
+emitting = false
+texture = ExtResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2( 0, 0 )
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]

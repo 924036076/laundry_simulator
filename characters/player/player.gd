@@ -2,6 +2,7 @@ extends "res://characters/base_character/base_character.gd"
 
 var enabled : bool = false
 
+
 func interact(body):
 	# unallowed to interact scenarios
 	# either body is not interactable, or it can only give and the player's hands are full
@@ -35,7 +36,7 @@ func load_laundry(laundry_in):
 	if !laundry_in:
 		return
 	laundry = laundry_in
-	laundry.position = offset
+	laundry.position = laundry_offset
 	add_child(laundry)
 	
 func set_targetobjct(body : Area2D):
