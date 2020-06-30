@@ -919,7 +919,7 @@ __meta__ = {
 position = Vector2( 962.165, 72.1826 )
 
 [node name="DeskLocation" type="Node2D" parent="Machines/Desk"]
-position = Vector2( -2, 48 )
+position = Vector2( -2, 31 )
 
 [node name="Spawner" type="Node2D" parent="."]
 light_mask = 3
