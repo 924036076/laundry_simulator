@@ -103,7 +103,7 @@ states/running/position = Vector2( 386, 42 )
 transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
 
 [sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( 0, 127 )
+graph_offset = Vector2( 0, -142.5 )
 nodes/Blend/node = SubResource( 4 )
 nodes/Blend/position = Vector2( 340, 140 )
 nodes/Shake/node = SubResource( 5 )
@@ -121,10 +121,10 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
+position = Vector2( -1, 0 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 2
-frame = 5
 
 [node name="Timer" type="Timer" parent="." index="2"]
 wait_time = 5.0

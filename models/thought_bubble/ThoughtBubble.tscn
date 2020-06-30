@@ -88,14 +88,12 @@ z_index = 2
 script = ExtResource( 3 )
 
 [node name="Bubble1" type="Sprite" parent="."]
-visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 2
 
 [node name="Bubble2" type="Sprite" parent="."]
-visible = false
 position = Vector2( -1, -15.0816 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
@@ -104,7 +102,6 @@ hframes = 2
 frame = 1
 
 [node name="SpeechBubble" type="Sprite" parent="."]
-visible = false
 position = Vector2( 0, -28.3187 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )

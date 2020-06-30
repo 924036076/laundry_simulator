@@ -149,7 +149,7 @@ switch_mode = 2
 states/Idle/node = SubResource( 6 )
 states/Idle/position = Vector2( 380, 82 )
 states/Move/node = SubResource( 11 )
-states/Move/position = Vector2( 799, 82 )
+states/Move/position = Vector2( 754, 61 )
 states/curl_up/node = SubResource( 12 )
 states/curl_up/position = Vector2( 224, -82 )
 states/disappointed/node = SubResource( 13 )
@@ -199,5 +199,5 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 45 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Move/blend_position = Vector2( 0, 0 )
+parameters/Move/blend_position = Vector2( 0.362832, 0.123364 )
 [connection signal="end_of_path" from="." to="." method="_on_end_of_path"]
