@@ -12,17 +12,18 @@ var patrol_cutoff : int = 10
 var sleep_cutoff : int = 30
 var work_cutoff : int = 50
 var mischief_cutoff : int = 100
-var thought_bubble : Node2D = null
-var thought_bubble_offset = Vector2(0, -40)
+var enabled : bool = false
 
 signal mischief
 signal shedding
+signal idle
 
 func _ready():
 	animated = true #in the future all characters will be animated, just not now
 	animationState = $AnimationTree["parameters/playback"]
 	money_label_offset = Vector2(0, -42)
 	speed = 75
+	assert($AnimationTree.active == true, "cat's Animation Tree is not active")
 	if patrol_path:
 		patrol_points = get_node(patrol_path).curve.get_baked_points()
 	if desk_path:
@@ -37,17 +38,18 @@ func _on_end_of_path():
 			$WaitTimer.start(rng.randi_range(2, 4))
 		State.SLEEP:
 			animationState.travel("sleep")
-			$Shedding.emitting = true
 			emit_signal("shedding")
 			$WaitTimer.start(5)
 		State.WORK:
 			animationState.travel("working")
 			$WaitTimer.start(rng.randi_range(3, 8))
 		State.MISCHIEF:
-			thought_bubble.queue_free()
+			$ThoughtBubble.hide()
 			animationState.travel("jump_forward")
 
 func _on_jump_start():
+	if !enabled:
+		return
 	global_position = target + Vector2(0,28)
 	state = State.SLEEP
 	$AnimationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
@@ -55,13 +57,10 @@ func _on_jump_start():
 	_on_end_of_path()
 
 func _on_WaitTimer_timeout():
-	animationState.travel("Idle")
-	$Shedding.emitting = false
 	if state == State.WORK:
 		show_money_earned(rng.randf_range(10.0, 50.0))
-	while animationState.get_current_node() != "Idle":
-		yield(get_tree().create_timer(1.0), "timeout")
-	choose_action()
+	if enabled:
+		choose_action()
 
 func manage_mischief(counter_pos : Vector2):
 	print("managing mischief!")
@@ -75,10 +74,13 @@ func manage_mischief(counter_pos : Vector2):
 
 func _on_done_reacting():
 	print("done reacting")
+	if !enabled:
+		return
 	if target == Vector2.ZERO:
 		print("I'll just be sad now")
-		thought_bubble.queue_free()
-		choose_action(false)
+		$ThoughtBubble.hide()
+		state = State.PATROL
+		_on_end_of_path()
 	else:
 		print("Yessss I'm so happy")
 		set_target_location(target)
@@ -87,6 +89,10 @@ func office_work():
 	set_target_location(desk.global_position)
 	
 func choose_action(mischief_allowed = true):
+	if !enabled:
+		return
+	animationState.travel("Idle")
+	yield(self, "idle")
 	var random = rng.randi_range(0, 100)
 	print("random num for cat: ", random)
 	if random < patrol_cutoff:
@@ -113,19 +119,28 @@ func choose_action(mischief_allowed = true):
 
 func _start_thinking():
 	animationState.travel("thinking")
-	thought_bubble = preload("res://models/thought_bubble/ThoughtBubble.tscn").instance()
-	add_child(thought_bubble)
-	thought_bubble.position = money_label_offset
-	thought_bubble.play()
-#	yield(thought_bubble, "animation_finished")
-#	print("done thinking!")  #this or "_on_done_thinking"? decisions, decisions
-#	emit_signal("mischief")
+	$ThoughtBubble.show()
 
 func _on_done_thinking():
-	# TODO: decide if want this signal or thought bubble signal
 	print("done thinking!")
-	emit_signal("mischief")
+	if enabled:
+		emit_signal("mischief")
 	
 func random_patrol_destination():
 	var patrol_index = rng.randi_range(0,  patrol_points.size()-1)
 	set_target_location(patrol_points[patrol_index])
+	
+func stop():
+	enabled = false
+	$ThoughtBubble.hide()
+	state = State.SLEEP
+	_on_end_of_path()
+	$WaitTimer.stop()
+		
+func start():
+	enabled = true
+	choose_action()
+	
+func _emit_idle():
+	# called from idle animation
+	emit_signal("idle")

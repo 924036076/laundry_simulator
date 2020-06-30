@@ -42,7 +42,7 @@ func _on_HUD_new_game():
 	$Clock.restart()
 	refresh_interactables()
 	$BackgroundMusic.restart()
-	cat.choose_action()
+	cat.start()
 
 func refresh_interactables():
 	print("REFRESHING")
@@ -54,6 +54,7 @@ func _on_day_over():
 	$Spawner.get_angry()
 	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
 	player.enable(false)
+	cat.stop()
 
 func _on_RestartDay_restart_button_pressed():
 	$Clock.stop()
@@ -63,14 +64,17 @@ func _on_RestartDay_restart_button_pressed():
 	$HUD.show_overlay(null)
 	player.reset()
 	player.enable(false)
+	cat.stop()
 
 func _on_Cat_mischief():
 	# give cat counter location with laundry
+	print("on cat mischief here")
 	var location = Vector2.ZERO
 	for counter in counters:
 		if counter.laundry_available:
 			location = counter.get_jump_launch_position()
 	cat.manage_mischief(location)
+	print("gave cat location")
 
 func _on_Cat_shedding():
 	for counter in counters:

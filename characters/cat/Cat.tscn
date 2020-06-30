@@ -25,7 +25,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-length = 1.1
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -45,7 +45,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.9 ),
+"times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -54,7 +54,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 1.1
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -74,7 +74,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.9 ),
+"times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -83,7 +83,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.25
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -97,9 +97,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_emit_idle"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
-length = 0.25
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -113,9 +127,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_emit_idle"
+} ]
+}
 
 [sub_resource type="Animation" id=7]
-length = 0.25
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -129,9 +157,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 7 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_emit_idle"
+} ]
+}
 
 [sub_resource type="Animation" id=8]
-length = 0.25
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -144,6 +186,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 10 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_emit_idle"
+} ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -287,6 +343,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 18 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shedding:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=17]
 length = 2.5
@@ -315,6 +383,20 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "_on_done_thinking"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("ThoughtBubble")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
 } ]
 }
 
@@ -346,6 +428,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 19, 20, 19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shedding:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -413,13 +507,13 @@ parameters/playback = SubResource( 21 )
 wait_time = 3.0
 one_shot = true
 
-[node name="ThoughtBubble" parent="." index="5" instance=ExtResource( 4 )]
-position = Vector2( -1.70588, -41.4681 )
-
-[node name="Shedding" type="CPUParticles2D" parent="." index="6"]
+[node name="Shedding" type="CPUParticles2D" parent="." index="5"]
 emitting = false
 texture = ExtResource( 5 )
 emission_shape = 1
 emission_sphere_radius = 20.0
 gravity = Vector2( 0, 0 )
+
+[node name="ThoughtBubble" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 0, -39.1995 )
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]

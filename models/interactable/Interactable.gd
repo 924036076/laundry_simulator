@@ -32,7 +32,6 @@ func _calculate_radius():
 
 func _on_Interactable_body_entered(body):
 	if body.get_name() == "Player":
-		print("player just entered: ", name)
 		player_in_range = true
 		if is_target:
 			body.interact(self)
@@ -41,7 +40,6 @@ func _on_Interactable_body_entered(body):
 			
 func _on_Interactable_body_exited(body):
 	if body.get_name() == "Player":
-		print("player just exited: ", name)
 		player_in_range = false
 	if body.get_name() == "Cat":
 		cat_in_range = false
