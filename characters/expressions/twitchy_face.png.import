@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/twitchy_face_v2.png-a839d0c42e24d04107d41a0c31798717.stex"
+path="res://.import/twitchy_face.png-a812b736c17d8889e84624d46e7d04d1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/expressions/twitchy_face_v2.png"
-dest_files=[ "res://.import/twitchy_face_v2.png-a839d0c42e24d04107d41a0c31798717.stex" ]
+source_file="res://characters/expressions/twitchy_face.png"
+dest_files=[ "res://.import/twitchy_face.png-a812b736c17d8889e84624d46e7d04d1.stex" ]
 
 [params]
 

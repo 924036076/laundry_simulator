@@ -2,17 +2,17 @@ extends "res://characters/base_character/base_character.gd"
 
 var return_destination : Vector2 
 var register : Vector2 
-var my_laundry
-var score_multiplier : int = 50
-var expression_offset = Vector2(0, -52)
-var score : float = 0
-var cleanliness_pct : float = 0
-var FURIOUS : float = 0.0
-var patience : float = 1.2
-var patience_unit : float = 0.02
-var patience_lower_cutoff : float = 0.2
-var patience_upper_cutoff : float = 0.6
-var received_laundry : bool = false
+var my_laundry : Node2D
+var score_multiplier := 50
+var expression_offset := Vector2(0, -52)
+var score := 0.0
+var cleanliness_pct := 0.0
+const FURIOUS := 0.0
+var patience := 1.2
+var patience_unit := 0.02
+var patience_lower_cutoff := 0.2
+var patience_upper_cutoff := 0.6
+var received_laundry := false
 
 signal leaving
 signal returning
@@ -92,11 +92,11 @@ func back_to_store() -> void:
 	$Bumper.interactable = true
 	$Bumper.set_state_pickup()
 	
-func last_call():
+func last_call() -> void:
 	$Timer.stop()
 	back_to_store()
 
-func decrement_patience():
+func decrement_patience() -> void:
 	patience -= patience_unit 
 	if patience < patience_upper_cutoff:
 		$PatienceParticles.emitting = true
@@ -106,18 +106,18 @@ func decrement_patience():
 	if patience <= 0:
 		storm_off()
 
-func stop_patience_particles():
+func stop_patience_particles() -> void:
 	$PatienceParticles.emitting = false
 	$PatienceParticles.visible = false
 	patience = 1
 
-func _on_Bumper_disallowed_customer_action():
+func _on_Bumper_disallowed_customer_action() -> void:
 	$AnimationPlayer.play("shake")
 	
-func _on_end_of_path():
+func _on_end_of_path() -> void:
 	._on_end_of_path()
 	if global_position.distance_to(return_destination) <= 0.25 and received_laundry:
 		queue_free()
 
-func _on_Bumper_modulate(modulation : Color):
+func _on_Bumper_modulate(modulation : Color) -> void:
 	$Sprite.modulate = modulation

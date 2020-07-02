@@ -1,18 +1,16 @@
 extends Area2D
 
-var default_modulation = Color(1, 1, 1, 1)
-var selected_modulation = Color(0.83, 1, 0.89, 1)
-var is_target = false setget set_target
-var laundry = null
-var interactable = true setget set_interactable
-var can_give = true
-var can_receive = true
-var laundry_available = false
-var player_in_range = false
-var cat_in_range = false
-var mouse_over = false
-var radius = 0.0
-var offset = Vector2(0,0)
+const default_modulation := Color(1, 1, 1, 1)
+const selected_modulation := Color(0.83, 1, 0.89, 1)
+var is_target := false setget set_target
+var laundry : Node2D = null
+var interactable := true setget set_interactable
+var can_give := true
+var can_receive := true
+var laundry_available := false
+var mouse_over := false
+var radius := 0.0
+var offset := Vector2(0,0)
 
 signal click
 
@@ -26,19 +24,6 @@ func _calculate_radius() -> void:
 	var extents =  get_node("CollisionShape2D").shape.get_extents()
 	# Halving the smallest extent by two for better controlability/feel
 	radius = min(extents.x, extents.y)/2
-
-func _on_Interactable_body_entered(body : PhysicsBody2D) -> void:
-	if body.get_name() == "Player":
-		player_in_range = true
-		if is_target: body.interact(self) # TODO: make objects and player less tightly coupled
-	if body.get_name() == "Cat":
-		cat_in_range = true
-			
-func _on_Interactable_body_exited(body : PhysicsBody2D) -> void:
-	if body.get_name() == "Player":
-		player_in_range = false
-	if body.get_name() == "Cat":
-		cat_in_range = false
 	
 func load_laundry(laundry_in : Node2D) -> void:
 	if !laundry_in: return

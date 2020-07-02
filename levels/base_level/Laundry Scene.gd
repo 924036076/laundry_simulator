@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_new_game() -> void:
 	player.reset()
-	player.enable(true)
+	player.enable_movement(true)
 	$HUD.hide_overlay()
 	$Spawner.restart()
 	$MoneyLabel.reset()
@@ -49,7 +49,7 @@ func _on_day_over() -> void:
 	$Spawner.stop()
 	$Spawner.get_angry()
 	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
-	player.enable(false)
+	player.enable_movement(false)
 	cat.stop()
 
 func _on_restart_day() -> void:
@@ -59,7 +59,7 @@ func _on_restart_day() -> void:
 	refresh_interactables()
 	$HUD.show_overlay(null)
 	player.reset()
-	player.enable(false)
+	player.enable_movement(false)
 	cat.stop()
 
 func _on_Cat_mischief() -> void:
@@ -72,7 +72,3 @@ func _on_Cat_mischief() -> void:
 		if counter.laundry_available:
 			location = counter.get_jump_launch_position()	
 	cat.manage_mischief(location)
-
-func _on_Cat_shedding() -> void:
-	for counter in counters:
-		if counter.cat_in_range: counter.cat_shedding()

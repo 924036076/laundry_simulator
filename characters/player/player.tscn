@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/player/player.gd" type="Script" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://characters/player/body_sprite.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 71.126
+radius = 33.0326
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle_down"
@@ -336,6 +336,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 70.1353
+
 [node name="Player" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
 script = ExtResource( 2 )
@@ -388,3 +391,9 @@ parameters/Move/blend_position = Vector2( -0.245374, 0.184047 )
 [node name="laundry_pos" type="Node2D" parent="." index="7"]
 position = Vector2( 0.803543, -35.7819 )
 z_index = 2
+
+[node name="Area2D" type="Area2D" parent="." index="8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource( 11 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

@@ -3,9 +3,9 @@ extends Node
 var hours : int
 var minutes : int
 
-var STARTING_HOUR : int = 7
-var STARTING_MINUTE : int = 0
-var CLOSING_HOUR : int = 19
+const STARTING_HOUR := 7
+const STARTING_MINUTE := 0
+const CLOSING_HOUR := 19
 
 signal new_hour
 signal day_over
@@ -27,7 +27,7 @@ func _on_MinuteTimer_timeout():
 	update_ui()
 	
 func update_ui():
-	var time : String = "new text!"
+	var time := "new text!"
 	time = str(hours) + ":" + str(minutes)
 	if minutes == 0:
 		time = time + "0"

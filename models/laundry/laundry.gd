@@ -1,15 +1,15 @@
 extends Node2D
 
-var wet = false
-var dirty = true
-var bloody = false
-var soiled = false
-var hairy = false
-var washable_modulation = Color(0.67, 0.67, 0.67)
-var dryable_modulation = Color(0.85, 0.85, 0.85)
-var default_modulation = Color(1, 1, 1)
-var starting_cleanliness : float = 1
-var highest_unfinished_score : float = 0.25
+var wet := false
+var dirty := true
+var bloody := false
+var soiled := false
+var hairy := false
+var starting_cleanliness := 1.0
+const highest_unfinished_score := 0.25
+const washable_modulation := Color(0.67, 0.67, 0.67)
+const dryable_modulation := Color(0.85, 0.85, 0.85)
+const default_modulation := Color(1, 1, 1)
 enum size {small, medium, large} #TODO: something with size
 var id : int
 
@@ -88,4 +88,5 @@ func show_ticket() -> void:
 	$Ticket/Label.text = str(id)
 	$Ticket.visible = true
 
-
+func _on_Area2D_get_hairy():
+	hairify()

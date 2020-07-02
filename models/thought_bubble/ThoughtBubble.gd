@@ -8,3 +8,7 @@ func show():
 
 func hide():
 	$AnimationPlayer.play("hide")
+
+
+func _on_Cat_mischief_started():
+	$AnimationPlayer.play("hide")

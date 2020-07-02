@@ -2,21 +2,20 @@ extends Node2D
 
 var navNode : Navigation2D 
 var player : KinematicBody2D
-var next_id : int = 0
-var next_customer_min : float = 3.0
-var next_customer_max : float = 15.0
-var customer_wait_min : float = 20.0
-var customer_wait_max : float = 32.0
-var queued_customers = []
-var waiting_customers = []
+var next_id := 0
+var next_customer_min := 3.0
+var next_customer_max := 15.0
+var customer_wait_min := 20.0
+var customer_wait_max := 32.0
+var queued_customers := []
+var waiting_customers := []
 var max_customers : int
-var starting_customers : int = 2
-var new_customers_on_timeout : int = 1
-var customers_created : int = 0
-var customers_served : int = 0
+var starting_customers := 2
+var new_customers_on_timeout := 1
+var customers_created := 0
+var customers_served := 0
+const LAST_CUSTOMER_HOUR := 16 # TODO: have this connected to clock then send signal
 signal day_over
-
-var LAST_CUSTOMER_HOUR : int = 16
 
 func init(node : Navigation2D, body : KinematicBody2D) -> void:
 	navNode = node

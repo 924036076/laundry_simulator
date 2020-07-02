@@ -16,7 +16,7 @@ func set_target(boolean) -> void:
 	is_target = boolean
 	
 func unload_laundry() -> Node2D:
-	var laundry_to_give = .unload_laundry()
+	var laundry_to_give := .unload_laundry()
 	if laundry_to_give:
 		emit_signal("released")
 		return laundry_to_give

@@ -1,8 +1,8 @@
 extends Node2D
 
-var good = Color(.01, .61, .09, 1)
-var meh = Color(.81, .43, .15, 1)
-var bad = Color(.83, .13, .04, 1)
+const good := Color(.01, .61, .09, 1)
+const meh := Color(.81, .43, .15, 1)
+const bad := Color(.83, .13, .04, 1)
 
 func display(message : String, percent : float):
 	var color : Color

@@ -2,15 +2,15 @@ extends KinematicBody2D
 
 var laundry_offset = Vector2(50, 0) 
 var money_label_offset = Vector2(0, -40)
-var target_objct = null
-var target = Vector2()
-var laundry = null
-var animated = false
+var target_objct : Area2D = null
+var target := Vector2()
+var laundry : Node2D = null
+var animated := false
 var animationState : AnimationNodeStateMachinePlayback
 
-var navNode
-var path : = PoolVector2Array() 
-var speed : = 175
+var navNode : Navigation2D
+var path := PoolVector2Array() 
+var speed := 175
 export(NodePath) var navNodePath
 signal end_of_path
 signal score
@@ -27,13 +27,12 @@ func move_along_path(distance : float) -> void:
 	var start_point : = global_position
 
 	while path.size():
-		var distance_to_next : = start_point.distance_to(path[0])
+		var distance_to_next := start_point.distance_to(path[0])
 		if distance <= distance_to_next and distance >= 0.0:
 			var move_rotation = get_angle_to(path[0])
 			var velocity = Vector2(speed,0).rotated(move_rotation)
+			velocity = move_and_slide(velocity)
 			update_sprite(velocity)
-# warning-ignore:return_value_discarded
-			move_and_slide(velocity)
 			break
 		elif path.size() == 1 && distance > distance_to_next:
 			set_physics_process(false)

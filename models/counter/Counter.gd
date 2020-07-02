@@ -15,12 +15,9 @@ func get_sleep_position() -> Vector2:
 	
 func cat_shedding() -> void:
 	interactable = false
-	if laundry:
-		laundry.hairify()
-			
+
 func _on_Interactable_body_exited(body : PhysicsBody2D) -> void:
 	# Cat only sleeps on counters 
-	._on_Interactable_body_exited(body)
 	if body.get_name() == "Cat":
 		interactable = true
 

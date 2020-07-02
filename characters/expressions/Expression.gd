@@ -1,6 +1,6 @@
 extends AnimatedSprite
-var happy_cutoff : float = 0.9
-var mad_cutoff : float = 0.25
+var happy_cutoff := 0.9
+var mad_cutoff := 0.25
 
 func _on_animation_finished():
 	queue_free()
