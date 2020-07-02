@@ -17,7 +17,6 @@ var received_laundry : bool = false
 signal leaving
 signal returning
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	._ready()
 	set_physics_process(false)
@@ -29,7 +28,6 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	$Bumper.connect("returned", self, "receive_order")
 	$Ticket.visible = false
-	print("customer initialized and reporting for duty!")
 
 func init(node : Navigation2D, id : int, wait_time : float) -> void:
 	navNode = node
@@ -70,7 +68,6 @@ func assess_laundry() -> void:
 	if $Bumper.laundry == my_laundry:
 		cleanliness_pct = my_laundry.assess_cleanliness()
 		score = cleanliness_pct * score_multiplier * patience
-		print("patrience: ", patience)
 	stop_patience_particles()
 	
 func emote(happiness_pct: float) -> AnimatedSprite:

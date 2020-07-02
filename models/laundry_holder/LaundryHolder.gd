@@ -16,10 +16,10 @@ var offset = Vector2(0,0)
 
 signal click
 
-func _ready():
+func _ready() -> void:
 	_calculate_radius()
 
-func _calculate_radius():
+func _calculate_radius() -> void:
 	# Default method for calculating interaction radius for rectangular interactables
 	# Overridden for any interactables with circular colliders
 	
@@ -27,21 +27,20 @@ func _calculate_radius():
 	# Halving the smallest extent by two for better controlability/feel
 	radius = min(extents.x, extents.y)/2
 
-func _on_Interactable_body_entered(body):
+func _on_Interactable_body_entered(body : PhysicsBody2D) -> void:
 	if body.get_name() == "Player":
 		player_in_range = true
-		if is_target:
-			body.interact(self)
+		if is_target: body.interact(self) # TODO: make objects and player less tightly coupled
 	if body.get_name() == "Cat":
 		cat_in_range = true
 			
-func _on_Interactable_body_exited(body):
+func _on_Interactable_body_exited(body : PhysicsBody2D) -> void:
 	if body.get_name() == "Player":
 		player_in_range = false
 	if body.get_name() == "Cat":
 		cat_in_range = false
 	
-func load_laundry(laundry_in):
+func load_laundry(laundry_in : Node2D) -> void:
 	if !laundry_in: return
 	
 	laundry = laundry_in
@@ -49,7 +48,7 @@ func load_laundry(laundry_in):
 	laundry_available = true
 	laundry.position = offset
 
-func unload_laundry():
+func unload_laundry() -> Node2D:
 	if !laundry: return null
 	
 	var laundry_to_give = laundry
@@ -58,10 +57,10 @@ func unload_laundry():
 	laundry_available = false
 	return laundry_to_give
 
-func _mouse_over(over):
+func _mouse_over(over : bool) -> void:
 	self.mouse_over = over
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	# TODO: refactor to enable mobile controls
 	if !mouse_over: return
 	if not event is InputEventMouseButton: return
@@ -71,33 +70,34 @@ func _unhandled_input(event):
 	get_tree().set_input_as_handled()
 	emit_signal("click", self)
 		
-func set_target(boolean):
+func set_target(boolean) -> void:
 	is_target = boolean
 	modulate()
 		
-func reset():
+func reset() -> void:
 	if laundry:
 		laundry.queue_free()
 	laundry = null
 	laundry_available = false
 	
-func disallowed_action():
+func disallowed_action() -> void:
+	# Overriden by scenes that inherit
 	pass
 
-func modulate():
+func modulate() -> void:
 	if is_target or mouse_over and interactable:
 		$Sprite.modulate = selected_modulation
 	else:
 		$Sprite.modulate = default_modulation
 
-func _on_mouse_entered():
+func _on_mouse_entered() -> void:
 	mouse_over = true
 	modulate()
 	
-func _on_mouse_exited():
+func _on_mouse_exited() -> void:
 	mouse_over = false
 	modulate()
 	
-func set_interactable(boolean):
+func set_interactable(boolean) -> void:
 	interactable = boolean
 	modulate()

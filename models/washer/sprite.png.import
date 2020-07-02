@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/random customerv2.png-904152a2d0942e9db32561e122f14ec0.stex"
+path="res://.import/sprite.png-03abf866b34156768602f063804f5dfb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/test customer/random customerv2.png"
-dest_files=[ "res://.import/random customerv2.png-904152a2d0942e9db32561e122f14ec0.stex" ]
+source_file="res://models/washer/sprite.png"
+dest_files=[ "res://.import/sprite.png-03abf866b34156768602f063804f5dfb.stex" ]
 
 [params]
 

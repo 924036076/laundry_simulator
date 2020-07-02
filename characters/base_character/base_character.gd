@@ -63,12 +63,12 @@ func set_target_location(new_target : Vector2) -> void:
 		return
 	set_physics_process(true)
 
-func _on_end_of_path():
+func _on_end_of_path() -> void:
 	set_physics_process(false)
 	if animated:
 		animationState.travel("Idle")
 		
-func show_money_earned(money : float, percent : float = 1):
+func show_money_earned(money : float, percent : float = 1) -> void:
 	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
 	add_child(label)
 	label.position = money_label_offset

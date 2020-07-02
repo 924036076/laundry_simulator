@@ -1124,6 +1124,6 @@ __meta__ = {
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
 [connection signal="new_game" from="HUD" to="." method="_on_HUD_new_game"]
-[connection signal="pressed" from="HUD/Button" to="HUD" method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_new_game"]
 [connection signal="score_update" from="Events" to="MoneyLabel" method="_on_Events_score_update"]
-[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_RestartDay_restart_button_pressed"]
+[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]

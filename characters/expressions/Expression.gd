@@ -5,7 +5,7 @@ var mad_cutoff : float = 0.25
 func _on_animation_finished():
 	queue_free()
 
-func set_and_play(happiness_pct : float):
+func set_and_play(happiness_pct : float) -> void:
 	# Happiness percent between 0 and 1 affects what is played
 	if happiness_pct >= happy_cutoff:
 		play("happy")

@@ -18,14 +18,14 @@ signal day_over
 
 var LAST_CUSTOMER_HOUR : int = 16
 
-func init(node : Navigation2D, body : KinematicBody2D):
+func init(node : Navigation2D, body : KinematicBody2D) -> void:
 	navNode = node
 	player = body
 	max_customers = $WaitingSpots.get_child_count()
 
-func create_customer():
+func create_customer() -> KinematicBody2D:
 	# Create and initialize new customer
-	var customer = preload("res://characters/test customer/customer.tscn").instance()
+	var customer = preload("res://characters/test_customer/customer.tscn").instance()
 	$Customers.add_child(customer)
 	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max))
 	
@@ -38,34 +38,32 @@ func create_customer():
 	
 	next_id += 1
 	customers_created += 1
-	#print("customers created: ", customers_created)
 	return customer
 
-func send_customer(customer):
+func send_customer(customer : KinematicBody2D) -> void:
 	#all customers (new and returning) go to queue first
 	queued_customers.append(customer)
 
-func _on_WaitTimer_timeout():
+func _on_WaitTimer_timeout() -> void:
 	manage_queue()
 
-func manage_queue():
-	if !waiting_customers or len(waiting_customers) < max_customers:
-		if queued_customers:
-			waiting_customers.append(queued_customers.pop_front())
+func manage_queue() -> void:
+	if len(waiting_customers) < max_customers and queued_customers:
+		waiting_customers.append(queued_customers.pop_front())
 	_move_line()
 
-func _on_Timer_timeout():
-	if queued_customers and queued_customers.size() > 2:
+func _on_Timer_timeout() -> void:
+	if queued_customers.size() > 2:
 		print("not generating another customer now")
 	else:
 		create_and_send_customer(new_customers_on_timeout)
 		$CustomerTimer.set_wait_time(rand_range(next_customer_min, next_customer_max))
 
-func create_and_send_customer(num : int):
+func create_and_send_customer(num : int) -> void:
 	for _i in range(num):
 		send_customer(create_customer())
 			
-func reset():
+func reset() -> void:
 	for child in $Customers.get_children():
 		child.queue_free()
 	waiting_customers = []
@@ -73,47 +71,45 @@ func reset():
 	customers_created = 0
 	customers_served = 0
 
-func start():
+func start() -> void:
 	create_and_send_customer(starting_customers)
 	$CustomerTimer.start()
 	$WaitTimer.start()
 	
-func restart():
+func restart() -> void:
 	reset()
 	start()
 	
-func stop():
+func stop() -> void:
 	$CustomerTimer.stop()
 	$WaitTimer.stop()
 	queued_customers = []
 
-func get_angry():
-	if waiting_customers:
-		for customer in waiting_customers:
-			customer.storm_off()
+func get_angry() -> void:
+	for customer in waiting_customers:
+		customer.storm_off()
 			
-func _on_Clock_new_hour(hour : int):
+func _on_Clock_new_hour(hour : int) -> void:
 	if hour >= LAST_CUSTOMER_HOUR:
 		$CustomerTimer.stop()
 		
-func _move_line():
-	#assert(len(waiting_customers) <= len($WaitingSpots.get_child_count()))
+func _move_line() -> void:
 	for i in range(len(waiting_customers)):
 		waiting_customers[i].set_target_location($WaitingSpots.get_child(i).global_position)
 		waiting_customers[i].decrement_patience()
 
-func handle_leaving(customer):
+func handle_leaving(customer : KinematicBody2D) -> void:
 	change_customer_group(customer)
 	var index = waiting_customers.find(customer)
 	if index >=0:
 		waiting_customers.remove(index)
 		customer.set_target_location(global_position)
 
-func handle_entering(customer):
+func handle_entering(customer : KinematicBody2D) -> void:
 	change_customer_group(customer)
 	send_customer(customer)
 	
-func change_customer_group(customer : KinematicBody2D):
+func change_customer_group(customer : KinematicBody2D) -> void:
 	if customer.is_in_group("dropping_off"):
 		customer.remove_from_group("dropping_off")
 		customer.add_to_group("limbo")
@@ -124,9 +120,8 @@ func change_customer_group(customer : KinematicBody2D):
 		customer.remove_from_group("picking_up")
 		customer.add_to_group("satisfied_customers")
 		customers_served += 1
-		#print("customers served: ", customers_served)
 		if customers_served >= customers_created:
 			emit_signal("day_over")
 
-func _on_Clock_almost_closing():
+func _on_Clock_almost_closing() -> void:
 	get_tree().call_group("limbo", "last_call")

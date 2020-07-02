@@ -13,39 +13,38 @@ var highest_unfinished_score : float = 0.25
 enum size {small, medium, large} #TODO: something with size
 var id : int
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	update_visuals()
 	starting_cleanliness = assess_cleanliness()
 
-func can_wash():
+func can_wash() -> bool:
 	return dirty or hairy
 	
-func can_dry():
+func can_dry() -> bool:
 	return wet
 	
-func hairify():
+func hairify() -> void:
 	hairy = true
 	update_visuals()
 	
-func dehairify():
+func dehairify() -> void:
 	hairy = false
 	update_visuals()
 	
-func wash():
+func wash() -> void:
 	dirty = false
 	wet = true
 	update_visuals()
 	
-func dry():
+func dry() -> void:
 	wet = false
 	update_visuals()
 	
-func update_visuals():
+func update_visuals() -> void:
 	update_modulation()
 	update_particles()
 
-func update_modulation():	
+func update_modulation() -> void:	
 	if can_wash():
 		$Sprite.modulate = washable_modulation
 	elif can_dry():
@@ -53,8 +52,7 @@ func update_modulation():
 	else:
 		$Sprite.modulate = default_modulation
 
-func update_particles():
-	# Updates particle effects with appropriate class variable booleans
+func update_particles() -> void:
 	# Emitting changes whether particles are produced, visible whether they're visible
 	# Only changing emitting results in lingering particles being visible after a state change
 
@@ -78,18 +76,16 @@ func assess_cleanliness() -> float:
 	return cleanliness
 	
 func score_laundry() -> float:
-	# TODO: integrate laundry scoring function to only give money when clothes
-	# are better off than they started
+	# TODO: Better laundry scoring
+	# (Currently doesn't make sense if more variables are introduced in gameplay)
 	var score : float = 0.0
 	var current_cleanliness = assess_cleanliness()
 	if current_cleanliness > starting_cleanliness:
 		score = current_cleanliness - starting_cleanliness
 	return score
 	
-func show_ticket():
+func show_ticket() -> void:
 	$Ticket/Label.text = str(id)
 	$Ticket.visible = true
-	
-	
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://characters/cat/cat.png" type="Texture" id=1]
+[ext_resource path="res://characters/cat/sprite.png" type="Texture" id=1]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/cat/Cat.gd" type="Script" id=3]
 [ext_resource path="res://models/thought_bubble/ThoughtBubble.tscn" type="PackedScene" id=4]
