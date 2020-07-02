@@ -8,7 +8,7 @@ var counters
 func _ready() -> void:
 	counters = $Objects/Counters.get_children()
 	initialize_level()
-		
+	
 func initialize_level() -> void:
 	for counter in counters:
 		counter.connect("click", $Objects/Player, "_on_Interactable_click")
@@ -64,11 +64,13 @@ func _on_restart_day() -> void:
 
 func _on_Cat_mischief() -> void:
 	# Give cat location of counter with laundry
-	var location = Vector2.ZERO
+	var location := Vector2.ZERO
+	var id : int
 	
 	# TODO: better way of selecting location
 	# (Like randomly choosing an occupied counter or having preference for clean laundry)
 	for counter in counters:
 		if counter.laundry_available:
-			location = counter.get_jump_launch_position()	
-	cat.manage_mischief(location)
+			location = counter.get_jump_launch_position()
+			id = counter.get_instance_id()	
+	cat.manage_mischief(location, id)

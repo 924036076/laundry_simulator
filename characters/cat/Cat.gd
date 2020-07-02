@@ -13,6 +13,7 @@ var sleep_cutoff := 30
 var work_cutoff := 50
 var mischief_cutoff := 100
 var action_enabled := false
+var target_id : int
 
 signal mischief_wanted
 signal mischief_started
@@ -59,20 +60,32 @@ func shed() -> void:
 func _on_jump_start() -> void:
 	if !action_enabled: return
 	
-	global_position = target + Vector2(0,28)
+	global_position = target + Vector2(0,28) # TODO: smarter jumping behavior; vanquish magic number
 	state = State.SLEEP
 	$AnimationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
 	$AnimationTree.set("parameters/Move/blend_position", Vector2.DOWN)
+	#handle_state_transition()
+
+func _on_jump_end() -> void:
+	EventHub.emit_signal("occupy_object", target_id)
 	handle_state_transition()
 
 func _on_WaitTimer_timeout() -> void:
-	if state == State.WORK:
-		show_money_earned(rng.randf_range(10.0, 50.0))
+	match state:
+		State.WORK:
+			show_money_earned(rng.randf_range(10.0, 50.0))
+		State.SLEEP:
+			animationState.travel("Idle")
+			yield(self, "idle")
+			EventHub.emit_signal("leave_object", target_id)
+			
 	if action_enabled:
 		choose_action()
 
-func manage_mischief(counter_pos : Vector2) -> void:
+func manage_mischief(counter_pos : Vector2, id : int) -> void:
 	target = counter_pos
+	target_id = id
+	
 	if target == Vector2.ZERO:
 		animationState.travel("disappointed")
 	else:
@@ -94,6 +107,7 @@ func office_work() -> void:
 	
 func choose_action() -> void:
 	if !action_enabled: return
+	target_id = 0
 	
 	# Wait until sprite has reached idle animation
 	animationState.travel("Idle")
