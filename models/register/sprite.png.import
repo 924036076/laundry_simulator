@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex"
+path="res://.import/sprite.png-c5d1bf216b94c1ca3d642cb9964c8fd6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/dryer/dryer.png"
-dest_files=[ "res://.import/dryer.png-a800eb3f92ad537d986f512ce72b2ded.stex" ]
+source_file="res://models/register/sprite.png"
+dest_files=[ "res://.import/sprite.png-c5d1bf216b94c1ca3d642cb9964c8fd6.stex" ]
 
 [params]
 

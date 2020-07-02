@@ -1,4 +1,4 @@
-extends "res://models/interactable/Interactable.gd"
+extends "res://models/laundry_holder/LaundryHolder.gd"
 
 # Declare member variables here. Examples:
 # var a = 2

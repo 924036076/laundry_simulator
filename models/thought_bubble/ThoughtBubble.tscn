@@ -1,8 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://models/thought_bubble/thought_bubble.png" type="Texture" id=1]
-[ext_resource path="res://models/thought_bubble/bubbles.png" type="Texture" id=2]
+[ext_resource path="res://models/thought_bubble/thought_sprite.png" type="Texture" id=1]
+[ext_resource path="res://models/thought_bubble/bubbles_sprite.png" type="Texture" id=2]
 [ext_resource path="res://models/thought_bubble/ThoughtBubble.gd" type="Script" id=3]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"

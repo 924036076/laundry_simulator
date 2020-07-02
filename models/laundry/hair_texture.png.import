@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bubbles.png-7f8bb8591b67185509f976979775e809.stex"
+path="res://.import/hair_texture.png-d95d0981a6f3c2d6fa415fdcb0b1b141.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/thought_bubble/bubbles.png"
-dest_files=[ "res://.import/bubbles.png-7f8bb8591b67185509f976979775e809.stex" ]
+source_file="res://models/laundry/hair_texture.png"
+dest_files=[ "res://.import/hair_texture.png-d95d0981a6f3c2d6fa415fdcb0b1b141.stex" ]
 
 [params]
 

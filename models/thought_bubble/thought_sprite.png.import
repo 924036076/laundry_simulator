@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/interactable_base.png-bb36ca96d28da2240d4037550aa444c3.stex"
+path="res://.import/thought_sprite.png-072ec4bc9c2b93dd3d398feaf1e0dd33.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/interactable/interactable_base.png"
-dest_files=[ "res://.import/interactable_base.png-bb36ca96d28da2240d4037550aa444c3.stex" ]
+source_file="res://models/thought_bubble/thought_sprite.png"
+dest_files=[ "res://.import/thought_sprite.png-072ec4bc9c2b93dd3d398feaf1e0dd33.stex" ]
 
 [params]
 

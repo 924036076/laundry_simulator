@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://models/laundry/laundry.png" type="Texture" id=1]
+[ext_resource path="res://models/laundry/sprite.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry/laundry.gd" type="Script" id=2]
 [ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=3]
-[ext_resource path="res://models/laundry/hair.png" type="Texture" id=4]
-[ext_resource path="res://models/laundry/drop.png" type="Texture" id=5]
+[ext_resource path="res://models/laundry/hair_texture.png" type="Texture" id=4]
+[ext_resource path="res://models/laundry/drop_texture.png" type="Texture" id=5]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.04, 0.988636 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.525 ), 0.0, 0.0, 0, 0 ]
@@ -15,7 +15,6 @@ scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.624542, -0.340603 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 
@@ -35,9 +34,9 @@ amount = 4
 lifetime = 0.75
 speed_scale = 0.4
 local_coords = false
+texture = ExtResource( 5 )
 emission_shape = 2
 emission_rect_extents = Vector2( 15, 2 )
-scale_amount = 3.0
 color = Color( 0.682353, 0.160784, 0.145098, 1 )
 
 [node name="Dirt Particles" type="CPUParticles2D" parent="."]

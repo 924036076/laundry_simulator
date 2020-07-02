@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/register.png-82ab3a1ea0fcea5141d15c37868c44d5.stex"
+path="res://.import/fluff.png-0a0475c70f5b607501147cb5a8ce4bb4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/register/register.png"
-dest_files=[ "res://.import/register.png-82ab3a1ea0fcea5141d15c37868c44d5.stex" ]
+source_file="res://characters/cat/fluff.png"
+dest_files=[ "res://.import/fluff.png-0a0475c70f5b607501147cb5a8ce4bb4.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

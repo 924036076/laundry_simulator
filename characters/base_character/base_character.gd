@@ -4,7 +4,6 @@ var laundry_offset = Vector2(50, 0)
 var money_label_offset = Vector2(0, -40)
 var target_objct = null
 var target = Vector2()
-var velocity = Vector2()
 var laundry = null
 var animated = false
 var animationState : AnimationNodeStateMachinePlayback
@@ -31,13 +30,12 @@ func move_along_path(distance : float) -> void:
 		var distance_to_next : = start_point.distance_to(path[0])
 		if distance <= distance_to_next and distance >= 0.0:
 			var move_rotation = get_angle_to(path[0])
-			var motion = Vector2(speed,0).rotated(move_rotation)
-			update_sprite(motion)
+			var velocity = Vector2(speed,0).rotated(move_rotation)
+			update_sprite(velocity)
 # warning-ignore:return_value_discarded
-			move_and_slide(motion)
+			move_and_slide(velocity)
 			break
 		elif path.size() == 1 && distance > distance_to_next:
-			#position = path[0]
 			set_physics_process(false)
 			emit_signal("end_of_path")
 			break
@@ -45,16 +43,16 @@ func move_along_path(distance : float) -> void:
 		start_point = path[0]
 		path.remove(0)
 
-func update_sprite(motion : Vector2):
+func update_sprite(velocity : Vector2):
 	if !animated:
-		if motion.x > 0:
+		if velocity.x > 0:
 			$Sprite.flip_h = true
 		else:
 			$Sprite.flip_h = false
 		return
-	var motion_vector = motion.normalized()
-	$AnimationTree.set("parameters/Idle/blend_position", motion_vector)
-	$AnimationTree.set("parameters/Move/blend_position", motion_vector)
+	var direction = velocity.normalized()
+	$AnimationTree.set("parameters/Idle/blend_position", direction)
+	$AnimationTree.set("parameters/Move/blend_position", direction)
 	animationState.travel("Move")
 
 func set_target_location(new_target : Vector2) -> void:
@@ -70,10 +68,9 @@ func _on_end_of_path():
 	if animated:
 		animationState.travel("Idle")
 		
-# warning-ignore:shadowed_variable
-func show_money_earned(score : float, percent : float = 1):
+func show_money_earned(money : float, percent : float = 1):
 	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
 	add_child(label)
 	label.position = money_label_offset
-	label.display("$" + str(round(score)), percent)
-	emit_signal("score", score)
+	label.display("$" + str(round(money)), percent)
+	emit_signal("score", money)

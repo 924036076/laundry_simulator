@@ -1,4 +1,4 @@
-extends "res://models/interactable/Interactable.gd"
+extends "res://models/laundry_holder/LaundryHolder.gd"
 
 var state_machine : AnimationNodeStateMachinePlayback
 

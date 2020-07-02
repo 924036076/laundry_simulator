@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/carboard.png-2c993882ee95211b62df85d7df1e2789.stex"
+path="res://.import/washer.png-9fc95597cff8bf350504b170f963e870.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/desk/carboard.png"
-dest_files=[ "res://.import/carboard.png-2c993882ee95211b62df85d7df1e2789.stex" ]
+source_file="res://models/washer/washer.png"
+dest_files=[ "res://.import/washer.png-9fc95597cff8bf350504b170f963e870.stex" ]
 
 [params]
 

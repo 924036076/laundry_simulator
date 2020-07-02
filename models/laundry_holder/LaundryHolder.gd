@@ -16,18 +16,15 @@ var offset = Vector2(0,0)
 
 signal click
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	#connect("mouse_entered", self, "_mouse_over", [true])
-	#connect("mouse_exited", self, "_mouse_over", [false])
 	_calculate_radius()
 
 func _calculate_radius():
 	# Default method for calculating interaction radius for rectangular interactables
-	# Should be overridden for any interactables with circular colliders
+	# Overridden for any interactables with circular colliders
+	
 	var extents =  get_node("CollisionShape2D").shape.get_extents()
-	# Halving the smallest extent by two for better controlability/look
-	# (Otherwise player will interact with object far away / in odd corners)
+	# Halving the smallest extent by two for better controlability/feel
 	radius = min(extents.x, extents.y)/2
 
 func _on_Interactable_body_entered(body):
@@ -45,16 +42,16 @@ func _on_Interactable_body_exited(body):
 		cat_in_range = false
 	
 func load_laundry(laundry_in):
-	if !laundry_in:
-		return
+	if !laundry_in: return
+	
 	laundry = laundry_in
 	add_child(laundry)
 	laundry_available = true
 	laundry.position = offset
 
 func unload_laundry():
-	if !laundry:
-		return null
+	if !laundry: return null
+	
 	var laundry_to_give = laundry
 	remove_child(laundry)
 	laundry = null
@@ -65,9 +62,14 @@ func _mouse_over(over):
 	self.mouse_over = over
 
 func _unhandled_input(event):
-	if mouse_over and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
-		get_tree().set_input_as_handled()
-		emit_signal("click", self)
+	# TODO: refactor to enable mobile controls
+	if !mouse_over: return
+	if not event is InputEventMouseButton: return
+	if event.button_index != BUTTON_LEFT: return
+	if not event.is_pressed(): return
+	
+	get_tree().set_input_as_handled()
+	emit_signal("click", self)
 		
 func set_target(boolean):
 	is_target = boolean
