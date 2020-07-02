@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/customer_mad.wav-a8fa7cccc581e808de30345e9f240833.sample"
+
+[deps]
+
+source_file="res://characters/expressions/customer_mad.wav"
+dest_files=[ "res://.import/customer_mad.wav-a8fa7cccc581e808de30345e9f240833.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

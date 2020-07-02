@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://music/SongLoop.gd" type="Script" id=1]
+[ext_resource path="res://music/SongLoop.ogg" type="AudioStream" id=2]
+[ext_resource path="res://music/SongIntro.ogg" type="AudioStream" id=3]
+[ext_resource path="res://music/BackgroundMusic.gd" type="Script" id=4]
+
+[node name="BackgroundMusic" type="Node"]
+script = ExtResource( 4 )
+
+[node name="SongIntro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -7.068
+autoplay = true
+bus = "music"
+
+[node name="SongLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "music"
+script = ExtResource( 1 )
+[connection signal="finished" from="SongIntro" to="SongLoop" method="_on_SongIntro_finished"]

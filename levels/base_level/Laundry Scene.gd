@@ -1,37 +1,74 @@
 extends Node2D
 
 onready var nav2d : Navigation2D = $Navigation2D
-onready var line2d : Line2D = $Line2D
-onready var player : Sprite = $Objects/Player
-var counters_in
-var counters_out # Distinction between type of counters will go away in future
+onready var player : KinematicBody2D = $Objects/Player
+onready var cat : KinematicBody2D = $Objects/Cat
+var counters
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	counters_in = $Objects/Counters_In.get_children()
-	counters_out = $Objects/Counters_Out.get_children()
-	generate_laundry()
-	
-			
-func generate_laundry():
-	# Mostly for debugging purposes right now
-	# Will have customers come in with laundry for actual gameplay
-	for counter in counters_in:
-		var laundry = preload("res://models/laundry/laundry.tscn").instance()
-		counter.load_laundry(laundry)
-		counter.connect("click", $Objects/Player, "_on_Interactable_click")
+func _ready() -> void:
+	counters = $Objects/Counters.get_children()
+	initialize_level()
 		
-	for counter in counters_out:
+func initialize_level() -> void:
+	for counter in counters:
 		counter.connect("click", $Objects/Player, "_on_Interactable_click")
+	$Spawner.init($Navigation2D, player)
 
-# Called when player clicks on screen but not on an interactable
 func _unhandled_input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton:
-		return
+	# Called when player clicks on screen but not on an interactable
 	
-	if event.button_index != BUTTON_LEFT or not event.pressed:
-		return
-	# For debugging pathfinding purposes:
-	#var new_path = nav2d.get_simple_path(player.global_position, event.global_position, true)
-	#line2d.points = new_path
-	player.set_target_location(event.global_position)
+	# Only handle mouse clicks
+	if not event is InputEventMouseButton: return
+	if not event.pressed: return
+	
+	match event.button_index:
+		BUTTON_RIGHT:
+			# Send customers on demand for debug purposes
+			$Spawner.create_and_send_customer(1)
+		BUTTON_LEFT:
+			# Send player to clicked location and reset player's target object
+			player.set_targetobjct(null)
+			player.set_target_location(get_global_mouse_position())
+
+func _on_new_game() -> void:
+	player.reset()
+	player.enable_movement(true)
+	$HUD.hide_overlay()
+	$Spawner.restart()
+	$MoneyLabel.reset()
+	$Clock.restart()
+	refresh_interactables()
+	$BackgroundMusic.restart()
+	cat.start()
+
+func refresh_interactables() -> void:
+	get_tree().call_group("InteractableObjects", "reset")
+	
+func _on_day_over() -> void:
+	$Clock.stop()
+	$Spawner.stop()
+	$Spawner.get_angry()
+	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
+	player.enable_movement(false)
+	cat.stop()
+
+func _on_restart_day() -> void:
+	$Clock.stop()
+	$Spawner.stop()
+	$Spawner.reset()
+	refresh_interactables()
+	$HUD.show_overlay(null)
+	player.reset()
+	player.enable_movement(false)
+	cat.stop()
+
+func _on_Cat_mischief() -> void:
+	# Give cat location of counter with laundry
+	var location = Vector2.ZERO
+	
+	# TODO: better way of selecting location
+	# (Like randomly choosing an occupied counter or having preference for clean laundry)
+	for counter in counters:
+		if counter.laundry_available:
+			location = counter.get_jump_launch_position()	
+	cat.manage_mischief(location)

@@ -1,31 +1,40 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://models/washer/washing machine.png" type="Texture" id=1]
-[ext_resource path="res://models/interactable/Interactable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/washer/sprite.png" type="Texture" id=1]
+[ext_resource path="res://models/laundry_holder/LaundryHolder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/washer/Washer.gd" type="Script" id=3]
-
-
-
-
-
+[ext_resource path="res://models/washer/washerLoop.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 6 ]
+"values": [ 5 ]
 }
 
 [sub_resource type="Animation" id=2]
-length = 0.6
+resource_name = "running"
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -34,26 +43,108 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 1, 0 ) ]
 }
 
-[node name="Washer" instance=ExtResource( 2 )]
+[sub_resource type="Animation" id=3]
+resource_name = "shake"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5, 0 ), Vector2( -5, 0 ), Vector2( 5, 0 ) ]
+}
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Sprite:position" ]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "shake"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 210, 42 )
+states/running/node = SubResource( 7 )
+states/running/position = Vector2( 386, 42 )
+transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
+
+[sub_resource type="AnimationNodeBlendTree" id=11]
+graph_offset = Vector2( 0, -142.5 )
+nodes/Blend/node = SubResource( 4 )
+nodes/Blend/position = Vector2( 340, 140 )
+nodes/Shake/node = SubResource( 5 )
+nodes/Shake/position = Vector2( 100, 220 )
+nodes/StateMachine/node = SubResource( 10 )
+nodes/StateMachine/position = Vector2( 20, -60 )
+nodes/output/position = Vector2( 540, 200 )
+node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 1, "Shake" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[node name="Washer" groups=[
+"InteractableObjects",
+] instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="1"]
+position = Vector2( -1, 0 )
 texture = ExtResource( 1 )
 vframes = 3
-hframes = 3
-frame = 6
+hframes = 2
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 5.0
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+playback_speed = 2.0
 anims/idle = SubResource( 1 )
 anims/running = SubResource( 2 )
+anims/shake = SubResource( 3 )
 
-[node name="Timer" type="Timer" parent="." index="4"]
-wait_time = 10.0
-one_shot = true
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Blend/blend_amount = 0.0
+parameters/StateMachine/playback = SubResource( 12 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "soundfx"
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

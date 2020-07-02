@@ -1,5 +1,43 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://models/interactable/Interactable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/laundry_holder/LaundryHolder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/counter/Counter.gd" type="Script" id=2]
+[ext_resource path="res://models/counter/sprite.png" type="Texture" id=3]
 
-[node name="Counter" instance=ExtResource( 1 )]
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Counter" groups=[
+"InteractableObjects",
+"sheddable",
+] instance=ExtResource( 1 )]
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/shake = SubResource( 1 )
+
+[node name="JumpLaunch" type="Node2D" parent="." index="3"]
+position = Vector2( 0, -61.5118 )
+
+[node name="SleepLocation" type="Node2D" parent="." index="4"]
+position = Vector2( -0.396835, -18.652 )

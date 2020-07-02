@@ -19,6 +19,15 @@ config/name="Laundry Simulator"
 run/main_scene="res://levels/base_level/Laundry Scene.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 click={
@@ -29,4 +38,6 @@ click={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false
