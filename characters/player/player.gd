@@ -39,8 +39,8 @@ func load_laundry(laundry_in : Node2D) -> void:
 	if laundry_in == null: return
 	
 	laundry = laundry_in
+	$laundry_pos.call_deferred("add_child", laundry)
 	laundry.position = laundry_offset
-	$laundry_pos.add_child(laundry)
 	
 func set_targetobjct(objct : Area2D) -> void:
 	if target_objct: target_objct.set_target(false)

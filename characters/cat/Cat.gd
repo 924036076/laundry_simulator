@@ -16,7 +16,6 @@ var action_enabled := false
 
 signal mischief_wanted
 signal mischief_started
-signal shedding
 signal idle
 
 func _ready() -> void:

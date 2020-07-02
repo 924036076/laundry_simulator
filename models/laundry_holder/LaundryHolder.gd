@@ -29,9 +29,9 @@ func load_laundry(laundry_in : Node2D) -> void:
 	if !laundry_in: return
 	
 	laundry = laundry_in
-	add_child(laundry)
 	laundry_available = true
 	laundry.position = offset
+	call_deferred("add_child", laundry)
 
 func unload_laundry() -> Node2D:
 	if !laundry: return null
