@@ -72,4 +72,4 @@ func show_money_earned(money : float, percent : float = 1) -> void:
 	add_child(label)
 	label.position = money_label_offset
 	label.display("$" + str(round(money)), percent)
-	emit_signal("score", money)
+	EventHub.emit_signal("add_money", money)
