@@ -948,7 +948,6 @@ position = Vector2( 234.467, -1.26316 )
 position = Vector2( 155.617, -1.26315 )
 
 [node name="WaitTimer" type="Timer" parent="Spawner"]
-wait_time = 0.75
 autostart = true
 
 [node name="Objects" type="TileMap" parent="."]

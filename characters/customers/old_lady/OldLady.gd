@@ -1,6 +1,6 @@
-extends "res://characters/test_customer/customer.gd"
-# TODO: rename "test_customer" to "customer" after next pull request merged
+extends "res://characters/customers/base_customer/customer.gd"
 
 func _ready():
-	#._ready()
 	speed = 50
+	patience = 2
+	score_multiplier = 35

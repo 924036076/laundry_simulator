@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://characters/test_customer/customer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/customers/base_customer/customer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/customers/old_lady/OldLady.gd" type="Script" id=2]
 [ext_resource path="res://characters/customers/old_lady/sprite.png" type="Texture" id=3]
 
