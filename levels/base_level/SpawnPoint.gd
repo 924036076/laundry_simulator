@@ -32,7 +32,6 @@ func create_customer() -> KinematicBody2D:
 	# Connect the appropriate signals
 	customer.connect("leaving", self, "handle_leaving")
 	customer.connect("returning", self, "handle_entering")
-	customer.connect("score", get_parent().get_node("Events"), "update_score")
 	customer.get_node("Bumper").connect("click", player, "_on_Interactable_click")
 	customer.add_to_group("dropping_off")
 	

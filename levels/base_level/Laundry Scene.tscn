@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://levels/base_level/Laundry Scene.gd" type="Script" id=1]
 [ext_resource path="res://levels/base_level/tile floor.png" type="Texture" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://levels/base_level/HUD.gd" type="Script" id=13]
 [ext_resource path="res://characters/player/transfer.wav" type="AudioStream" id=14]
-[ext_resource path="res://levels/base_level/Events.gd" type="Script" id=15]
 [ext_resource path="res://icons/KawaiiIcons_NoBG015.png" type="Texture" id=16]
 [ext_resource path="res://icons/KawaiiIcons_NoBG004.png" type="Texture" id=17]
 [ext_resource path="res://icons/KawaiiIcons_NoBG010.png" type="Texture" id=18]
@@ -820,22 +819,24 @@ font_data = ExtResource( 12 )
 
 [sub_resource type="GDScript" id=20]
 script/source = "extends Label
-var score : int = 0
+#TODO: save money in more permanent way, for multiple days of play
+var money : int = 0 
 
 func _ready():
-	format_score()
+	format_money()
+	EventHub.connect(\"add_money\", self, \"_on_add_money\")
 	
 func reset():
-	score = 0
-	format_score()
+	money = 0
+	format_money()
 
-func format_score():
-	set_text(\"$\" + str(score))
+func format_money():
+	set_text(\"$\" + str(money))
 
-func _on_Events_score_update(addition : float):
+func _on_add_money(addition : float):
 # warning-ignore:narrowing_conversion
-	score += round(addition)
-	format_score()
+	money += round(addition)
+	format_money()
 "
 
 [sub_resource type="DynamicFont" id=21]
@@ -1067,9 +1068,6 @@ __meta__ = {
 stream = ExtResource( 14 )
 bus = "soundfx"
 
-[node name="Events" type="Node" parent="."]
-script = ExtResource( 15 )
-
 [node name="BackgroundMusic" parent="." instance=ExtResource( 9 )]
 
 [node name="RestartDay" type="Button" parent="."]
@@ -1117,12 +1115,10 @@ __meta__ = {
 [connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]
 [connection signal="mischief_wanted" from="Objects/Cat" to="." method="_on_Cat_mischief"]
-[connection signal="score" from="Objects/Cat" to="Events" method="update_score"]
 [connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
 [connection signal="day_over" from="Clock" to="." method="_on_day_over"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
 [connection signal="new_game" from="HUD" to="." method="_on_new_game"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_new_game"]
-[connection signal="score_update" from="Events" to="MoneyLabel" method="_on_Events_score_update"]
 [connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]
