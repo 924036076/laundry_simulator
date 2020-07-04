@@ -5,7 +5,6 @@ var money_label_offset = Vector2(0, -40)
 var target_objct : Area2D = null
 var target := Vector2()
 var laundry : Node2D = null
-var animated := false
 var animationState : AnimationNodeStateMachinePlayback
 
 var navNode : Navigation2D
@@ -43,12 +42,6 @@ func move_along_path(distance : float) -> void:
 		path.remove(0)
 
 func update_sprite(velocity : Vector2):
-	if !animated:
-		if velocity.x > 0:
-			$Sprite.flip_h = true
-		else:
-			$Sprite.flip_h = false
-		return
 	var direction = velocity.normalized()
 	$AnimationTree.set("parameters/Idle/blend_position", direction)
 	$AnimationTree.set("parameters/Move/blend_position", direction)
@@ -64,8 +57,7 @@ func set_target_location(new_target : Vector2) -> void:
 
 func _on_end_of_path() -> void:
 	set_physics_process(false)
-	if animated:
-		animationState.travel("Idle")
+	animationState.travel("Idle")
 		
 func show_money_earned(money : float, percent : float = 1) -> void:
 	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()

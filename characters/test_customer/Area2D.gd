@@ -6,8 +6,9 @@ signal disallowed_customer_action
 signal modulate
 
 func _ready() -> void:
-	offset = Vector2(0,12)
+	offset = Vector2()
 	can_receive = false
+	laundry_parent = $HandPos
 	
 func _calculate_radius() -> void:
 	radius =  $CollisionShape2D.shape.radius

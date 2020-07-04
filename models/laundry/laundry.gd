@@ -11,7 +11,11 @@ const washable_modulation := Color(0.67, 0.67, 0.67)
 const dryable_modulation := Color(0.85, 0.85, 0.85)
 const default_modulation := Color(1, 1, 1)
 enum size {small, medium, large} #TODO: something with size
-var id : int
+var id : int setget set_id
+
+func set_id(new_id : int):
+	id = new_id
+	$Ticket/Label.text = str(id)
 
 func _ready() -> void:
 	update_visuals()

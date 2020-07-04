@@ -1,10 +1,10 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://characters/base_character/sprite.png" type="Texture" id=1]
 [ext_resource path="res://characters/base_character/base_character.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 50.2821
+radius = 12.62
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "idle_left"
@@ -75,34 +75,34 @@ animation = "patrol"
 animation = "rude_awakening"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
-animation = "sleep"
+animation = "shake"
 
 [sub_resource type="AnimationNodeAnimation" id=19]
-animation = "thinking"
+animation = "sleep"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "uncurl"
+animation = "thinking"
 
 [sub_resource type="AnimationNodeAnimation" id=21]
-animation = "wake_up"
+animation = "uncurl"
 
 [sub_resource type="AnimationNodeAnimation" id=22]
+animation = "wake_up"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "working"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 switch_mode = 2
@@ -114,6 +114,7 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
@@ -124,8 +125,6 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=36]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 switch_mode = 2
@@ -133,6 +132,7 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 switch_mode = 2
@@ -144,8 +144,16 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=44]
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=47]
 states/Idle/node = SubResource( 6 )
 states/Idle/position = Vector2( 380, 82 )
 states/Move/node = SubResource( 11 )
@@ -161,22 +169,24 @@ states/jump_forward/position = Vector2( 767.632, -49.7399 )
 states/patrol/node = SubResource( 16 )
 states/patrol/position = Vector2( 543.632, -54.74 )
 states/rude_awakening/node = SubResource( 17 )
-states/rude_awakening/position = Vector2( 61, 138 )
-states/sleep/node = SubResource( 18 )
-states/sleep/position = Vector2( 195, -7 )
-states/thinking/node = SubResource( 19 )
+states/rude_awakening/position = Vector2( -11, 53 )
+states/shake/node = SubResource( 18 )
+states/shake/position = Vector2( 243.632, 149.26 )
+states/sleep/node = SubResource( 19 )
+states/sleep/position = Vector2( 77, -75 )
+states/thinking/node = SubResource( 20 )
 states/thinking/position = Vector2( 342.632, 272.26 )
-states/uncurl/node = SubResource( 20 )
-states/uncurl/position = Vector2( 245, 138 )
-states/wake_up/node = SubResource( 21 )
-states/wake_up/position = Vector2( 190, 61 )
-states/working/node = SubResource( 22 )
+states/uncurl/node = SubResource( 21 )
+states/uncurl/position = Vector2( 201, 53 )
+states/wake_up/node = SubResource( 22 )
+states/wake_up/position = Vector2( 77, -13 )
+states/working/node = SubResource( 23 )
 states/working/position = Vector2( 380, -49.7399 )
-transitions = [ "Idle", "Move", SubResource( 23 ), "Move", "Idle", SubResource( 24 ), "Idle", "curl_up", SubResource( 25 ), "curl_up", "sleep", SubResource( 26 ), "sleep", "wake_up", SubResource( 27 ), "wake_up", "rude_awakening", SubResource( 28 ), "wake_up", "uncurl", SubResource( 29 ), "rude_awakening", "uncurl", SubResource( 30 ), "uncurl", "Idle", SubResource( 31 ), "Idle", "working", SubResource( 32 ), "working", "Idle", SubResource( 33 ), "Idle", "patrol", SubResource( 34 ), "patrol", "Idle", SubResource( 35 ), "Idle", "thinking", SubResource( 36 ), "disappointed", "Idle", SubResource( 37 ), "excited", "Idle", SubResource( 38 ), "thinking", "Idle", SubResource( 39 ), "thinking", "excited", SubResource( 40 ), "thinking", "disappointed", SubResource( 41 ), "jump_forward", "Idle", SubResource( 42 ), "Idle", "jump_forward", SubResource( 43 ) ]
+transitions = [ "Idle", "Move", SubResource( 24 ), "Move", "Idle", SubResource( 25 ), "Idle", "curl_up", SubResource( 26 ), "curl_up", "sleep", SubResource( 27 ), "sleep", "wake_up", SubResource( 28 ), "wake_up", "rude_awakening", SubResource( 29 ), "wake_up", "uncurl", SubResource( 30 ), "rude_awakening", "uncurl", SubResource( 31 ), "uncurl", "Idle", SubResource( 32 ), "Idle", "working", SubResource( 33 ), "working", "Idle", SubResource( 34 ), "Idle", "patrol", SubResource( 35 ), "patrol", "Idle", SubResource( 36 ), "Idle", "thinking", SubResource( 37 ), "disappointed", "Idle", SubResource( 38 ), "excited", "Idle", SubResource( 39 ), "thinking", "Idle", SubResource( 40 ), "thinking", "excited", SubResource( 41 ), "thinking", "disappointed", SubResource( 42 ), "jump_forward", "Idle", SubResource( 43 ), "Idle", "jump_forward", SubResource( 44 ), "Idle", "shake", SubResource( 45 ), "shake", "Idle", SubResource( 46 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -147.368, -106.74 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=45]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=48]
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( -2, 0 )
@@ -194,10 +204,10 @@ texture = ExtResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 44 )
+tree_root = SubResource( 47 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 45 )
+parameters/playback = SubResource( 48 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Move/blend_position = Vector2( 0.362832, 0.123364 )
 [connection signal="end_of_path" from="." to="." method="_on_end_of_path"]

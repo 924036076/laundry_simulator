@@ -23,11 +23,11 @@ func _ready() -> void:
 	speed = 100 # TODO: have different levels of speed and remove this magic number
 	my_laundry = preload("res://models/laundry/laundry.tscn").instance()
 	$Bumper.load_laundry(my_laundry)
-# warning-ignore:return_value_discarded
 	$Bumper.connect("released", self, "drop_off")
-# warning-ignore:return_value_discarded
 	$Bumper.connect("returned", self, "receive_order")
-	$Ticket.visible = false
+	$Bumper/HandPos/Ticket.visible = false
+	animationState = $AnimationTree["parameters/playback"]
+	assert($AnimationTree.active == true, "Customer's Animation Tree is not active")
 
 func init(node : Navigation2D, id : int, wait_time : float) -> void:
 	navNode = node
@@ -38,21 +38,21 @@ func init(node : Navigation2D, id : int, wait_time : float) -> void:
 func set_laundry_id(id : int) -> void:
 	if my_laundry:
 		my_laundry.id = id
-		$Ticket/Label.text = str(id)
+		$Bumper/HandPos/Ticket/Label.text = str(id)
 	else:
 		print_debug("ERROR: no laundry to give id")
 	
 func drop_off() -> void:
 	set_physics_process(false)
 	$Bumper.interactable = false
-	$Ticket.visible = true
+	$Bumper/HandPos/Ticket.visible = true
 	my_laundry.show_ticket()
 	$Timer.start()	
 	leave_store()
 	
 func receive_order() -> void:
 	$Bumper.interactable = false
-	$Ticket.visible = false
+	$Bumper/HandPos/Ticket.visible = false
 	assess_laundry()
 	var expression = emote(cleanliness_pct)
 	yield(expression, "animation_finished")

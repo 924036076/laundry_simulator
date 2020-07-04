@@ -19,7 +19,6 @@ signal mischief_started
 signal idle
 
 func _ready() -> void:
-	animated = true #in the future all characters will be animated, just not now
 	animationState = $AnimationTree["parameters/playback"]
 	money_label_offset = Vector2(0, -42)
 	speed = 75

@@ -24,7 +24,8 @@ func init(node : Navigation2D, body : KinematicBody2D) -> void:
 
 func create_customer() -> KinematicBody2D:
 	# Create and initialize new customer
-	var customer = preload("res://characters/test_customer/customer.tscn").instance()
+	#var customer = preload("res://characters/test_customer/customer.tscn").instance()
+	var customer = preload("res://characters/customers/old_lady/OldLady.tscn").instance()
 	$Customers.add_child(customer)
 	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max))
 	

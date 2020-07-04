@@ -11,6 +11,7 @@ var laundry_available := false
 var mouse_over := false
 var radius := 0.0
 var offset := Vector2(0,0)
+var laundry_parent : Node2D = self
 
 signal click
 
@@ -31,13 +32,13 @@ func load_laundry(laundry_in : Node2D) -> void:
 	laundry = laundry_in
 	laundry_available = true
 	laundry.position = offset
-	call_deferred("add_child", laundry)
+	laundry_parent.call_deferred("add_child", laundry)
 
 func unload_laundry() -> Node2D:
 	if !laundry: return null
 	
 	var laundry_to_give = laundry
-	remove_child(laundry)
+	laundry_parent.remove_child(laundry)
 	laundry = null
 	laundry_available = false
 	return laundry_to_give
