@@ -5,6 +5,7 @@ var register : Vector2
 var my_laundry : Node2D
 var score_multiplier := 50
 var expression_offset := Vector2(0, -52)
+var buff_offset := Vector2(0, 15)
 var score := 0.0
 var cleanliness_pct := 0.0
 const FURIOUS := 0.0

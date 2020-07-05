@@ -8,7 +8,7 @@ func _ready():
 	
 func happy_buff() -> void:
 	var buff = preload("res://characters/customers/effects/love_aura/LoveAura.tscn").instance()
-	buff.position = Vector2(0, 15)
+	buff.position = buff_offset
 	call_deferred("add_child", buff)
 
 func on_patience_cloud(_area : Area2D, _points : int)-> void:

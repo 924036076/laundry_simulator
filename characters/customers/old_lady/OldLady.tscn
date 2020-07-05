@@ -8,6 +8,7 @@
 
 [node name="Customer" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+navNodePath = null
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( -2.6893, 19.8796 )
