@@ -7,7 +7,7 @@
 [ext_resource path="res://characters/customers/base_customer/sprite.png" type="Texture" id=5]
 [ext_resource path="res://characters/expressions/exclamation mark.png" type="Texture" id=6]
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=1]
 resource_name = "idle_down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -46,7 +46,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=2]
 resource_name = "idle_left"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -85,7 +85,7 @@ tracks/2/keys = {
 "values": [ -1 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=3]
 resource_name = "idle_right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -124,7 +124,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=4]
 resource_name = "idle_up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -350,7 +350,9 @@ _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
-[node name="Customer" instance=ExtResource( 3 )]
+[node name="Customer" groups=[
+"customers",
+] instance=ExtResource( 3 )]
 position = Vector2( 0.146393, 0 )
 z_index = 1
 collision_layer = 0
@@ -366,13 +368,13 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 vframes = 4
 hframes = 3
-frame = 4
+frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
-anims/idle_down = SubResource( 13 )
-anims/idle_left = SubResource( 14 )
-anims/idle_right = SubResource( 15 )
-anims/idle_up = SubResource( 16 )
+anims/idle_down = SubResource( 1 )
+anims/idle_left = SubResource( 2 )
+anims/idle_right = SubResource( 3 )
+anims/idle_up = SubResource( 4 )
 anims/mov_down = SubResource( 5 )
 anims/mov_left = SubResource( 6 )
 anims/mov_right = SubResource( 7 )
@@ -389,7 +391,6 @@ shape = SubResource( 10 )
 
 [node name="HandPos" type="Node2D" parent="Bumper" index="1"]
 position = Vector2( -5.29681, 11.3091 )
-z_index = -1
 
 [node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
 position = Vector2( -20, -11 )
@@ -417,4 +418,6 @@ parameters/Move/blend_position = Vector2( 0, 0.00948286 )
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
 [connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Bumper" to="Bumper" method="_on_mouse_exited"]
+[connection signal="released" from="Bumper" to="." method="drop_off"]
+[connection signal="returned" from="Bumper" to="." method="receive_order"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

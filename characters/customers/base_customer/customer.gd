@@ -12,6 +12,7 @@ var patience := 1.2
 var patience_unit := 0.02
 var patience_lower_cutoff := 0.2
 var patience_upper_cutoff := 0.6
+var happy_buff_cutoff := 1.15
 var received_laundry := false
 
 signal leaving
@@ -23,11 +24,10 @@ func _ready() -> void:
 	speed = 100 # TODO: have different levels of speed and remove this magic number
 	my_laundry = preload("res://models/laundry/laundry.tscn").instance()
 	$Bumper.load_laundry(my_laundry)
-	$Bumper.connect("released", self, "drop_off")
-	$Bumper.connect("returned", self, "receive_order")
 	$Bumper/HandPos/Ticket.visible = false
 	animationState = $AnimationTree["parameters/playback"]
 	assert($AnimationTree.active == true, "Customer's Animation Tree is not active")
+	EventHub.connect("patience_cloud", self, "on_patience_cloud")
 
 func init(node : Navigation2D, id : int, wait_time : float) -> void:
 	navNode = node
@@ -55,14 +55,22 @@ func receive_order() -> void:
 	$Bumper/HandPos/Ticket.visible = false
 	assess_laundry()
 	var expression = emote(cleanliness_pct)
+	# TODO: work on scoring and cleaniness pct logic to be better; redo this
+	if patience >= happy_buff_cutoff and cleanliness_pct >= 1: happy_buff()
+	print("patience: ", patience)
+	print("cleanliness_pct: ", cleanliness_pct)
 	yield(expression, "animation_finished")
 	show_money_earned(score, cleanliness_pct)
 	received_laundry = true
 	leave_store()
 	
+func happy_buff() -> void:
+	# To be overridden by inherited customers
+	print("happy buff!")
+	
 func leave_store() -> void:
 	set_target_location(return_destination)
-	emit_signal("leaving", self)
+	EventHub.emit_signal("customer_leaving", self)
 
 func assess_laundry() -> void:
 	if $Bumper.laundry == my_laundry:
@@ -88,7 +96,7 @@ func _on_Timer_timeout() -> void:
 	back_to_store()
 	
 func back_to_store() -> void:
-	emit_signal("returning", self)
+	EventHub.emit_signal("customer_entering", self)
 	$Bumper.interactable = true
 	$Bumper.set_state_pickup()
 	
@@ -97,6 +105,7 @@ func last_call() -> void:
 	back_to_store()
 
 func decrement_patience() -> void:
+	if received_laundry: return
 	patience -= patience_unit 
 	if patience < patience_upper_cutoff:
 		$PatienceParticles.emitting = true
@@ -109,7 +118,6 @@ func decrement_patience() -> void:
 func stop_patience_particles() -> void:
 	$PatienceParticles.emitting = false
 	$PatienceParticles.visible = false
-	patience = 1
 
 func _on_Bumper_disallowed_customer_action() -> void:
 	$AnimationPlayer.play("shake")
@@ -121,3 +129,13 @@ func _on_end_of_path() -> void:
 
 func _on_Bumper_modulate(modulation : Color) -> void:
 	$Sprite.modulate = modulation
+	
+func add_patience_points(points : int) -> void:
+	patience += points * patience_unit
+	
+func on_patience_cloud(cloud : Area2D, points : int) -> void:
+	if !cloud.overlaps_area($Bumper): return
+	if received_laundry: return
+	add_patience_points(points)
+	var patience_point = preload("res://characters/customers/effects/patience_change/PatiencePoint.tscn").instance()
+	call_deferred("add_child", patience_point)

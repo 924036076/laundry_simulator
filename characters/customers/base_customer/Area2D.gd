@@ -4,6 +4,7 @@ signal released
 signal returned
 signal disallowed_customer_action
 signal modulate
+var initialized := false
 
 func _ready() -> void:
 	offset = Vector2()
@@ -25,7 +26,9 @@ func unload_laundry() -> Node2D:
 	
 func load_laundry(laundry_in : Node2D) -> void:
 	.load_laundry(laundry_in)
-	if laundry: emit_signal("returned")
+	if !laundry: return
+	if initialized: emit_signal("returned")
+	else: initialized = true
 
 func set_state_pickup() -> void:
 	can_give = false

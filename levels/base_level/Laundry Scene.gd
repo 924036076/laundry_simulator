@@ -10,8 +10,6 @@ func _ready() -> void:
 	initialize_level()
 	
 func initialize_level() -> void:
-	for counter in counters:
-		counter.connect("click", $Objects/Player, "_on_Interactable_click")
 	$Spawner.init($Navigation2D, player)
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -6,6 +6,7 @@ func _ready() -> void:
 	laundry_offset = Vector2(0, -1)
 	animationState = $AnimationTree["parameters/playback"]
 	assert($AnimationTree.active == true, "player's Animation Tree is not active")
+	EventHub.connect("click", self, "_on_Interactable_click")
 	
 func interact(body) -> void:
 	# Either body is not interactable, or it can only give and player cannot receive

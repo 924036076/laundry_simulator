@@ -924,7 +924,7 @@ position = Vector2( -2, 31 )
 
 [node name="Spawner" type="Node2D" parent="."]
 light_mask = 3
-position = Vector2( -73.8895, 219.211 )
+position = Vector2( -53.7597, 213.914 )
 script = ExtResource( 10 )
 
 [node name="CustomerTimer" type="Timer" parent="Spawner"]
@@ -948,7 +948,6 @@ position = Vector2( 234.467, -1.26316 )
 position = Vector2( 155.617, -1.26315 )
 
 [node name="WaitTimer" type="Timer" parent="Spawner"]
-autostart = true
 
 [node name="Objects" type="TileMap" parent="."]
 tile_set = SubResource( 16 )
@@ -1106,10 +1105,6 @@ script = ExtResource( 26 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="click" from="Machines/Washer" to="Objects/Player" method="_on_Interactable_click"]
-[connection signal="click" from="Machines/Washer2" to="Objects/Player" method="_on_Interactable_click"]
-[connection signal="click" from="Machines/Dryer" to="Objects/Player" method="_on_Interactable_click"]
-[connection signal="click" from="Machines/Dryer2" to="Objects/Player" method="_on_Interactable_click"]
 [connection signal="day_over" from="Spawner" to="." method="_on_day_over"]
 [connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]

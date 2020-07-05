@@ -21,21 +21,19 @@ func init(node : Navigation2D, body : KinematicBody2D) -> void:
 	navNode = node
 	player = body
 	max_customers = $WaitingSpots.get_child_count()
+	EventHub.connect("customer_leaving", self, "handle_leaving")
+	EventHub.connect("customer_entering", self, "handle_entering")
 
 func create_customer() -> KinematicBody2D:
 	# Create and initialize new customer
 	var customer : KinematicBody2D = null
+	# TODO: Better way of choosing what type of customer to make
 	if customers_created % 2 == 0:
-		customer = preload("res://characters/customers/old_lady/OldLady.tscn").instance()
-	else:
 		customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
+	else:
+		customer = preload("res://characters/customers/old_lady/OldLady.tscn").instance()
 	$Customers.add_child(customer)
 	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max))
-	
-	# Connect the appropriate signals
-	customer.connect("leaving", self, "handle_leaving")
-	customer.connect("returning", self, "handle_entering")
-	customer.get_node("Bumper").connect("click", player, "_on_Interactable_click")
 	customer.add_to_group("dropping_off")
 	
 	next_id += 1

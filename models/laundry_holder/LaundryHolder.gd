@@ -13,8 +13,6 @@ var radius := 0.0
 var offset := Vector2(0,0)
 var laundry_parent : Node2D = self
 
-signal click
-
 func _ready() -> void:
 	_calculate_radius()
 
@@ -54,7 +52,7 @@ func _unhandled_input(event) -> void:
 	if not event.is_pressed(): return
 	
 	get_tree().set_input_as_handled()
-	emit_signal("click", self)
+	EventHub.emit_signal("click", self)
 		
 func set_target(boolean) -> void:
 	is_target = boolean
