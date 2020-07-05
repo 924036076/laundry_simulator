@@ -65,7 +65,7 @@ func receive_order() -> void:
 	
 func happy_buff() -> void:
 	# To be overridden by inherited customers
-	print("happy buff!")
+	pass
 	
 func leave_store() -> void:
 	set_target_location(return_destination)
