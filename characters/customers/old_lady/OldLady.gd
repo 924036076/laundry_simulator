@@ -12,4 +12,4 @@ func happy_buff() -> void:
 	call_deferred("add_child", buff)
 
 func on_patience_cloud(_area : Area2D, _points : int)-> void:
-	pass
+	return #this customer type is unaffected
