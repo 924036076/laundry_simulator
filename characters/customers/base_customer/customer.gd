@@ -58,8 +58,6 @@ func receive_order() -> void:
 	var expression = emote(cleanliness_pct)
 	# TODO: work on scoring and cleaniness pct logic to be better; redo this
 	if patience >= happy_buff_cutoff and cleanliness_pct >= 1: happy_buff()
-	print("patience: ", patience)
-	print("cleanliness_pct: ", cleanliness_pct)
 	yield(expression, "animation_finished")
 	show_money_earned(score, cleanliness_pct)
 	received_laundry = true

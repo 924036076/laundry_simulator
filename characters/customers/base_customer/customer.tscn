@@ -7,7 +7,6 @@
 [ext_resource path="res://characters/customers/base_customer/sprite.png" type="Texture" id=5]
 [ext_resource path="res://characters/expressions/exclamation mark.png" type="Texture" id=6]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "idle_down"
 tracks/0/type = "value"
@@ -369,7 +368,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 vframes = 4
 hframes = 3
-frame = 1
+frame = 4
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/idle_down = SubResource( 1 )
@@ -392,6 +391,7 @@ shape = SubResource( 10 )
 
 [node name="HandPos" type="Node2D" parent="Bumper" index="1"]
 position = Vector2( -5.29681, 11.3091 )
+z_index = -1
 
 [node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
 position = Vector2( -20, -11 )
