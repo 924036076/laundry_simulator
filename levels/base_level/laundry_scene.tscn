@@ -1113,6 +1113,5 @@ __meta__ = {
 [connection signal="day_over" from="Clock" to="." method="_on_day_over"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
-[connection signal="new_game" from="HUD" to="." method="_on_new_game"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_new_game"]
 [connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]

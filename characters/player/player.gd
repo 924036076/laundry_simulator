@@ -1,4 +1,5 @@
 extends BaseCharacter
+class_name Player
 
 var movement_enabled : bool = false
 

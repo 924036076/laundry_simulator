@@ -1,4 +1,5 @@
 extends LaundryHolder
+class_name Counter
 
 func _ready() -> void:
 	._ready()

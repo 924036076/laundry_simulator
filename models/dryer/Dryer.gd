@@ -1,4 +1,5 @@
 extends Washer
+class_name Dryer
 
 func can_run() -> bool:
 	return laundry.can_dry()
