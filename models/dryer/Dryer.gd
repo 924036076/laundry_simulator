@@ -1,4 +1,4 @@
-extends "res://models/washer/Washer.gd"
+extends Washer
 
 func can_run() -> bool:
 	return laundry.can_dry()

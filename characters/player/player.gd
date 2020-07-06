@@ -1,12 +1,12 @@
-extends "res://characters/base_character/base_character.gd"
+extends BaseCharacter
 
 var movement_enabled : bool = false
 
 func _ready() -> void:
 	laundry_offset = Vector2(0, -1)
-	animated = true # In the future all characters will be animated, just not now
 	animationState = $AnimationTree["parameters/playback"]
 	assert($AnimationTree.active == true, "player's Animation Tree is not active")
+	EventHub.connect("click", self, "_on_Interactable_click")
 	
 func interact(body) -> void:
 	# Either body is not interactable, or it can only give and player cannot receive

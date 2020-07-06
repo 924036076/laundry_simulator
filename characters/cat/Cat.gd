@@ -1,4 +1,5 @@
-extends "res://characters/base_character/base_character.gd"
+extends BaseCharacter
+class_name Cat
 
 export (NodePath) var patrol_path
 export (NodePath) var desk_path
@@ -20,7 +21,6 @@ signal mischief_started
 signal idle
 
 func _ready() -> void:
-	animated = true #in the future all characters will be animated, just not now
 	animationState = $AnimationTree["parameters/playback"]
 	money_label_offset = Vector2(0, -42)
 	speed = 75

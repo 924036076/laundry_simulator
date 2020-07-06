@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://levels/base_level/Clock.gd" type="Script" id=1]
-[ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=2]
+[ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=1]
+[ext_resource path="res://game_utils/clock.gd" type="Script" id=2]
 
 [node name="Clock" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="MinuteTimer" type="Timer" parent="."]
 autostart = true
@@ -13,7 +13,7 @@ autostart = true
 margin_right = 42.0
 margin_bottom = 40.0
 rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 0.32549, 0.321569, 0.321569, 1 )
 scroll_active = false
 __meta__ = {

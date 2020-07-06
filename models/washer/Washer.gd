@@ -1,4 +1,5 @@
-extends "res://models/laundry_holder/LaundryHolder.gd"
+extends LaundryHolder
+class_name Washer
 
 var state_machine : AnimationNodeStateMachinePlayback
 

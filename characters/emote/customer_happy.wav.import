@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/customer_happy.wav-80bcbb98efe8e9fca2aa8a55a5b00df1.sample"
+
+[deps]
+
+source_file="res://characters/emote/customer_happy.wav"
+dest_files=[ "res://.import/customer_happy.wav-80bcbb98efe8e9fca2aa8a55a5b00df1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

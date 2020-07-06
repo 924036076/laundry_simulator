@@ -1,4 +1,4 @@
-extends "res://models/laundry_holder/LaundryHolder.gd"
+extends LaundryHolder
 
 func _ready() -> void:
 	._ready()

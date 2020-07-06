@@ -1,0 +1,1118 @@
+[gd_scene load_steps=52 format=2]
+
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/desk/desk.tscn" type="PackedScene" id=3]
+[ext_resource path="res://models/dryer/dryer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/cat/cat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://music/background_music.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/counter/counter.tscn" type="PackedScene" id=8]
+[ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=9]
+[ext_resource path="res://levels/base_level/music_toggle.gd" type="Script" id=10]
+[ext_resource path="res://levels/base_level/spawn_point.gd" type="Script" id=11]
+[ext_resource path="res://game_utils/clock.gd" type="Script" id=12]
+[ext_resource path="res://levels/base_level/restart_day.gd" type="Script" id=13]
+[ext_resource path="res://levels/base_level/laundry_scene.gd" type="Script" id=14]
+[ext_resource path="res://levels/base_level/sound_toggle.gd" type="Script" id=15]
+[ext_resource path="res://levels/base_level/hud.gd" type="Script" id=16]
+[ext_resource path="res://tilesets/grate_upper.png" type="Texture" id=17]
+[ext_resource path="res://characters/player/transfer.wav" type="AudioStream" id=18]
+[ext_resource path="res://icons/KawaiiIcons_NoBG015.png" type="Texture" id=19]
+[ext_resource path="res://tilesets/walls.png" type="Texture" id=20]
+[ext_resource path="res://tilesets/counter_floor.png" type="Texture" id=21]
+[ext_resource path="res://icons/KawaiiIcons_NoBG010.png" type="Texture" id=22]
+[ext_resource path="res://icons/KawaiiIcons_NoBG016.png" type="Texture" id=23]
+[ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=24]
+[ext_resource path="res://icons/KawaiiIcons_NoBG004.png" type="Texture" id=25]
+[ext_resource path="res://levels/base_level/tile_floor.png" type="Texture" id=26]
+[ext_resource path="res://tilesets/sidewalk_middle.png" type="Texture" id=27]
+[ext_resource path="res://icons/KawaiiIcons_NoBG005.png" type="Texture" id=28]
+[ext_resource path="res://tilesets/Tilemap.png" type="Texture" id=29]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 8, 8, 32, 8, 32, 32, 8, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 0, 24, 32, 24, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 0, 24, 32, 24, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 24, 0, 24 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=7]
+vertices = PoolVector2Array( 0, 16, 32, 16, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 0, 16, 32, 16, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 0, 24, 32, 24, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 0, 0, 24, 0, 24, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=11]
+vertices = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=12]
+vertices = PoolVector2Array( 0, 8, 32, 8, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=13]
+vertices = PoolVector2Array( 8, 0, 32, 0, 32, 24, 8, 24 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=14]
+vertices = PoolVector2Array( 8, 0, 32, 0, 32, 32, 8, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=15]
+vertices = PoolVector2Array( 0, 8, 24, 8, 24, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="TileSet" id=16]
+0/name = "white floor.png 0"
+0/texture = ExtResource( 24 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "tile floor.png 1"
+1/texture = ExtResource( 26 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/navigation = SubResource( 1 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "Tilemap.png 2"
+2/texture = ExtResource( 29 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 832, 32, 32 )
+2/tile_mode = 1
+2/autotile/bitmask_mode = 0
+2/autotile/bitmask_flags = [  ]
+2/autotile/icon_coordinate = Vector2( 0, 0 )
+2/autotile/tile_size = Vector2( 32, 32 )
+2/autotile/spacing = 0
+2/autotile/occluder_map = [  ]
+2/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 2 ) ]
+2/autotile/priority_map = [  ]
+2/autotile/z_index_map = [  ]
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "Tilemap.png 3"
+3/texture = ExtResource( 29 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 32, 928, 32, 32 )
+3/tile_mode = 1
+3/autotile/bitmask_mode = 0
+3/autotile/bitmask_flags = [  ]
+3/autotile/icon_coordinate = Vector2( 0, 0 )
+3/autotile/tile_size = Vector2( 32, 32 )
+3/autotile/spacing = 0
+3/autotile/occluder_map = [  ]
+3/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 6 ) ]
+3/autotile/priority_map = [  ]
+3/autotile/z_index_map = [  ]
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "Tilemap.png 4"
+4/texture = ExtResource( 29 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 128, 864, 32, 32 )
+4/tile_mode = 1
+4/autotile/bitmask_mode = 0
+4/autotile/bitmask_flags = [  ]
+4/autotile/icon_coordinate = Vector2( 0, 0 )
+4/autotile/tile_size = Vector2( 32, 32 )
+4/autotile/spacing = 0
+4/autotile/occluder_map = [  ]
+4/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 10 ) ]
+4/autotile/priority_map = [  ]
+4/autotile/z_index_map = [  ]
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "Tilemap.png 5"
+5/texture = ExtResource( 29 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 128, 928, 32, 32 )
+5/tile_mode = 1
+5/autotile/bitmask_mode = 0
+5/autotile/bitmask_flags = [  ]
+5/autotile/icon_coordinate = Vector2( 0, 0 )
+5/autotile/tile_size = Vector2( 32, 32 )
+5/autotile/spacing = 0
+5/autotile/occluder_map = [  ]
+5/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 11 ) ]
+5/autotile/priority_map = [  ]
+5/autotile/z_index_map = [  ]
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "Tilemap.png 6"
+6/texture = ExtResource( 29 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 32, 832, 32, 32 )
+6/tile_mode = 1
+6/autotile/bitmask_mode = 0
+6/autotile/bitmask_flags = [  ]
+6/autotile/icon_coordinate = Vector2( 0, 0 )
+6/autotile/tile_size = Vector2( 32, 32 )
+6/autotile/spacing = 0
+6/autotile/occluder_map = [  ]
+6/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 12 ) ]
+6/autotile/priority_map = [  ]
+6/autotile/z_index_map = [  ]
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "Tilemap.png 7"
+7/texture = ExtResource( 29 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 928, 32, 32 )
+7/tile_mode = 1
+7/autotile/bitmask_mode = 0
+7/autotile/bitmask_flags = [  ]
+7/autotile/icon_coordinate = Vector2( 0, 0 )
+7/autotile/tile_size = Vector2( 32, 32 )
+7/autotile/spacing = 0
+7/autotile/occluder_map = [  ]
+7/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 13 ) ]
+7/autotile/priority_map = [  ]
+7/autotile/z_index_map = [  ]
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "Tilemap.png 8"
+8/texture = ExtResource( 29 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 864, 32, 32 )
+8/tile_mode = 1
+8/autotile/bitmask_mode = 0
+8/autotile/bitmask_flags = [  ]
+8/autotile/icon_coordinate = Vector2( 0, 0 )
+8/autotile/tile_size = Vector2( 32, 32 )
+8/autotile/spacing = 0
+8/autotile/occluder_map = [  ]
+8/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 14 ) ]
+8/autotile/priority_map = [  ]
+8/autotile/z_index_map = [  ]
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "Tilemap.png 9"
+9/texture = ExtResource( 29 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 128, 832, 32, 32 )
+9/tile_mode = 1
+9/autotile/bitmask_mode = 0
+9/autotile/bitmask_flags = [  ]
+9/autotile/icon_coordinate = Vector2( 0, 0 )
+9/autotile/tile_size = Vector2( 32, 32 )
+9/autotile/spacing = 0
+9/autotile/occluder_map = [  ]
+9/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 15 ) ]
+9/autotile/priority_map = [  ]
+9/autotile/z_index_map = [  ]
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+11/name = "Tilemap.png 11"
+11/texture = ExtResource( 29 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 64, 704, 32, 32 )
+11/tile_mode = 1
+11/autotile/bitmask_mode = 0
+11/autotile/bitmask_flags = [  ]
+11/autotile/icon_coordinate = Vector2( 0, 0 )
+11/autotile/tile_size = Vector2( 32, 32 )
+11/autotile/spacing = 0
+11/autotile/occluder_map = [  ]
+11/autotile/navpoly_map = [  ]
+11/autotile/priority_map = [  ]
+11/autotile/z_index_map = [  ]
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "Tilemap.png 12"
+12/texture = ExtResource( 29 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 800, 32, 32 )
+12/tile_mode = 1
+12/autotile/bitmask_mode = 0
+12/autotile/bitmask_flags = [  ]
+12/autotile/icon_coordinate = Vector2( 0, 0 )
+12/autotile/tile_size = Vector2( 32, 32 )
+12/autotile/spacing = 0
+12/autotile/occluder_map = [  ]
+12/autotile/navpoly_map = [  ]
+12/autotile/priority_map = [  ]
+12/autotile/z_index_map = [  ]
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
+12/shapes = [  ]
+12/z_index = 0
+13/name = "Tilemap.png 13"
+13/texture = ExtResource( 29 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 224, 768, 32, 32 )
+13/tile_mode = 1
+13/autotile/bitmask_mode = 0
+13/autotile/bitmask_flags = [  ]
+13/autotile/icon_coordinate = Vector2( 0, 0 )
+13/autotile/tile_size = Vector2( 32, 32 )
+13/autotile/spacing = 0
+13/autotile/occluder_map = [  ]
+13/autotile/navpoly_map = [  ]
+13/autotile/priority_map = [  ]
+13/autotile/z_index_map = [  ]
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+14/name = "Tilemap.png 14"
+14/texture = ExtResource( 29 )
+14/tex_offset = Vector2( 0, 0 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 288, 768, 32, 32 )
+14/tile_mode = 1
+14/autotile/bitmask_mode = 0
+14/autotile/bitmask_flags = [  ]
+14/autotile/icon_coordinate = Vector2( 0, 0 )
+14/autotile/tile_size = Vector2( 32, 32 )
+14/autotile/spacing = 0
+14/autotile/occluder_map = [  ]
+14/autotile/navpoly_map = [  ]
+14/autotile/priority_map = [  ]
+14/autotile/z_index_map = [  ]
+14/occluder_offset = Vector2( 0, 0 )
+14/navigation_offset = Vector2( 0, 0 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape_one_way = false
+14/shape_one_way_margin = 0.0
+14/shapes = [  ]
+14/z_index = 0
+21/name = "Tilemap.png 21"
+21/texture = ExtResource( 29 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 288, 672, 32, 32 )
+21/tile_mode = 1
+21/autotile/bitmask_mode = 0
+21/autotile/bitmask_flags = [  ]
+21/autotile/icon_coordinate = Vector2( 0, 0 )
+21/autotile/tile_size = Vector2( 32, 32 )
+21/autotile/spacing = 0
+21/autotile/occluder_map = [  ]
+21/autotile/navpoly_map = [  ]
+21/autotile/priority_map = [  ]
+21/autotile/z_index_map = [  ]
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 0
+22/name = "counterfloor.png 22"
+22/texture = ExtResource( 21 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 0, 0, 32, 32 )
+22/tile_mode = 2
+22/autotile/icon_coordinate = Vector2( 0, 0 )
+22/autotile/tile_size = Vector2( 32, 32 )
+22/autotile/spacing = 0
+22/autotile/occluder_map = [  ]
+22/autotile/navpoly_map = [ Vector2( 1, 0 ), SubResource( 3 ), Vector2( 2, 0 ), SubResource( 4 ) ]
+22/autotile/priority_map = [  ]
+22/autotile/z_index_map = [  ]
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
+22/shapes = [  ]
+22/z_index = 0
+23/name = "counterfloor.png 23"
+23/texture = ExtResource( 21 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 0, 32, 32 )
+23/tile_mode = 1
+23/autotile/bitmask_mode = 0
+23/autotile/bitmask_flags = [  ]
+23/autotile/icon_coordinate = Vector2( 0, 0 )
+23/autotile/tile_size = Vector2( 32, 32 )
+23/autotile/spacing = 0
+23/autotile/occluder_map = [  ]
+23/autotile/navpoly_map = [  ]
+23/autotile/priority_map = [  ]
+23/autotile/z_index_map = [  ]
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 0
+24/name = "counterfloor.png 24"
+24/texture = ExtResource( 21 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 0, 64, 32, 32 )
+24/tile_mode = 1
+24/autotile/bitmask_mode = 0
+24/autotile/bitmask_flags = [  ]
+24/autotile/icon_coordinate = Vector2( 0, 0 )
+24/autotile/tile_size = Vector2( 32, 32 )
+24/autotile/spacing = 0
+24/autotile/occluder_map = [  ]
+24/autotile/navpoly_map = [  ]
+24/autotile/priority_map = [  ]
+24/autotile/z_index_map = [  ]
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
+25/name = "counterfloor.png 25"
+25/texture = ExtResource( 21 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 32, 32, 32, 32 )
+25/tile_mode = 1
+25/autotile/bitmask_mode = 0
+25/autotile/bitmask_flags = [  ]
+25/autotile/icon_coordinate = Vector2( 0, 0 )
+25/autotile/tile_size = Vector2( 32, 32 )
+25/autotile/spacing = 0
+25/autotile/occluder_map = [  ]
+25/autotile/navpoly_map = [  ]
+25/autotile/priority_map = [  ]
+25/autotile/z_index_map = [  ]
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
+27/name = "counterfloor.png 27"
+27/texture = ExtResource( 21 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 0, 32, 32, 32 )
+27/tile_mode = 1
+27/autotile/bitmask_mode = 0
+27/autotile/bitmask_flags = [  ]
+27/autotile/icon_coordinate = Vector2( 0, 0 )
+27/autotile/tile_size = Vector2( 32, 32 )
+27/autotile/spacing = 0
+27/autotile/occluder_map = [  ]
+27/autotile/navpoly_map = [  ]
+27/autotile/priority_map = [  ]
+27/autotile/z_index_map = [  ]
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
+28/name = "counterfloor.png 28"
+28/texture = ExtResource( 21 )
+28/tex_offset = Vector2( 0, 0 )
+28/modulate = Color( 1, 1, 1, 1 )
+28/region = Rect2( 32, 0, 32, 32 )
+28/tile_mode = 1
+28/autotile/bitmask_mode = 0
+28/autotile/bitmask_flags = [  ]
+28/autotile/icon_coordinate = Vector2( 0, 0 )
+28/autotile/tile_size = Vector2( 32, 32 )
+28/autotile/spacing = 0
+28/autotile/occluder_map = [  ]
+28/autotile/navpoly_map = [  ]
+28/autotile/priority_map = [  ]
+28/autotile/z_index_map = [  ]
+28/occluder_offset = Vector2( 0, 0 )
+28/navigation_offset = Vector2( 0, 0 )
+28/shape_offset = Vector2( 0, 0 )
+28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape_one_way = false
+28/shape_one_way_margin = 0.0
+28/shapes = [  ]
+28/z_index = 0
+29/name = "Sidewalkmiddle.png 29"
+29/texture = ExtResource( 27 )
+29/tex_offset = Vector2( 0, 0 )
+29/modulate = Color( 1, 1, 1, 1 )
+29/region = Rect2( 0, 0, 32, 32 )
+29/tile_mode = 0
+29/occluder_offset = Vector2( 0, 0 )
+29/navigation_offset = Vector2( 0, 0 )
+29/navigation = SubResource( 5 )
+29/shape_offset = Vector2( 0, 0 )
+29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+29/shape_one_way = false
+29/shape_one_way_margin = 0.0
+29/shapes = [  ]
+29/z_index = 0
+30/name = "grate_upper.png 30"
+30/texture = ExtResource( 17 )
+30/tex_offset = Vector2( 0, 0 )
+30/modulate = Color( 1, 1, 1, 1 )
+30/region = Rect2( 0, 0, 32, 32 )
+30/tile_mode = 1
+30/autotile/bitmask_mode = 0
+30/autotile/bitmask_flags = [  ]
+30/autotile/icon_coordinate = Vector2( 0, 0 )
+30/autotile/tile_size = Vector2( 32, 32 )
+30/autotile/spacing = 0
+30/autotile/occluder_map = [  ]
+30/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 7 ) ]
+30/autotile/priority_map = [  ]
+30/autotile/z_index_map = [  ]
+30/occluder_offset = Vector2( 0, 0 )
+30/navigation_offset = Vector2( 0, 0 )
+30/shape_offset = Vector2( 0, 0 )
+30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+30/shape_one_way = false
+30/shape_one_way_margin = 0.0
+30/shapes = [  ]
+30/z_index = 0
+31/name = "grate_upper.png 31"
+31/texture = ExtResource( 17 )
+31/tex_offset = Vector2( 0, 0 )
+31/modulate = Color( 1, 1, 1, 1 )
+31/region = Rect2( 0, 32, 32, 32 )
+31/tile_mode = 1
+31/autotile/bitmask_mode = 0
+31/autotile/bitmask_flags = [  ]
+31/autotile/icon_coordinate = Vector2( 0, 0 )
+31/autotile/tile_size = Vector2( 32, 32 )
+31/autotile/spacing = 0
+31/autotile/occluder_map = [  ]
+31/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 8 ) ]
+31/autotile/priority_map = [  ]
+31/autotile/z_index_map = [  ]
+31/occluder_offset = Vector2( 0, 0 )
+31/navigation_offset = Vector2( 0, 0 )
+31/shape_offset = Vector2( 0, 0 )
+31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+31/shape_one_way = false
+31/shape_one_way_margin = 0.0
+31/shapes = [  ]
+31/z_index = 0
+32/name = "counterfloor.png 32"
+32/texture = ExtResource( 21 )
+32/tex_offset = Vector2( 0, 0 )
+32/modulate = Color( 1, 1, 1, 1 )
+32/region = Rect2( 64, 0, 32, 32 )
+32/tile_mode = 1
+32/autotile/bitmask_mode = 0
+32/autotile/bitmask_flags = [  ]
+32/autotile/icon_coordinate = Vector2( 0, 0 )
+32/autotile/tile_size = Vector2( 32, 32 )
+32/autotile/spacing = 0
+32/autotile/occluder_map = [  ]
+32/autotile/navpoly_map = [  ]
+32/autotile/priority_map = [  ]
+32/autotile/z_index_map = [  ]
+32/occluder_offset = Vector2( 0, 0 )
+32/navigation_offset = Vector2( 0, 0 )
+32/shape_offset = Vector2( 0, 0 )
+32/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+32/shape_one_way = false
+32/shape_one_way_margin = 0.0
+32/shapes = [  ]
+32/z_index = 0
+33/name = "counterfloor.png 33"
+33/texture = ExtResource( 21 )
+33/tex_offset = Vector2( 0, 0 )
+33/modulate = Color( 1, 1, 1, 1 )
+33/region = Rect2( 64, 32, 32, 32 )
+33/tile_mode = 1
+33/autotile/bitmask_mode = 0
+33/autotile/bitmask_flags = [  ]
+33/autotile/icon_coordinate = Vector2( 0, 0 )
+33/autotile/tile_size = Vector2( 32, 32 )
+33/autotile/spacing = 0
+33/autotile/occluder_map = [  ]
+33/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 9 ) ]
+33/autotile/priority_map = [  ]
+33/autotile/z_index_map = [  ]
+33/occluder_offset = Vector2( 0, 0 )
+33/navigation_offset = Vector2( 0, 0 )
+33/shape_offset = Vector2( 0, 0 )
+33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+33/shape_one_way = false
+33/shape_one_way_margin = 0.0
+33/shapes = [  ]
+33/z_index = 0
+34/name = "walls.png 34"
+34/texture = ExtResource( 20 )
+34/tex_offset = Vector2( 0, 0 )
+34/modulate = Color( 1, 1, 1, 1 )
+34/region = Rect2( 0, 0, 32, 32 )
+34/tile_mode = 1
+34/autotile/bitmask_mode = 0
+34/autotile/bitmask_flags = [  ]
+34/autotile/icon_coordinate = Vector2( 0, 0 )
+34/autotile/tile_size = Vector2( 32, 32 )
+34/autotile/spacing = 0
+34/autotile/occluder_map = [  ]
+34/autotile/navpoly_map = [  ]
+34/autotile/priority_map = [  ]
+34/autotile/z_index_map = [  ]
+34/occluder_offset = Vector2( 0, 0 )
+34/navigation_offset = Vector2( 0, 0 )
+34/shape_offset = Vector2( 0, 0 )
+34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+34/shape_one_way = false
+34/shape_one_way_margin = 0.0
+34/shapes = [  ]
+34/z_index = 0
+35/name = "walls.png 35"
+35/texture = ExtResource( 20 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 32, 0, 32, 32 )
+35/tile_mode = 1
+35/autotile/bitmask_mode = 0
+35/autotile/bitmask_flags = [  ]
+35/autotile/icon_coordinate = Vector2( 0, 0 )
+35/autotile/tile_size = Vector2( 32, 32 )
+35/autotile/spacing = 0
+35/autotile/occluder_map = [  ]
+35/autotile/navpoly_map = [  ]
+35/autotile/priority_map = [  ]
+35/autotile/z_index_map = [  ]
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape_one_way = false
+35/shape_one_way_margin = 0.0
+35/shapes = [  ]
+35/z_index = 0
+36/name = "walls.png 36"
+36/texture = ExtResource( 20 )
+36/tex_offset = Vector2( 0, 0 )
+36/modulate = Color( 1, 1, 1, 1 )
+36/region = Rect2( 0, 32, 32, 32 )
+36/tile_mode = 1
+36/autotile/bitmask_mode = 0
+36/autotile/bitmask_flags = [  ]
+36/autotile/icon_coordinate = Vector2( 0, 0 )
+36/autotile/tile_size = Vector2( 32, 32 )
+36/autotile/spacing = 0
+36/autotile/occluder_map = [  ]
+36/autotile/navpoly_map = [  ]
+36/autotile/priority_map = [  ]
+36/autotile/z_index_map = [  ]
+36/occluder_offset = Vector2( 0, 0 )
+36/navigation_offset = Vector2( 0, 0 )
+36/shape_offset = Vector2( 0, 0 )
+36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+36/shape_one_way = false
+36/shape_one_way_margin = 0.0
+36/shapes = [  ]
+36/z_index = 0
+37/name = "walls.png 37"
+37/texture = ExtResource( 20 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 32, 32, 32, 32 )
+37/tile_mode = 1
+37/autotile/bitmask_mode = 0
+37/autotile/bitmask_flags = [  ]
+37/autotile/icon_coordinate = Vector2( 0, 0 )
+37/autotile/tile_size = Vector2( 32, 32 )
+37/autotile/spacing = 0
+37/autotile/occluder_map = [  ]
+37/autotile/navpoly_map = [  ]
+37/autotile/priority_map = [  ]
+37/autotile/z_index_map = [  ]
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape_one_way = false
+37/shape_one_way_margin = 0.0
+37/shapes = [  ]
+37/z_index = 0
+38/name = "walls.png 38"
+38/texture = ExtResource( 20 )
+38/tex_offset = Vector2( 0, 0 )
+38/modulate = Color( 1, 1, 1, 1 )
+38/region = Rect2( 0, 64, 32, 32 )
+38/tile_mode = 1
+38/autotile/bitmask_mode = 0
+38/autotile/bitmask_flags = [  ]
+38/autotile/icon_coordinate = Vector2( 0, 0 )
+38/autotile/tile_size = Vector2( 32, 32 )
+38/autotile/spacing = 0
+38/autotile/occluder_map = [  ]
+38/autotile/navpoly_map = [  ]
+38/autotile/priority_map = [  ]
+38/autotile/z_index_map = [  ]
+38/occluder_offset = Vector2( 0, 0 )
+38/navigation_offset = Vector2( 0, 0 )
+38/shape_offset = Vector2( 0, 0 )
+38/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+38/shape_one_way = false
+38/shape_one_way_margin = 0.0
+38/shapes = [  ]
+38/z_index = 0
+39/name = "walls.png 39"
+39/texture = ExtResource( 20 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 32, 64, 32, 32 )
+39/tile_mode = 1
+39/autotile/bitmask_mode = 0
+39/autotile/bitmask_flags = [  ]
+39/autotile/icon_coordinate = Vector2( 0, 0 )
+39/autotile/tile_size = Vector2( 32, 32 )
+39/autotile/spacing = 0
+39/autotile/occluder_map = [  ]
+39/autotile/navpoly_map = [  ]
+39/autotile/priority_map = [  ]
+39/autotile/z_index_map = [  ]
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape_one_way = false
+39/shape_one_way_margin = 0.0
+39/shapes = [  ]
+39/z_index = 0
+
+[sub_resource type="Curve2D" id=17]
+bake_interval = 134.34
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 957.746, 422.018, 0, 0, 0, 0, 953.431, 545.183, 0, 0, 0, 0, 775.441, 533.529, 0, 0, 0, 0, 596.392, 544.124, 0, 0, 0, 0, 359.072, 535.648, 0, 0, 0, 0, 187.439, 514.459, 0, 0, 0, 0, 65.8406, 550.452, 0, 0, 0, 0, 55.0062, 476.318 )
+}
+
+[sub_resource type="DynamicFont" id=18]
+size = 32
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 32
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=20]
+script/source = "extends Label
+#TODO: save money in more permanent way, for multiple days of play
+var money : int = 0 
+
+func _ready():
+	format_money()
+	EventHub.connect(\"add_money\", self, \"_on_add_money\")
+	
+func reset():
+	money = 0
+	format_money()
+
+func format_money():
+	set_text(\"$\" + str(money))
+
+func _on_add_money(addition : float):
+# warning-ignore:narrowing_conversion
+	money += round(addition)
+	format_money()
+"
+
+[sub_resource type="DynamicFont" id=21]
+size = 36
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 64
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[node name="root" type="Node2D"]
+script = ExtResource( 14 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="Background" type="TileMap" parent="Navigation2D"]
+scale = Vector2( 2.90518, 2.67858 )
+tile_set = SubResource( 16 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 2
+format = 1
+tile_data = PoolIntArray( 0, 35, 0, 1, 35, 0, 2, 35, 0, 3, 35, 0, 4, 35, 0, 5, 35, 0, 6, 35, 0, 7, 35, 0, 8, 35, 0, 9, 35, 0, 10, 36, 0, 65536, 34, 0, 65537, 34, 0, 65538, 34, 0, 65539, 34, 0, 65540, 34, 0, 65541, 34, 0, 65542, 34, 0, 65543, 34, 0, 65544, 34, 0, 65545, 34, 0, 65546, 37, 0, 196607, 29, 0, 131072, 29, 0, 131073, 29, 0, 131074, 29, 0, 131075, 29, 0, 131076, 30, 0, 131077, 30, 0, 131078, 31, 0, 131079, 31, 0, 131080, 29, 0, 131081, 29, 0, 131082, 4, 0, 196608, 8, 0, 196609, 29, 0, 196610, 29, 0, 196611, 29, 0, 196612, 29, 0, 196613, 29, 0, 196614, 29, 0, 196615, 29, 0, 196616, 29, 0, 196617, 29, 0, 196618, 4, 0, 262144, 8, 0, 262145, 29, 0, 262146, 29, 0, 262147, 25, 0, 262148, 24, 0, 262149, 24, 0, 262150, 24, 0, 262151, 27, 0, 262152, 29, 0, 262153, 29, 0, 262154, 4, 0, 327680, 8, 0, 327681, 29, 0, 327682, 29, 0, 327683, 32, 0, 327684, 33, 0, 327685, 33, 0, 327686, 33, 0, 327687, 28, 0, 327688, 29, 0, 327689, 29, 0, 327690, 4, 0, 393216, 7, 0, 393217, 3, 0, 393218, 3, 0, 393219, 3, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 393225, 3, 0, 393226, 5, 0 )
+
+[node name="Path2D" type="Path2D" parent="Navigation2D"]
+curve = SubResource( 17 )
+
+[node name="CounterLabel" type="Label" parent="Navigation2D"]
+margin_left = 490.863
+margin_top = 478.716
+margin_right = 546.863
+margin_bottom = 500.716
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color = Color( 1, 0.996078, 0.996078, 1 )
+text = "store"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Machines" type="Node2D" parent="."]
+position = Vector2( 0.0676003, 92.5666 )
+
+[node name="Washer" parent="Machines" instance=ExtResource( 2 )]
+position = Vector2( 418.046, 54.2833 )
+
+[node name="Washer2" parent="Machines" instance=ExtResource( 2 )]
+position = Vector2( 511.146, 54.2833 )
+
+[node name="Dryer" parent="Machines" instance=ExtResource( 4 )]
+position = Vector2( 604.296, 54.2833 )
+
+[node name="Dryer2" parent="Machines" instance=ExtResource( 4 )]
+position = Vector2( 697.396, 54.2833 )
+
+[node name="WashLabel" type="Label" parent="Machines"]
+margin_left = 440.795
+margin_top = 113.547
+margin_right = 490.795
+margin_bottom = 135.547
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color = Color( 1, 0.984314, 0.984314, 1 )
+text = "wash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DryLabel" type="Label" parent="Machines"]
+margin_left = 630.774
+margin_top = 113.547
+margin_right = 680.774
+margin_bottom = 135.547
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color = Color( 0.952941, 0.952941, 0.952941, 1 )
+text = "dry"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Desk" parent="Machines" instance=ExtResource( 3 )]
+position = Vector2( 962.165, 72.1826 )
+
+[node name="DeskLocation" type="Node2D" parent="Machines/Desk"]
+position = Vector2( -2, 31 )
+
+[node name="Spawner" type="Node2D" parent="."]
+light_mask = 3
+position = Vector2( -53.7597, 213.914 )
+script = ExtResource( 11 )
+
+[node name="CustomerTimer" type="Timer" parent="Spawner"]
+wait_time = 10.0
+
+[node name="Customers" type="YSort" parent="Spawner"]
+
+[node name="WaitingSpots" type="Node2D" parent="Spawner"]
+position = Vector2( -1.05262, -1.05261 )
+
+[node name="1" type="Node2D" parent="Spawner/WaitingSpots"]
+position = Vector2( 390.932, 1.05261 )
+
+[node name="2" type="Node2D" parent="Spawner/WaitingSpots"]
+position = Vector2( 313.281, 1.05263 )
+
+[node name="3" type="Node2D" parent="Spawner/WaitingSpots"]
+position = Vector2( 234.467, -1.26316 )
+
+[node name="4" type="Node2D" parent="Spawner/WaitingSpots"]
+position = Vector2( 155.617, -1.26315 )
+
+[node name="WaitTimer" type="Timer" parent="Spawner"]
+
+[node name="Objects" type="TileMap" parent="."]
+tile_set = SubResource( 16 )
+cell_size = Vector2( 32, 32 )
+cell_y_sort = true
+format = 1
+
+[node name="Player" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( 420.553, 218.159 )
+scale = Vector2( 0.75, 0.75 )
+z_index = 2
+navNodePath = NodePath("../../Navigation2D")
+
+[node name="Cat" parent="Objects" instance=ExtResource( 6 )]
+position = Vector2( 321.456, 528.511 )
+z_index = 1
+navNodePath = NodePath("../../Navigation2D")
+patrol_path = NodePath("../../Navigation2D/Path2D")
+desk_path = NodePath("../../Machines/Desk/DeskLocation")
+
+[node name="Counters" type="YSort" parent="Objects"]
+position = Vector2( -41.0415, -111.419 )
+
+[node name="Counter1" parent="Objects/Counters" instance=ExtResource( 8 )]
+position = Vector2( 410.498, 527.759 )
+
+[node name="Counter2" parent="Objects/Counters" instance=ExtResource( 8 )]
+position = Vector2( 506.104, 527.759 )
+
+[node name="Counter3" parent="Objects/Counters" instance=ExtResource( 8 )]
+position = Vector2( 601.589, 527.759 )
+
+[node name="Counter4" parent="Objects/Counters" instance=ExtResource( 8 )]
+position = Vector2( 697.415, 527.759 )
+
+[node name="MoneyLabel" type="Label" parent="."]
+anchor_right = 0.058
+margin_left = 809.476
+margin_top = 54.2833
+margin_right = 959.476
+margin_bottom = 104.283
+custom_fonts/font = SubResource( 19 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "$8,888,888"
+script = SubResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clock" type="Node2D" parent="."]
+position = Vector2( 932.255, 0 )
+script = ExtResource( 12 )
+
+[node name="MinuteTimer" type="Timer" parent="Clock"]
+wait_time = 1.5
+
+[node name="RichTextLabel" type="Label" parent="Clock"]
+margin_left = 13.3579
+margin_top = 54.2833
+margin_right = 63.3579
+margin_bottom = 91.2833
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "13:50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 16 )
+
+[node name="Sprite" type="Sprite" parent="HUD"]
+modulate = Color( 0.952941, 0.952941, 0.952941, 1 )
+position = Vector2( 511.146, 293.719 )
+scale = Vector2( 13, 13 )
+texture = ExtResource( 24 )
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 323.751
+margin_top = 291.015
+margin_right = 704.751
+margin_bottom = 320.015
+custom_fonts/font = SubResource( 21 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "Mouse click to move/interact"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="HUD"]
+margin_left = 334.146
+margin_top = 177.85
+margin_right = 694.146
+margin_bottom = 221.85
+custom_fonts/font = SubResource( 22 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "Laundry Simulator"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="HUD"]
+margin_left = 444.553
+margin_top = 341.734
+margin_right = 586.553
+margin_bottom = 390.734
+custom_fonts/font = ExtResource( 9 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 18 )
+bus = "soundfx"
+
+[node name="BackgroundMusic" parent="." instance=ExtResource( 7 )]
+
+[node name="RestartDay" type="Button" parent="."]
+margin_left = 109.003
+margin_top = 42.0
+margin_right = 153.003
+margin_bottom = 80.0
+icon = ExtResource( 22 )
+flat = true
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundToggle" type="TextureButton" parent="."]
+margin_left = 69.7008
+margin_top = 45.368
+margin_right = 109.701
+margin_bottom = 85.368
+toggle_mode = true
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 28 )
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicToggle" type="TextureButton" parent="."]
+margin_left = 29.7008
+margin_top = 45.368
+margin_right = 69.7008
+margin_bottom = 85.368
+toggle_mode = true
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 23 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="day_over" from="Spawner" to="." method="_on_day_over"]
+[connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]
+[connection signal="mischief_wanted" from="Objects/Cat" to="." method="_on_Cat_mischief_wanted"]
+[connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
+[connection signal="day_over" from="Clock" to="." method="_on_day_over"]
+[connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
+[connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
+[connection signal="new_game" from="HUD" to="." method="_on_new_game"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_new_game"]
+[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]
