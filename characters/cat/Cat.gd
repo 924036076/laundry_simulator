@@ -1,4 +1,5 @@
-extends "res://characters/base_character/base_character.gd"
+extends BaseCharacter
+class_name Cat
 
 export (NodePath) var patrol_path
 export (NodePath) var desk_path

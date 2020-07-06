@@ -1,4 +1,5 @@
-extends "res://characters/base_character/base_character.gd"
+extends BaseCharacter
+class_name BaseCustomer
 
 var return_destination : Vector2 
 var register : Vector2 
@@ -78,7 +79,7 @@ func assess_laundry() -> void:
 	stop_patience_particles()
 	
 func emote(happiness_pct: float) -> AnimatedSprite:
-	var expression = preload("res://characters/expressions/Expression.tscn").instance()
+	var expression = preload("res://characters/emote/emote.tscn").instance()
 	expression.position = expression_offset
 	add_child(expression)
 	expression.set_and_play(happiness_pct)
@@ -136,5 +137,5 @@ func on_patience_cloud(cloud : Area2D, points : int) -> void:
 	if !cloud.overlaps_area($Bumper): return
 	if received_laundry: return
 	add_patience_points(points)
-	var patience_point = preload("res://characters/customers/effects/patience_change/PatiencePoint.tscn").instance()
+	var patience_point = preload("res://characters/customers/effects/patience_change/patience_point.tscn").instance()
 	call_deferred("add_child", patience_point)

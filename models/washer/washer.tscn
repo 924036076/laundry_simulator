@@ -1,9 +1,10 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://models/washer/sprite.png" type="Texture" id=1]
-[ext_resource path="res://models/laundry_holder/LaundryHolder.tscn" type="PackedScene" id=2]
-[ext_resource path="res://models/washer/Washer.gd" type="Script" id=3]
+[ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/washer/washer.gd" type="Script" id=3]
 [ext_resource path="res://models/washer/washerLoop.wav" type="AudioStream" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"

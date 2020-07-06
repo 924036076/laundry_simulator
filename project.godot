@@ -8,20 +8,109 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "BaseCharacter",
+"language": "GDScript",
+"path": "res://characters/base_character/base_character.gd"
+}, {
+"base": "BaseCharacter",
+"class": "BaseCustomer",
+"language": "GDScript",
+"path": "res://characters/customers/base_customer/customer.gd"
+}, {
+"base": "LaundryHolder",
+"class": "Bumper",
+"language": "GDScript",
+"path": "res://characters/customers/base_customer/bumper.gd"
+}, {
+"base": "BaseCharacter",
+"class": "Cat",
+"language": "GDScript",
+"path": "res://characters/cat/cat.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Emote",
+"language": "GDScript",
+"path": "res://characters/emote/emote.gd"
+}, {
+"base": "CanvasLayer",
+"class": "HUD",
+"language": "GDScript",
+"path": "res://levels/base_level/hud.gd"
+}, {
+"base": "Area2D",
+"class": "LaundryHolder",
+"language": "GDScript",
+"path": "res://models/laundry_holder/laundry_holder.gd"
+}, {
+"base": "Node2D",
+"class": "LaundryScene",
+"language": "GDScript",
+"path": "res://levels/base_level/laundry_scene.gd"
+}, {
+"base": "Area2D",
+"class": "LoveAura",
+"language": "GDScript",
+"path": "res://characters/customers/effects/love_aura/love_aura.gd"
+}, {
+"base": "RichTextLabel",
+"class": "MoneyLabel",
+"language": "GDScript",
+"path": "res://levels/base_level/money_label.gd"
+}, {
+"base": "BaseCustomer",
+"class": "OldLady",
+"language": "GDScript",
+"path": "res://characters/customers/old_lady/old_lady.gd"
+}, {
+"base": "Node2D",
+"class": "PatiencePoint",
+"language": "GDScript",
+"path": "res://characters/customers/effects/patience_change/patience_point.gd"
+}, {
+"base": "Button",
+"class": "RestartDay",
+"language": "GDScript",
+"path": "res://levels/base_level/restart_day.gd"
+}, {
+"base": "TextureButton",
+"class": "SoundToggle",
+"language": "GDScript",
+"path": "res://levels/base_level/sound_toggle.gd"
+}, {
+"base": "LaundryHolder",
+"class": "Washer",
+"language": "GDScript",
+"path": "res://models/washer/washer.gd"
+} ]
 _global_script_class_icons={
-
+"BaseCharacter": "",
+"BaseCustomer": "",
+"Bumper": "",
+"Cat": "",
+"Emote": "",
+"HUD": "",
+"LaundryHolder": "",
+"LaundryScene": "",
+"LoveAura": "",
+"MoneyLabel": "",
+"OldLady": "",
+"PatiencePoint": "",
+"RestartDay": "",
+"SoundToggle": "",
+"Washer": ""
 }
 
 [application]
 
 config/name="Laundry Simulator"
-run/main_scene="res://levels/base_level/Laundry Scene.tscn"
+run/main_scene="res://levels/base_level/laundry_scene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-EventHub="*res://game_utils/EventHub.gd"
+EventHub="*res://game_utils/event_hub.gd"
 
 [debug]
 

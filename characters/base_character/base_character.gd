@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name BaseCharacter
 
 var laundry_offset = Vector2(50, 0) 
 var money_label_offset = Vector2(0, -40)
@@ -60,7 +61,7 @@ func _on_end_of_path() -> void:
 	animationState.travel("Idle")
 		
 func show_money_earned(money : float, percent : float = 1) -> void:
-	var label = preload("res://models/money_label/MoneyLabel.tscn").instance()
+	var label = preload("res://models/money_label/money_label.tscn").instance()
 	add_child(label)
 	label.position = money_label_offset
 	label.display("$" + str(round(money)), percent)

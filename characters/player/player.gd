@@ -1,4 +1,4 @@
-extends "res://characters/base_character/base_character.gd"
+extends BaseCharacter
 
 var movement_enabled : bool = false
 

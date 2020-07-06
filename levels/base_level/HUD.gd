@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name HUD
 
 signal new_game
 var game_over_msg = "Day End"

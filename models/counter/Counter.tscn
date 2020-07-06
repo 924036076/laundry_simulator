@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://models/laundry_holder/LaundryHolder.tscn" type="PackedScene" id=1]
-[ext_resource path="res://models/counter/Counter.gd" type="Script" id=2]
+[ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/counter/counter.gd" type="Script" id=2]
 [ext_resource path="res://models/counter/sprite.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]

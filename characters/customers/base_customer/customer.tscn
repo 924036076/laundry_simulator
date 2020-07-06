@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://characters/customers/base_customer/Bumper.gd" type="Script" id=1]
-[ext_resource path="res://models/Ticket/Ticket.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/customers/base_customer/bumper.gd" type="Script" id=1]
+[ext_resource path="res://models/Ticket/ticket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/customers/base_customer/customer.gd" type="Script" id=4]
 [ext_resource path="res://characters/customers/base_customer/sprite.png" type="Texture" id=5]
-[ext_resource path="res://characters/expressions/exclamation mark.png" type="Texture" id=6]
+[ext_resource path="res://characters/emote/exclamation mark.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle_down"
