@@ -1,11 +1,12 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://characters/customers/base_customer/bumper.gd" type="Script" id=1]
-[ext_resource path="res://models/Ticket/ticket.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/ticket/ticket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/customers/base_customer/customer.gd" type="Script" id=4]
 [ext_resource path="res://characters/customers/base_customer/sprite.png" type="Texture" id=5]
-[ext_resource path="res://characters/emote/exclamation mark.png" type="Texture" id=6]
+[ext_resource path="res://characters/customers/effects/patience_change/exclamation mark.png" type="Texture" id=6]
+[ext_resource path="res://characters/customers/effects/patience_change/patience_meter.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle_down"
@@ -343,7 +344,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 47.781
+radius = 32.8417
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
@@ -394,14 +395,14 @@ position = Vector2( -5.29681, 11.3091 )
 z_index = -1
 
 [node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
-position = Vector2( -20, -11 )
+position = Vector2( -19.0818, -9.54093 )
 
 [node name="Timer" type="Timer" parent="." index="4"]
 wait_time = 10.0
 one_shot = true
 
 [node name="PatienceParticles" type="CPUParticles2D" parent="." index="5"]
-position = Vector2( -0.44545, -48.2409 )
+position = Vector2( -0.209215, -51.3907 )
 emitting = false
 amount = 1
 lifetime = 2.0
@@ -415,6 +416,8 @@ scale_amount_curve = SubResource( 11 )
 [node name="AnimationTree" parent="." index="6"]
 parameters/playback = SubResource( 12 )
 parameters/Move/blend_position = Vector2( 0, 0.00948286 )
+
+[node name="PatienceMeter" parent="." index="7" instance=ExtResource( 7 )]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
 [connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
@@ -422,3 +425,4 @@ parameters/Move/blend_position = Vector2( 0, 0.00948286 )
 [connection signal="released" from="Bumper" to="." method="drop_off"]
 [connection signal="returned" from="Bumper" to="." method="receive_order"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="patience_exhausted" from="PatienceMeter" to="." method="_on_patience_exhausted"]

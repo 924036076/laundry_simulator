@@ -15,11 +15,9 @@ func _ready() -> void:
 func _calculate_radius() -> void:
 	radius =  $CollisionShape2D.shape.radius
 	
-func set_target(boolean) -> void:
-	is_target = boolean
-	
 func unload_laundry() -> Node2D:
 	var laundry_to_give := .unload_laundry()
+	set_target(false)
 	if laundry_to_give:
 		emit_signal("released")
 		return laundry_to_give
@@ -27,6 +25,7 @@ func unload_laundry() -> Node2D:
 	
 func load_laundry(laundry_in : Node2D) -> void:
 	.load_laundry(laundry_in)
+	set_target(false)
 	if !laundry: return
 	if initialized: emit_signal("returned")
 	else: initialized = true
@@ -39,5 +38,7 @@ func disallowed_action() -> void:
 	emit_signal("disallowed_customer_action")
 	
 func modulate() -> void:
-	if mouse_over and interactable: emit_signal("modulate", selected_modulation)
-	else: emit_signal("modulate", default_modulation)
+	if interactable and (mouse_over or is_target): 
+		emit_signal("modulate", selected_modulation)
+	else: 
+		emit_signal("modulate", default_modulation)

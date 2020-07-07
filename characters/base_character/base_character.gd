@@ -11,6 +11,7 @@ var animationState : AnimationNodeStateMachinePlayback
 var navNode : Navigation2D
 var path := PoolVector2Array() 
 var speed := 175
+var walking := false
 export(NodePath) var navNodePath
 signal end_of_path
 signal score
@@ -49,6 +50,10 @@ func update_sprite(velocity : Vector2):
 	animationState.travel("Move")
 
 func set_target_location(new_target : Vector2) -> void:
+	if new_target.distance_to(global_position) < 2: 
+		_on_end_of_path()
+		return
+	walking = true
 	target = new_target
 	path = navNode.get_simple_path(global_position, new_target)
 	if path.size() == 0:
@@ -57,6 +62,7 @@ func set_target_location(new_target : Vector2) -> void:
 	set_physics_process(true)
 
 func _on_end_of_path() -> void:
+	walking = false
 	set_physics_process(false)
 	animationState.travel("Idle")
 		

@@ -15,5 +15,9 @@ position = Vector2( -2.6893, 19.8796 )
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 
+[node name="HandPos" parent="Bumper" index="1"]
+position = Vector2( -5.29681, 11.3091 )
+
 [node name="AnimationTree" parent="." index="6"]
+active = true
 parameters/playback = SubResource( 1 )
