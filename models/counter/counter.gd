@@ -22,3 +22,6 @@ func be_occupied(id : int) -> void:
 func be_free(id : int) -> void:
 	if id == get_instance_id(): interactable = true
 
+func reset() -> void:
+	.reset()
+	be_free(get_instance_id())

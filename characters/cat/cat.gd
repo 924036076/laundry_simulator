@@ -143,10 +143,9 @@ func set_random_destination() -> void:
 	
 func stop() -> void:
 	action_enabled = false
-	$ThoughtBubble.hide()
-	state = State.SLEEP
-	handle_state_transition()
 	$WaitTimer.stop()
+	$ThoughtBubble.hide()
+	animationState.travel("sleep")
 		
 func start() -> void:
 	action_enabled = true
