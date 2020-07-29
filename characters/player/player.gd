@@ -20,7 +20,7 @@ func interact(body) -> void:
 		body.disallowed_action()
 	else:	# Allowed to interact: swap laundry loads
 		$TransferSoundPlayer.play()
-		var player_laundry : = unload_laundry() if body.can_receive else null
+		var player_laundry : = null if !body.can_receive else unload_laundry()
 		var object_laundry = null
 		if body.can_give and !laundry:
 			object_laundry = body.unload_laundry()

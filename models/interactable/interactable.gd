@@ -7,7 +7,7 @@ var is_target := false setget set_target
 var interactable := true setget set_interactable
 var mouse_over := false setget _mouse_over
 var radius := 0.0
-var offset := Vector2(0,0)
+
 
 func _ready() -> void:
 	_calculate_radius()
@@ -59,15 +59,14 @@ func set_interactable(boolean) -> void:
 	
 	
 func _mouse_over(over : bool) -> void:
-	self.mouse_over = over
+	mouse_over = over
 	
 	
 func _on_Interactable_input_event(viewport, event, shape_idx):
-	#if !mouse_over: return
+	if !mouse_over: return
 	if not event is InputEventMouseButton: return
 	if event.button_index != BUTTON_LEFT: return
 	if not event.is_pressed(): return
 	
-	print("click!")
 	get_tree().set_input_as_handled()
 	EventHub.emit_signal("click", self)
