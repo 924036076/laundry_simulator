@@ -1,21 +1,17 @@
 extends Area2D
-class_name LaundryHolder
+class_name Interactable
 
 const default_modulation := Color(1, 1, 1, 1)
 const selected_modulation := Color(0.83, 1, 0.89, 1)
 var is_target := false setget set_target
-var laundry : Node2D = null
 var interactable := true setget set_interactable
-var can_give := true
-var can_receive := true
-var laundry_available := false
-var mouse_over := false
+var mouse_over := false setget _mouse_over
 var radius := 0.0
 var offset := Vector2(0,0)
-var laundry_parent : Node2D = self
 
 func _ready() -> void:
 	_calculate_radius()
+
 
 func _calculate_radius() -> void:
 	# Default method for calculating interaction radius for rectangular interactables
@@ -25,60 +21,43 @@ func _calculate_radius() -> void:
 	# Halving the smallest extent by two for better controlability/feel
 	radius = min(extents.x, extents.y)/2
 	
-func load_laundry(laundry_in : Node2D) -> void:
-	if !laundry_in: return
 	
-	laundry = laundry_in
-	laundry_available = true
-	laundry.position = offset
-	laundry_parent.call_deferred("add_child", laundry)
-
-func unload_laundry() -> Node2D:
-	if !laundry: return null
-	
-	var laundry_to_give = laundry
-	laundry_parent.remove_child(laundry)
-	laundry = null
-	laundry_available = false
-	return laundry_to_give
-
-func _mouse_over(over : bool) -> void:
-	self.mouse_over = over
-
-		
 func set_target(boolean) -> void:
 	is_target = boolean
 	modulate()
-		
-func reset() -> void:
-	if laundry:
-		laundry.queue_free()
-	laundry = null
-	laundry_available = false
-	
+
+
 func disallowed_action() -> void:
 	# Overriden by scenes that inherit
 	pass
-
+	
+	
 func modulate() -> void:
 	if is_target or mouse_over and interactable:
 		$Sprite.modulate = selected_modulation
 	else:
 		$Sprite.modulate = default_modulation
 
+
 func _on_mouse_entered() -> void:
 	mouse_over = true
 	modulate()
+	
 	
 func _on_mouse_exited() -> void:
 	mouse_over = false
 	modulate()
 	
+	
 func set_interactable(boolean) -> void:
 	interactable = boolean
 	modulate()
-
-
+	
+	
+func _mouse_over(over : bool) -> void:
+	self.mouse_over = over
+	
+	
 func _on_Interactable_input_event(viewport, event, shape_idx):
 	#if !mouse_over: return
 	if not event is InputEventMouseButton: return
@@ -88,4 +67,3 @@ func _on_Interactable_input_event(viewport, event, shape_idx):
 	print("click!")
 	get_tree().set_input_as_handled()
 	EventHub.emit_signal("click", self)
-	#print("click on: ", get_name())

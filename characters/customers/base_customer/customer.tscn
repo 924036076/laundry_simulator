@@ -419,6 +419,7 @@ parameters/Move/blend_position = Vector2( 0, 0.00948286 )
 
 [node name="PatienceMeter" parent="." index="7" instance=ExtResource( 7 )]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
+[connection signal="input_event" from="Bumper" to="Bumper" method="_on_Interactable_input_event"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
 [connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Bumper" to="Bumper" method="_on_mouse_exited"]

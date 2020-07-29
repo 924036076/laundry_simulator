@@ -1026,13 +1026,26 @@ scale = Vector2( 13, 13 )
 texture = ExtResource( 24 )
 
 [node name="Score" type="Label" parent="HUD"]
-margin_left = 323.751
-margin_top = 291.015
-margin_right = 704.751
-margin_bottom = 320.015
+margin_left = 328.241
+margin_top = 299.995
+margin_right = 709.241
+margin_bottom = 328.995
 custom_fonts/font = SubResource( 21 )
 custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
 text = "Mouse click to move/interact"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" type="Label" parent="HUD"]
+margin_left = 317.016
+margin_top = 96.8291
+margin_right = 698.016
+margin_bottom = 125.829
+custom_fonts/font = SubResource( 21 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "High Score: 455"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

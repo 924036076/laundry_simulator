@@ -29,6 +29,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			player.set_targetobjct(null)
 			player.set_target_location(get_global_mouse_position())
 
+
 func _on_new_game() -> void:
 	player.reset()
 	player.enable_movement(true)
@@ -47,7 +48,7 @@ func _on_day_over() -> void:
 	$Clock.stop()
 	$Spawner.stop()
 	$Spawner.get_angry()
-	$HUD.show_overlay("Daily earnings: " + $MoneyLabel.text)
+	$HUD.show_overlay($MoneyLabel.money)
 	player.enable_movement(false)
 	cat.stop()
 
@@ -56,7 +57,7 @@ func _on_restart_day() -> void:
 	$Spawner.stop()
 	$Spawner.reset()
 	refresh_interactables()
-	$HUD.show_overlay(null)
+	$HUD.show_overlay(0)
 	player.reset()
 	player.enable_movement(false)
 	cat.stop()
