@@ -13,6 +13,10 @@ func _ready() -> void:
 	_calculate_radius()
 
 
+func reset() -> void:
+	pass
+
+
 func _calculate_radius() -> void:
 	# Default method for calculating interaction radius for rectangular interactables
 	# Overridden for any interactables with circular colliders
