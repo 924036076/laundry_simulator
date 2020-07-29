@@ -12,24 +12,26 @@ func _ready():
 	show_overlay(0)
 	format_high_score(Global.get_high_score())
 	
-func show_overlay(score: int):
+func show_overlay(score := 0):
 	$Sprite.visible = true
 	$Button.visible = true
 	
 	if score != 0:
 		show_game_over(score)
-		check_high_score(score)
 	else: 
 		$Score.text = instructions
-		format_high_score(Global.get_high_score())
-		
+
+	check_high_score(score)
 	$Score.visible = true
 	$Title.visible = true
+
 
 func check_high_score(score: int) -> void:
 	if score > Global.get_high_score():
 		Global.save(score)
-		format_high_score(score)
+		# TODO: add something special that happens on a new high score
+	format_high_score(Global.get_high_score())
+
 
 func format_high_score(score : int) -> void:
 	$HighScore.text = high_score_label + str(score)
