@@ -63,7 +63,7 @@ func _mouse_over(over : bool) -> void:
 	
 	
 func _on_Interactable_input_event(viewport, event, shape_idx):
-	if !mouse_over: return
+	#if !mouse_over: return
 	if not event is InputEventMouseButton: return
 	if event.button_index != BUTTON_LEFT: return
 	if not event.is_pressed(): return
