@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://models/washer/sprite.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
@@ -115,36 +115,43 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 35.7068, 47.3758 )
+
 [node name="Washer" groups=[
 "InteractableObjects",
 ] instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="1"]
-position = Vector2( -1, 0 )
-texture = ExtResource( 1 )
-vframes = 3
-hframes = 2
-
-[node name="Timer" type="Timer" parent="." index="2"]
+[node name="Timer" type="Timer" parent="." index="0"]
 wait_time = 5.0
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 playback_speed = 2.0
 anims/idle = SubResource( 1 )
 anims/running = SubResource( 2 )
 anims/shake = SubResource( 3 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Blend/blend_amount = 0.0
 parameters/StateMachine/playback = SubResource( 12 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 4 )
 volume_db = -10.0
 bus = "soundfx"
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+vframes = 3
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
+shape = SubResource( 13 )
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

@@ -10,23 +10,22 @@ func _ready() -> void:
 	EventHub.connect("click", self, "_on_Interactable_click")
 	
 func interact(body) -> void:
+	# Reset target object and stop moving
+	set_targetobjct(null)
+	set_target_location(global_position)
+	
 	# Either body is not interactable, or it can only give and player cannot receive
 	if !body.interactable or (body.can_give and !body.can_receive and laundry):  
 		$UnallowedSoundPlayer.play()
 		body.disallowed_action()
 	else:	# Allowed to interact: swap laundry loads
 		$TransferSoundPlayer.play()
-		var player_laundry : = unload_laundry() if body.can_receive else null
+		var player_laundry : = null if !body.can_receive else unload_laundry()
 		var object_laundry = null
 		if body.can_give and !laundry:
 			object_laundry = body.unload_laundry()
 		load_laundry(object_laundry)
 		body.load_laundry(player_laundry)
-	
-	# Reset target object and stop moving
-	target_objct.set_target(false)
-	target_objct = null
-	set_target_location(global_position)
 
 func unload_laundry() -> Node2D:
 	if !laundry: return null
@@ -53,7 +52,6 @@ func set_targetobjct(objct : Area2D) -> void:
 func _on_Interactable_click(objct) -> void:
 	if !movement_enabled: return
 	set_targetobjct(objct)
-	
 	# New target object is in range
 	if target_objct.overlaps_area($Area2D): 
 		interact(target_objct)
@@ -65,8 +63,9 @@ func _on_Interactable_click(objct) -> void:
 	set_target_location(new_target)
 		
 func set_target_location(destination : Vector2) -> void:
-	if movement_enabled: .set_target_location(destination)
-		
+	if movement_enabled: 
+		.set_target_location(destination)
+	
 func enable_movement(input : bool) -> void:
 	movement_enabled = input
 	
@@ -74,9 +73,7 @@ func reset() -> void:
 	if laundry:
 		laundry.queue_free()
 		laundry = null
-	if target_objct:
-		target_objct.set_target(false)
-		target_objct = null
+	set_targetobjct(null)
 
 func _on_Area2D_area_entered(area):
 	if area == target_objct:

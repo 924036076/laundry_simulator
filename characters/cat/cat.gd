@@ -143,10 +143,9 @@ func set_random_destination() -> void:
 	
 func stop() -> void:
 	action_enabled = false
-	$ThoughtBubble.hide()
-	state = State.SLEEP
-	handle_state_transition()
 	$WaitTimer.stop()
+	$ThoughtBubble.hide()
+	animationState.travel("sleep")
 		
 func start() -> void:
 	action_enabled = true
@@ -155,3 +154,11 @@ func start() -> void:
 func _emit_idle() -> void:
 	# Called from idle animation
 	emit_signal("idle")
+
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if not event is InputEventMouseButton: return
+	if event.button_index != BUTTON_LEFT: return
+	if not event.is_pressed(): return
+	print("cat input event!!!!")
+	get_tree().set_input_as_handled()

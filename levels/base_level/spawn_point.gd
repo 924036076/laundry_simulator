@@ -28,10 +28,10 @@ func create_customer() -> KinematicBody2D:
 	# Create and initialize new customer
 	var customer : KinematicBody2D = null
 	# TODO: Better way of choosing what type of customer to make
-	if customers_created % 2 == 0:
-		customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
-	else:
+	if customers_created % 3 == 0:
 		customer = preload("res://characters/customers/old_lady/old_lady.tscn").instance()
+	else:
+		customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
 	$Customers.add_child(customer)
 	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max))
 	customer.add_to_group("dropping_off")
