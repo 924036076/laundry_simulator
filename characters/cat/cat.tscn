@@ -528,8 +528,9 @@ position = Vector2( 0, -39.1995 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource( 22 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="8"]
+[node name="LoveParticles" type="CPUParticles2D" parent="." index="8"]
 position = Vector2( 3.46478, 0 )
+emitting = false
 amount = 1
 lifetime = 3.2
 speed_scale = 2.0

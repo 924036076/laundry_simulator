@@ -4,26 +4,29 @@ class_name LaundryHolder
 const default_modulation := Color(1, 1, 1, 1)
 const selected_modulation := Color(0.83, 1, 0.89, 1)
 var is_target := false setget set_target
-var laundry : Node2D = null
 var interactable := true setget set_interactable
-var can_give := true
-var can_receive := true
-var laundry_available := false
 var mouse_over := false
 var radius := 0.0
 var offset := Vector2(0,0)
+var laundry : Node2D = null
+var can_give := true
+var can_receive := true
+var laundry_available := false
 var laundry_parent : Node2D = self
+
 
 func _ready() -> void:
 	_calculate_radius()
+
 
 func _calculate_radius() -> void:
 	# Default method for calculating interaction radius for rectangular interactables
 	# Overridden for any interactables with circular colliders
 	
-	var extents =  get_node("CollisionShape2D").shape.get_extents()
+	var extents =  $CollisionShape2D.shape.get_extents()
 	# Halving the smallest extent by two for better controlability/feel
 	radius = min(extents.x, extents.y)/2
+	
 	
 func load_laundry(laundry_in : Node2D) -> void:
 	if !laundry_in: return
@@ -32,6 +35,7 @@ func load_laundry(laundry_in : Node2D) -> void:
 	laundry_available = true
 	laundry.position = offset
 	laundry_parent.call_deferred("add_child", laundry)
+
 
 func unload_laundry() -> Node2D:
 	if !laundry: return null
