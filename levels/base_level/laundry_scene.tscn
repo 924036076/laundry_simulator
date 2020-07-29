@@ -886,10 +886,14 @@ position = Vector2( 418.046, 54.2833 )
 [node name="Washer2" parent="Machines" instance=ExtResource( 2 )]
 position = Vector2( 511.146, 54.2833 )
 
-[node name="Dryer" parent="Machines" instance=ExtResource( 4 )]
+[node name="Dryer" parent="Machines" groups=[
+"laundry_holder",
+] instance=ExtResource( 4 )]
 position = Vector2( 604.296, 54.2833 )
 
-[node name="Dryer2" parent="Machines" instance=ExtResource( 4 )]
+[node name="Dryer2" parent="Machines" groups=[
+"laundry_holder",
+] instance=ExtResource( 4 )]
 position = Vector2( 697.396, 54.2833 )
 
 [node name="WashLabel" type="Label" parent="Machines"]

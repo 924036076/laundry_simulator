@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://characters/customers/base_customer/bumper.gd" type="Script" id=1]
 [ext_resource path="res://models/ticket/ticket.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://characters/customers/base_customer/sprite.png" type="Texture" id=5]
 [ext_resource path="res://characters/customers/effects/patience_change/exclamation mark.png" type="Texture" id=6]
 [ext_resource path="res://characters/customers/effects/patience_change/patience_meter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle_down"
@@ -343,13 +344,13 @@ tracks/0/keys = {
 "values": [ Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=10]
-radius = 32.8417
-
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 30.8545
 
 [node name="Customer" groups=[
 "customers",
@@ -382,26 +383,11 @@ anims/mov_right = SubResource( 7 )
 anims/mov_up = SubResource( 8 )
 anims/shake = SubResource( 9 )
 
-[node name="Bumper" type="Area2D" parent="." index="3"]
-position = Vector2( 0.101102, -0.136639 )
-collision_mask = 2
-script = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
-shape = SubResource( 10 )
-
-[node name="HandPos" type="Node2D" parent="Bumper" index="1"]
-position = Vector2( -5.29681, 11.3091 )
-z_index = -1
-
-[node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
-position = Vector2( -19.0818, -9.54093 )
-
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 10.0
 one_shot = true
 
-[node name="PatienceParticles" type="CPUParticles2D" parent="." index="5"]
+[node name="PatienceParticles" type="CPUParticles2D" parent="." index="4"]
 position = Vector2( -0.209215, -51.3907 )
 emitting = false
 amount = 1
@@ -413,17 +399,28 @@ gravity = Vector2( 0, 0 )
 scale_amount = 1.25
 scale_amount_curve = SubResource( 11 )
 
-[node name="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" parent="." index="5"]
 parameters/playback = SubResource( 12 )
 parameters/Move/blend_position = Vector2( 0, 0.00948286 )
 
-[node name="PatienceMeter" parent="." index="7" instance=ExtResource( 7 )]
-[connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
-[connection signal="input_event" from="Bumper" to="Bumper" method="_on_Interactable_input_event"]
-[connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
-[connection signal="mouse_entered" from="Bumper" to="Bumper" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Bumper" to="Bumper" method="_on_mouse_exited"]
-[connection signal="released" from="Bumper" to="." method="drop_off"]
-[connection signal="returned" from="Bumper" to="." method="receive_order"]
+[node name="PatienceMeter" parent="." index="6" instance=ExtResource( 7 )]
+
+[node name="Bumper" parent="." index="7" instance=ExtResource( 8 )]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
+position = Vector2( -1.12375, 1.12373 )
+shape = SubResource( 13 )
+
+[node name="HandPos" type="Node2D" parent="Bumper" index="1"]
+position = Vector2( -5.29681, 11.3091 )
+z_index = -1
+
+[node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
+position = Vector2( -19.0818, -9.54093 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="patience_exhausted" from="PatienceMeter" to="." method="_on_patience_exhausted"]
+[connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
+[connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
+[connection signal="released" from="Bumper" to="." method="drop_off"]
+[connection signal="returned" from="Bumper" to="." method="receive_order"]
