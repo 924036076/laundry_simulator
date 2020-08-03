@@ -20,6 +20,7 @@ signal mischief_wanted
 signal mischief_started
 signal idle
 
+
 func _ready() -> void:
 	animationState = $AnimationTree["parameters/playback"]
 	money_label_offset = Vector2(0, -42)
@@ -31,9 +32,11 @@ func _ready() -> void:
 	if desk_path:
 		desk = get_node(desk_path)
 
+
 func _on_end_of_path() -> void:
 	._on_end_of_path()
 	handle_state_transition()
+
 
 func handle_state_transition() -> void:
 	match state:
@@ -52,10 +55,12 @@ func handle_state_transition() -> void:
 			emit_signal("mischief_started")
 			animationState.travel("jump_forward")
 
+
 func shed() -> void:
-	var areas = $Area2D.get_overlapping_areas()
+	var areas = $Bumper.get_overlapping_areas()
 	for i in areas:
 		if i.is_in_group("sheddable"): i.cat_shedding()
+
 
 func _on_jump_start() -> void:
 	if !action_enabled: return
@@ -66,9 +71,11 @@ func _on_jump_start() -> void:
 	$AnimationTree.set("parameters/Move/blend_position", Vector2.DOWN)
 	#handle_state_transition()
 
+
 func _on_jump_end() -> void:
 	EventHub.emit_signal("occupy_object", target_id)
 	handle_state_transition()
+
 
 func _on_WaitTimer_timeout() -> void:
 	match state:
@@ -82,6 +89,7 @@ func _on_WaitTimer_timeout() -> void:
 	if action_enabled:
 		choose_action()
 
+
 func manage_mischief(counter_pos : Vector2, id : int) -> void:
 	target = counter_pos
 	target_id = id
@@ -90,6 +98,7 @@ func manage_mischief(counter_pos : Vector2, id : int) -> void:
 		animationState.travel("disappointed")
 	else:
 		animationState.travel("excited")
+
 
 func _on_done_reacting() -> void:
 	# Called from disappointed and excited animations
@@ -102,8 +111,10 @@ func _on_done_reacting() -> void:
 	else:
 		set_target_location(target)
 
+
 func office_work() -> void:
 	set_target_location(desk.global_position)
+	
 	
 func choose_action() -> void:
 	if !action_enabled: return
@@ -128,18 +139,22 @@ func choose_action() -> void:
 		state = State.MISCHIEF
 		_start_thinking()
 
+
 func _start_thinking() -> void:
 	animationState.travel("thinking")
 	$ThoughtBubble.show()
+
 
 func _on_done_thinking() -> void:
 	# Called at end of thinking animation
 	if action_enabled:
 		emit_signal("mischief_wanted")
 	
+	
 func set_random_destination() -> void:
 	var patrol_index = rng.randi_range(0,  patrol_points.size()-1)
 	set_target_location(patrol_points[patrol_index])
+	
 	
 func stop() -> void:
 	action_enabled = false
@@ -147,18 +162,16 @@ func stop() -> void:
 	$ThoughtBubble.hide()
 	animationState.travel("sleep")
 		
+		
 func start() -> void:
 	action_enabled = true
 	choose_action()
+	
 	
 func _emit_idle() -> void:
 	# Called from idle animation
 	emit_signal("idle")
 
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	if not event is InputEventMouseButton: return
-	if event.button_index != BUTTON_LEFT: return
-	if not event.is_pressed(): return
-	print("cat input event!!!!")
-	get_tree().set_input_as_handled()
+func _on_Bumper_modulate(modulation : Color) -> void:
+	$Sprite.modulate = modulation

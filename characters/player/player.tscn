@@ -26,6 +26,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 47, 44 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Face:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle_down"
@@ -388,7 +400,7 @@ z_index = 1
 texture = ExtResource( 6 )
 vframes = 7
 hframes = 8
-frame = 47
+frame = 3
 
 [node name="TransferSoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource( 3 )
