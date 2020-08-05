@@ -104,7 +104,6 @@ func manage_mischief(counter_pos : Vector2, id : int) -> void:
 
 func _on_done_reacting() -> void:
 	# Called from disappointed and excited animations
-	print("done reacting")
 	if !action_enabled:
 		return
 	if target == Vector2.ZERO:
