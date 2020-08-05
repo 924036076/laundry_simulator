@@ -9,6 +9,7 @@ var counters
 func _ready() -> void:
 	counters = $Objects/Counters.get_children()
 	initialize_level()
+
 	
 func initialize_level() -> void:
 	$Spawner.init($Navigation2D, player)

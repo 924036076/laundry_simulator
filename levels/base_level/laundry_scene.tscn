@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -15,8 +15,9 @@
 [ext_resource path="res://levels/base_level/restart_day.gd" type="Script" id=13]
 [ext_resource path="res://levels/base_level/laundry_scene.gd" type="Script" id=14]
 [ext_resource path="res://levels/base_level/sound_toggle.gd" type="Script" id=15]
-[ext_resource path="res://interfaces/title_screen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://levels/base_level/hud.gd" type="Script" id=16]
 [ext_resource path="res://tilesets/grate_upper.png" type="Texture" id=17]
+[ext_resource path="res://characters/player/transfer.wav" type="AudioStream" id=18]
 [ext_resource path="res://icons/KawaiiIcons_NoBG015.png" type="Texture" id=19]
 [ext_resource path="res://tilesets/walls.png" type="Texture" id=20]
 [ext_resource path="res://tilesets/counter_floor.png" type="Texture" id=21]
@@ -1005,7 +1006,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" parent="." instance=ExtResource( 16 )]
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 16 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 18 )
+bus = "soundfx"
 
 [node name="BackgroundMusic" parent="." instance=ExtResource( 7 )]
 
@@ -1054,4 +1060,5 @@ __meta__ = {
 [connection signal="day_over" from="Clock" to="." method="_on_day_over"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
+[connection signal="new_game" from="HUD" to="." method="_on_new_game"]
 [connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]

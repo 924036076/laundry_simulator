@@ -31,6 +31,8 @@ func _ready() -> void:
 		patrol_points = get_node(patrol_path).curve.get_baked_points()
 	if desk_path:
 		desk = get_node(desk_path)
+	
+	rng.randomize()
 
 
 func _on_end_of_path() -> void:
@@ -69,12 +71,12 @@ func _on_jump_start() -> void:
 	state = State.SLEEP
 	$AnimationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
 	$AnimationTree.set("parameters/Move/blend_position", Vector2.DOWN)
-	#handle_state_transition()
 
 
 func _on_jump_end() -> void:
 	EventHub.emit_signal("occupy_object", target_id)
 	handle_state_transition()
+	$ThoughtBubble.hide()
 
 
 func _on_WaitTimer_timeout() -> void:
@@ -102,6 +104,7 @@ func manage_mischief(counter_pos : Vector2, id : int) -> void:
 
 func _on_done_reacting() -> void:
 	# Called from disappointed and excited animations
+	print("done reacting")
 	if !action_enabled:
 		return
 	if target == Vector2.ZERO:
