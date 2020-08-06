@@ -5,13 +5,18 @@ onready var nav2d : Navigation2D = $Navigation2D
 onready var player : KinematicBody2D = $Objects/Player
 onready var cat : Cat = $Objects/Cat
 var counters
+var day_count := 1
+var prev_balance := 0
+
 
 func _ready() -> void:
 	counters = $Objects/Counters.get_children()
 	initialize_level()
-	
+
+
 func initialize_level() -> void:
 	$Spawner.init($Navigation2D, player)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Called when player clicks on screen but not on an interactable
@@ -31,28 +36,44 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_new_game() -> void:
-	player.reset()
-	player.enable_movement(true)
-	$HUD.hide_overlay()
-	$Spawner.restart()
+	day_count = 1
+	prev_balance = 0
 	$MoneyLabel.reset()
-	$Clock.restart()
-	refresh_interactables()
-	$BackgroundMusic.restart()
-	cat.start()
+	_on_new_day()
 
 func refresh_interactables() -> void:
 	get_tree().call_group("InteractableObjects", "reset")
-	
+
+
 func _on_day_over() -> void:
 	$Clock.stop()
 	$Spawner.stop()
 	$Spawner.get_angry()
-	$HUD.show_overlay($MoneyLabel.money)
+	#$HUD.show_overlay($MoneyLabel.money) # show daily earnings here
 	player.enable_movement(false)
 	cat.stop()
+	var day_end_screen = preload("res://interfaces/day_end_screen.tscn").instance()
+	print("previous balance: ", prev_balance)
+	day_end_screen.set_values($MoneyLabel.money, prev_balance, day_count)
+	$HUD.add_child(day_end_screen)
+	day_end_screen.connect("next_day_button_pressed", self, "_on_new_day")
+	prev_balance = $MoneyLabel.money
+	day_count += 1
+	print("previous balance: ", prev_balance)
 
-func _on_restart_day() -> void:
+
+func _on_new_day() -> void:
+	$Clock.restart()
+	refresh_interactables()
+	$BackgroundMusic.restart()
+	cat.start()
+	player.reset()
+	player.enable_movement(true)
+	$HUD.hide_overlay()
+	$Spawner.restart()
+
+
+func _on_restart_button_pressed() -> void:
 	$Clock.stop()
 	$Spawner.stop()
 	$Spawner.reset()
@@ -61,6 +82,7 @@ func _on_restart_day() -> void:
 	player.reset()
 	player.enable_movement(false)
 	cat.stop()
+
 
 func _on_Cat_mischief_wanted():
 	# Give cat location of counter with laundry

@@ -2,59 +2,52 @@ extends CanvasLayer
 class_name HUD
 
 signal new_game
-const game_over_msg := "Day End"
-const new_game_button := "Restart"
-const instructions := "Mouse click to move/interact"
-const daily_earnings_label := "Daily Earnings: $"
-const high_score_label := "High score: $"
+signal new_day
+var overlay : Control
+
 
 func _ready():
-	show_overlay(0)
-	format_high_score(Global.get_high_score())
-	
+	show_title_screen()
+	Global.save(0)
+
+
 func show_overlay(score := 0):
-	$Sprite.visible = true
-	$Button.visible = true
-	
 	if score != 0:
 		show_game_over(score)
-	else: 
-		$Score.text = instructions
-
-	check_high_score(score)
-	$Score.visible = true
-	$Title.visible = true
+	else:
+		show_title_screen()
 
 
 func check_high_score(score: int) -> void:
 	if score > Global.get_high_score():
 		Global.save(score)
-		# TODO: add something special that happens on a new high score
-	format_high_score(Global.get_high_score())
 
 
-func format_high_score(score : int) -> void:
-	$HighScore.text = high_score_label + str(score)
-	if score:
-		$HighScore.visible = true
-	else:
-		$HighScore.visible = false
-	
-func _on_new_high_score() -> void:
-	pass
-	
 func show_game_over(score : int) -> void:
-	$Score.text = daily_earnings_label + str(score)
-	$Title.text = game_over_msg
-	$Button.text = new_game_button		
+	check_high_score(score)
+	if overlay:
+		overlay.queue_free()
+	overlay = preload("res://interfaces/game_over_screen.tscn").instance()
+	overlay.set_scores(Global.get_high_score(), score)
+	add_child(overlay)
+	overlay.connect("new_game_button_pressed", self, "_on_new_game")
+
+
+func show_title_screen() -> void:
+	if overlay and overlay.get_name() == "TitleScreen":
+		return
+	if overlay:
+		overlay.queue_free()
+	overlay = preload("res://interfaces/title_screen.tscn").instance()
+	add_child(overlay)
+	overlay.connect("start_button_pressed", self, "_on_new_game")
+
 
 func hide_overlay():
-	$Sprite.visible = false
-	$Title.visible = false
-	$Button.visible = false
-	$Score.visible = false
-	$HighScore.visible = false
+	if overlay:
+		overlay.queue_free()
 
-func _on_Button_pressed():
+
+func _on_new_game():
 	emit_signal("new_game")
 	$AudioStreamPlayer.play()
