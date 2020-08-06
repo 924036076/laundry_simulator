@@ -40,7 +40,6 @@ func show_title_screen() -> void:
 		overlay.queue_free()
 	overlay = preload("res://interfaces/title_screen.tscn").instance()
 	add_child(overlay)
-	#overlay.call_deferred("connect", "start_button_pressed", self, "")
 	overlay.connect("start_button_pressed", self, "_on_new_game")
 
 
