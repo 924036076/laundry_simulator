@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@
 [ext_resource path="res://tilesets/sidewalk_middle.png" type="Texture" id=27]
 [ext_resource path="res://icons/KawaiiIcons_NoBG005.png" type="Texture" id=28]
 [ext_resource path="res://tilesets/Tilemap.png" type="Texture" id=29]
+[ext_resource path="res://icons/KawaiiIcons_NoBG001.png" type="Texture" id=30]
+[ext_resource path="res://icons/KawaiiIcons_NoBG002.png" type="Texture" id=31]
+[ext_resource path="res://levels/base_level/PauseToggle.gd" type="Script" id=32]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1017,23 +1020,20 @@ bus = "soundfx"
 
 [node name="BackgroundMusic" parent="." instance=ExtResource( 7 )]
 
-[node name="RestartDay" type="Button" parent="."]
-margin_left = 109.003
-margin_top = 42.0
-margin_right = 153.003
-margin_bottom = 80.0
-icon = ExtResource( 22 )
-flat = true
-script = ExtResource( 13 )
+[node name="Options" type="HBoxContainer" parent="."]
+pause_mode = 2
+margin_left = 21.3574
+margin_top = 46.052
+margin_right = 137.357
+margin_bottom = 84.052
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SoundToggle" type="TextureButton" parent="."]
-margin_left = 69.7008
-margin_top = 45.368
-margin_right = 109.701
-margin_bottom = 85.368
+[node name="SoundToggle" type="TextureButton" parent="Options"]
+margin_right = 32.0
+margin_bottom = 38.0
 toggle_mode = true
 texture_normal = ExtResource( 25 )
 texture_pressed = ExtResource( 28 )
@@ -1042,11 +1042,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicToggle" type="TextureButton" parent="."]
-margin_left = 29.7008
-margin_top = 45.368
-margin_right = 69.7008
-margin_bottom = 85.368
+[node name="MusicToggle" type="TextureButton" parent="Options"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 38.0
 toggle_mode = true
 texture_normal = ExtResource( 19 )
 texture_pressed = ExtResource( 23 )
@@ -1054,6 +1053,22 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PauseToggle" type="TextureButton" parent="Options"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 38.0
+toggle_mode = true
+texture_normal = ExtResource( 31 )
+texture_pressed = ExtResource( 30 )
+script = ExtResource( 32 )
+
+[node name="RestartDay" type="TextureButton" parent="Options"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 38.0
+texture_normal = ExtResource( 22 )
+script = ExtResource( 13 )
 [connection signal="day_over" from="Spawner" to="." method="_on_day_over"]
 [connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]
@@ -1063,4 +1078,5 @@ __meta__ = {
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
 [connection signal="new_game" from="HUD" to="." method="_on_new_game"]
-[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_button_pressed"]
+[connection signal="toggled" from="Options/PauseToggle" to="Options/PauseToggle" method="_on_PauseToggle_toggled"]
+[connection signal="restart_button_pressed" from="Options/RestartDay" to="." method="_on_restart_button_pressed"]

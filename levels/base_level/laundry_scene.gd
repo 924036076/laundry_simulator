@@ -71,6 +71,7 @@ func _on_new_day() -> void:
 	player.enable_movement(true)
 	$HUD.hide_overlay()
 	$Spawner.restart()
+	$Options/PauseToggle.pressed = false
 
 
 func _on_restart_button_pressed() -> void:

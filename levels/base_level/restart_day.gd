@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 class_name RestartDay
 
 signal restart_button_pressed
