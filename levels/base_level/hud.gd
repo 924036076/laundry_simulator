@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name HUD
 
 signal new_game
+signal new_day
 var overlay : Control
 
 
@@ -29,7 +30,7 @@ func show_game_over(score : int) -> void:
 	overlay = preload("res://interfaces/game_over_screen.tscn").instance()
 	overlay.set_scores(Global.get_high_score(), score)
 	add_child(overlay)
-	overlay.connect("new_game_button_pressed", self, "_on_Button_pressed")
+	overlay.connect("new_game_button_pressed", self, "_on_new_game")
 
 
 func show_title_screen() -> void:
@@ -40,13 +41,14 @@ func show_title_screen() -> void:
 	overlay = preload("res://interfaces/title_screen.tscn").instance()
 	add_child(overlay)
 	#overlay.call_deferred("connect", "start_button_pressed", self, "")
-	overlay.connect("start_button_pressed", self, "_on_Button_pressed")
+	overlay.connect("start_button_pressed", self, "_on_new_game")
 
 
 func hide_overlay():
-	overlay.queue_free()
+	if overlay:
+		overlay.queue_free()
 
 
-func _on_Button_pressed():
+func _on_new_game():
 	emit_signal("new_game")
 	$AudioStreamPlayer.play()

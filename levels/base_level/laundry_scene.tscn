@@ -821,6 +821,7 @@ font_data = ExtResource( 1 )
 script/source = "extends Label
 #TODO: save money in more permanent way, for multiple days of play
 var money : int = 0 
+var daily_earnings := []
 
 func _ready():
 	format_money()
@@ -1007,6 +1008,7 @@ __meta__ = {
 }
 
 [node name="HUD" type="CanvasLayer" parent="."]
+pause_mode = 2
 script = ExtResource( 16 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
@@ -1061,4 +1063,4 @@ __meta__ = {
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
 [connection signal="new_game" from="HUD" to="." method="_on_new_game"]
-[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_day"]
+[connection signal="restart_button_pressed" from="RestartDay" to="." method="_on_restart_button_pressed"]

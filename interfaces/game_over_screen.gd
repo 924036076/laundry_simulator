@@ -1,17 +1,17 @@
 extends Control
-const high_score_prefix := "High Score: $"
-const new_high_score_prefix := "New High Score!: $"
-const score_prefix := "Your earnings: $"
+const HIGH_SCORE_PREFIX := "High Score: $%d"
+const NEW_HIGH_SCORE_PREFIX := "New High Score!: $%d"
+const SCORE_PREFIX := "Your earnings: $"
 signal new_game_button_pressed
 
 
 func set_scores(high_score : int, score : int):
 	if score == high_score:
 		$EndScore.hide()
-		$HighScore.text = new_high_score_prefix + str(high_score)
+		$HighScore.text = NEW_HIGH_SCORE_PREFIX % high_score
 	else:
-		$HighScore.text = high_score_prefix + str(high_score)
-		$EndScore.text = score_prefix + str(score)
+		$HighScore.text = HIGH_SCORE_PREFIX % high_score
+		$EndScore.text = SCORE_PREFIX % score
 		$EndScore.show()
 
 

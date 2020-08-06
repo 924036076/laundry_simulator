@@ -2,7 +2,7 @@
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=2]
-[ext_resource path="res://interfaces/title_screen.gd" type="Script" id=3]
+[ext_resource path="res://interfaces/day_end_screen.gd" type="Script" id=3]
 [ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -35,9 +35,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -180.0
-margin_top = -128.0
+margin_top = -130.0
 margin_right = 180.0
-margin_bottom = 93.0
+margin_bottom = 106.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,34 +55,140 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
+[node name="Review" type="Label" parent="VBoxContainer"]
+visible = false
 margin_top = 48.0
 margin_right = 360.0
-margin_bottom = 123.0
-rect_min_size = Vector2( 0, 75 )
-
-[node name="Score" type="Label" parent="VBoxContainer"]
-margin_top = 145.0
-margin_right = 360.0
-margin_bottom = 170.0
+margin_bottom = 73.0
 rect_min_size = Vector2( 360, 25 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
-text = "\"Well, I got my laundry back?"
+text = "\"Well, I got my laundry back?\""
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 193.0
+[node name="Spacer3" type="Control" parent="VBoxContainer"]
+margin_top = 48.0
 margin_right = 360.0
-margin_bottom = 221.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Earnings" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 92.0
+margin_right = 360.0
+margin_bottom = 166.0
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Labels" type="VBoxContainer" parent="VBoxContainer/Earnings"]
+margin_left = 104.0
+margin_right = 194.0
+margin_bottom = 74.0
+alignment = 2
+
+[node name="Previous" type="Label" parent="VBoxContainer/Earnings/Labels"]
+margin_right = 90.0
+margin_bottom = 22.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "Starting:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="New" type="Label" parent="VBoxContainer/Earnings/Labels"]
+margin_top = 26.0
+margin_right = 90.0
+margin_bottom = 48.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "Earnings:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Total" type="Label" parent="VBoxContainer/Earnings/Labels"]
+margin_top = 52.0
+margin_right = 90.0
+margin_bottom = 74.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "Total:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Values" type="VBoxContainer" parent="VBoxContainer/Earnings"]
+margin_left = 198.0
+margin_right = 256.0
+margin_bottom = 74.0
+
+[node name="Previous" type="Label" parent="VBoxContainer/Earnings/Values"]
+margin_right = 58.0
+margin_bottom = 22.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "$500"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="New" type="Label" parent="VBoxContainer/Earnings/Values"]
+margin_top = 26.0
+margin_right = 58.0
+margin_bottom = 48.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "$500"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Total" type="Label" parent="VBoxContainer/Earnings/Values"]
+margin_top = 52.0
+margin_right = 58.0
+margin_bottom = 74.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.278431, 0.247059, 0.247059, 1 )
+text = "$1,000"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+margin_top = 170.0
+margin_right = 360.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 214.0
+margin_right = 360.0
+margin_bottom = 242.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/ButtonContainer"]
 margin_left = 130.0
 margin_right = 230.0
 margin_bottom = 28.0
@@ -92,4 +198,4 @@ text = "Next Day"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/Button" to="." method="_on_Button_pressed"]
