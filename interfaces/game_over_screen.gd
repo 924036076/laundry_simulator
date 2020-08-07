@@ -1,7 +1,7 @@
 extends Control
 const HIGH_SCORE_PREFIX := "High Score: $%d"
 const NEW_HIGH_SCORE_PREFIX := "New High Score!: $%d"
-const SCORE_PREFIX := "Your earnings: $"
+const SCORE_PREFIX := "Your earnings: $%d"
 signal new_game_button_pressed
 
 

@@ -23,7 +23,9 @@ func _on_MinuteTimer_timeout():
 		if hours >= CLOSING_HOUR - 1:
 			emit_signal("almost_closing")
 		if hours >= CLOSING_HOUR:
+			print("day over signal!")
 			emit_signal("day_over")
+			stop()
 	update_ui()
 	
 func update_ui():

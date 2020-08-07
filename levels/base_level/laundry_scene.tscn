@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://icons/KawaiiIcons_NoBG001.png" type="Texture" id=30]
 [ext_resource path="res://icons/KawaiiIcons_NoBG002.png" type="Texture" id=31]
 [ext_resource path="res://levels/base_level/PauseToggle.gd" type="Script" id=32]
+[ext_resource path="res://game_utils/star_rating.tscn" type="PackedScene" id=33]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -918,7 +919,7 @@ position = Vector2( -2, 31 )
 
 [node name="Spawner" type="Node2D" parent="."]
 light_mask = 3
-position = Vector2( -53.7597, 213.914 )
+position = Vector2( -63.8505, 213.914 )
 script = ExtResource( 11 )
 
 [node name="CustomerTimer" type="Timer" parent="Spawner"]
@@ -1069,6 +1070,12 @@ margin_right = 140.0
 margin_bottom = 38.0
 texture_normal = ExtResource( 22 )
 script = ExtResource( 13 )
+
+[node name="StarRating" parent="." instance=ExtResource( 33 )]
+margin_left = 468.473
+margin_top = 49.3883
+margin_right = 643.473
+margin_bottom = 81.3883
 [connection signal="day_over" from="Spawner" to="." method="_on_day_over"]
 [connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]
@@ -1077,6 +1084,8 @@ script = ExtResource( 13 )
 [connection signal="day_over" from="Clock" to="." method="_on_day_over"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
 [connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
+[connection signal="new_day" from="HUD" to="." method="_on_new_day"]
 [connection signal="new_game" from="HUD" to="." method="_on_new_game"]
 [connection signal="toggled" from="Options/PauseToggle" to="Options/PauseToggle" method="_on_PauseToggle_toggled"]
 [connection signal="restart_button_pressed" from="Options/RestartDay" to="." method="_on_restart_button_pressed"]
+[connection signal="game_over" from="StarRating" to="." method="_on_StarRating_game_over"]

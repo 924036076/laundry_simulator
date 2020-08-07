@@ -99,6 +99,7 @@ func emote(happiness_pct: float) -> AnimatedSprite:
 	
 func storm_off() -> void:
 	$PatienceMeter.hide()
+	received_laundry = true
 	if score == 0:
 		var expression = emote(FURIOUS)
 		yield(expression, "animation_finished")

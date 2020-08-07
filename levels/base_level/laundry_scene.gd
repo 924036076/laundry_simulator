@@ -7,11 +7,14 @@ onready var cat : Cat = $Objects/Cat
 var counters
 var day_count := 1
 var prev_balance := 0
+enum State {TITLE, GAME_OVER, DAY_OVER, PLAYING}
+var state = State.TITLE
 
 
 func _ready() -> void:
 	counters = $Objects/Counters.get_children()
 	initialize_level()
+	$StarRating.visible = false
 
 
 func initialize_level() -> void:
@@ -36,33 +39,37 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_new_game() -> void:
-	day_count = 1
+	day_count = 0
 	prev_balance = 0
 	$MoneyLabel.reset()
+	$StarRating.reset()
+	$Spawner.new_game()
 	_on_new_day()
+
 
 func refresh_interactables() -> void:
 	get_tree().call_group("InteractableObjects", "reset")
 
 
 func _on_day_over() -> void:
+	if state == State.DAY_OVER:
+		return
+	state = State.DAY_OVER
+	stop()
+	$Spawner.get_angry()
+	$HUD.show_day_end($MoneyLabel.money, prev_balance, day_count)
+
+
+func stop() -> void:
 	$Clock.stop()
 	$Spawner.stop()
-	$Spawner.get_angry()
-	#$HUD.show_overlay($MoneyLabel.money) # show daily earnings here
 	player.enable_movement(false)
 	cat.stop()
-	var day_end_screen = preload("res://interfaces/day_end_screen.tscn").instance()
-	print("previous balance: ", prev_balance)
-	day_end_screen.set_values($MoneyLabel.money, prev_balance, day_count)
-	$HUD.add_child(day_end_screen)
-	day_end_screen.connect("next_day_button_pressed", self, "_on_new_day")
-	prev_balance = $MoneyLabel.money
-	day_count += 1
-	print("previous balance: ", prev_balance)
+	$StarRating.visible = false
 
 
 func _on_new_day() -> void:
+	state = State.PLAYING
 	$Clock.restart()
 	refresh_interactables()
 	$BackgroundMusic.restart()
@@ -72,17 +79,19 @@ func _on_new_day() -> void:
 	$HUD.hide_overlay()
 	$Spawner.restart()
 	$Options/PauseToggle.pressed = false
+	$StarRating.visible = true
+	prev_balance = $MoneyLabel.money
+	day_count += 1
+	print("day now: ", day_count)
 
 
 func _on_restart_button_pressed() -> void:
-	$Clock.stop()
-	$Spawner.stop()
+	state = State.TITLE
+	stop()
 	$Spawner.reset()
 	refresh_interactables()
-	$HUD.show_overlay(0)
+	$HUD.show_title_screen()
 	player.reset()
-	player.enable_movement(false)
-	cat.stop()
 
 
 func _on_Cat_mischief_wanted():
@@ -97,3 +106,12 @@ func _on_Cat_mischief_wanted():
 			location = counter.get_jump_launch_position()
 			id = counter.get_instance_id()	
 	cat.manage_mischief(location, id)
+
+
+func _on_StarRating_game_over():
+	if state == State.GAME_OVER:
+		return
+	state = State.GAME_OVER
+	stop()
+	$Spawner.get_angry()
+	$HUD.show_game_over($MoneyLabel.money)
