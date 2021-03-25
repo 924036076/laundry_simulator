@@ -39,7 +39,7 @@ func show_title_screen() -> void:
 
 
 func hide_overlay() -> void:
-	if overlay:
+	if is_instance_valid(overlay):
 		overlay.queue_free()
 
 
