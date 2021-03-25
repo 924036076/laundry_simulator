@@ -54,6 +54,7 @@ func load_laundry(laundry_in : Node2D) -> void:
 	laundry = laundry_in
 	$laundry_pos.call_deferred("add_child", laundry)
 	laundry.position = laundry_offset
+	laundry.visible = true
 	
 	
 func set_targetobjct(objct : Area2D) -> void:

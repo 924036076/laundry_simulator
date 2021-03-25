@@ -5,16 +5,13 @@ var laundry : Node2D = null
 var can_give := true
 var can_receive := true
 var laundry_available := false
-var laundry_parent : Node2D = self
-var offset := Vector2(0,0)
+onready var laundry_parent : Node2D = $LaundryParent
 
-	
+
 func load_laundry(laundry_in : Node2D) -> void:
 	if !laundry_in: return
-	
 	laundry = laundry_in
 	laundry_available = true
-	laundry.position = offset
 	laundry_parent.call_deferred("add_child", laundry)
 
 

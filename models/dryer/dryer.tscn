@@ -5,16 +5,16 @@
 [ext_resource path="res://models/dryer/dryer.gd" type="Script" id=3]
 [ext_resource path="res://models/dryer/loop.wav" type="AudioStream" id=4]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 34.9408, 47.9553 )
 
 [node name="Dryer" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="AnimationTree" parent="." index="2"]
-parameters/StateMachine/playback = SubResource( 2 )
+parameters/StateMachine/playback = SubResource( 1 )
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 4 )
@@ -23,4 +23,4 @@ stream = ExtResource( 4 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="5"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )

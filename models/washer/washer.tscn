@@ -103,7 +103,7 @@ states/running/position = Vector2( 386, 42 )
 transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
 
 [sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( 0, -142.5 )
+graph_offset = Vector2( -109.833, 60 )
 nodes/Blend/node = SubResource( 4 )
 nodes/Blend/position = Vector2( 340, 140 )
 nodes/Shake/node = SubResource( 5 )
@@ -146,12 +146,16 @@ volume_db = -10.0
 bus = "soundfx"
 
 [node name="Sprite" type="Sprite" parent="." index="4"]
+position = Vector2( 0, 1 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 2
-frame = 1
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
 shape = SubResource( 13 )
+
+[node name="LaundryParent" parent="." index="6"]
+position = Vector2( 0, -18 )
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

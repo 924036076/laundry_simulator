@@ -34,6 +34,11 @@ func set_target(boolean) -> void:
 func disallowed_action() -> void:
 	# Overriden by scenes that inherit
 	pass
+
+
+func interact() -> void:
+	# Overriden by scenes that inherit
+	pass
 	
 	
 func modulate() -> void:

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://models/interactable/interactable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/toy/toy_holder.gd" type="Script" id=2]
+[ext_resource path="res://models/toy/restraints.png" type="Texture" id=3]
+[ext_resource path="res://models/toy/toy.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 19.902
+
+[node name="ToyHolder" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+Toy = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+position = Vector2( -4.73, 1.93 )
+scale = Vector2( 3, 3 )
+z_index = 12
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( -3.12192, 0.148903 )
+shape = SubResource( 1 )

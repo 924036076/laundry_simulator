@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://characters/customers/base_customer/customer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/customers/young_man/young_man.gd" type="Script" id=2]
+[ext_resource path="res://characters/customers/young_man/Male 10-1.png" type="Texture" id=3]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="Customer" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="AnimationTree" parent="." index="5"]
+parameters/playback = SubResource( 1 )

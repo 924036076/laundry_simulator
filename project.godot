@@ -89,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/player/player.gd"
 }, {
-"base": "Button",
+"base": "TextureButton",
 "class": "RestartDay",
 "language": "GDScript",
 "path": "res://levels/base_level/restart_day.gd"
@@ -131,6 +131,10 @@ _global_script_class_icons={
 config/name="Laundry Simulator"
 run/main_scene="res://levels/base_level/laundry_scene.tscn"
 config/icon="res://icon.png"
+
+[audio]
+
+output_latency.web=150
 
 [autoload]
 
