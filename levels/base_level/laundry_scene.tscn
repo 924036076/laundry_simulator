@@ -911,18 +911,28 @@ position = Vector2( 0.0676003, 92.5666 )
 
 [node name="Washer" parent="Machines" instance=ExtResource( 2 )]
 position = Vector2( 418.046, 54.2833 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Washer2" parent="Machines" instance=ExtResource( 2 )]
 position = Vector2( 511.146, 54.2833 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Dryer" parent="Machines" instance=ExtResource( 4 )]
 position = Vector2( 604.296, 54.2833 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Dryer2" parent="Machines" instance=ExtResource( 4 )]
 position = Vector2( 697.396, 54.2833 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="LintMachine" parent="Machines" instance=ExtResource( 34 )]
 position = Vector2( 818.953, 61.1402 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="WashLabel" type="Label" parent="Machines"]
 margin_left = 440.795
@@ -1005,15 +1015,23 @@ position = Vector2( -41.0415, -111.419 )
 
 [node name="Counter1" parent="Objects/Counters" instance=ExtResource( 8 )]
 position = Vector2( 410.498, 527.759 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Counter2" parent="Objects/Counters" instance=ExtResource( 8 )]
 position = Vector2( 506.104, 527.759 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Counter3" parent="Objects/Counters" instance=ExtResource( 8 )]
 position = Vector2( 601.589, 527.759 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Counter4" parent="Objects/Counters" instance=ExtResource( 8 )]
 position = Vector2( 697.415, 527.759 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Cat" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 219.254, 316.099 )

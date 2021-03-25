@@ -5,7 +5,7 @@ var minutes : int
 
 const STARTING_HOUR := 7
 const STARTING_MINUTE := 0
-const CLOSING_HOUR := 20
+const CLOSING_HOUR := 8 #20
 
 signal new_hour
 signal day_over

@@ -28,6 +28,7 @@ func show_game_over(score : int) -> void:
 
 func show_title_screen() -> void:
 	if is_instance_valid(overlay):
+		print("overlay name: ", overlay.get_name())
 		if overlay.get_name() == "TitleScreen":
 			return
 		else:
@@ -45,14 +46,14 @@ func hide_overlay() -> void:
 
 func show_day_end(total : int, prev_balance : int, day_count : int):
 	if is_instance_valid(overlay):
-		if overlay.get_name() == "GameOverScreen":
+		if overlay.get_name() == "DayEndScreen":
 			return
 		else:
 			overlay.queue_free()
-	var day_end_screen = preload("res://interfaces/day_end_screen.tscn").instance()
-	day_end_screen.set_values(total, prev_balance, day_count)
-	add_child(day_end_screen)
-	day_end_screen.connect("next_day_button_pressed", self, "_on_new_day")
+	overlay = preload("res://interfaces/day_end_screen.tscn").instance()
+	overlay.set_values(total, prev_balance, day_count)
+	add_child(overlay)
+	overlay.connect("next_day_button_pressed", self, "_on_new_day")
 
 
 func _on_new_day() -> void:

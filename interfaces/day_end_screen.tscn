@@ -198,4 +198,5 @@ text = "Next Day"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/Button" to="." method="_on_Button_pressed"]
