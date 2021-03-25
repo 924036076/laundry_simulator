@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_good_review() -> void:
-	rect_size.x = min(rect_size.x + decrement, max_length)
+	rect_size.x = min(rect_size.x + (decrement / 2), max_length)
 
 
 func _on_bad_review() -> void:
@@ -36,7 +36,9 @@ func check_rating() -> void:
 	print("current length: ", rect_size.x)
 	if rect_size.x <= min_length:
 		emit_signal("game_over")
+		print("game over from stars")
 
 
 func reset() -> void:
+	print("resetting stars!")
 	rect_size.x = max_length / stars * starting_stars

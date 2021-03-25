@@ -5,7 +5,7 @@ var minutes : int
 
 const STARTING_HOUR := 7
 const STARTING_MINUTE := 0
-const CLOSING_HOUR := 19
+const CLOSING_HOUR := 20
 
 signal new_hour
 signal day_over
@@ -20,7 +20,7 @@ func _on_MinuteTimer_timeout():
 		minutes = 0
 		hours += 1
 		emit_signal("new_hour", hours)
-		if hours >= CLOSING_HOUR - 1:
+		if hours >= CLOSING_HOUR - 2:
 			emit_signal("almost_closing")
 		if hours >= CLOSING_HOUR:
 			print("day over signal!")

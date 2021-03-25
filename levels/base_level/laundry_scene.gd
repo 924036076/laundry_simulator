@@ -30,8 +30,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	match event.button_index:
 		BUTTON_RIGHT:
-			# Send customers on demand for debug purposes
-			$Spawner.create_and_send_customer(1)
+			# Commands for debug purposes
+			$Toy.release()
+			# $Spawner.create_and_send_customer(1)
 		BUTTON_LEFT:
 			# Send player to clicked location and reset player's target object
 			player.set_targetobjct(null)
@@ -43,6 +44,7 @@ func _on_new_game() -> void:
 	prev_balance = 0
 	$MoneyLabel.reset()
 	$StarRating.reset()
+	$StarRating.visible = true
 	$Spawner.new_game()
 	_on_new_day()
 
@@ -65,7 +67,6 @@ func stop() -> void:
 	$Spawner.stop()
 	player.enable_movement(false)
 	cat.stop()
-	$StarRating.visible = false
 
 
 func _on_new_day() -> void:
@@ -74,12 +75,13 @@ func _on_new_day() -> void:
 	refresh_interactables()
 	$BackgroundMusic.restart()
 	cat.start()
+	$ToyHolder.new_toy()
+	$Machines/LintMachine.new_lint_roll()
 	player.reset()
 	player.enable_movement(true)
 	$HUD.hide_overlay()
 	$Spawner.restart()
 	$Options/PauseToggle.pressed = false
-	$StarRating.visible = true
 	prev_balance = $MoneyLabel.money
 	day_count += 1
 	print("day now: ", day_count)
@@ -110,8 +112,15 @@ func _on_Cat_mischief_wanted():
 
 func _on_StarRating_game_over():
 	if state == State.GAME_OVER:
+		print("already in game over state")
 		return
+	print("game over signal received at root")
 	state = State.GAME_OVER
 	stop()
+	$StarRating.visible = false
 	$Spawner.get_angry()
 	$HUD.show_game_over($MoneyLabel.money)
+
+
+func _on_Toy_new_destination(new_pos):
+	$Destination.global_position = new_pos

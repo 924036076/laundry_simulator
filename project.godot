@@ -132,6 +132,10 @@ config/name="Laundry Simulator"
 run/main_scene="res://levels/base_level/laundry_scene.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+output_latency.web=150
+
 [autoload]
 
 EventHub="*res://game_utils/event_hub.gd"

@@ -6,6 +6,9 @@
 "laundry_holder",
 ]]
 script = ExtResource( 1 )
+
+[node name="LaundryParent" type="Position2D" parent="."]
+position = Vector2( -5, -25 )
 [connection signal="input_event" from="." to="." method="_on_Interactable_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

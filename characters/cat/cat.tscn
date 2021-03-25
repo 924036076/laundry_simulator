@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=88 format=2]
 
-[ext_resource path="res://characters/cat/sprite.png" type="Texture" id=1]
+[ext_resource path="res://characters/cat/cat_sheet.png" type="Texture" id=1]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/cat/cat.gd" type="Script" id=3]
 [ext_resource path="res://models/thought_bubble/thought_bubble.tscn" type="PackedScene" id=4]
@@ -8,12 +8,15 @@
 [ext_resource path="res://characters/customers/effects/love_aura/hearts.png" type="Texture" id=6]
 [ext_resource path="res://characters/cat/bumper.gd" type="Script" id=7]
 [ext_resource path="res://models/interactable/interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://characters/cat/CatSlash_32x32.png" type="Texture" id=9]
+[ext_resource path="res://characters/cat/CatCloud_32x32.png" type="Texture" id=10]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 13.7788
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.46046
+height = 0.0
 
 [sub_resource type="Animation" id=2]
-length = 0.6
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -21,10 +24,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 13, 14, 15, 16, 17, 18 ]
+"values": [ 13, 14, 15, 16, 17, 36, 37, 38, 39 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -114,6 +117,42 @@ tracks/1/keys = {
 "method": "_emit_idle"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shedding:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Cloud:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Slash:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.75
@@ -143,6 +182,42 @@ tracks/1/keys = {
 "args": [  ],
 "method": "_emit_idle"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shedding:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Slash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cloud:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -174,6 +249,42 @@ tracks/1/keys = {
 "method": "_emit_idle"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shedding:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Slash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cloud:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.75
@@ -203,6 +314,42 @@ tracks/1/keys = {
 "args": [  ],
 "method": "_emit_idle"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shedding:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Slash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cloud:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -319,6 +466,97 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=15]
+resource_name = "play"
+length = 2.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 12, 13, 12, 13, 12, 13, 12, 13, 12, 13, 12, 13, 12 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.85 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_play_end"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Cloud:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Cloud:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Slash:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.7, 2.1, 2.4, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Slash:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2, 2.05, 2.4, 2.45, 2.5, 2.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Slash:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1.7, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=16]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -333,7 +571,8 @@ tracks/0/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -341,10 +580,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 18 ]
+"values": [ 39, 38 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Shedding:emitting")
@@ -359,7 +598,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 2.5
 loop = true
 tracks/0/type = "value"
@@ -403,8 +642,8 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
-length = 0.8
+[sub_resource type="Animation" id=19]
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -412,14 +651,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19, 17, 16, 15, 14, 13, 12 ]
+"values": [ 38, 37, 36, 19, 17, 16, 15, 14, 13, 12 ]
 }
 
-[sub_resource type="Animation" id=19]
-length = 0.8
+[sub_resource type="Animation" id=20]
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -427,10 +666,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 18, 19, 20, 19, 20, 19 ]
+"values": [ 38 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Shedding:emitting")
@@ -439,13 +678,13 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false, false ]
+"values": [ false ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -461,28 +700,232 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "idle_left"
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "idle_down"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "idle_up"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "idle_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+blend_point_0/node = SubResource( 22 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 23 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 24 )
+blend_point_2/pos = Vector2( 0, -1.1 )
+blend_point_3/node = SubResource( 25 )
+blend_point_3/pos = Vector2( 1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "mov_left"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "mov_right"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "mov_down"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "mov_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=31]
+blend_point_0/node = SubResource( 27 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 28 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 29 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 30 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "curl_up"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "dance"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "disappointed"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "excited"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "jump_forward"
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "patrol"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "play"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "rude_awakening"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "shake"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "sleep"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "thinking"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "uncurl"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "wake_up"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "working"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachine" id=75]
+states/Idle/node = SubResource( 26 )
+states/Idle/position = Vector2( 380, 82 )
+states/Move/node = SubResource( 31 )
+states/Move/position = Vector2( 754, 61 )
+states/curl_up/node = SubResource( 32 )
+states/curl_up/position = Vector2( 224, -82 )
+states/dance/node = SubResource( 33 )
+states/dance/position = Vector2( 661.632, 128.26 )
+states/disappointed/node = SubResource( 34 )
+states/disappointed/position = Vector2( 557.632, 374 )
+states/excited/node = SubResource( 35 )
+states/excited/position = Vector2( 533.632, 173 )
+states/jump_forward/node = SubResource( 36 )
+states/jump_forward/position = Vector2( 767.632, -49.7399 )
+states/patrol/node = SubResource( 37 )
+states/patrol/position = Vector2( 543.632, -54.74 )
+states/play/node = SubResource( 38 )
+states/play/position = Vector2( 171.632, 318.26 )
+states/rude_awakening/node = SubResource( 39 )
+states/rude_awakening/position = Vector2( -11, 53 )
+states/shake/node = SubResource( 40 )
+states/shake/position = Vector2( 243.632, 149.26 )
+states/sleep/node = SubResource( 41 )
+states/sleep/position = Vector2( 77, -75 )
+states/thinking/node = SubResource( 42 )
+states/thinking/position = Vector2( 342.632, 272.26 )
+states/uncurl/node = SubResource( 43 )
+states/uncurl/position = Vector2( 201, 53 )
+states/wake_up/node = SubResource( 44 )
+states/wake_up/position = Vector2( 77, -13 )
+states/working/node = SubResource( 45 )
+states/working/position = Vector2( 380, -49.7399 )
+transitions = [ "Idle", "Move", SubResource( 46 ), "Move", "Idle", SubResource( 47 ), "Idle", "curl_up", SubResource( 48 ), "curl_up", "sleep", SubResource( 49 ), "sleep", "wake_up", SubResource( 50 ), "wake_up", "rude_awakening", SubResource( 51 ), "wake_up", "uncurl", SubResource( 52 ), "rude_awakening", "uncurl", SubResource( 53 ), "uncurl", "Idle", SubResource( 54 ), "Idle", "working", SubResource( 55 ), "working", "Idle", SubResource( 56 ), "Idle", "patrol", SubResource( 57 ), "patrol", "Idle", SubResource( 58 ), "Idle", "thinking", SubResource( 59 ), "disappointed", "Idle", SubResource( 60 ), "excited", "Idle", SubResource( 61 ), "thinking", "Idle", SubResource( 62 ), "thinking", "excited", SubResource( 63 ), "thinking", "disappointed", SubResource( 64 ), "jump_forward", "Idle", SubResource( 65 ), "Idle", "jump_forward", SubResource( 66 ), "Idle", "shake", SubResource( 67 ), "shake", "Idle", SubResource( 68 ), "Idle", "dance", SubResource( 69 ), "dance", "Idle", SubResource( 70 ), "Idle", "play", SubResource( 71 ), "play", "Idle", SubResource( 72 ), "Idle", "excited", SubResource( 73 ), "Idle", "disappointed", SubResource( 74 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -147.368, -106.74 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=76]
+
+[sub_resource type="CapsuleShape2D" id=77]
 radius = 14.8756
 
 [node name="Cat" groups=[
+"cat",
 "shedder",
 ] instance=ExtResource( 2 )]
-position = Vector2( 0, 10 )
+position = Vector2( -0.235962, -15.4846 )
+z_index = 5
 collision_layer = 4
 collision_mask = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0.565014, 0.18732 )
+position = Vector2( 0, 8 )
+rotation = 0.0
 shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -0.66893, -13.9732 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-vframes = 6
+vframes = 7
 hframes = 6
 frame = 4
 
@@ -501,15 +944,19 @@ anims/mov_left = SubResource( 11 )
 anims/mov_right = SubResource( 12 )
 anims/mov_up = SubResource( 13 )
 anims/patrol = SubResource( 14 )
-anims/rude_awakening = SubResource( 15 )
-anims/sleep = SubResource( 16 )
-anims/thinking = SubResource( 17 )
-anims/uncurl = SubResource( 18 )
-anims/wake_up = SubResource( 19 )
-anims/working = SubResource( 20 )
+anims/play = SubResource( 15 )
+anims/rude_awakening = SubResource( 16 )
+anims/sleep = SubResource( 17 )
+anims/thinking = SubResource( 18 )
+anims/uncurl = SubResource( 19 )
+anims/wake_up = SubResource( 20 )
+anims/working = SubResource( 21 )
 
 [node name="AnimationTree" parent="." index="3"]
-parameters/playback = SubResource( 21 )
+tree_root = SubResource( 75 )
+parameters/playback = SubResource( 76 )
+parameters/Idle/blend_position = Vector2( -0.0732484, 0.104563 )
+parameters/Move/blend_position = Vector2( -0.272293, 0.0292776 )
 
 [node name="WaitTimer" type="Timer" parent="." index="4"]
 wait_time = 3.0
@@ -524,13 +971,14 @@ gravity = Vector2( 0, 0 )
 
 [node name="ThoughtBubble" parent="." index="6" instance=ExtResource( 4 )]
 position = Vector2( 0, -39.1995 )
+z_index = 20
 
 [node name="Bumper" parent="." index="7" instance=ExtResource( 8 )]
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
 position = Vector2( 0.280609, -9.26031 )
-shape = SubResource( 22 )
+shape = SubResource( 77 )
 
 [node name="LoveParticles" type="CPUParticles2D" parent="Bumper" index="1"]
 position = Vector2( 3.46478, 0 )
@@ -546,6 +994,25 @@ initial_velocity = 10.0
 
 [node name="CuddleTimer" type="Timer" parent="Bumper" index="2"]
 wait_time = 3.0
+
+[node name="Cloud" type="Sprite" parent="." index="8"]
+visible = false
+position = Vector2( 0, 29.8591 )
+scale = Vector2( 2, 2 )
+z_index = 12
+texture = ExtResource( 10 )
+hframes = 4
+frame = 3
+
+[node name="Slash" type="Sprite" parent="." index="9"]
+visible = false
+position = Vector2( 0.299606, 30.2689 )
+scale = Vector2( 2, 2 )
+z_index = 12
+texture = ExtResource( 9 )
+flip_h = true
+hframes = 4
+frame = 3
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Bumper_body_exited"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]

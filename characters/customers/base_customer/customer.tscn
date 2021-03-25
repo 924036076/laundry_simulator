@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://characters/customers/base_customer/bumper.gd" type="Script" id=1]
 [ext_resource path="res://models/ticket/ticket.tscn" type="PackedScene" id=2]
@@ -9,8 +9,11 @@
 [ext_resource path="res://characters/customers/effects/patience_change/patience_meter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=8]
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle_down"
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 11.7339
+height = 0.0
+
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -48,8 +51,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle_left"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -87,8 +89,7 @@ tracks/2/keys = {
 "values": [ -1 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle_right"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -126,8 +127,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle_up"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -165,8 +165,7 @@ tracks/2/keys = {
 "values": [ -1 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "mov_down"
+[sub_resource type="Animation" id=6]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -206,8 +205,7 @@ tracks/2/keys = {
 "values": [ Vector2( -21.4293, 13.8577 ), Vector2( -18.1793, 16.6077 ), Vector2( -13.9293, 18.6077 ), Vector2( -18.179, 16.608 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "mov_left"
+[sub_resource type="Animation" id=7]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -247,8 +245,7 @@ tracks/2/keys = {
 "values": [ -1 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "mov_right"
+[sub_resource type="Animation" id=8]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -288,8 +285,7 @@ tracks/2/keys = {
 "values": [ Vector2( -10.1793, 19.1077 ), Vector2( -4.92934, 19.6077 ), Vector2( 1.57066, 19.7743 ), Vector2( -4.929, 19.608 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "mov_up"
+[sub_resource type="Animation" id=9]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -329,10 +325,10 @@ tracks/2/keys = {
 "values": [ Vector2( 20.0707, 9.10766 ), Vector2( 17.8207, 7.85766 ), Vector2( 15.5707, 6.85766 ), Vector2( 17.821, 7.858 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -344,51 +340,77 @@ tracks/0/keys = {
 "values": [ Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( -2, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Curve" id=10]
-_data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
 [sub_resource type="CircleShape2D" id=12]
 radius = 30.8545
 
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.973864 ), 0.0, 0.0, 0, 0, Vector2( 0.988506, 0.0920454 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Customer" groups=[
 "customers",
 ] instance=ExtResource( 3 )]
 position = Vector2( 0.146393, 0 )
-z_index = 1
-collision_layer = 0
+z_index = 2
+collision_layer = 8
 collision_mask = 0
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( -1.29517, 18.6274 )
+position = Vector2( -0.171452, -12.6438 )
+rotation = 0.0
+shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2( -2, 0 )
+position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 vframes = 4
 hframes = 3
-frame = 4
+frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
-anims/idle_down = SubResource( 1 )
-anims/idle_left = SubResource( 2 )
-anims/idle_right = SubResource( 3 )
-anims/idle_up = SubResource( 4 )
-anims/mov_down = SubResource( 5 )
-anims/mov_left = SubResource( 6 )
-anims/mov_right = SubResource( 7 )
-anims/mov_up = SubResource( 8 )
-anims/shake = SubResource( 9 )
+anims/idle_down = SubResource( 2 )
+anims/idle_left = SubResource( 3 )
+anims/idle_right = SubResource( 4 )
+anims/idle_up = SubResource( 5 )
+anims/mov_down = SubResource( 6 )
+anims/mov_left = SubResource( 7 )
+anims/mov_right = SubResource( 8 )
+anims/mov_up = SubResource( 9 )
+anims/shake = SubResource( 10 )
 
 [node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 10.0
 one_shot = true
 
-[node name="PatienceParticles" type="CPUParticles2D" parent="." index="4"]
-position = Vector2( -0.209215, -51.3907 )
+[node name="AnimationTree" parent="." index="4"]
+parameters/playback = SubResource( 11 )
+parameters/Idle/blend_position = Vector2( -0.0207006, 0.710559 )
+parameters/Move/blend_position = Vector2( -0.296178, -0.129814 )
+
+[node name="Bumper" parent="." index="5" instance=ExtResource( 8 )]
+position = Vector2( 0, -32 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
+position = Vector2( -1.12375, 1.12373 )
+shape = SubResource( 12 )
+
+[node name="HandPos" type="Node2D" parent="Bumper" index="1"]
+position = Vector2( -19.2887, 15.9847 )
+
+[node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
+position = Vector2( -19.0818, -9.54093 )
+
+[node name="PatienceMeter" parent="." index="6" instance=ExtResource( 7 )]
+position = Vector2( 0, -32 )
+z_index = 1
+
+[node name="PatienceParticles" type="CPUParticles2D" parent="." index="7"]
+position = Vector2( -0.209213, -83.3907 )
+z_index = 1
 emitting = false
 amount = 1
 lifetime = 2.0
@@ -397,30 +419,10 @@ texture = ExtResource( 6 )
 spread = 46.93
 gravity = Vector2( 0, 0 )
 scale_amount = 1.25
-scale_amount_curve = SubResource( 10 )
-
-[node name="AnimationTree" parent="." index="5"]
-parameters/playback = SubResource( 11 )
-parameters/Move/blend_position = Vector2( 0, 0.00948286 )
-
-[node name="PatienceMeter" parent="." index="6" instance=ExtResource( 7 )]
-
-[node name="Bumper" parent="." index="7" instance=ExtResource( 8 )]
-script = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
-position = Vector2( -1.12375, 1.12373 )
-shape = SubResource( 12 )
-
-[node name="HandPos" type="Node2D" parent="Bumper" index="1"]
-position = Vector2( -5.29681, 11.3091 )
-z_index = -1
-
-[node name="Ticket" parent="Bumper/HandPos" index="0" instance=ExtResource( 2 )]
-position = Vector2( -19.0818, -9.54093 )
+scale_amount_curve = SubResource( 13 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="patience_exhausted" from="PatienceMeter" to="." method="_on_patience_exhausted"]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
 [connection signal="released" from="Bumper" to="." method="drop_off"]
 [connection signal="returned" from="Bumper" to="." method="receive_order"]
+[connection signal="patience_exhausted" from="PatienceMeter" to="." method="_on_patience_exhausted"]

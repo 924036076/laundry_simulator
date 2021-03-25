@@ -4,7 +4,7 @@
 [ext_resource path="res://characters/base_character/base_character.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 12.62
+radius = 24.4428
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "idle_left"
@@ -98,7 +98,6 @@ animation = "working"
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
 
@@ -144,7 +143,6 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 switch_mode = 2

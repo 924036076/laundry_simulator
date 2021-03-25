@@ -2,7 +2,7 @@ extends KinematicBody2D
 class_name BaseCharacter
 
 var laundry_offset = Vector2(50, 0) 
-var money_label_offset = Vector2(0, -40)
+var money_label_offset = Vector2(0, -74)
 var target_objct : Area2D = null
 var target := Vector2()
 var laundry : Node2D = null

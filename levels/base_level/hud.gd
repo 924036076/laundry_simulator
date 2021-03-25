@@ -16,8 +16,9 @@ func check_high_score(score: int) -> void:
 
 
 func show_game_over(score : int) -> void:
+	print("HUD showing game over!")
 	check_high_score(score)
-	if overlay:
+	if is_instance_valid(overlay):
 		overlay.queue_free()
 	overlay = preload("res://interfaces/game_over_screen.tscn").instance()
 	overlay.set_scores(Global.get_high_score(), score)
@@ -26,10 +27,12 @@ func show_game_over(score : int) -> void:
 
 
 func show_title_screen() -> void:
-	if overlay and overlay.get_name() == "TitleScreen":
-		return
-	if overlay:
-		overlay.queue_free()
+	if is_instance_valid(overlay):
+		if overlay.get_name() == "TitleScreen":
+			return
+		else:
+			overlay.queue_free()
+			
 	overlay = preload("res://interfaces/title_screen.tscn").instance()
 	add_child(overlay)
 	overlay.connect("start_button_pressed", self, "_on_new_game")
@@ -41,10 +44,11 @@ func hide_overlay() -> void:
 
 
 func show_day_end(total : int, prev_balance : int, day_count : int):
-	if overlay and overlay.get_name() == "GameOverScreen":
-		return
-	if overlay:
-		overlay.queue_free()
+	if is_instance_valid(overlay):
+		if overlay.get_name() == "GameOverScreen":
+			return
+		else:
+			overlay.queue_free()
 	var day_end_screen = preload("res://interfaces/day_end_screen.tscn").instance()
 	day_end_screen.set_values(total, prev_balance, day_count)
 	add_child(day_end_screen)
