@@ -17,12 +17,12 @@ func load_laundry(laundry_in : Node2D) -> void:
 	
 	if !can_run(): return
 	_start_load()
-	_change_laundry_state()
 
 
 func _change_laundry_state() -> void:
 	laundry.wash()
 	laundry.dehairify()
+	EventHub.emit_signal("laundry_washed")
 
 
 func can_run() -> bool:
@@ -38,6 +38,7 @@ func _start_load() -> void:
 
 
 func _finish_load() -> void:
+	_change_laundry_state()
 	state_machine.travel("idle")
 	$AudioStreamPlayer.stop()
 	laundry.visible = true

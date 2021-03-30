@@ -376,7 +376,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 70.1353
+radius = 43.0256
 
 [node name="Player" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
@@ -391,8 +391,8 @@ shape = SubResource( 1 )
 position = Vector2( -1.19055, -28.1449 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
-vframes = 7
 hframes = 8
+vframes = 7
 frame = 3
 
 [node name="TransferSoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
@@ -423,8 +423,8 @@ position = Vector2( -1.19055, -28.1449 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
 flip_h = true
-vframes = 5
 hframes = 5
+vframes = 5
 frame = 3
 
 [node name="AnimationTree" parent="." index="6"]
@@ -442,4 +442,5 @@ position = Vector2( -1.19055, -32.1449 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 0, 2 )
 shape = SubResource( 13 )
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

@@ -25,25 +25,6 @@ func initialize_level() -> void:
 	$Spawner.init(nav2d, player)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	# Called when player clicks on screen but not on an interactable
-	
-	# Only handle mouse clicks
-	if not event is InputEventMouseButton: return
-	if not event.pressed: return
-	
-	match event.button_index:
-		BUTTON_RIGHT:
-			pass
-			# Commands for debug purposes
-			#$Toy.release()
-			# $Spawner.create_and_send_customer(1)
-		BUTTON_LEFT:
-			# Send player to clicked location and reset player's target object
-			player.set_targetobjct(null)
-			player.set_target_location(get_global_mouse_position())
-
-
 func _on_new_game() -> void:
 	day_count = 0
 	prev_balance = 0

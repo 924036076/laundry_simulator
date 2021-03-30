@@ -31,6 +31,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 5 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "running"
@@ -121,6 +133,7 @@ extents = Vector2( 35.7068, 47.3758 )
 [node name="Washer" groups=[
 "InteractableObjects",
 ] instance=ExtResource( 2 )]
+rotation = 0.0
 script = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="." index="0"]
@@ -128,6 +141,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+autoplay = "idle"
 playback_speed = 2.0
 anims/idle = SubResource( 1 )
 anims/running = SubResource( 2 )
@@ -146,17 +160,26 @@ volume_db = -10.0
 bus = "soundfx"
 
 [node name="Sprite" type="Sprite" parent="." index="4"]
-position = Vector2( 0, 1 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 3
-frame = 2
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
 shape = SubResource( 13 )
 
-[node name="LaundryParent" parent="." index="6"]
+[node name="InteractableParticles" type="CPUParticles2D" parent="." index="6"]
+visible = false
+amount = 20
+lifetime = 0.3
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+angular_velocity = 0.2
+angular_velocity_random = 0.32
+
+[node name="LaundryParent" parent="." index="7"]
 position = Vector2( 0, -18 )
 
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

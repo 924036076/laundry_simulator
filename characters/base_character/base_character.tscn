@@ -218,4 +218,5 @@ active = true
 parameters/playback = SubResource( 51 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Move/blend_position = Vector2( 0.362832, 0.123364 )
+
 [connection signal="end_of_path" from="." to="." method="_on_end_of_path"]

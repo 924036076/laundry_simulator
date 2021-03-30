@@ -1,8 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/counter/counter.gd" type="Script" id=2]
 [ext_resource path="res://models/counter/sprite.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -26,10 +53,13 @@ extents = Vector2( 47.2103, 47.7452 )
 [node name="Counter" groups=[
 "InteractableObjects",
 ] instance=ExtResource( 1 )]
+rotation = 0.0
 collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
 anims/shake = SubResource( 1 )
 
 [node name="JumpLaunch" type="Node2D" parent="." index="1"]
@@ -39,7 +69,6 @@ position = Vector2( 0, -61.5118 )
 position = Vector2( -0.396835, -18.652 )
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
-position = Vector2( -2, 0 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 hframes = 2
@@ -49,5 +78,15 @@ frame = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 shape = SubResource( 2 )
 
-[node name="LaundryParent" parent="." index="5"]
+[node name="InteractableParticles" type="CPUParticles2D" parent="." index="5"]
+visible = false
+amount = 20
+lifetime = 0.3
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2( 0, 0 )
+angular_velocity = 0.2
+angular_velocity_random = 0.32
+
+[node name="LaundryParent" parent="." index="6"]
 z_index = 3

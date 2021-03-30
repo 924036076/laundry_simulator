@@ -12,6 +12,7 @@ func _ready():
 
 func _change_laundry_state() -> void:
 	laundry.dehairify()
+	EventHub.emit_signal("laundry_delinted")
 
 
 func can_run() -> bool:

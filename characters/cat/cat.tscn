@@ -927,7 +927,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 7
-frame = 30
+frame = 4
 
 [node name="AnimationPlayer" parent="." index="2"]
 playback_speed = 0.5

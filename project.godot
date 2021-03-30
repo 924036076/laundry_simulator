@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "RichTextLabel",
 "class": "MoneyLabel",
 "language": "GDScript",
-"path": "res://levels/base_level/money_label.gd"
+"path": "res://overlays/money_label.gd"
 }, {
 "base": "BaseCustomer",
 "class": "OldLady",

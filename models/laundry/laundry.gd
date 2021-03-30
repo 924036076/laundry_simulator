@@ -127,4 +127,4 @@ func _on_Area2D_get_hairy():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "fold":
-		EventHub.emit_signal("laundry_folded", self)
+		EventHub.emit_signal("folding_anim_completed", self)

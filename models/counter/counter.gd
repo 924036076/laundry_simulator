@@ -24,7 +24,7 @@ func fold_laundry() -> void:
 
 func _ready() -> void:
 	._ready()
-	EventHub.connect("laundry_folded", self, "_on_laundry_folded")
+	EventHub.connect("folding_anim_completed", self, "_on_folding_anim_completed")
 	EventHub.connect("occupy_object", self, "be_occupied")
 	EventHub.connect("leave_object", self, "be_free")
 
@@ -61,10 +61,11 @@ func determine_interactability() -> void:
 		interactable = true
 
 
-func _on_laundry_folded(folded_laundry) -> void:
+func _on_folding_anim_completed(folded_laundry) -> void:
 	if folded_laundry == laundry:
 		laundry_folding = false
 		determine_interactability()
+		EventHub.emit_signal("laundry_folded")
 
 
 func reset() -> void:

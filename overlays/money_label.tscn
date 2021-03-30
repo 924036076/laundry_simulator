@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Label
+#TODO: save money in more permanent way, for multiple days of play
+var money : int = 0 
+var daily_earnings := []
+
+
+func _ready():
+	format_money()
+	EventHub.connect(\"add_money\", self, \"_on_add_money\")
+	EventHub.connect(\"new_game\", self, \"_on_new_game\")
+
+
+func reset():
+	money = 0
+	format_money()
+
+
+func format_money():
+	set_text(\"$\" + str(money))
+
+
+func _on_add_money(addition : float):
+# warning-ignore:narrowing_conversion
+	money += round(addition)
+	format_money()
+
+
+func _on_new_game():
+	reset()
+"
+
+[node name="MoneyLabel" type="Label"]
+anchor_right = 0.058
+margin_left = 809.476
+margin_top = 54.2833
+margin_right = 959.476
+margin_bottom = 104.283
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "$8,888,888"
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

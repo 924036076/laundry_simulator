@@ -1,0 +1,66 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://levels/base_level/music_toggle.gd" type="Script" id=1]
+[ext_resource path="res://levels/base_level/PauseToggle.gd" type="Script" id=2]
+[ext_resource path="res://levels/base_level/sound_toggle.gd" type="Script" id=3]
+[ext_resource path="res://levels/base_level/restart_day.gd" type="Script" id=4]
+[ext_resource path="res://icons/KawaiiIcons_NoBG001.png" type="Texture" id=5]
+[ext_resource path="res://icons/KawaiiIcons_NoBG016.png" type="Texture" id=6]
+[ext_resource path="res://icons/KawaiiIcons_NoBG005.png" type="Texture" id=7]
+[ext_resource path="res://icons/KawaiiIcons_NoBG002.png" type="Texture" id=8]
+[ext_resource path="res://icons/KawaiiIcons_NoBG015.png" type="Texture" id=9]
+[ext_resource path="res://icons/KawaiiIcons_NoBG004.png" type="Texture" id=10]
+[ext_resource path="res://icons/KawaiiIcons_NoBG010.png" type="Texture" id=11]
+[ext_resource path="res://overlays/options.gd" type="Script" id=12]
+
+[node name="Options" type="HBoxContainer"]
+pause_mode = 2
+margin_left = 21.3574
+margin_top = 46.052
+margin_right = 137.357
+margin_bottom = 84.052
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundToggle" type="TextureButton" parent="."]
+margin_right = 32.0
+margin_bottom = 38.0
+toggle_mode = true
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 7 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicToggle" type="TextureButton" parent="."]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 38.0
+toggle_mode = true
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 6 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseToggle" type="TextureButton" parent="."]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 38.0
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 5 )
+script = ExtResource( 2 )
+
+[node name="RestartDay" type="TextureButton" parent="."]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 38.0
+texture_normal = ExtResource( 11 )
+script = ExtResource( 4 )
+
+[connection signal="toggled" from="PauseToggle" to="PauseToggle" method="_on_PauseToggle_toggled"]

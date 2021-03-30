@@ -1,7 +1,7 @@
 extends BaseCharacter
 class_name Player
 
-var movement_enabled : bool = false
+var movement_enabled : bool = true
 
 
 func _ready() -> void:
@@ -108,3 +108,21 @@ func _on_Cat_cuddled() -> void:
 func _on_cuddles_stopped() -> void:
 	if animationState.get_current_node() == "dance":
 		animationState.travel("Idle")
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Called when player clicks on screen but not on an interactable
+	
+	# Only handle mouse clicks
+	if not event is InputEventMouseButton: return
+	if not event.pressed: return
+	
+	match event.button_index:
+		BUTTON_RIGHT:
+			pass
+			# Commands for debug purposes
+
+		BUTTON_LEFT:
+			# Send player to clicked location and reset player's target object
+			set_targetobjct(null)
+			set_target_location(get_global_mouse_position())

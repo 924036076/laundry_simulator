@@ -6,3 +6,4 @@ func can_run() -> bool:
 
 func _change_laundry_state() -> void:
 	laundry.dry()
+	EventHub.emit_signal("laundry_dried")
