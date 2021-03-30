@@ -27,6 +27,16 @@ signal toy_released
 signal toy_destroyed
 signal toy_bounced_on_body
 
+# HUD signals 
+signal new_game
+signal new_day
+
+# Options signals
+signal restart
 
 # Laundry signals
 signal laundry_folded
+
+# Misc
+signal day_over # spawner and clock
+signal game_over # only by stars right now

@@ -1,13 +1,12 @@
 extends CanvasLayer
 class_name HUD
 
-signal new_game
-signal new_day
 var overlay : Control
 
 
 func _ready() -> void:
 	show_title_screen()
+	EventHub.connect("restart", self, "_on_restart")
 
 
 func check_high_score(score: int) -> void:
@@ -36,7 +35,7 @@ func show_title_screen() -> void:
 			
 	overlay = preload("res://interfaces/title_screen.tscn").instance()
 	add_child(overlay)
-	overlay.connect("start_button_pressed", self, "_on_new_game")
+	overlay.connect("start_button_pressed", self, "_on_start_pressed")
 
 
 func hide_overlay() -> void:
@@ -53,15 +52,24 @@ func show_day_end(total : int, prev_balance : int, day_count : int):
 	overlay = preload("res://interfaces/day_end_screen.tscn").instance()
 	overlay.set_values(total, prev_balance, day_count)
 	add_child(overlay)
-	overlay.connect("next_day_button_pressed", self, "_on_new_day")
+	overlay.connect("next_day_button_pressed", self, "_on_next_day_pressed")
 
 
-func _on_new_day() -> void:
-	emit_signal("new_day")
+func _on_next_day_pressed() -> void:
+	EventHub.emit_signal("new_day")
+	$AudioStreamPlayer.play()
+	hide_overlay()
+
+
+func _on_start_pressed() -> void:
+	EventHub.emit_signal("new_game")
+	hide_overlay()
 	$AudioStreamPlayer.play()
 
 
-func _on_new_game() -> void:
-	emit_signal("new_game")
-	$AudioStreamPlayer.play()
+func _on_restart():
+	show_title_screen()
+
+
+
 	

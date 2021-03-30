@@ -19,7 +19,15 @@ var customers_served := 0
 var ratings_count := 0
 var rating_sum := 0.0
 const LAST_CUSTOMER_HOUR := 16 # TODO: have this connected to clock then send signal
-signal day_over
+
+
+func _ready():
+	EventHub.connect("new_game", self, "_on_new_game")
+	EventHub.connect("day_over", self, "_on_day_over")
+	EventHub.connect("game_over", self, "_on_game_over")
+	EventHub.connect("restart", self, "_on_restart")
+	EventHub.connect("new_day", self, "_on_new_day")
+	print("in spawner ready function")
 
 
 func init(node : Navigation2D, body : KinematicBody2D) -> void:
@@ -29,6 +37,7 @@ func init(node : Navigation2D, body : KinematicBody2D) -> void:
 	EventHub.connect("customer_leaving", self, "handle_leaving")
 	EventHub.connect("customer_entering", self, "handle_entering")
 	EventHub.connect("new_rating", self, "_on_new_rating")
+	print("spawner initialized")
 
 
 func create_customer() -> KinematicBody2D:
@@ -101,8 +110,9 @@ func reset() -> void:
 	customers_served = 0
 
 
-func new_game() -> void:
+func _on_new_game() -> void:
 	next_customer_max = NEXT_CUSTOMER_MAX
+	start()
 	# TODO: do same re-anchoring for max_customers
 
 func start() -> void:
@@ -198,8 +208,27 @@ func change_customer_group(customer : KinematicBody2D) -> void:
 		customer.add_to_group("satisfied_customers")
 		customers_served += 1
 		if customers_served >= customers_created:
-			emit_signal("day_over")
+			EventHub.emit_signal("day_over")
 
 
 func _on_Clock_almost_closing() -> void:
 	get_tree().call_group("limbo", "last_call")
+
+
+func _on_day_over():
+	get_angry()
+	stop()
+
+
+func _on_game_over():
+	get_angry()
+	stop()
+
+func _on_restart():
+	stop()
+	reset()
+
+func _on_new_day():
+	print("spawner new day called")
+	restart()
+

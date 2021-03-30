@@ -3,18 +3,18 @@
 [ext_resource path="res://characters/customers/effects/patience_change/patience_meter.gd" type="Script" id=1]
 [ext_resource path="res://characters/customers/effects/patience_change/exclamation mark.png" type="Texture" id=2]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.14902, 0.6, 0.654902, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.121569, 0.780392, 0.196078, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.376471, 0.376471, 0.376471, 1 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0.00653595, 0.538636 ), 0.0, 0.0, 0, 0, Vector2( 0.496732, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.993464, 0.529545 ), 0.0, 0.0, 0, 0 ]
 
 [node name="PatienceMeter" type="Node2D"]
@@ -29,8 +29,8 @@ margin_top = -44.0
 margin_right = 51.0
 margin_bottom = -34.0
 mouse_filter = 2
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 max_value = 1.5
 value = 1.25
 allow_greater = true
@@ -47,8 +47,8 @@ margin_top = -44.0
 margin_right = 26.0
 margin_bottom = -34.0
 mouse_filter = 2
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 max_value = 1.0
 value = 0.5
 allow_greater = true
@@ -65,7 +65,7 @@ amount = 1
 texture = ExtResource( 2 )
 gravity = Vector2( 0, 0 )
 scale_amount = 2.0
-scale_amount_curve = SubResource( 3 )
+scale_amount_curve = SubResource( 5 )
 
 [node name="HappyParticles" type="CPUParticles2D" parent="."]
 position = Vector2( 27.1739, -39.0312 )

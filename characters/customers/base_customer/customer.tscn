@@ -366,8 +366,8 @@ shape = SubResource( 1 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
-vframes = 4
 hframes = 3
+vframes = 4
 frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
@@ -420,6 +420,7 @@ spread = 46.93
 gravity = Vector2( 0, 0 )
 scale_amount = 1.25
 scale_amount_curve = SubResource( 13 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]

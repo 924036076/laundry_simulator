@@ -1,9 +1,9 @@
 extends Node2D
 class_name LaundryScene
 
-onready var nav2d : Navigation2D = $Navigation2D
-onready var player : KinematicBody2D = $Objects/Player
-onready var cat : Cat = $Objects/Cat
+onready var nav2d : Navigation2D = $Map/Navigation2D
+onready var player : KinematicBody2D = $Map/Objects/Player
+onready var cat : Cat = $Map/Objects/Cat
 var counters
 var day_count := 1
 var prev_balance := 0
@@ -12,13 +12,17 @@ var state = State.TITLE
 
 
 func _ready() -> void:
-	counters = $Objects/Counters.get_children()
+	counters = $Map/Objects/Counters.get_children()
 	initialize_level()
-	$StarRating.visible = false
+	EventHub.connect("new_day", self, "_on_new_day")
+	EventHub.connect("new_game", self, "_on_new_game")
+	EventHub.connect("day_over", self, "_on_day_over")
+	EventHub.connect("game_over", self, "_on_game_over")
+	EventHub.connect("restart", self, "_on_restart")
 
 
 func initialize_level() -> void:
-	$Spawner.init($Navigation2D, player)
+	$Spawner.init(nav2d, player)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -30,8 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	match event.button_index:
 		BUTTON_RIGHT:
+			pass
 			# Commands for debug purposes
-			$Toy.release()
+			#$Toy.release()
 			# $Spawner.create_and_send_customer(1)
 		BUTTON_LEFT:
 			# Send player to clicked location and reset player's target object
@@ -42,10 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_new_game() -> void:
 	day_count = 0
 	prev_balance = 0
-	$MoneyLabel.reset()
-	$StarRating.reset()
-	$StarRating.visible = true
-	$Spawner.new_game()
 	_on_new_day()
 
 
@@ -58,41 +59,30 @@ func _on_day_over() -> void:
 		return
 	state = State.DAY_OVER
 	stop()
-	$Spawner.get_angry()
 	$HUD.show_day_end($MoneyLabel.money, prev_balance, day_count)
 
 
 func stop() -> void:
-	$Clock.stop()
-	$Spawner.stop()
 	player.enable_movement(false)
 	cat.stop()
 
 
 func _on_new_day() -> void:
+	print("root on new day")
 	state = State.PLAYING
-	$Clock.restart()
 	refresh_interactables()
-	$BackgroundMusic.restart()
 	cat.start()
-	$ToyHolder.new_toy()
-	$Machines/LintMachine.new_lint_roll()
 	player.reset()
 	player.enable_movement(true)
-	$HUD.hide_overlay()
-	$Spawner.restart()
-	$Options/PauseToggle.pressed = false
 	prev_balance = $MoneyLabel.money
 	day_count += 1
 	print("day now: ", day_count)
 
 
-func _on_restart_button_pressed() -> void:
+func _on_restart() -> void:
 	state = State.TITLE
 	stop()
-	$Spawner.reset()
 	refresh_interactables()
-	$HUD.show_title_screen()
 	player.reset()
 
 
@@ -110,15 +100,13 @@ func _on_Cat_mischief_wanted():
 	cat.manage_mischief(location, id)
 
 
-func _on_StarRating_game_over():
+func _on_game_over():
 	if state == State.GAME_OVER:
 		print("already in game over state")
 		return
 	print("game over signal received at root")
 	state = State.GAME_OVER
 	stop()
-	$StarRating.visible = false
-	$Spawner.get_angry()
 	$HUD.show_game_over($MoneyLabel.money)
 
 

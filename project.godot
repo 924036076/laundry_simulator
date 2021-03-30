@@ -140,6 +140,7 @@ output_latency.web=75
 
 EventHub="*res://game_utils/event_hub.gd"
 Global="*res://game_utils/global.gd"
+BackgroundMusic="*res://music/background_music.tscn"
 
 [debug]
 

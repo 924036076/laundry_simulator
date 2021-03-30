@@ -11,7 +11,7 @@ var radius := 0.0
 
 func _ready() -> void:
 	_calculate_radius()
-
+	$InteractableParticles.emission_sphere_radius = radius
 
 func reset() -> void:
 	pass

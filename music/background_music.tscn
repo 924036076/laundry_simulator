@@ -19,4 +19,5 @@ bus = "music"
 stream = ExtResource( 2 )
 bus = "music"
 script = ExtResource( 1 )
+
 [connection signal="finished" from="SongIntro" to="SongLoop" method="_on_SongIntro_finished"]

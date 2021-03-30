@@ -925,9 +925,9 @@ shape = SubResource( 1 )
 position = Vector2( -0.66893, -13.9732 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-vframes = 7
 hframes = 6
-frame = 4
+vframes = 7
+frame = 30
 
 [node name="AnimationPlayer" parent="." index="2"]
 playback_speed = 0.5
@@ -1013,6 +1013,7 @@ texture = ExtResource( 9 )
 flip_h = true
 hframes = 4
 frame = 3
+
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Bumper_body_exited"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]

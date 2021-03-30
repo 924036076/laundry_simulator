@@ -8,11 +8,15 @@ const STARTING_MINUTE := 0
 const CLOSING_HOUR := 20 #20
 
 signal new_hour
-signal day_over
 signal almost_closing
+
 
 func _ready():
 	reset()
+	EventHub.connect("day_over", self, "_on_day_over")
+	EventHub.connect("game_over", self, "_on_game_over")
+	EventHub.connect("new_day", self, "_on_new_day")
+
 
 func _on_MinuteTimer_timeout():
 	minutes += 10
@@ -24,29 +28,45 @@ func _on_MinuteTimer_timeout():
 			emit_signal("almost_closing")
 		if hours >= CLOSING_HOUR:
 			print("day over signal!")
-			emit_signal("day_over")
-			stop()
+			EventHub.emit_signal("day_over")
 	update_ui()
-	
+
+
 func update_ui():
 	var time := "new text!"
 	time = str(hours) + ":" + str(minutes)
 	if minutes == 0:
 		time = time + "0"
 	$RichTextLabel.text = time
-	
+
+
 func start():
 	$MinuteTimer.start()	
-	
+
+
 func stop():
 	$MinuteTimer.stop()
-	
+
+
 func reset():
 	hours = STARTING_HOUR
 	minutes = STARTING_MINUTE
 	update_ui()
-	
+
+
 func restart():
 	reset()
 	start()
+
+
+func _on_day_over():
+	stop()
+
+
+func _on_game_over():
+	stop()
+
+
+func _on_new_day():
+	restart()
 

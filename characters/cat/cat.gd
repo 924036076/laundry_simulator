@@ -7,7 +7,7 @@ export (NodePath) var desk_path
 var desk : Node2D
 var patrol_points : PoolVector2Array
 var rng := RandomNumberGenerator.new()
-enum State {PATROL, SLEEP, WORK, PLAY, MISCHIEF}
+enum State {PATROL, SLEEP, WORK, PLAY, MISCHIEF, JUMPING}
 var state = State.PATROL
 var patrol_cutoff := 10
 var sleep_cutoff := 30
@@ -39,6 +39,7 @@ func _ready() -> void:
 
 
 func _on_toy_released(play_loc : Vector2) -> void:
+	if state == State.JUMPING or state == State.SLEEP: return
 	target = play_loc
 	state = State.PLAY
 	$WaitTimer.stop()
@@ -79,6 +80,7 @@ func handle_state_transition() -> void:
 			$WaitTimer.start(rng.randi_range(3, 8))
 		State.MISCHIEF:
 			emit_signal("mischief_started")
+			state = State.JUMPING
 			animationState.travel("jump_forward")
 		State.PLAY:
 			if target.distance_to(global_position) < 10:

@@ -149,8 +149,8 @@ bus = "soundfx"
 position = Vector2( 0, 1 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
-vframes = 3
 hframes = 2
+vframes = 3
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
@@ -158,4 +158,5 @@ shape = SubResource( 13 )
 
 [node name="LaundryParent" parent="." index="6"]
 position = Vector2( 0, -18 )
+
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

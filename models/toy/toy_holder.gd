@@ -10,7 +10,8 @@ func _ready():
 	toy = Toy.instance()
 	toy.nav_node = nav_node
 	add_child(toy)
-
+	EventHub.connect("new_day", self, "_on_new_day")
+	
 
 func new_toy():
 	if is_instance_valid(toy):
@@ -45,3 +46,7 @@ func modulate() -> void:
 		modulate = selected_modulation
 	else:
 		modulate = default_modulation
+
+
+func _on_new_day():
+	new_toy()

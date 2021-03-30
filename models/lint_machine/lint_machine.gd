@@ -7,6 +7,7 @@ var sprite_sheet_dir = "res://models/lint_machine/machine_sprite_sheets/"
 func _ready():
 	._ready()
 	load_sprite_sheet()
+	EventHub.connect("new_day", self, "_on_new_day")
 
 
 func _change_laundry_state() -> void:
@@ -39,3 +40,7 @@ func load_sprite_sheet():
 func new_lint_roll():
 	durability = 0 
 	load_sprite_sheet()
+
+
+func _on_new_day():
+	new_lint_roll()
