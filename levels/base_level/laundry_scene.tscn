@@ -832,9 +832,9 @@ use_mipmaps = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="NavigationPolygon" id=21]
-vertices = PoolVector2Array( 872.583, 216.479, 974.637, 217.739, 978.416, 569.257, 745.331, 567.997, 726.432, 474.763, 725.172, 362.63, 746.591, 222.779, 49.8544, 566.737, 296.799, 472.243, 49.8544, 242.938, 300.579, 361.37, -150.473, 245.458, -147.953, 166.082, 3.23737, 179.942, 363.575, 181.202, 364.835, 206.4, 741.551, 208.92 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ), PoolIntArray( 4, 3, 7, 8 ), PoolIntArray( 8, 7, 9, 10 ), PoolIntArray( 11, 12, 13, 9 ), PoolIntArray( 10, 9, 13, 14, 15 ), PoolIntArray( 5, 10, 15, 16, 6 ) ]
-outlines = [ PoolVector2Array( 3.23737, 179.942, 363.575, 181.202, 364.835, 206.4, 741.551, 208.92, 746.591, 222.779, 872.583, 216.479, 974.637, 217.739, 978.416, 569.257, 745.331, 567.997, 49.8544, 566.737, 49.8544, 242.938, -150.473, 245.458, -147.953, 166.082 ), PoolVector2Array( 300.579, 361.37, 725.172, 362.63, 726.432, 474.763, 296.799, 472.243 ) ]
+vertices = PoolVector2Array( 974.637, 217.739, 978.416, 569.257, 745.331, 567.997, 726.432, 474.763, 725.172, 362.63, 916.23, 216.605, 876.852, 211.265, 757.384, 211.265, 49.8544, 566.737, 296.799, 472.243, 49.8544, 242.938, 300.579, 361.37, 364.835, 206.4, 741.551, 208.92, -150.473, 245.458, -147.953, 166.082, 3.23737, 179.942, 363.575, 181.202 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 5, 4, 7 ), PoolIntArray( 3, 2, 8, 9 ), PoolIntArray( 9, 8, 10, 11 ), PoolIntArray( 12, 13, 7, 4, 11 ), PoolIntArray( 14, 15, 16, 10 ), PoolIntArray( 11, 10, 16, 17, 12 ) ]
+outlines = [ PoolVector2Array( 3.23737, 179.942, 363.575, 181.202, 364.835, 206.4, 741.551, 208.92, 757.384, 211.265, 876.852, 211.265, 916.23, 216.605, 974.637, 217.739, 978.416, 569.257, 745.331, 567.997, 49.8544, 566.737, 49.8544, 242.938, -150.473, 245.458, -147.953, 166.082 ), PoolVector2Array( 300.579, 361.37, 725.172, 362.63, 726.432, 474.763, 296.799, 472.243 ) ]
 
 [node name="root" type="Node2D"]
 script = ExtResource( 14 )
@@ -882,17 +882,22 @@ navpoly = SubResource( 21 )
 [node name="Machines" type="Node2D" parent="Map"]
 position = Vector2( 0.0676003, 92.5666 )
 
-[node name="Washer" parent="Map/Machines" instance=ExtResource( 2 )]
+[node name="Washer" parent="Map/Machines" groups=[
+"interactables",
+] instance=ExtResource( 2 )]
 position = Vector2( 418.046, 54.2833 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
 
-[node name="Washer2" parent="Map/Machines" instance=ExtResource( 2 )]
+[node name="Washer2" parent="Map/Machines" groups=[
+"interactables",
+] instance=ExtResource( 2 )]
 position = Vector2( 511.146, 54.2833 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
 
 [node name="Dryer" parent="Map/Machines" groups=[
+"interactables",
 "laundry_holder",
 ] instance=ExtResource( 4 )]
 position = Vector2( 604.296, 54.2833 )
@@ -901,6 +906,7 @@ scale = Vector2( 1.05748, 1.05748 )
 gravity = 0.0
 
 [node name="Dryer2" parent="Map/Machines" groups=[
+"interactables",
 "laundry_holder",
 ] instance=ExtResource( 4 )]
 position = Vector2( 697.396, 54.2833 )
@@ -909,6 +915,7 @@ scale = Vector2( 1.05748, 1.05748 )
 gravity = 0.0
 
 [node name="LintMachine" parent="Map/Machines" groups=[
+"interactables",
 "laundry_holder",
 ] instance=ExtResource( 34 )]
 position = Vector2( 818.953, 61.1402 )
@@ -967,22 +974,30 @@ format = 1
 [node name="Counters" type="YSort" parent="Map/Objects"]
 position = Vector2( -41.0415, -111.419 )
 
-[node name="Counter1" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
+[node name="Counter1" parent="Map/Objects/Counters" groups=[
+"interactables",
+] instance=ExtResource( 8 )]
 position = Vector2( 410.498, 527.759 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
 
-[node name="Counter2" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
+[node name="Counter2" parent="Map/Objects/Counters" groups=[
+"interactables",
+] instance=ExtResource( 8 )]
 position = Vector2( 506.104, 527.759 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
 
-[node name="Counter3" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
+[node name="Counter3" parent="Map/Objects/Counters" groups=[
+"interactables",
+] instance=ExtResource( 8 )]
 position = Vector2( 601.589, 527.759 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
 
-[node name="Counter4" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
+[node name="Counter4" parent="Map/Objects/Counters" groups=[
+"interactables",
+] instance=ExtResource( 8 )]
 position = Vector2( 697.415, 527.759 )
 scale = Vector2( 1, 1 )
 gravity = 0.0
@@ -1006,6 +1021,8 @@ position = Vector2( 323.851, 106.628 )
 gravity = 98.0
 
 [node name="MoneyLabel" parent="." instance=ExtResource( 7 )]
+margin_left = 777.476
+margin_right = 927.476
 
 [node name="Clock" type="Node2D" parent="."]
 position = Vector2( 932.255, 0 )

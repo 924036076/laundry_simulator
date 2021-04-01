@@ -20,13 +20,13 @@ func interact(object : Area2D) -> void:
 	
 	if object.is_in_group("laundry_holder"):
 		laundry_interaction(object)
-	else:
-		object.interact()
+	
+	object.interact()
 
 
 func laundry_interaction(object : Area2D) -> void:
 	# Either object is not interactable, or it can only give and player cannot receive
-	if !object.interactable or (object.can_give and !object.can_receive and laundry):  
+	if !object.interactable or (object.can_give and !object.can_receive and laundry): 
 		$UnallowedSoundPlayer.play()
 		object.disallowed_action()
 	else:	# Allowed to interact: swap laundry loads
@@ -51,6 +51,7 @@ func unload_laundry() -> Node2D:
 func load_laundry(laundry_in : Node2D) -> void:
 	if laundry_in == null: return
 	
+	EventHub.emit_signal("player_picked_up_laundry")
 	laundry = laundry_in
 	$laundry_pos.call_deferred("add_child", laundry)
 	laundry.position = laundry_offset

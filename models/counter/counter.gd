@@ -71,3 +71,11 @@ func _on_folding_anim_completed(folded_laundry) -> void:
 func reset() -> void:
 	.reset()
 	be_free(get_instance_id())
+
+
+func selective_click_me(type : String):
+	if laundry_folding or cat_occupant: return
+	if name.to_lower() in type:
+		click_me()
+	else:
+		$BaseAnimPlayer.play("idle")

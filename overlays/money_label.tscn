@@ -9,8 +9,8 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Label
-#TODO: save money in more permanent way, for multiple days of play
-var money : int = 0 
+
+export var money := 0
 var daily_earnings := []
 
 
@@ -48,6 +48,7 @@ margin_bottom = 104.283
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "$8,888,888"
+align = 2
 script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

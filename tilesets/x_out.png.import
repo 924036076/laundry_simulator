@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Female 25-1.png-3613f5fc5bdba6921b7b45aaa0aefa04.stex"
+path="res://.import/x_out.png-5bec5e9a14c59842ae92e18f0a0003a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/customers/tutorial_mom/Female 25-1.png"
-dest_files=[ "res://.import/Female 25-1.png-3613f5fc5bdba6921b7b45aaa0aefa04.stex" ]
+source_file="res://tilesets/x_out.png"
+dest_files=[ "res://.import/x_out.png-5bec5e9a14c59842ae92e18f0a0003a3.stex" ]
 
 [params]
 

@@ -1,6 +1,8 @@
 extends Area2D
 class_name Interactable
 
+export var description := "this doesn't interest me"
+
 const default_modulation := Color(1, 1, 1, 1)
 const selected_modulation := Color(0.83, 1, 0.89, 1)
 var is_target := false setget set_target
@@ -15,6 +17,17 @@ func _ready() -> void:
 
 func reset() -> void:
 	pass
+
+
+func selective_click_me(type : String):
+	if name.to_lower() in type:
+		click_me()
+	else:
+		$BaseAnimPlayer.play("idle")
+
+
+func click_me():
+	$BaseAnimPlayer.play("click_me")
 
 
 func _calculate_radius() -> void:
@@ -38,7 +51,8 @@ func disallowed_action() -> void:
 
 func interact() -> void:
 	# Overriden by scenes that inherit
-	pass
+	EventHub.emit_signal("interactable_broadcasted", description)
+	$BaseAnimPlayer.play("idle")
 	
 	
 func modulate() -> void:

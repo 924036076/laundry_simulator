@@ -59,3 +59,11 @@ func disallowed_action() -> void:
 	$AnimationTree.set("parameters/Blend/blend_amount", 0.5)
 	yield(get_tree().create_timer(0.4), "timeout")
 	$AnimationTree.set("parameters/Blend/blend_amount", 0)
+
+
+func selective_click_me(type : String):
+	if state_machine.get_current_node() != "idle": return
+	if name.to_lower() in type:
+		click_me()
+	else:
+		$BaseAnimPlayer.play("idle")

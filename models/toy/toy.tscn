@@ -146,5 +146,6 @@ anims/idle = SubResource( 3 )
 anims/landing = SubResource( 4 )
 anims/takeoff = SubResource( 5 )
 anims/torture = SubResource( 6 )
+
 [connection signal="body_entered" from="." to="." method="_on_Toy_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

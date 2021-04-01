@@ -3,6 +3,9 @@ extends Node
 signal click
 signal add_money
 
+# InteractablePlus signals
+signal interactable_broadcasted # sends flavor text from simple clicks
+
 # Customer signals
 signal patience_cloud
 signal customer_leaving
@@ -42,6 +45,9 @@ signal restart
 
 # Laundry signals
 signal folding_anim_completed
+
+# Player signals
+signal player_picked_up_laundry
 
 # Misc
 signal day_over # spawner and clock
