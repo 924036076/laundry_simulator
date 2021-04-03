@@ -3,6 +3,9 @@ extends Node2D
 export (NodePath) var up_stairs 
 export (NodePath) var down_stairs
 
+var expression_offset := Vector2(8, -83)
+var money_label_offset = Vector2(0, -74)
+
 var up_loc
 var down_loc
 
@@ -29,8 +32,13 @@ func retrieve_laundry():
 
 
 func go_downstairs():
+	var current = $AnimationPlayer.current_animation
+	if current == "appear" or current == "stairs_down": return
+	if position == down_loc: return
+	
 	position = up_loc
 	$AnimationPlayer.play("appear")
+	$AudioStreamPlayer.play()
 	yield($AnimationPlayer, "animation_finished")
 	$AnimationPlayer.play("stairs_down")
 	walk(up_loc, down_loc, $AnimationPlayer.get_animation("stairs_down").length)
@@ -54,9 +62,29 @@ func _on_Bumper_released():
 
 
 func _on_Bumper_returned():
-	# TODO: emote and give money
-	go_upstairs()
 	$Bumper.interactable = false
+	
+	var expression = emote()
+	yield(expression, "animation_finished")
+	show_money_earned(2.0)
+	yield(get_tree().create_timer(buffer), "timeout")
+	go_upstairs()
+
+
+func show_money_earned(money : float, percent : float = 1) -> void:
+	var label = preload("res://models/money_label/money_label.tscn").instance()
+	add_child(label)
+	label.position = money_label_offset
+	label.display("$" + str(round(money)), percent)
+	EventHub.emit_signal("add_money", money)
+
+
+func emote() -> AnimatedSprite:
+	var expression = preload("res://characters/emote/emote.tscn").instance()
+	expression.position = expression_offset
+	add_child(expression)
+	expression.set_and_play(1)
+	return expression
 
 
 func _on_Bumper_disallowed_customer_action():
@@ -73,6 +101,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"stairs_up":
 			$AnimationPlayer.play_backwards("appear")
+			$AudioStreamPlayer.play()
 		"stairs_down":
 			$Bumper.interactable = true
 			$Timer.start()
@@ -83,3 +112,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_Timer_timeout():
 	if $Bumper.interactable:
 		$Bumper.click_me()
+
+
+func _on_Tween_tween_all_completed():
+	if position == up_loc:
+		position = Vector2(0,0)

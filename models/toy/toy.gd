@@ -34,6 +34,7 @@ func _ready():
 	EventHub.connect("play_ended", self, "_on_cat_play_ended")
 	rng = RandomNumberGenerator.new()
 	set_process(false)
+	$Squeak.pitch_scale = 1
 
 
 func _on_cat_play_started():
@@ -77,6 +78,9 @@ func decrement_durability():
 func die():
 	state = State.DEATH
 	$AnimationPlayer.play("death")
+	$Squeak.pitch_scale = 0.4
+	$Squeak.play()
+	
 
 
 func calculate_random_dest():
@@ -116,10 +120,12 @@ func calculate_initial_velocity():
 func kick(kick_loc : Vector2) -> void:
 	state = State.KICK
 	$AnimationPlayer.play("takeoff")
+	$Squeak.play()
 	count = 0.0
 	calculate_kicked_dest(kick_loc)
 	calculate_initial_velocity()
-	EventHub.emit_signal("toy_released", destination - Vector2(0, height_offset))
+	EventHub.emit_signal("toy_released", destination + Vector2(0, height_offset))
+	#EventHub.emit_signal("toy_released", destination + Vector2(0, height_offset))
 	set_process(true)
 
 
@@ -135,12 +141,13 @@ func bounce() -> void:
 
 	if bounces >= max_bounces:
 		return
-
+	
+	$Squeak.play()
 	$AnimationPlayer.play("takeoff")
 	count = 0.0
 	calculate_random_dest()
 	calculate_initial_velocity()
-	EventHub.emit_signal("toy_released", destination - Vector2(0, height_offset))
+	EventHub.emit_signal("toy_released", destination + Vector2(0, height_offset))
 	set_process(true)
 
 
@@ -163,6 +170,7 @@ func _on_landing():
 	#$CPUParticles2D.emitting = true
 	state = State.IDLE
 	$AnimationPlayer.play("landing")
+	$Landing.play()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

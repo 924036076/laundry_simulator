@@ -198,7 +198,6 @@ graph_offset = Vector2( -147.368, -106.74 )
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( -2, 0 )
-z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

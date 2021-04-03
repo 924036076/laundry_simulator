@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/63523__florian-reinke__money4.wav-30ebc9ea11c840f36e1faf90ecad0131.sample"
+
+[deps]
+
+source_file="res://overlays/63523__florian-reinke__money4.wav"
+dest_files=[ "res://.import/63523__florian-reinke__money4.wav-30ebc9ea11c840f36e1faf90ecad0131.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

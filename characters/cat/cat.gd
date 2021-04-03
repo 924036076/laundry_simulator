@@ -26,7 +26,7 @@ func _ready() -> void:
 	EventHub.connect("toy_released", self, "_on_toy_released")
 	EventHub.connect("toy_destroyed", self, "_on_toy_destroyed")
 	animationState = $AnimationTree["parameters/playback"]
-	money_label_offset = Vector2(0, -42)
+	money_label_offset = Vector2(0, -65)
 	speed = 75
 	assert($AnimationTree.active == true, "cat's Animation Tree is not active")
 	
@@ -98,7 +98,7 @@ func shed() -> void:
 func _on_jump_start() -> void:
 	if !action_enabled: return
 	
-	global_position = target + Vector2(0,28) # TODO: smarter jumping behavior; vanquish magic number
+	global_position = target + Vector2(0,43) # TODO: smarter jumping behavior; vanquish magic number
 	state = State.SLEEP
 	$AnimationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
 	$AnimationTree.set("parameters/Move/blend_position", Vector2.DOWN)

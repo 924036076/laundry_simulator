@@ -5,13 +5,18 @@ enum State {BEGINNING, MOM_ENTRY_1, WASH, WASH_PICKUP, DRY, DRY_PICKUP, FOLD, FO
 
 var mom_buffer := 2
 var normal_buffer := 1.5
+var ending_buffer := 10.0
+var computer_bool = false
+
 
 func _ready():
 	EventHub.connect("laundry_washed", self, "_on_laundry_washed")
 	EventHub.connect("laundry_dried", self, "_on_laundry_dried")
 	EventHub.connect("laundry_folded", self, "_on_laundry_folded")
 	EventHub.connect("player_picked_up_laundry", self, "_on_player_picked_up_laundry")
+	EventHub.connect("add_money", self, "_on_money_added")
 	$Timer.start(mom_buffer)
+
 
 func _on_laundry_washed():
 	state = State.WASH_PICKUP
@@ -67,4 +72,16 @@ func _on_Timer_timeout():
 			state = State.MOM_ENTRY_2
 		State.MOM_ENTRY_2:
 			$Mom.retrieve_laundry()
+		State.ENDING:
+			get_tree().call_group("interactables", "selective_click_me", "computer")
+
+
+func _on_money_added(_money):
+	if computer_bool: return
+	
+	computer_bool = true
+	yield(get_tree().create_timer(normal_buffer), "timeout")
+	state = State.ENDING
+	EventHub.emit_signal("new_option")
+	$Timer.start(ending_buffer)
 

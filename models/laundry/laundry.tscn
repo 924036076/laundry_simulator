@@ -120,5 +120,6 @@ autoplay = "idle"
 playback_speed = 0.5
 anims/fold = SubResource( 3 )
 anims/idle = SubResource( 4 )
+
 [connection signal="get_hairy" from="Area2D" to="." method="_on_Area2D_get_hairy"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

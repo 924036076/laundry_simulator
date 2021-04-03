@@ -75,8 +75,9 @@ func _on_Interactable_click(objct) -> void:
 		return
 
 	# Player must travel to new target object
-	var distance := global_position.distance_to(target_objct.global_position)
-	var new_target := target_objct.global_position.linear_interpolate(global_position, target_objct.radius/distance)
+	#var distance := global_position.distance_to(target_objct.global_position)
+	var new_target = target_objct.global_position
+	#var new_target := target_objct.global_position.linear_interpolate(global_position, target_objct.radius/distance)
 	set_target_location(new_target)
 		
 		
@@ -120,6 +121,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	match event.button_index:
 		BUTTON_RIGHT:
+			EventHub.emit_signal("add_money", 2.0)
 			pass
 			# Commands for debug purposes
 

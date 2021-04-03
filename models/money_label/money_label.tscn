@@ -56,7 +56,6 @@ z_index = 2
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-visible = false
 margin_left = -20.5337
 margin_top = -10.2668
 margin_right = 19.4663
@@ -66,6 +65,7 @@ custom_colors/font_color = Color( 0.87451, 0.545098, 0.0666667, 1 )
 text = "$50"
 align = 1
 valign = 1
+percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,4 +74,5 @@ __meta__ = {
 autoplay = "static"
 anims/show_self = SubResource( 2 )
 anims/static = SubResource( 3 )
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

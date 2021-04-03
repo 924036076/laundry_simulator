@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/379239__tix99__skiffy9.wav-16ad7d9377996e0118b968f7a6413866.sample"
+
+[deps]
+
+source_file="res://models/toy/379239__tix99__skiffy9.wav"
+dest_files=[ "res://.import/379239__tix99__skiffy9.wav-16ad7d9377996e0118b968f7a6413866.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

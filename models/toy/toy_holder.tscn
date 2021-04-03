@@ -6,7 +6,7 @@
 [ext_resource path="res://models/toy/toy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 19.902
+radius = 35.7409
 
 [node name="ToyHolder" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

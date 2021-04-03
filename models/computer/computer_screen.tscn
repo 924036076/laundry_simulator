@@ -1,22 +1,40 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://tilesets/x_out_red.png" type="Texture" id=2]
 [ext_resource path="res://models/computer/computer_screen.gd" type="Script" id=3]
 [ext_resource path="res://tilesets/screen_rect_2.png" type="Texture" id=4]
 [ext_resource path="res://tilesets/screen_rect_1.png" type="Texture" id=5]
+[ext_resource path="res://models/computer/519981__timbre__simulated-crt-tv-power-off-on-remix-of-freesound-519627_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://models/computer/519981__timbre__simulated-crt-tv-power-off-on-remix-of-freesound-519627_1.wav" type="AudioStream" id=7]
+[ext_resource path="res://models/computer/327737__distillerystudio__error-02.wav" type="AudioStream" id=8]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=3]
-resource_name = "expand"
+resource_name = "error"
+length = 2.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Screen/Ad/BuyButton:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9, 1.3, 1.7, 2.1, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "insufficient funds", "", "insufficient funds", "", "insufficient funds", "", "insufficient funds" ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Screen:rect_scale")
@@ -29,6 +47,85 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Screen:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 280, 294 ), Vector2( 280, 144 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Screen/Ad/BuyButton:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "BUY" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Screen/Ad/BuyButton:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Screen/Ad/BuyButton:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "", ".", ". ", ". .", ". . ", ". . .", "", ".", ". ", ". .", ". . ", ". . .", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Screen/Ad/BuyButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "success"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Screen/Ad/BuyButton:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "purchased!" ]
 }
 
 [node name="ComputerScreen" type="CanvasLayer"]
@@ -69,7 +166,7 @@ margin_left = -2.16632
 margin_top = 33.0079
 margin_right = 262.834
 margin_bottom = 80.0079
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Gently used laundromat for sale:  $75,000"
 align = 1
 autowrap = true
@@ -77,13 +174,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Screen/Ad"]
-margin_left = 55.8337
+[node name="BuyButton" type="Button" parent="Screen/Ad"]
+margin_left = 39.8337
 margin_top = 120.008
-margin_right = 205.834
+margin_right = 225.834
 margin_bottom = 170.008
-custom_fonts/font = SubResource( 2 )
-text = "BUY"
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+text = "purchased!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,7 +206,7 @@ margin_left = 6.0
 margin_top = 7.0
 margin_right = 46.0
 margin_bottom = 21.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "http://totally-legit-business-schemes.laundry"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,9 +225,24 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/expand = SubResource( 3 )
+autoplay = "expand"
+anims/error = SubResource( 3 )
+anims/expand = SubResource( 4 )
+anims/pending = SubResource( 5 )
+anims/success = SubResource( 6 )
 
-[connection signal="pressed" from="Screen/Ad/Button" to="." method="_on_Button_pressed"]
+[node name="On" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[connection signal="pressed" from="Screen/Ad/BuyButton" to="." method="_on_BuyButton_pressed"]
 [connection signal="mouse_entered" from="Screen/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
 [connection signal="mouse_exited" from="Screen/ExitButton" to="." method="_on_ExitButton_mouse_exited"]
 [connection signal="pressed" from="Screen/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

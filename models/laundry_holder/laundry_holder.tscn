@@ -15,6 +15,3 @@ position = Vector2( -5, -25 )
 
 [node name="Circle" parent="." index="2"]
 scale = Vector2( 0.35, 0.35 )
-
-[node name="PointUp" parent="." index="3"]
-offset = Vector2( 0, 0 )

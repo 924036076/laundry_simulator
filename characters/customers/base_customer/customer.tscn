@@ -352,7 +352,6 @@ _data = [ Vector2( 0.0114943, 0.0011363 ), 0.0, 0.0, 0, 0, Vector2( 0.482759, 0.
 "customers",
 ] instance=ExtResource( 3 )]
 position = Vector2( 0.146393, 0 )
-z_index = 2
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 4 )

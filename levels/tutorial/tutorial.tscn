@@ -7,7 +7,7 @@
 [ext_resource path="res://overlays/Options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://overlays/money_label.tscn" type="PackedScene" id=6]
 
-[node name="Tutorial" type="Node2D"]
+[node name="Tutorial" type="YSort"]
 script = ExtResource( 4 )
 
 [node name="BasementMap" parent="." instance=ExtResource( 1 )]
@@ -18,15 +18,15 @@ position = Vector2( 285.105, 304.187 )
 [node name="TextDisplay" parent="." instance=ExtResource( 2 )]
 
 [node name="Mom" parent="." instance=ExtResource( 3 )]
-position = Vector2( 271.647, 283.76 )
+position = Vector2( 270.06, 293.681 )
 up_stairs = NodePath("../UpStairs")
 down_stairs = NodePath("../DownStairs")
 
 [node name="UpStairs" type="Position2D" parent="."]
-position = Vector2( 272.318, 283.023 )
+position = Vector2( 269.54, 294.325 )
 
 [node name="DownStairs" type="Position2D" parent="."]
-position = Vector2( 332.913, 303.191 )
+position = Vector2( 333.707, 313.509 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -34,11 +34,14 @@ one_shot = true
 autostart = true
 
 [node name="MoneyLabel" parent="." instance=ExtResource( 6 )]
+anchor_bottom = 0.262
 margin_left = 613.476
 margin_top = 110.283
 margin_right = 763.476
-margin_bottom = 160.283
-money = 74988
+margin_bottom = 135.283
+bbcode_text = "[right][wave]$5000[/wave][/right]"
+fit_content_height = false
+money = 74998
 
 [node name="Options" parent="." instance=ExtResource( 5 )]
 margin_left = 253.357

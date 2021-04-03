@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/327737__distillerystudio__error-02.wav-6b05e24f4520ed12daf9efdcd69baf93.sample"
+
+[deps]
+
+source_file="res://models/computer/327737__distillerystudio__error-02.wav"
+dest_files=[ "res://.import/327737__distillerystudio__error-02.wav-6b05e24f4520ed12daf9efdcd69baf93.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

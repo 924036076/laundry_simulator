@@ -55,7 +55,7 @@ func set_target_location(new_target : Vector2) -> void:
 		return
 	walking = true
 	target = new_target
-	path = navNode.get_simple_path(global_position, new_target)
+	path = navNode.get_simple_path(global_position, new_target, true)
 	if path.size() == 0:
 		print("you sent me an empty array!")
 		return

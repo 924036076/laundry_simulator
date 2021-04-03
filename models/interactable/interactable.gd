@@ -53,8 +53,8 @@ func interact() -> void:
 	# Overriden by scenes that inherit
 	EventHub.emit_signal("interactable_broadcasted", description)
 	$BaseAnimPlayer.play("idle")
-	
-	
+
+
 func modulate() -> void:
 	if is_target or mouse_over and interactable:
 		$Sprite.modulate = selected_modulation

@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://models/interactable/interactable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/desk/sprite.png" type="Texture" id=2]
+[ext_resource path="res://models/computer/computer.gd" type="Script" id=3]
+[ext_resource path="res://models/computer/computer_screen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://models/computer/light.png" type="Texture" id=5]
+[ext_resource path="res://models/computer/white_screen.png" type="Texture" id=6]
+[ext_resource path="res://models/computer/519981__timbre__simulated-crt-tv-power-off-on-remix-of-freesound-519627_2.wav" type="AudioStream" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36.2711, 35.478 )
+
+[node name="Computer" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+description = "maybe someday..."
+Screen = ExtResource( 4 )
+
+[node name="Circle" parent="." index="1"]
+scale = Vector2( 0.1, 0.1 )
+
+[node name="PointUp" parent="." index="2"]
+offset = Vector2( 0, 3.33333 )
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( 0.37458, 9.49492 )
+shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="." index="5"]
+position = Vector2( 7.31354, -6.06354 )
+texture = ExtResource( 5 )
+texture_scale = 0.25
+color = Color( 0.513726, 0.705882, 0.552941, 1 )
+shadow_enabled = true
+shadow_filter = 3
+
+[node name="Screen" type="Sprite" parent="." index="6"]
+position = Vector2( 7.54465, -7.45275 )
+texture = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource( 7 )

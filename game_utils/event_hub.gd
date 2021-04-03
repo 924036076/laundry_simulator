@@ -52,3 +52,5 @@ signal player_picked_up_laundry
 # Misc
 signal day_over # spawner and clock
 signal game_over # only by stars right now
+signal new_option # currently just in tutorial logic
+signal laundromat_purchased # for upgrades

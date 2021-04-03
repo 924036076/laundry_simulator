@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("Sprite:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,7 +34,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -47,7 +47,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 47.2103, 47.7452 )
+extents = Vector2( 47.2103, 47.3777 )
 
 [node name="Counter" groups=[
 "InteractableObjects",
@@ -63,19 +63,22 @@ anims/idle = SubResource( 1 )
 anims/shake = SubResource( 2 )
 
 [node name="JumpLaunch" type="Node2D" parent="." index="1"]
-position = Vector2( 0, -61.5118 )
+position = Vector2( 0, -23.6091 )
 
 [node name="SleepLocation" type="Node2D" parent="." index="2"]
-position = Vector2( -0.396835, -18.652 )
+position = Vector2( -0.396835, 7.82604 )
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
+position = Vector2( 5.67387, 34.9888 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
+offset = Vector2( -2, 0 )
 hframes = 2
 vframes = 2
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( -0.315571, 34.9739 )
 shape = SubResource( 3 )
 
 [node name="InteractableParticles" type="CPUParticles2D" parent="." index="5"]
@@ -89,7 +92,12 @@ angular_velocity = 0.2
 angular_velocity_random = 0.32
 
 [node name="LaundryParent" parent="." index="7"]
-z_index = 3
+position = Vector2( -1.21742, 10.9345 )
+
+[node name="Circle" parent="." index="8"]
+position = Vector2( 0, 7.56516 )
+scale = Vector2( 0.1, 0.1 )
 
 [node name="PointUp" parent="." index="9"]
-visible = false
+position = Vector2( 0, 15.5652 )
+offset = Vector2( 0, 3.33333 )

@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://models/toy/toy.gd" type="Script" id=1]
 [ext_resource path="res://models/toy/mouse-sheet.png" type="Texture" id=2]
 [ext_resource path="res://models/toy/small_cloud.png" type="Texture" id=3]
+[ext_resource path="res://models/toy/379239__tix99__skiffy9.wav" type="AudioStream" id=4]
+[ext_resource path="res://models/toy/half_squeak.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.3672
@@ -59,6 +61,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -146,6 +160,14 @@ anims/idle = SubResource( 3 )
 anims/landing = SubResource( 4 )
 anims/takeoff = SubResource( 5 )
 anims/torture = SubResource( 6 )
+
+[node name="Squeak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
+
+[node name="Landing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.0
 
 [connection signal="body_entered" from="." to="." method="_on_Toy_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

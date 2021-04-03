@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://models/washer/sprite.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
@@ -130,6 +130,9 @@ node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 35.7068, 47.3758 )
 
+[sub_resource type="OccluderPolygon2D" id=14]
+polygon = PoolVector2Array( -35.994, -47.6055, 35.5732, -47.2079, 35.9708, 47.0221, -35.994, 47.0221 )
+
 [node name="Washer" groups=[
 "InteractableObjects",
 "machines",
@@ -185,5 +188,8 @@ position = Vector2( 0, -18 )
 
 [node name="PointUp" parent="." index="10"]
 visible = false
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="11"]
+occluder = SubResource( 14 )
 
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]
