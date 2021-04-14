@@ -14,9 +14,9 @@ font_data = ExtResource( 1 )
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="ButtonGroup" id=4]
+[sub_resource type="ButtonGroup" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 1 )
 
@@ -117,7 +117,7 @@ custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 pressed = true
-group = SubResource( 4 )
+group = SubResource( 3 )
 text = "machines"
 
 [node name="CheckBox2" type="CheckBox" parent="Label/VBoxContainer"]
@@ -128,7 +128,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.290196, 0.290196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-group = SubResource( 4 )
+group = SubResource( 3 )
 text = "consumables"
 
 [node name="ExitButton" parent="." instance=ExtResource( 3 )]
@@ -158,7 +158,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 331.0
 margin_bottom = 86.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Item store"
 align = 1
