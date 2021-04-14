@@ -1,0 +1,182 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://interfaces/customer_card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://interfaces/customer_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://interfaces/card_display.gd" type="Script" id=4]
+[ext_resource path="res://icons/KawaiiIcons_NoBG042.png" type="Texture" id=5]
+[ext_resource path="res://tilesets/x_out_red.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "display"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background/ButtonBackground:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1019, 0 ), Vector2( 843, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TextureButton:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ScrollContainer:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Card:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 480, 309 ) ]
+}
+
+[node name="CardDisplay" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 4 )
+CustomerButton = ExtResource( 2 )
+
+[node name="Card" parent="." instance=ExtResource( 1 )]
+position = Vector2( 480, 309 )
+
+[node name="Background" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.427451 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBackground" type="ColorRect" parent="Background"]
+margin_left = 931.0
+margin_right = 1111.0
+margin_bottom = 600.0
+color = Color( 0.192157, 0.192157, 0.192157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="TextureButton" parent="Background/ButtonBackground"]
+margin_left = 93.0
+margin_top = 8.0
+margin_right = 133.0
+margin_bottom = 48.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/ButtonBackground"]
+margin_left = 43.0
+margin_top = 187.0
+margin_right = 149.0
+margin_bottom = 234.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Unlocked
+Customers"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
+margin_left = 861.0
+margin_top = 248.0
+margin_right = 1023.0
+margin_bottom = 598.0
+follow_focus = true
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 150.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 150, 350 )
+custom_constants/separation = 10
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+margin_left = 924.265
+margin_top = 504.004
+margin_right = 1052.27
+margin_bottom = 632.004
+rect_scale = Vector2( 0.6, 0.6 )
+texture_normal = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/display = SubResource( 2 )
+
+[connection signal="mouse_entered" from="Background/ButtonBackground/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
+[connection signal="mouse_exited" from="Background/ButtonBackground/ExitButton" to="." method="_on_ExitButton_mouse_exited"]
+[connection signal="pressed" from="Background/ButtonBackground/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_TextureButton_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

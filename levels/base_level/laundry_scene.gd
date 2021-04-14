@@ -19,6 +19,8 @@ func _ready() -> void:
 	EventHub.connect("day_over", self, "_on_day_over")
 	EventHub.connect("game_over", self, "_on_game_over")
 	EventHub.connect("restart", self, "_on_restart")
+	EventHub.connect("new_customer", self, "_on_new_customer")
+	EventHub.connect("customer_card_removed", self, "_on_customer_card_removed")
 
 
 func initialize_level() -> void:
@@ -57,6 +59,7 @@ func _on_new_day() -> void:
 	player.enable_movement(true)
 	prev_balance = $MoneyLabel.money
 	day_count += 1
+	Global.day = day_count
 	print("day now: ", day_count)
 
 
@@ -93,3 +96,15 @@ func _on_game_over():
 
 func _on_Toy_new_destination(new_pos):
 	$Destination.global_position = new_pos
+
+
+func _on_new_customer(customer_name : String):
+	var card = preload("res://interfaces/customer_card.tscn").instance()
+	card.init(customer_name)
+	$CardHolder.call_deferred("add_child", card)
+	card.call_deferred("play_new_card")
+	get_tree().paused = true
+
+
+func _on_customer_card_removed():
+	get_tree().paused = false

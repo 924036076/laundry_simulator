@@ -16,6 +16,7 @@ func _ready():
 	EventHub.connect("day_over", self, "_on_day_over")
 	EventHub.connect("game_over", self, "_on_game_over")
 	EventHub.connect("new_day", self, "_on_new_day")
+	EventHub.connect("new_game", self, "_on_new_day")
 
 
 func _on_MinuteTimer_timeout():
@@ -68,5 +69,6 @@ func _on_game_over():
 
 
 func _on_new_day():
+	print("new day!")
 	restart()
 

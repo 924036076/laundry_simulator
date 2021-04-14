@@ -16,6 +16,7 @@ func _ready():
 	EventHub.connect("player_picked_up_laundry", self, "_on_player_picked_up_laundry")
 	EventHub.connect("add_money", self, "_on_money_added")
 	$Timer.start(mom_buffer)
+	$Cat.stop()
 
 
 func _on_laundry_washed():

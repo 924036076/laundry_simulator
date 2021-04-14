@@ -1,0 +1,217 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://characters/customers/effects/love_aura/love_aura.tscn" type="PackedScene" id=1]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://interfaces/speckled_background_card.png" type="Texture" id=3]
+[ext_resource path="res://interfaces/ninepatch_pokemon_darkyellow.png" type="Texture" id=4]
+[ext_resource path="res://interfaces/star.png" type="Texture" id=5]
+[ext_resource path="res://interfaces/ninepatch_yellow2.png" type="Texture" id=6]
+[ext_resource path="res://interfaces/s-l1600.jpg" type="Texture" id=7]
+[ext_resource path="res://characters/customers/old_lady/sprite.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Card" type="CanvasLayer"]
+
+[node name="Guide" type="Sprite" parent="."]
+visible = false
+position = Vector2( 784.41, 307.987 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 512.731, 298.431 )
+texture = ExtResource( 3 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color( 0.847059, 0.996078, 1, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -174.0
+margin_right = 125.0
+margin_bottom = 174.0
+rect_pivot_offset = Vector2( 61.3459, -29.3358 )
+texture = ExtResource( 6 )
+patch_margin_left = 50
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+margin_left = 26.0
+margin_top = 17.0
+margin_right = 266.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Old Lady"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type" type="Label" parent="NinePatchRect"]
+margin_left = 125.293
+margin_top = 24.2929
+margin_right = 225.293
+margin_bottom = 46.2929
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Common"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PatienceLabel" type="Label" parent="NinePatchRect"]
+margin_left = 37.8726
+margin_top = 303.0
+margin_right = 137.873
+margin_bottom = 325.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Patience"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="NinePatchRect/PatienceLabel"]
+position = Vector2( 0, 16 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="NinePatchRect/PatienceLabel"]
+position = Vector2( 12, 16 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite3" type="Sprite" parent="NinePatchRect/PatienceLabel"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="TipLabel" type="Label" parent="NinePatchRect"]
+margin_left = 187.0
+margin_top = 303.0
+margin_right = 287.0
+margin_bottom = 325.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Tips"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TipDescription" type="Label" parent="NinePatchRect/TipLabel"]
+margin_left = -40.0
+margin_top = 16.0
+margin_right = 60.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.0235294, 0.788235, 0.0666667, 1 )
+text = "$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -136.0
+margin_right = 100.0
+margin_bottom = 12.0
+texture = ExtResource( 4 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
+margin_left = 30.0
+margin_top = 42.0
+margin_right = 220.0
+margin_bottom = 182.0
+color = Color( 0.901961, 1, 0.635294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="Sprite" parent="NinePatchRect"]
+position = Vector2( 125.652, 108.588 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+hframes = 3
+vframes = 4
+
+[node name="LoveAura" parent="NinePatchRect/Portrait" instance=ExtResource( 1 )]
+position = Vector2( 0, 9 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+margin_left = 37.0
+margin_top = 200.0
+margin_right = 217.0
+margin_bottom = 300.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer"]
+visible = false
+margin_right = 180.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Slow but patient, this customer has a hidden ability"
+autowrap = true
+
+[node name="Special" type="Label" parent="NinePatchRect/VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Love Hearts:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="NinePatchRect/VBoxContainer/Special"]
+margin_top = 26.0
+margin_right = 180.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "When very happy, makes surrounding customers happier and more likely to tip."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

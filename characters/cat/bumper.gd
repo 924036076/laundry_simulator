@@ -15,6 +15,7 @@ func modulate() -> void:
 
 
 func interact() -> void:
+	.interact()
 	$LoveParticles.emitting = true
 	EventHub.emit_signal("cat_cuddled")
 	$CuddleTimer.start(cuddle_length)

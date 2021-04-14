@@ -11,7 +11,7 @@ var customer_wait_max := 32.0
 var queued_customers := []
 var waiting_customers := []
 var max_waiting_customers : int
-var max_customers := 6
+var max_customers := 3
 var starting_customers := 1
 var new_customers_on_timeout := 1
 var customers_created := 0
@@ -20,6 +20,8 @@ var ratings_count := 0
 var rating_sum := 0.0
 const LAST_CUSTOMER_HOUR := 16 # TODO: have this connected to clock then send signal
 
+var rng = RandomNumberGenerator.new()
+
 
 func _ready():
 	EventHub.connect("new_game", self, "_on_new_game")
@@ -27,7 +29,7 @@ func _ready():
 	EventHub.connect("game_over", self, "_on_game_over")
 	EventHub.connect("restart", self, "_on_restart")
 	EventHub.connect("new_day", self, "_on_new_day")
-	print("in spawner ready function")
+	rng.randomize()
 
 
 func init(node : Navigation2D, body : KinematicBody2D) -> void:
@@ -40,25 +42,38 @@ func init(node : Navigation2D, body : KinematicBody2D) -> void:
 	print("spawner initialized")
 
 
-func create_customer() -> KinematicBody2D:
+func create_customer(type = null) -> KinematicBody2D:
 	# Create and initialize new customer
 	var customer : KinematicBody2D = null
 	# TODO: Better way of choosing what type of customer to make
-	match customers_created % 3:
-		0:
-			customer = preload("res://characters/customers/old_lady/old_lady.tscn").instance()
-		1:
-			customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
-		2: 
-			customer = preload("res://characters/customers/young_man/young_man.tscn").instance()
-
+	# Change to common/uncommon/rare? and use rng?
+	customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
 	$Customers.add_child(customer)
-	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max))
+	
+	if type == null:
+		type = get_random_customer_type()
+
+	customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max), type)
 	customer.add_to_group("dropping_off")
 	
 	next_id += 1
 	customers_created += 1
 	return customer
+
+
+func get_random_customer_type() -> String:
+	var type = ""
+	var prob_dist = GameLogic.get_probability_dist()
+	var customer_types = GameLogic.get_customer_list()
+	var rand = rng.randf()
+	
+	for i in len(prob_dist):
+		if rand <= prob_dist[i]:
+			type = customer_types[i]
+			return type
+
+	assert("YOU SHOULD NEVER REACH THIS POINT, IF YOU DO, PROB DIST FLAWED")
+	return type
 
 
 func send_customer(customer : KinematicBody2D) -> void:
@@ -98,7 +113,6 @@ func create_and_send_customer(num : int) -> void:
 
 
 func reset() -> void:
-	print("spawner resetting")
 	adjust_difficulty()
 	for child in $Customers.get_children():
 		child.queue_free()
@@ -229,6 +243,5 @@ func _on_restart():
 	reset()
 
 func _on_new_day():
-	print("spawner new day called")
 	restart()
 

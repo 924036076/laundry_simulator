@@ -129,7 +129,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Laundry Simulator"
-run/main_scene="res://levels/base_level/laundry_scene.tscn"
+run/main_scene="res://levels/tutorial/tutorial.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -142,6 +142,7 @@ EventHub="*res://game_utils/event_hub.gd"
 Global="*res://game_utils/global.gd"
 BackgroundMusic="*res://music/background_music.tscn"
 Transition="*res://overlays/Transition.tscn"
+GameLogic="*res://game_utils/game_logic.gd"
 
 [debug]
 
@@ -152,6 +153,10 @@ gdscript/warnings/return_value_discarded=false
 
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[global]
+
+font=false
 
 [input]
 

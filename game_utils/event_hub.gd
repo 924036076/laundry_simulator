@@ -11,6 +11,7 @@ signal patience_cloud
 signal customer_leaving
 signal customer_entering
 signal new_rating
+signal new_customer
 
 # Machine & counter signals
 signal laundry_washed 
@@ -48,6 +49,10 @@ signal folding_anim_completed
 
 # Player signals
 signal player_picked_up_laundry
+
+# Card signals
+signal customer_card_displayed
+signal customer_card_removed
 
 # Misc
 signal day_over # spawner and clock

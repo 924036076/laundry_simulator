@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://characters/customers/old_lady/sprite.png" type="Texture" id=2]
+[ext_resource path="res://interfaces/customer_button.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="CustomerButton" type="Button"]
+margin_right = 150.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "      Old Lady"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 13.4204, 12.0918 )
+texture = ExtResource( 2 )
+hframes = 3
+vframes = 4
+
+[connection signal="pressed" from="." to="." method="_on_CustomerButton_pressed"]

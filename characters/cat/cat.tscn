@@ -1032,6 +1032,7 @@ z_index = 20
 [node name="Bumper" parent="." index="7" instance=ExtResource( 8 )]
 position = Vector2( 0, -16 )
 script = ExtResource( 7 )
+description = "Snowball! She's studying to be an accountant."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumper" index="0"]
 position = Vector2( 0.280609, -9.26031 )

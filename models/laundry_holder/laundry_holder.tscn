@@ -6,6 +6,7 @@
 [node name="LaundryHolder" groups=[
 "laundry_holder",
 ] instance=ExtResource( 2 )]
+pause_mode = 1
 rotation = -0.00659965
 scale = Vector2( 1.05748, 1.05748 )
 script = ExtResource( 1 )

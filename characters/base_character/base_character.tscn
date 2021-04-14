@@ -197,6 +197,7 @@ graph_offset = Vector2( -147.368, -106.74 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=51]
 
 [node name="Character" type="KinematicBody2D"]
+pause_mode = 1
 position = Vector2( -2, 0 )
 script = ExtResource( 2 )
 

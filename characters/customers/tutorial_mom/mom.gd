@@ -39,6 +39,7 @@ func go_downstairs():
 	position = up_loc
 	$AnimationPlayer.play("appear")
 	$AudioStreamPlayer.play()
+	$Bumper.interactable = true
 	yield($AnimationPlayer, "animation_finished")
 	$AnimationPlayer.play("stairs_down")
 	walk(up_loc, down_loc, $AnimationPlayer.get_animation("stairs_down").length)

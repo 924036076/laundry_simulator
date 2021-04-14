@@ -13,7 +13,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 frame = 8
 
-[node name="AnimationTree" parent="." index="5"]
+[node name="AnimationTree" parent="." index="4"]
 parameters/playback = SubResource( 1 )
 parameters/Idle/blend_position = Vector2( 0.0286624, -0.113402 )
 parameters/Move/blend_position = Vector2( -0.113057, -0.00567007 )

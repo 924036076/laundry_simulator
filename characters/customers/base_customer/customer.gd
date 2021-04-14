@@ -4,7 +4,7 @@ class_name BaseCustomer
 var return_destination : Vector2 
 var register : Vector2 
 var my_laundry : Node2D
-var score_multiplier := 50
+var score_multiplier := 30
 var expression_offset := Vector2(0, -83)
 var buff_offset := Vector2(0, -17)
 var score := 0.0
@@ -14,6 +14,10 @@ var max_patience := 1.0
 var patience_unit := 0.02
 var received_laundry := false
 var toy_bounce_effect := -5
+var customer_name = "influencer"
+var happy_effect = ""
+var mad_effect = ""
+
 
 signal leaving
 signal returning
@@ -33,11 +37,25 @@ func _ready() -> void:
 	$PatienceMeter.set_max_patience(max_patience)
 
 
-func init(node : Navigation2D, id : int, wait_time : float) -> void:
+func init(node : Navigation2D, id : int, wait_time : float, shorthand = "young_man") -> void:
 	navNode = node
 	set_laundry_id(id)
 	return_destination = global_position
 	$Timer.set_wait_time(wait_time)
+	customer_name = shorthand
+	set_characteristics()
+
+
+func set_characteristics():
+	var data = Global.Customers[customer_name]
+	speed = data["speed"]
+	score_multiplier = data["score_multiplier"]
+	patience_unit = data["patience_unit"]
+	$Sprite.texture = load(data["sprite_path"])
+	if data.has("ability"):
+		match data["ability"]:
+			"Love Hearts":
+				happy_effect = "Love Hearts"
 
 
 func set_laundry_id(id : int) -> void:
@@ -56,6 +74,10 @@ func drop_off() -> void:
 	$Timer.start()	
 	leave_store()
 	$PatienceMeter.on_drop_off()
+	var visits = Global.Customers[customer_name]["visits"]
+	if visits == 0:
+		EventHub.emit_signal("new_customer", customer_name)
+	Global.Customers[customer_name]["visits"] = visits + 1
 
 
 func receive_order() -> void:
@@ -74,8 +96,10 @@ func receive_order() -> void:
 
 
 func happy_buff() -> void:
-	# To be overridden by inherited customers
-	pass
+	if happy_effect == "Love Hearts":
+		var buff = preload("res://characters/customers/effects/love_aura/love_aura.tscn").instance()
+		buff.position = buff_offset
+		call_deferred("add_child", buff)
 
 
 func leave_store() -> void:
