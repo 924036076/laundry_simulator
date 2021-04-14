@@ -70,7 +70,6 @@ func get_unlocked_store_inventory():
     unlocked_dic[key]["amount"] = store_inventory[key]
     unlocked_dic[key]["owned"] = player_inventory[key]
   return unlocked_dic
- 
 
 
 func _ready():
