@@ -5,43 +5,43 @@ var sprite_sheet_dir = "res://models/lint_machine/machine_sprite_sheets/"
 
 
 func _ready():
-	._ready()
-	load_sprite_sheet()
-	EventHub.connect("new_day", self, "_on_new_day")
+  ._ready()
+  load_sprite_sheet()
+  EventHub.connect("new_day", self, "_on_new_day")
 
 
 func _change_laundry_state() -> void:
-	laundry.dehairify()
-	EventHub.emit_signal("laundry_delinted")
+  laundry.dehairify()
+  EventHub.emit_signal("laundry_delinted")
 
 
 func can_run() -> bool:
-	return laundry.can_lint_roll() and durability < durability_limit
+  return laundry.can_lint_roll() and durability < durability_limit
 
 
 func _finish_load():
-	._finish_load()
-	decrement_durability()
+  ._finish_load()
+  decrement_durability()
 
 
 func decrement_durability():
-	durability = min(durability + 1, durability_limit)
-	load_sprite_sheet()
+  durability = min(durability + 1, durability_limit)
+  load_sprite_sheet()
 
 
 func load_sprite_sheet():
-	var path = sprite_sheet_dir + "/" + str(durability) + ".png"
-	var file = File.new()
-	if file.file_exists(path):
-		$Sprite.texture = load(path)
-	else:
-		print("ERROR: file not found")
+  var path = sprite_sheet_dir + "/" + str(durability) + ".png"
+  var file = File.new()
+  if file.file_exists(path):
+    $Sprite.texture = load(path)
+  else:
+    print("ERROR: file not found")
 
 
 func new_lint_roll():
-	durability = 0 
-	load_sprite_sheet()
+  durability = 0 
+  load_sprite_sheet()
 
 
 func _on_new_day():
-	new_lint_roll()
+  new_lint_roll()
