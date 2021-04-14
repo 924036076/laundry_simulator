@@ -2,20 +2,42 @@ extends Control
 export var description = "default description for a default item"
 
 var out_of_stock := false
+var is_machine := false
+var is_consumable := false
 const stocked_text := "BUY"
 const out_of_stock_text := "OUT OF STOCK"
-var stocked_items := 10
-var cost := 200
+var price := 200
+var amount := 0
+var owned := 0
 
 
 func _ready():
   set_button() 
-  # TODO: load stock, price info
+
+
+func init(dictionary):
+  var sprite_info = dictionary["sprite_info"]
+  $Sprite.texture = load(sprite_info["path"])
+  $Sprite.hframes = sprite_info["hframes"]
+  $Sprite.vframes = sprite_info["vframes"]
+  $Sprite.frame = sprite_info["frame"]
+  $Sprite.scale = sprite_info["scale"]
+  
+  is_machine = dictionary["is_machine"]
+  is_consumable = dictionary["is_consumable"]
+  description = dictionary["description"]
+  price = dictionary["price"]
+  amount = dictionary["amount"]
+  owned = dictionary["owned"]
+
+  $Owned/Amount.bbcode_text = str(owned)
+  $Price/Amount.text = "$" + str(price)
 
 
 func buy():
-  $HBoxContainer/Label2.bbcode_text = "[shake level=10]" + str(stocked_items)
-  EventHub.emit_signal("add_money", -cost)
+  owned += 1
+  $Owned/Amount.bbcode_text = "[shake level=10]" + str(owned)
+  EventHub.emit_signal("add_money", -price)
   $Timer.start()
 
 
@@ -50,4 +72,4 @@ func _on_StoreItem_focus_exited():
 
 
 func _on_Timer_timeout():
-  $HBoxContainer/Label2.bbcode_text = str(stocked_items)
+  $Owned/Amount.bbcode_text = str(owned)

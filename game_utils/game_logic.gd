@@ -9,40 +9,46 @@ const STORE_ITEMS = {
     {
     "sprite_info" : {
       "path" : "res://models/toy/mouse-sheet.png",
-      "h_frames" : 3,
-      "v_frames" : 1,
-      "scale" : 3,
+      "hframes" : 3,
+      "vframes" : 1,
+      "scale" : Vector2(3,3),
       "frame" : 0
       },
     "display_name" : "Squeakers",
     "description" : "Distract the cat with the good stuff",
-    "price" : 25
+    "price" : 25,
+    "is_consumable" : true,
+    "is_machine" : false
    },
   "basic_washer" : 
     {
     "sprite_info" : {
       "path" : "res://models/washer/sprite.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : 2,
+      "hframes" : 2,
+      "vframes" : 3,
+      "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Maude",
     "description" : "Not much to look at, but she gets the job done.",
-    "price" : 500
+    "price" : 500,
+    "is_consumable" : false,
+    "is_machine" : true
    },
   "basic_dryer" : 
     {
     "sprite_info" : {
       "path" : "res://models/dryer/sprite.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : 2,
+      "hframes" : 2,
+      "vframes" : 3,
+      "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Alvin",
     "description" : "Painfully unhip, but reliable and cuddly.",
-    "price" : 650
+    "price" : 650,
+    "is_consumable" : false,
+    "is_machine" : true
    }
  }
 
