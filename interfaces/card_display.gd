@@ -23,7 +23,6 @@ func init():
 
 
 func set_visibility():
-  print("setting_viz")
   match state:
     State.INACTIVE:
       $ScrollContainer.visible = false
@@ -39,6 +38,7 @@ func set_visibility():
       $ScrollContainer.visible = true
       $TextureButton.visible = false
       $Background.visible = true
+  visible = true # overall visibility
 
 
 func add_button(customer : String):
