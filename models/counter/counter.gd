@@ -42,13 +42,13 @@ func get_sleep_position() -> Vector2:
 
 
 func be_occupied(id : int) -> void:
-  if id == get_instance_id(): 
+  if id == get_instance_id():
     cat_occupant = true
     determine_interactability()
 
 
 func be_free(id : int) -> void:
-  if id == get_instance_id(): 
+  if id == get_instance_id():
     cat_occupant = false
     laundry_folding = false
     determine_interactability()
