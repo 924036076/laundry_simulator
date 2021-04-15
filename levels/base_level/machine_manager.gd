@@ -25,15 +25,13 @@ func sort_machines(owned:Dictionary) -> Array:
   return items
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   _refresh_machines()
 
 
 func _refresh_machines() -> void:
   var owned_machines := GameLogic.get_player_machines()
-  # TODO: Add counters
-  var groups := ["washers", "dryers"]
+  var groups := ["washers", "dryers", "counters", "linters"]
   for g in groups:
     var machines := get_tree().get_nodes_in_group(g)
     var sorted_owned := sort_machines(owned_machines[g])
@@ -47,8 +45,7 @@ func _refresh_machines() -> void:
 
 # TODO: Properly connect to purchasing
 func _on_purchase(purchase_info: Dictionary) -> void:
-  var type = purchase_info["type"]
-  if type == "washer" or type == "dryer":
-    _refresh_machines()
+  # TODO: check if the change affects us before trying to refresh the machines
+  _refresh_machines()
 
 
