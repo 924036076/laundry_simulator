@@ -1074,6 +1074,7 @@ tile_data = PoolIntArray( 589820, 2, 0, 589821, 2, 0, 589822, 2, 0, 589823, 2, 0
 curve = SubResource( 20 )
 
 [node name="CounterLabel" type="Label" parent="Map/Navigation2D"]
+visible = false
 margin_left = 486.863
 margin_top = 478.716
 margin_right = 542.863
@@ -1125,6 +1126,7 @@ position = Vector2( 818.953, 61.1402 )
 rotation = -0.00659965
 
 [node name="WashLabel" type="Label" parent="Map/Machines"]
+visible = false
 margin_left = 440.795
 margin_top = 113.547
 margin_right = 490.795
@@ -1137,6 +1139,7 @@ __meta__ = {
 }
 
 [node name="DryLabel" type="Label" parent="Map/Machines"]
+visible = false
 margin_left = 630.774
 margin_top = 113.547
 margin_right = 680.774
@@ -1149,6 +1152,7 @@ __meta__ = {
 }
 
 [node name="LintLabel" type="Label" parent="Map/Machines"]
+visible = false
 margin_left = 766.774
 margin_top = 113.547
 margin_right = 854.774
@@ -1291,6 +1295,7 @@ pause_mode = 1
 
 [node name="CardDisplay" parent="CardHolder" instance=ExtResource( 15 )]
 visible = false
+
 [connection signal="mischief_wanted" from="Map/Objects/Cat" to="." method="_on_Cat_mischief_wanted"]
 [connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]

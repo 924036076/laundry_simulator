@@ -12,6 +12,7 @@
 script = ExtResource( 4 )
 
 [node name="BasementMap" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1.68176, 0 )
 
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2( 285.105, 304.187 )
