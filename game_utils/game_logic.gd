@@ -107,8 +107,8 @@ var store_inventory = {
 
 var player_inventory = {
   "basic_toy" : 1,
-  "basic_washer" : 2,
-  "reasonable_washer" : 1,
+  "basic_washer" : 1,
+  #"reasonable_washer" : 1,
   "basic_dryer" : 1
  }
 
