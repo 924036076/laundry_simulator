@@ -61,7 +61,6 @@ signal item_purchased
 signal new_inventory
 signal money_updated
 
-
 # Misc
 signal day_over # spawner and clock
 signal game_over # only by stars right now

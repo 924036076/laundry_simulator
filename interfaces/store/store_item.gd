@@ -2,12 +2,11 @@ extends Control
 export var description = "default description for a default item"
 
 var id := ""
-var out_of_stock := false
 var type
 const stocked_text := "BUY"
 const out_of_stock_text := "OUT OF STOCK"
-var price := 200
-var amount := 0
+var price := 200.0
+var stocked_items := 0.0
 var owned := 0
 
 
@@ -29,22 +28,17 @@ func init(key, dictionary):
   type = dictionary["type"]
   description = dictionary["display_name"] + ": " + dictionary["description"]
   price = dictionary["price"]
-  amount = dictionary["amount"]
+  stocked_items = dictionary["amount"]
   owned = dictionary["owned"]
 
   $Owned/Amount.bbcode_text = str(owned)
   $Price/Amount.text = "$" + str(price)
-  
-  if amount == INF or amount > 0:
-    out_of_stock = false
-  else:
-    out_of_stock = true
-    print("out of stock")
+
   set_button()
 
 
 func check_can_purchase(funds):
-  if funds < price:
+  if funds < price or stocked_items <= 0:
     $Button.disabled = true
   else:
     $Button.disabled = false
@@ -64,7 +58,7 @@ func _on_StoreItem_gui_input(event):
 
 
 func set_button():
-  if out_of_stock:
+  if stocked_items <= 0:
     $Button.text = out_of_stock_text
     $Button.disabled = true
   else:
