@@ -6,18 +6,32 @@ onready var item_parent = $NinePatchRect/ScrollContainer/VBoxContainer
 
 func _ready():
   EventHub.connect("interactable_broadcasted", self, "_on_interactable_broadcasted")
+  EventHub.connect("money_updated", self, "_on_money_updated")
   $Description.visible = false
+  
   var item_list = GameLogic.get_unlocked_store_inventory()
   populate_store(item_list)
   if .get_child_count() > 0:
     item_parent.get_child(0).grab_focus()
+  
+  var funds = GameLogic.get_player_money()
+  check_funds(funds)
 
 
 func populate_store(list):
   for item in list:
     var new_item = StoreItem.instance()
-    new_item.init(list[item])
+    new_item.init(item, list[item])
     item_parent.add_child(new_item)
+
+
+func check_funds(funds):
+  for child in item_parent.get_children():
+    child.check_can_purchase(funds)
+
+
+func _on_money_updated(new_value):
+  check_funds(new_value)
 
 
 func _on_interactable_broadcasted(description):

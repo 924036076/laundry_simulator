@@ -54,6 +54,14 @@ signal player_picked_up_laundry
 signal customer_card_displayed
 signal customer_card_removed
 
+# Store / Store Item signals
+signal item_purchased
+
+# Game Logic signals
+signal new_inventory
+signal money_updated
+
+
 # Misc
 signal day_over # spawner and clock
 signal game_over # only by stars right now

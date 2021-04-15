@@ -2,6 +2,9 @@ extends Node
 var customers = ["young_man"]
 var weights = [10]
 var prob_dist = [1]
+var day := 1
+var money := 67 setget set_player_money, get_player_money
+var previous_balance
 
 
 const STORE_ITEMS = {
@@ -57,7 +60,7 @@ var unlocked_items = [
 ]
 
 var store_inventory = {
-  "basic_toy" : INF,
+  "basic_toy" : 1,
   "basic_washer" : 1,
   "basic_dryer" : 1
  }
@@ -67,6 +70,15 @@ var player_inventory = {
   "basic_washer" : 1,
   "basic_dryer" : 1
  }
+
+
+func get_player_money():
+  return money
+
+
+func set_player_money(new_money):
+  money = new_money
+  EventHub.emit_signal("money_updated", money)
 
 
 func get_unlocked_store_inventory():
@@ -80,6 +92,10 @@ func get_unlocked_store_inventory():
 
 func _ready():
   EventHub.connect("day_over", self, "_on_day_over")
+  EventHub.connect("item_purchased", self, "_on_item_purchased")
+  EventHub.connect("add_money", self, "_on_add_money")
+  EventHub.connect("new_game", self, "_on_new_game")
+  EventHub.connect("new_day", self, "_on_new_day")
 
 
 func _on_day_over():
@@ -89,8 +105,25 @@ func _on_day_over():
     add_customer("old_lady", 5)
 
 
+func _on_new_day():
+  previous_balance = money
+
+
+func _on_new_game():
+  set_player_money(0)
+  previous_balance = 0
+
+
 func get_probability_dist():
   return prob_dist
+
+
+func get_day_count():
+  return day
+
+
+func get_previous_balance():
+  return previous_balance
 
 
 func get_customer_list():
@@ -121,3 +154,14 @@ func add_customer(customer_name, weight):
   customers.append(customer_name)
   weights.append(weight)
   calculate_probability_dist()
+
+
+func _on_add_money(amount):
+  set_player_money(money + amount)
+
+
+func _on_item_purchased(item_key, amount = 1):
+  EventHub.emit_signal("add_money", -STORE_ITEMS[item_key]["price"] * amount)
+  if player_inventory.has(item_key):
+    player_inventory[item_key] = player_inventory[item_key] + amount
+    store_inventory[item_key] = store_inventory[item_key] - amount

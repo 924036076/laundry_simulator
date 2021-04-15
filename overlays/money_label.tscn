@@ -17,40 +17,36 @@ var daily_earnings := []
 
 
 func _ready():
-	format_money()
-	EventHub.connect(\"add_money\", self, \"_on_add_money\")
-	EventHub.connect(\"new_game\", self, \"_on_new_game\")
+  money = GameLogic.get_player_money()
+  format_money()
+  EventHub.connect(\"money_updated\", self, \"_on_money_updated\")
 
 
-func reset():
-	money = 0
-	format_money()
+func _on_money_updated(new_value):
+  var difference = new_value - money
+  _on_add_money(difference)
 
 
 func format_money(effect = \"\"):
-	set_bbcode(\"[right]\" + effect + \"$\" + str(money))
+  set_bbcode(\"[right]\" + effect + \"$\" + str(money))
 
 
 func _on_add_money(addition : float):
 # warning-ignore:narrowing_conversion
-	money += round(addition)
-	var color_string
-	if addition > 0:
-		color_string = \"[color=#5dff67]\"
-	else:
-		color_string = \"[color=red]\"
-	
-	format_money(\"[wave]\" + color_string)
-	$AudioStreamPlayer.play()
-
-
-func _on_new_game():
-	reset()
+  money += round(addition)
+  var color_string
+  if addition > 0:
+    color_string = \"[color=#5dff67]\"
+  else:
+    color_string = \"[color=red]\"
+  
+  format_money(\"[wave]\" + color_string)
+  $AudioStreamPlayer.play()
 
 
 func _on_AudioStreamPlayer_finished():
-	yield(get_tree().create_timer(1.3), \"timeout\")
-	format_money()
+  yield(get_tree().create_timer(1.3), \"timeout\")
+  format_money()
 "
 
 [node name="MoneyLabel" type="RichTextLabel"]

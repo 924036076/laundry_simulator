@@ -1,6 +1,7 @@
 extends Control
 export var description = "default description for a default item"
 
+var id := ""
 var out_of_stock := false
 var is_machine := false
 var is_consumable := false
@@ -15,7 +16,10 @@ func _ready():
   set_button() 
 
 
-func init(dictionary):
+func init(key, dictionary):
+  id = key
+  
+  print(dictionary)
   var sprite_info = dictionary["sprite_info"]
   $Sprite.texture = load(sprite_info["path"])
   $Sprite.hframes = sprite_info["hframes"]
@@ -32,25 +36,34 @@ func init(dictionary):
 
   $Owned/Amount.bbcode_text = str(owned)
   $Price/Amount.text = "$" + str(price)
+  
+  if amount == INF or amount > 0:
+    out_of_stock = false
+  else:
+    out_of_stock = true
+    print("out of stock")
+  set_button()
 
+
+func check_can_purchase(funds):
+  if funds < price:
+    $Button.disabled = true
+  else:
+    $Button.disabled = false
+    
 
 func buy():
-  owned += 1
   $Owned/Amount.bbcode_text = "[shake level=10]" + str(owned)
-  EventHub.emit_signal("add_money", -price)
+  EventHub.emit_signal("item_purchased", id)
   $Timer.start()
-
-
-func _on_StoreItem_mouse_entered():
-  pass
-  #EventHub.emit_signal("interactable_broadcasted", description)
 
 
 func _on_StoreItem_gui_input(event):
   if event.is_action_pressed("click"):
     EventHub.emit_signal("interactable_broadcasted", description)
-  if event.is_action_pressed("ui_accept"):
+  if event.is_action_pressed("ui_accept") and !$Button.disabled: # TODO: add noise/effect when trying to purchase with insufficient funds
     buy()
+  
 
 
 func set_button():
@@ -73,3 +86,7 @@ func _on_StoreItem_focus_exited():
 
 func _on_Timer_timeout():
   $Owned/Amount.bbcode_text = str(owned)
+
+
+func _on_Button_pressed():
+  buy()

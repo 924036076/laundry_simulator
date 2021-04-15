@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interfaces/ninepatchtest2.png" type="Texture" id=2]
 [ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interfaces/store/store_item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interfaces/store/store.gd" type="Script" id=5]
+[ext_resource path="res://overlays/money_label.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -165,6 +166,13 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MoneyLabel" parent="." instance=ExtResource( 6 )]
+margin_left = 337.476
+margin_top = -281.717
+margin_right = 487.476
+margin_bottom = -251.717
+money = 60
 
 [connection signal="pressed" from="Label/VBoxContainer/All" to="." method="_on_All_pressed"]
 [connection signal="pressed" from="Label/VBoxContainer/MachineCheck" to="." method="_on_MachineCheck_pressed"]

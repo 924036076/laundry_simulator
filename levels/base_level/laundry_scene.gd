@@ -5,8 +5,6 @@ onready var nav2d : Navigation2D = $Map/Navigation2D
 onready var player : KinematicBody2D = $Map/Objects/Player
 onready var cat : Cat = $Map/Objects/Cat
 var counters
-var day_count := 1
-var prev_balance := 0
 enum State {TITLE, GAME_OVER, DAY_OVER, PLAYING}
 var state = State.TITLE
 
@@ -28,8 +26,6 @@ func initialize_level() -> void:
 
 
 func _on_new_game() -> void:
-  day_count = 0
-  prev_balance = 0
   _on_new_day()
 
 
@@ -42,7 +38,7 @@ func _on_day_over() -> void:
     return
   state = State.DAY_OVER
   stop()
-  $HUD.show_day_end($MoneyLabel.money, prev_balance, day_count)
+  #$HUD.show_day_end($MoneyLabel.money, prev_balance, day_count)
 
 
 func stop() -> void:
@@ -57,10 +53,7 @@ func _on_new_day() -> void:
   cat.start()
   player.reset()
   player.enable_movement(true)
-  prev_balance = $MoneyLabel.money
-  day_count += 1
-  Global.day = day_count
-  print("day now: ", day_count)
+  #prev_balance = $MoneyLabel.money
 
 
 func _on_restart() -> void:
@@ -91,7 +84,7 @@ func _on_game_over():
   print("game over signal received at root")
   state = State.GAME_OVER
   stop()
-  $HUD.show_game_over($MoneyLabel.money)
+  #$HUD.show_game_over($MoneyLabel.money)
 
 
 func _on_Toy_new_destination(new_pos):
