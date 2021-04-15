@@ -87,7 +87,7 @@ const STORE_ITEMS = {
   "basic_dryer" :
     {
     "sprite_info" : {
-      "path" : "res://models/dryer/sprite.png",
+      "path" : "res://models/dryer/basic_dryer.png",
       "hframes" : 2,
       "vframes" : 3,
       "scale" : Vector2(2,2),
