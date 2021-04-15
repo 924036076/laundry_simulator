@@ -14,7 +14,7 @@ signal new_rating
 signal new_customer
 
 # Machine & counter signals
-signal laundry_washed 
+signal laundry_washed
 signal laundry_dried
 signal laundry_folded
 signal laundry_delinted
@@ -37,7 +37,7 @@ signal toy_released
 signal toy_destroyed
 signal toy_bounced_on_body
 
-# HUD signals 
+# HUD signals
 signal new_game
 signal new_day
 
@@ -59,7 +59,8 @@ signal item_purchased
 
 # Game Logic signals
 signal new_inventory
-signal money_updated
+signal money_updated  # when money increases or decreases
+signal money_reset # when money is reset; eg with new day / tutorial
 signal inventory_updated
 
 # Misc
@@ -67,3 +68,4 @@ signal day_over # spawner and clock
 signal game_over # only by stars right now
 signal new_option # currently just in tutorial logic
 signal laundromat_purchased # for upgrades
+signal tutorial_started

@@ -15,6 +15,7 @@ func _ready():
   EventHub.connect("laundry_folded", self, "_on_laundry_folded")
   EventHub.connect("player_picked_up_laundry", self, "_on_player_picked_up_laundry")
   EventHub.connect("add_money", self, "_on_money_added")
+  EventHub.emit_signal("tutorial_started")
   $Timer.start(mom_buffer)
   $Cat.stop()
 

@@ -29,7 +29,7 @@ func _on_add_money(_money):
 func enable_light(boolean = true):
   $Light2D.enabled = boolean
   $Screen.visible = boolean
-  
+
   if boolean:
     $AudioStreamPlayer.play()
 

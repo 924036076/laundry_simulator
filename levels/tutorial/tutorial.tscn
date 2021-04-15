@@ -42,7 +42,6 @@ margin_right = 763.476
 margin_bottom = 135.283
 bbcode_text = "[right][wave]$5000[/wave][/right]"
 fit_content_height = false
-money = 74998
 
 [node name="Options" parent="." instance=ExtResource( 5 )]
 margin_left = 253.357
@@ -53,4 +52,5 @@ margin_bottom = 140.052
 [node name="Cat" parent="." instance=ExtResource( 7 )]
 pause_mode = 0
 position = Vector2( 437.322, 292.927 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
