@@ -13,136 +13,176 @@ enum ItemType{MACHINE, CONSUMABLE}
 const WASHERS = {
   "basic_washer": {
     "time": 5.0,
-    "level": 1
+    "level": 1,
+  },
+  "reasonable_washer": {
+    "time": 2.0,
+    "level": 2,
   },
 }
 
 const DRYERS = {
   "basic_dryer": {
     "time": 5.0,
-    "level": 1
+    "level": 1,
   },
   "reasonable_dryer": {
-    "time": 5.0,
-    "level": 2
-  }
+    "time": 2.0,
+    "level": 2,
+  },
 }
 
 const LINTERS = {
   "basic_linter": {
     "time": 5.0,
-    "level": 1
-  }
+    "level": 1,
+  },
 }
 
 const COUNTERS = {
   "basic_counter": {
-    "level": 1
-  }
+    "level": 1,
+  },
+  "reasonable_counter": {
+    "level": 2,
+  },
+}
+
+const ITEM_SPRITE_INFO = {
+  "basic_toy": {
+    "path" : "res://models/toy/mouse-sheet.png",
+    "hframes" : 3,
+    "vframes" : 1,
+    "scale" : Vector2(3,3),
+    "frame" : 0,
+  },
+  "basic_washer": {
+    "path" : "res://models/washer/basic_washer.png",
+    "hframes" : 2,
+    "vframes" : 3,
+    "scale" : Vector2(2,2),
+    "frame" : 5,
+  },
+  "reasonable_washer": {
+    "path" : "res://models/washer/reasonable_washer.png",
+    "hframes" : 2,
+    "vframes" : 3,
+    "scale" : Vector2(2,2),
+    "frame" : 5,
+  },
+  "basic_dryer": {
+    "path" : "res://models/dryer/basic_dryer.png",
+    "hframes" : 2,
+    "vframes" : 3,
+    "scale" : Vector2(2,2),
+    "frame" : 5,
+  },
+  "reasonable_dryer": {
+    "path" : "res://models/dryer/reasonable_dryer.png",
+    "hframes" : 2,
+    "vframes" : 3,
+    "scale" : Vector2(2,2),
+    "frame" : 5,
+  },
+  "basic_linter": {
+    "path" : "res://models/lint_machine/machine_sprite_sheets/0.png",
+    "hframes" : 7,
+    "vframes" : 1,
+    "scale" : Vector2(2,2),
+    "frame" : 5,
+  },
+  "basic_counter": {
+    "path" : "res://models/counter/basic_counter.png",
+    "hframes" : 1,
+    "vframes" : 1,
+    "scale" : Vector2(2,2),
+    "frame" : 0,
+  },
+  "reasonable_counter": {
+    "path" : "res://models/counter/reasonable_counter.png",
+    "hframes" : 1,
+    "vframes" : 1,
+    "scale" : Vector2(2,2),
+    "frame" : 0,
+  },
 }
 
 const STORE_ITEMS = {
-  "basic_toy" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/toy/mouse-sheet.png",
-      "hframes" : 3,
-      "vframes" : 1,
-      "scale" : Vector2(3,3),
-      "frame" : 0
-      },
+  "basic_toy" : {
     "display_name" : "Squeakers",
     "description" : "Distract the cat with the good stuff",
     "price" : 25,
-    "type" : ItemType.CONSUMABLE
-   },
-  "basic_washer" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/washer/basic_washer.png",
-      "hframes" : 2,
-      "vframes" : 3,
-      "scale" : Vector2(2,2),
-      "frame" : 5
-      },
+    "type" : ItemType.CONSUMABLE,
+  },
+  "basic_washer" : {
     "display_name" : "Maude",
     "description" : "Not much to look at, but she gets the job done.",
     "price" : 500,
-    "type" : ItemType.MACHINE
-   },
-  "reasonable_washer" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/washer/reasonable_washer.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : Vector2(2,2),
-      "frame" : 5
-      },
+    "type" : ItemType.MACHINE,
+  },
+  "reasonable_washer" : {
     "display_name" : "Maude 2",
     "description" : "So much better than Maude.",
     "price" : 1200,
-    "type" : ItemType.MACHINE
-   },
-  "basic_dryer" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/dryer/basic_dryer.png",
-      "hframes" : 2,
-      "vframes" : 3,
-      "scale" : Vector2(2,2),
-      "frame" : 5
-      },
+    "type" : ItemType.MACHINE,
+  },
+  "basic_dryer" : {
     "display_name" : "Alvin",
     "description" : "Painfully unhip, but reliable and cuddly.",
     "price" : 650,
-    "type" : ItemType.MACHINE
-   },
-  "basic_linter" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/lint_machine/machine_sprite_sheets/0.png",
-      "hframes" : 7,
-      "vframes" : 1,
-      "scale" : Vector2(2,2),
-      "frame" : 5
-      },
+    "type" : ItemType.MACHINE,
+  },
+  "reasonable_dryer": {
+    "display_name": "Alvin 2",
+    "description": "Even more unhip",
+    "price": 1300,
+    "type": ItemType.MACHINE,
+  },
+  "basic_linter" : {
     "display_name" : "Geoffrey",
     "description" : "Meticulous deflufferizer",
     "price" : 1500,
-    "type" : ItemType.MACHINE
-   },
-  "basic_counter":
-    {
-    "sprite_info" : {
-      "path" : "res://models/counter/basic_counter.png",
-      "hframes" : 1,
-      "vframes" : 1,
-      "scale" : Vector2(2,2),
-      "frame" : 0
-      },
+    "type" : ItemType.MACHINE,
+  },
+  "basic_counter": {
     "display_name" : "shoyo hinata",
     "description" : "super eager fast moving short puppeh",
     "price" : 500,
-    "type" : ItemType.MACHINE
-  }
- }
+    "type" : ItemType.MACHINE,
+  },
+  "reasonable_counter": {
+    "display_name" : "shoyo hinata 2",
+    "description" : "super eager fast moving short puppeh",
+    "price" : 2500,
+    "type" : ItemType.MACHINE,
+  },
+}
 
 var unlocked_items = [
   "basic_toy",
+  "basic_washer",
+  "basic_dryer",
+  "basic_linter",
+  "basic_counter",
 ]
 
+# TODO: These amounts need to change based on the layout...
+#       Consider a mechanism to auto populate the amounts based on the layouts
 var store_inventory = {
   "basic_toy" : INF,
   "basic_washer" : 1,
+  "reasonable_washer": 2,
   "basic_dryer" : 1,
+  "reasonable_dryer": 2,
   "basic_linter" : 1,
   "basic_counter" : 3,
+  "reasonable_counter": 4,
  }
 
 var player_inventory = {
   "basic_toy" : 1,
-  "basic_washer" : 1,
+  "basic_washer" : 2,
+  "reasonable_washer": 1,
   "basic_dryer" : 1,
   "basic_linter": 0,
   "basic_counter" : 1,
@@ -166,9 +206,13 @@ func reset_player_money(new_money):
 func get_unlocked_store_inventory():
   var unlocked_dic = {}
   for key in unlocked_items:
+    if OS.is_debug_build():
+      assert(key in store_inventory, key + " should be in store_inventory")
+      assert(key in ITEM_SPRITE_INFO, key + " should be in ITEM_SPRITE_INFO")
     unlocked_dic[key] = STORE_ITEMS[key]
+    unlocked_dic[key]["owned"] = player_inventory[key] if key in player_inventory else 0
     unlocked_dic[key]["amount"] = store_inventory[key]
-    unlocked_dic[key]["owned"] = player_inventory[key]
+    unlocked_dic[key]["sprite_info"] = ITEM_SPRITE_INFO[key]
   return unlocked_dic
 
 
@@ -181,22 +225,26 @@ func get_player_machines() -> Dictionary:
     if item in WASHERS:
       washers[item] = {
         "amount": player_inventory[item],
-        "params": WASHERS[item]
+        "params": WASHERS[item],
+        "sprite_info": ITEM_SPRITE_INFO[item],
       }
     elif item in DRYERS:
       dryers[item] = {
         "amount": player_inventory[item],
-        "params": DRYERS[item]
+        "params": DRYERS[item],
+        "sprite_info": ITEM_SPRITE_INFO[item],
       }
     elif item in COUNTERS:
       counters[item] = {
         "amount": player_inventory[item],
-        "params": COUNTERS[item]
+        "params": COUNTERS[item],
+        "sprite_info": ITEM_SPRITE_INFO[item],
       }
     elif item in LINTERS:
       linters[item] = {
         "amount": player_inventory[item],
-        "params": LINTERS[item]
+        "params": LINTERS[item],
+        "sprite_info": ITEM_SPRITE_INFO[item],
       }
   var machines := {
     "washers": washers,

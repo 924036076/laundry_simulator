@@ -79,3 +79,7 @@ func selective_click_me(type : String):
     click_me()
   else:
     $BaseAnimPlayer.play("idle")
+
+
+func load_state(state:Dictionary) -> void:
+  $Sprite.texture = load(state["sprite_info"]["path"])

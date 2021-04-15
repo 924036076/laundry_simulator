@@ -31,9 +31,10 @@ func can_run() -> bool:
   return laundry.can_wash()
 
 
-func load_params(params:Dictionary) -> void:
-  time = params["time"]
-  level = params["level"]
+func load_state(state:Dictionary) -> void:
+  $Sprite.texture = load(state["sprite_info"]["path"])
+  time = state["params"]["time"]
+  level = state["params"]["level"]
 
 
 func _start_load() -> void:

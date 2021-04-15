@@ -172,7 +172,6 @@ margin_left = 337.476
 margin_top = -281.717
 margin_right = 487.476
 margin_bottom = -251.717
-money = 60
 
 [connection signal="pressed" from="Label/VBoxContainer/All" to="." method="_on_All_pressed"]
 [connection signal="pressed" from="Label/VBoxContainer/MachineCheck" to="." method="_on_MachineCheck_pressed"]

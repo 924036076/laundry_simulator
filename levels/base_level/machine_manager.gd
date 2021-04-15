@@ -38,7 +38,7 @@ func _refresh_machines() -> void:
     var num_machines_to_slot = min(len(machines), len(sorted_owned))
     for i in range(num_machines_to_slot):
       machines[i].show()
-      machines[i].load_params(sorted_owned[i]["params"])
+      machines[i].load_state(sorted_owned[i])
     for i in range(num_machines_to_slot, len(machines)):
       machines[i].hide()
 

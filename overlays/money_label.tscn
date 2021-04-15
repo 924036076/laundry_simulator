@@ -39,7 +39,7 @@ func _format_currency(value):
   while v >= 1000:
     parts.append(str(v % 1000))
     v = v / 1000
-  if v > 0:
+  if v > 0 or len(parts) == 0:
     parts.append(str(v))
   parts.invert()
   return \"$\" + parts.join(\",\")
