@@ -16,7 +16,7 @@ func _ready():
 
 func init(key, dictionary):
   id = key
-  
+
   print(dictionary)
   var sprite_info = dictionary["sprite_info"]
   $Sprite.texture = load(sprite_info["path"])

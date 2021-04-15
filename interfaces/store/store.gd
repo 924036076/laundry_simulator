@@ -8,12 +8,12 @@ func _ready():
   EventHub.connect("interactable_broadcasted", self, "_on_interactable_broadcasted")
   EventHub.connect("money_updated", self, "_on_money_updated")
   $Description.visible = false
-  
+
   var item_list = GameLogic.get_unlocked_store_inventory()
   populate_store(item_list)
   if .get_child_count() > 0:
     item_parent.get_child(0).grab_focus()
-  
+
   var funds = GameLogic.get_player_money()
   check_funds(funds)
 
