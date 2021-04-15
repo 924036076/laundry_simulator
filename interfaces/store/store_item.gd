@@ -8,6 +8,7 @@ const out_of_stock_text := "OUT OF STOCK"
 var price := 200.0
 var stocked_items := 0.0
 var owned := 0
+var shake_prefix := "[shake level=10]"
 
 
 func _ready():
@@ -17,7 +18,6 @@ func _ready():
 func init(key, dictionary):
   id = key
 
-  print(dictionary)
   var sprite_info = dictionary["sprite_info"]
   $Sprite.texture = load(sprite_info["path"])
   $Sprite.hframes = sprite_info["hframes"]
@@ -31,7 +31,10 @@ func init(key, dictionary):
   stocked_items = dictionary["amount"]
   owned = dictionary["owned"]
 
-  $Owned/Amount.bbcode_text = str(owned)
+  if $Owned/Amount.bbcode_text.begins_with(shake_prefix):
+    $Owned/Amount.bbcode_text = shake_prefix + str(owned)
+  else:
+    $Owned/Amount.bbcode_text = str(owned)
   $Price/Amount.text = "$" + str(price)
 
   set_button()
@@ -44,7 +47,7 @@ func check_can_purchase(funds):
 
 
 func buy():
-  $Owned/Amount.bbcode_text = "[shake level=10]" + str(owned)
+  $Owned/Amount.bbcode_text = shake_prefix + str(owned)
   EventHub.emit_signal("item_purchased", id)
   $Timer.start()
 
@@ -83,4 +86,4 @@ func _on_Button_pressed():
 
 
 func _on_StoreItem_mouse_entered():
-  EventHub.emit_signal("interactable_broadcasted", description)
+  grab_focus()

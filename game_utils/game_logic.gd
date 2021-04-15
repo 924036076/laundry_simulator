@@ -129,7 +129,7 @@ const STORE_ITEMS = {
  }
 
 var unlocked_items = [
-  "basic_toy",
+  "basic_toy"
 ]
 
 var store_inventory = {
