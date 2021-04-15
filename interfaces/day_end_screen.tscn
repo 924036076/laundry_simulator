@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://font/Awake/Awake.tres" type="DynamicFont" id=2]
 [ext_resource path="res://interfaces/day_end_screen.gd" type="Script" id=3]
 [ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=4]
+[ext_resource path="res://interfaces/store/store_button.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -198,5 +199,11 @@ text = "Next Day"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureButton" parent="." instance=ExtResource( 5 )]
+margin_left = 178.0
+margin_top = -32.0
+margin_right = 238.0
+margin_bottom = 28.0
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/Button" to="." method="_on_Button_pressed"]
