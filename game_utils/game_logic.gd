@@ -59,7 +59,7 @@ const STORE_ITEMS = {
   "basic_washer" :
     {
     "sprite_info" : {
-      "path" : "res://models/washer/sprite.png",
+      "path" : "res://models/washer/basic_washer.png",
       "hframes" : 2,
       "vframes" : 3,
       "scale" : Vector2(2,2),
@@ -73,14 +73,14 @@ const STORE_ITEMS = {
   "reasonable_washer" :
     {
     "sprite_info" : {
-      "path" : "res://models/washer/sprite.png",
+      "path" : "res://models/washer/reasonable_washer.png",
       "h_frames" : 2,
       "v_frames" : 3,
       "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Maude 2",
-    "description" : "Not much to look at, but she gets the job done.",
+    "description" : "So much better than Maude.",
     "price" : 1200,
     "type" : ItemType.MACHINE
    },
@@ -115,11 +115,11 @@ const STORE_ITEMS = {
   "basic_counter":
     {
     "sprite_info" : {
-      "path" : "res://models/counter/sprite.png",
-      "hframes" : 2,
-      "vframes" : 2,
+      "path" : "res://models/counter/basic_counter.png",
+      "hframes" : 1,
+      "vframes" : 1,
       "scale" : Vector2(2,2),
-      "frame" : 3
+      "frame" : 0
       },
     "display_name" : "shoyo hinata",
     "description" : "super eager fast moving short puppeh",

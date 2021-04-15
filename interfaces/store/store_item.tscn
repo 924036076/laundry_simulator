@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interfaces/ninepatchtest.png" type="Texture" id=2]
 [ext_resource path="res://icons/white_arrow.png" type="Texture" id=3]
 [ext_resource path="res://interfaces/store/store_item.gd" type="Script" id=4]
-[ext_resource path="res://models/washer/sprite.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -231,7 +230,6 @@ wait_time = 0.8
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 84, 45 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 5 )
 hframes = 2
 vframes = 3
 frame = 5
