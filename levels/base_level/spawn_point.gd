@@ -171,6 +171,7 @@ func adjust_difficulty() -> void:
     max_customers = ratings_count - 2
     next_customer_max += 2
   elif average_score <= 0.25:
+# warning-ignore:narrowing_conversion
     max_customers = max(ratings_count - 4, 2)
     next_customer_max = min(30, next_customer_max + 4)
   

@@ -38,7 +38,6 @@ func _on_day_over() -> void:
     return
   state = State.DAY_OVER
   stop()
-  #$HUD.show_day_end($MoneyLabel.money, prev_balance, day_count)
 
 
 func stop() -> void:
@@ -53,7 +52,6 @@ func _on_new_day() -> void:
   cat.start()
   player.reset()
   player.enable_movement(true)
-  #prev_balance = $MoneyLabel.money
 
 
 func _on_restart() -> void:
@@ -84,7 +82,6 @@ func _on_game_over():
   print("game over signal received at root")
   state = State.GAME_OVER
   stop()
-  #$HUD.show_game_over($MoneyLabel.money)
 
 
 func _on_Toy_new_destination(new_pos):
