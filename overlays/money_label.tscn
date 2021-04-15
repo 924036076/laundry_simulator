@@ -12,7 +12,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="GDScript" id=2]
 script/source = "extends RichTextLabel
 
-export var money := 0
+var money := 0
 var daily_earnings := []
 
 
@@ -20,6 +20,12 @@ func _ready():
   money = GameLogic.get_player_money()
   format_money()
   EventHub.connect(\"money_updated\", self, \"_on_money_updated\")
+  EventHub.connect(\"money_reset\", self, \"_on_money_reset\")
+
+
+func _on_money_reset(new_value):
+  money = new_value
+  format_money()
 
 
 func _on_money_updated(new_value):
@@ -39,7 +45,7 @@ func _on_add_money(addition : float):
     color_string = \"[color=#5dff67]\"
   else:
     color_string = \"[color=red]\"
-  
+
   format_money(\"[wave]\" + color_string)
   $AudioStreamPlayer.play()
 

@@ -158,6 +158,11 @@ func set_player_money(new_money):
   EventHub.emit_signal("money_updated", money)
 
 
+func reset_player_money(new_money):
+  money = new_money
+  EventHub.emit_signal("money_reset", money)
+
+
 func get_unlocked_store_inventory():
   var unlocked_dic = {}
   for key in unlocked_items:
@@ -208,6 +213,7 @@ func _ready():
   EventHub.connect("add_money", self, "_on_add_money")
   EventHub.connect("new_game", self, "_on_new_game")
   EventHub.connect("new_day", self, "_on_new_day")
+  EventHub.connect("tutorial_started", self, "_on_tutorial_started")
 
 
 func _on_day_over():
@@ -222,8 +228,12 @@ func _on_new_day():
 
 
 func _on_new_game():
-  set_player_money(0)
+  reset_player_money(0)
   previous_balance = 0
+
+
+func _on_tutorial_started():
+  reset_player_money(74998)
 
 
 func get_probability_dist():
