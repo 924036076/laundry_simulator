@@ -10,10 +10,6 @@ const WASHERS = {
     "time": 5.0,
     "level": 1
   },
-  "reasonable_washer": {
-    "time": 3.0,
-    "level": 2
-  }
 }
 
 const DRYERS = {
@@ -80,19 +76,6 @@ const STORE_ITEMS = {
     "description" : "Painfully unhip, but reliable and cuddly.",
     "price" : 650,
    },
-  "reasonable_dryer" :
-    {
-    "sprite_info" : {
-      "path" : "res://models/dryer/sprite.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : 2,
-      "frame" : 5
-      },
-    "display_name" : "Alvin 2",
-    "description" : "Painfully unhip, but reliable and cuddly.",
-    "price" : 650,
-   },
  }
 
 var unlocked_items = [
@@ -108,7 +91,6 @@ var store_inventory = {
 var player_inventory = {
   "basic_toy" : 1,
   "basic_washer" : 1,
-  #"reasonable_washer" : 1,
   "basic_dryer" : 1
  }
 
@@ -125,6 +107,7 @@ func get_unlocked_store_inventory():
 func get_player_machines() -> Dictionary:
   var washers := {}
   var dryers := {}
+  # TODO add counters
   for item in player_inventory:
     if item in WASHERS:
       washers[item] = {

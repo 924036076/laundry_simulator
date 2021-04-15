@@ -24,12 +24,6 @@ func sort_machines(owned:Dictionary) -> Array:
   items.sort_custom(MachineSorter, "sort_descending_levels")
   return items
 
-# auto incrementing count
-var count := 0 setget ,get_count
-
-func get_count() -> int:
-  count += 1
-  return count
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +32,8 @@ func _ready() -> void:
 
 func _refresh_machines() -> void:
   var owned_machines := GameLogic.get_player_machines()
-  var groups := ["washers", "dryers"] #, "counters"]
+  # TODO: Add counters
+  var groups := ["washers", "dryers"]
   for g in groups:
     var machines := get_tree().get_nodes_in_group(g)
     var sorted_owned := sort_machines(owned_machines[g])
