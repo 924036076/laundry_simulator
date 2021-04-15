@@ -33,8 +33,20 @@ func _on_money_updated(new_value):
   _on_add_money(difference)
 
 
+func _format_currency(value):
+  var v := int(value)
+  var parts := PoolStringArray()
+  while v >= 1000:
+    parts.append(str(v % 1000))
+    v = v / 1000
+  if v > 0:
+    parts.append(str(v))
+  parts.invert()
+  return \"$\" + parts.join(\",\")
+
+
 func format_money(effect = \"\"):
-  set_bbcode(\"[right]\" + effect + \"$\" + str(money))
+  set_bbcode(\"[right]\" + effect + _format_currency(money))
 
 
 func _on_add_money(addition : float):
