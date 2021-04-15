@@ -27,6 +27,7 @@ func sort_machines(owned:Dictionary) -> Array:
 
 func _ready() -> void:
   _refresh_machines()
+  EventHub.connect("inventory_updated", self, "_on_inventory_updated")
 
 
 func _refresh_machines() -> void:
@@ -38,13 +39,12 @@ func _refresh_machines() -> void:
     var num_machines_to_slot = min(len(machines), len(sorted_owned))
     for i in range(num_machines_to_slot):
       machines[i].show()
-      machines[i].load_params(sorted_owned[i]["params"])
+      machines[i].load_state(sorted_owned[i])
     for i in range(num_machines_to_slot, len(machines)):
       machines[i].hide()
 
 
-# TODO: Properly connect to purchasing
-func _on_purchase(purchase_info: Dictionary) -> void:
+func _on_inventory_updated() -> void:
   # TODO: check if the change affects us before trying to refresh the machines
   _refresh_machines()
 

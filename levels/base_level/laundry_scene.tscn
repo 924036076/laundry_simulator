@@ -1091,7 +1091,7 @@ __meta__ = {
 navpoly = SubResource( 22 )
 
 [node name="Machines" type="YSort" parent="Map"]
-pause_mode = 1
+pause_mode = 2
 position = Vector2( 0.0676003, 92.5666 )
 script = ExtResource( 19 )
 

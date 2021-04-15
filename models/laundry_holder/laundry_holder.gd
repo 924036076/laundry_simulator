@@ -33,5 +33,6 @@ func reset() -> void:
 
 
 # subclasses can override this to handle changing appearance and behavior
-func load_params(params:Dictionary) -> void:
+func load_state(_state:Dictionary) -> void:
   pass
+
