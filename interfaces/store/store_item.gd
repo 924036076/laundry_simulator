@@ -38,11 +38,10 @@ func init(key, dictionary):
 
 
 func check_can_purchase(funds):
-  if funds < price or stocked_items <= 0:
-    $Button.disabled = true
-  else:
-    $Button.disabled = false
-    
+  var out_of_stock = stocked_items <= 0
+  var insufficient_funds = funds < price
+  $Button.disabled = out_of_stock or insufficient_funds
+
 
 func buy():
   $Owned/Amount.bbcode_text = "[shake level=10]" + str(owned)

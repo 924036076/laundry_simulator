@@ -3,7 +3,7 @@ var customers = ["young_man"]
 var weights = [10]
 var prob_dist = [1]
 var day := 1
-var money := 67 setget set_player_money, get_player_money
+var money := 0 setget set_player_money, get_player_money
 var previous_balance
 
 enum ItemType{MACHINE, CONSUMABLE}
