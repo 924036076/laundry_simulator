@@ -1291,6 +1291,7 @@ pause_mode = 1
 
 [node name="CardDisplay" parent="CardHolder" instance=ExtResource( 15 )]
 visible = false
+
 [connection signal="mischief_wanted" from="Map/Objects/Cat" to="." method="_on_Cat_mischief_wanted"]
 [connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
