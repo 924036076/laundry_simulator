@@ -1118,7 +1118,9 @@ rotation = -0.00659965
 position = Vector2( 697.396, 54.2833 )
 rotation = -0.00659965
 
-[node name="LintMachine" parent="Map/Machines" instance=ExtResource( 34 )]
+[node name="LintMachine" parent="Map/Machines" groups=[
+"linters",
+] instance=ExtResource( 34 )]
 position = Vector2( 818.953, 61.1402 )
 rotation = -0.00659965
 
@@ -1203,6 +1205,8 @@ navNodePath = NodePath("../../Navigation2D")
 [node name="ToyHolder" parent="Map" instance=ExtResource( 37 )]
 position = Vector2( 323.851, 106.628 )
 gravity = 98.0
+
+[node name="YSort" type="YSort" parent="Map"]
 
 [node name="MoneyLabel" parent="." instance=ExtResource( 7 )]
 margin_left = 777.476

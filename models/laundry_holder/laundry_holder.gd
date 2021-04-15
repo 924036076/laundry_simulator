@@ -17,17 +17,21 @@ func load_laundry(laundry_in : Node2D) -> void:
 
 func unload_laundry() -> Node2D:
   if !laundry: return null
-  
+
   var laundry_to_give = laundry
   laundry_parent.remove_child(laundry)
   laundry = null
   laundry_available = false
   return laundry_to_give
 
-    
+
 func reset() -> void:
   if laundry:
     laundry.queue_free()
   laundry = null
   laundry_available = false
 
+
+# subclasses can override this to handle changing appearance and behavior
+func load_params(params:Dictionary) -> void:
+  pass

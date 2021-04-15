@@ -28,6 +28,19 @@ const DRYERS = {
   }
 }
 
+const LINTERS = {
+  "basic_linter": {
+    "time": 5.0,
+    "level": 1
+  }
+}
+
+const COUNTERS = {
+  "basic_counter": {
+    "level": 1
+  }
+}
+
 const STORE_ITEMS = {
   "basic_toy" :
     {
@@ -84,23 +97,55 @@ const STORE_ITEMS = {
     "description" : "Painfully unhip, but reliable and cuddly.",
     "price" : 650,
     "type" : ItemType.MACHINE
-   }
+   },
+  "basic_linter" :
+    {
+    "sprite_info" : {
+      "path" : "res://models/lint_machine/machine_sprite_sheets/0.png",
+      "hframes" : 7,
+      "vframes" : 1,
+      "scale" : Vector2(2,2),
+      "frame" : 5
+      },
+    "display_name" : "Geoffrey",
+    "description" : "Meticulous deflufferizer",
+    "price" : 1500,
+    "type" : ItemType.MACHINE
+   },
+  "basic_counter":
+    {
+    "sprite_info" : {
+      "path" : "res://models/counter/sprite.png",
+      "hframes" : 2,
+      "vframes" : 2,
+      "scale" : Vector2(2,2),
+      "frame" : 3
+      },
+    "display_name" : "shoyo hinata",
+    "description" : "super eager fast moving short puppeh",
+    "price" : 500,
+    "type" : ItemType.MACHINE
+  }
  }
 
 var unlocked_items = [
-  "basic_toy"
+  "basic_toy",
 ]
 
 var store_inventory = {
   "basic_toy" : INF,
   "basic_washer" : 1,
-  "basic_dryer" : 1
+  "basic_dryer" : 1,
+  "basic_linter" : 1,
+  "basic_counter" : 3,
  }
 
 var player_inventory = {
   "basic_toy" : 1,
   "basic_washer" : 1,
-  "basic_dryer" : 1
+  "basic_dryer" : 1,
+  "basic_linter": 0,
+  "basic_counter" : 1,
  }
 
 
@@ -125,7 +170,8 @@ func get_unlocked_store_inventory():
 func get_player_machines() -> Dictionary:
   var washers := {}
   var dryers := {}
-  # TODO add counters
+  var linters := {}
+  var counters := {}
   for item in player_inventory:
     if item in WASHERS:
       washers[item] = {
@@ -137,9 +183,21 @@ func get_player_machines() -> Dictionary:
         "amount": player_inventory[item],
         "params": DRYERS[item]
       }
+    elif item in COUNTERS:
+      counters[item] = {
+        "amount": player_inventory[item],
+        "params": COUNTERS[item]
+      }
+    elif item in LINTERS:
+      linters[item] = {
+        "amount": player_inventory[item],
+        "params": LINTERS[item]
+      }
   var machines := {
     "washers": washers,
-    "dryers": dryers
+    "dryers": dryers,
+    "linters": linters,
+    "counters": counters,
   }
   return machines
 
