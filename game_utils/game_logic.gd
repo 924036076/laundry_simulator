@@ -3,9 +3,28 @@ var customers = ["young_man"]
 var weights = [10]
 var prob_dist = [1]
 
+#TODO: confirm name for reasonable washer/dryer
+
+const WASHERS = {
+  "basic_washer": {
+    "time": 5.0,
+    "level": 1
+  },
+}
+
+const DRYERS = {
+  "basic_dryer": {
+    "time": 5.0,
+    "level": 1
+  },
+  "reasonable_dryer": {
+    "time": 5.0,
+    "level": 2
+  }
+}
 
 const STORE_ITEMS = {
-  "basic_toy" : 
+  "basic_toy" :
     {
     "sprite_info" : {
       "path" : "res://models/toy/mouse-sheet.png",
@@ -18,7 +37,7 @@ const STORE_ITEMS = {
     "description" : "Distract the cat with the good stuff",
     "price" : 25
    },
-  "basic_washer" : 
+  "basic_washer" :
     {
     "sprite_info" : {
       "path" : "res://models/washer/sprite.png",
@@ -29,9 +48,22 @@ const STORE_ITEMS = {
       },
     "display_name" : "Maude",
     "description" : "Not much to look at, but she gets the job done.",
-    "price" : 500
+    "price" : 500,
    },
-  "basic_dryer" : 
+  "reasonable_washer" :
+    {
+    "sprite_info" : {
+      "path" : "res://models/washer/sprite.png",
+      "h_frames" : 2,
+      "v_frames" : 3,
+      "scale" : 2,
+      "frame" : 5
+      },
+    "display_name" : "Maude 2",
+    "description" : "Not much to look at, but she gets the job done.",
+    "price" : 500,
+   },
+  "basic_dryer" :
     {
     "sprite_info" : {
       "path" : "res://models/dryer/sprite.png",
@@ -42,12 +74,12 @@ const STORE_ITEMS = {
       },
     "display_name" : "Alvin",
     "description" : "Painfully unhip, but reliable and cuddly.",
-    "price" : 650
-   }
+    "price" : 650,
+   },
  }
 
 var unlocked_items = [
-  "basic_toy" 
+  "basic_toy"
 ]
 
 var store_inventory = {
@@ -72,6 +104,28 @@ func get_unlocked_store_inventory():
   return unlocked_dic
 
 
+func get_player_machines() -> Dictionary:
+  var washers := {}
+  var dryers := {}
+  # TODO add counters
+  for item in player_inventory:
+    if item in WASHERS:
+      washers[item] = {
+        "amount": player_inventory[item],
+        "params": WASHERS[item]
+      }
+    elif item in DRYERS:
+      dryers[item] = {
+        "amount": player_inventory[item],
+        "params": DRYERS[item]
+      }
+  var machines := {
+    "washers": washers,
+    "dryers": dryers
+  }
+  return machines
+
+
 func _ready():
   EventHub.connect("day_over", self, "_on_day_over")
 
@@ -93,10 +147,10 @@ func get_customer_list():
 
 func calculate_probability_dist():
   var total = 0.0
-  
+
   for i in len(customers):
     total += weights[i]
-  
+
   prob_dist = []
   var count = 0
   for i in len(customers):
@@ -111,7 +165,7 @@ func add_customer(customer_name, weight):
     if weights[index] != weight:
       weights[index] = weight
     return
-    
+
   customers.append(customer_name)
   weights.append(weight)
   calculate_probability_dist()

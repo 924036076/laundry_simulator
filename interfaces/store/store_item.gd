@@ -9,7 +9,7 @@ var cost := 200
 
 
 func _ready():
-  set_button() 
+  set_button()
   # TODO: load stock, price info
 
 

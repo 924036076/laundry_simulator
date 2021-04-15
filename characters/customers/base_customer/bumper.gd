@@ -44,7 +44,7 @@ func disallowed_action() -> void:
 
 
 func modulate() -> void:
-  if interactable and (mouse_over or is_target): 
+  if interactable and (mouse_over or is_target):
     emit_signal("modulate", selected_modulation)
-  else: 
+  else:
     emit_signal("modulate", default_modulation)

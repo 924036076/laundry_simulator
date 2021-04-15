@@ -53,5 +53,4 @@ margin_bottom = 140.052
 [node name="Cat" parent="." instance=ExtResource( 7 )]
 pause_mode = 0
 position = Vector2( 437.322, 292.927 )
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
