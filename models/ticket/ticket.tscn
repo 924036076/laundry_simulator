@@ -3,6 +3,7 @@
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/ticket/sprite.png" type="Texture" id=2]
 
+
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 1 )
