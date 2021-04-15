@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://models/washer/sprite.png" type="Texture" id=1]
+[ext_resource path="res://models/washer/basic_washer.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/washer/washer.gd" type="Script" id=3]
 [ext_resource path="res://models/washer/washerLoop.wav" type="AudioStream" id=4]
@@ -166,8 +166,8 @@ bus = "soundfx"
 [node name="Sprite" type="Sprite" parent="." index="4"]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
-vframes = 3
 hframes = 2
+vframes = 3
 frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
@@ -191,4 +191,5 @@ visible = false
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="11"]
 occluder = SubResource( 14 )
+
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]
