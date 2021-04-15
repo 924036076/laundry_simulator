@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 export (PackedScene) var StoreItem
 onready var item_parent = $NinePatchRect/ScrollContainer/VBoxContainer
