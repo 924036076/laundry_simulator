@@ -7,6 +7,8 @@ var overlay : Control
 func _ready() -> void:
   show_title_screen()
   EventHub.connect("restart", self, "_on_restart")
+  EventHub.connect("game_over", self, "_on_game_over")
+  EventHub.connect("day_over", self, "_on_day_over")
 
 
 func check_high_score(score: int) -> void:
@@ -43,6 +45,14 @@ func hide_overlay() -> void:
     overlay.queue_free()
 
 
+func _on_day_over():
+  var total_money = GameLogic.get_player_money()
+  var previous_balance = GameLogic.get_previous_balance()
+  var day_count = GameLogic.get_day_count()
+  
+  call_deferred("show_day_end", total_money, previous_balance, day_count)
+
+
 func show_day_end(total : int, prev_balance : int, day_count : int):
   if is_instance_valid(overlay):
     if overlay.get_name() == "DayEndScreen":
@@ -71,5 +81,5 @@ func _on_restart():
   show_title_screen()
 
 
-
-  
+func _on_game_over():
+  show_game_over(GameLogic.get_player_money())

@@ -2,6 +2,11 @@ extends Node
 var customers = ["young_man"]
 var weights = [10]
 var prob_dist = [1]
+var day := 1
+var money := 0 setget set_player_money, get_player_money
+var previous_balance
+
+enum ItemType{MACHINE, CONSUMABLE}
 
 #TODO: confirm name for reasonable washer/dryer
 
@@ -28,27 +33,29 @@ const STORE_ITEMS = {
     {
     "sprite_info" : {
       "path" : "res://models/toy/mouse-sheet.png",
-      "h_frames" : 3,
-      "v_frames" : 1,
-      "scale" : 3,
+      "hframes" : 3,
+      "vframes" : 1,
+      "scale" : Vector2(3,3),
       "frame" : 0
       },
     "display_name" : "Squeakers",
     "description" : "Distract the cat with the good stuff",
-    "price" : 25
+    "price" : 25,
+    "type" : ItemType.CONSUMABLE
    },
   "basic_washer" :
     {
     "sprite_info" : {
       "path" : "res://models/washer/sprite.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : 2,
+      "hframes" : 2,
+      "vframes" : 3,
+      "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Maude",
     "description" : "Not much to look at, but she gets the job done.",
     "price" : 500,
+    "type" : ItemType.MACHINE
    },
   "reasonable_washer" :
     {
@@ -56,26 +63,28 @@ const STORE_ITEMS = {
       "path" : "res://models/washer/sprite.png",
       "h_frames" : 2,
       "v_frames" : 3,
-      "scale" : 2,
+      "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Maude 2",
     "description" : "Not much to look at, but she gets the job done.",
-    "price" : 500,
+    "price" : 1200,
+    "type" : ItemType.MACHINE
    },
   "basic_dryer" :
     {
     "sprite_info" : {
       "path" : "res://models/dryer/sprite.png",
-      "h_frames" : 2,
-      "v_frames" : 3,
-      "scale" : 2,
+      "hframes" : 2,
+      "vframes" : 3,
+      "scale" : Vector2(2,2),
       "frame" : 5
       },
     "display_name" : "Alvin",
     "description" : "Painfully unhip, but reliable and cuddly.",
     "price" : 650,
-   },
+    "type" : ItemType.MACHINE
+   }
  }
 
 var unlocked_items = [
@@ -93,6 +102,15 @@ var player_inventory = {
   "basic_washer" : 1,
   "basic_dryer" : 1
  }
+
+
+func get_player_money():
+  return money
+
+
+func set_player_money(new_money):
+  money = new_money
+  EventHub.emit_signal("money_updated", money)
 
 
 func get_unlocked_store_inventory():
@@ -128,6 +146,10 @@ func get_player_machines() -> Dictionary:
 
 func _ready():
   EventHub.connect("day_over", self, "_on_day_over")
+  EventHub.connect("item_purchased", self, "_on_item_purchased")
+  EventHub.connect("add_money", self, "_on_add_money")
+  EventHub.connect("new_game", self, "_on_new_game")
+  EventHub.connect("new_day", self, "_on_new_day")
 
 
 func _on_day_over():
@@ -137,8 +159,25 @@ func _on_day_over():
     add_customer("old_lady", 5)
 
 
+func _on_new_day():
+  previous_balance = money
+
+
+func _on_new_game():
+  set_player_money(0)
+  previous_balance = 0
+
+
 func get_probability_dist():
   return prob_dist
+
+
+func get_day_count():
+  return day
+
+
+func get_previous_balance():
+  return previous_balance
 
 
 func get_customer_list():
@@ -169,3 +208,15 @@ func add_customer(customer_name, weight):
   customers.append(customer_name)
   weights.append(weight)
   calculate_probability_dist()
+
+
+func _on_add_money(amount):
+  set_player_money(money + amount)
+
+
+func _on_item_purchased(item_key, amount = 1):
+  EventHub.emit_signal("add_money", -STORE_ITEMS[item_key]["price"] * amount)
+  if player_inventory.has(item_key):
+    player_inventory[item_key] = player_inventory[item_key] + amount
+    store_inventory[item_key] = store_inventory[item_key] - amount
+  # TODO: send signal to update store values

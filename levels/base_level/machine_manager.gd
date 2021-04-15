@@ -19,7 +19,7 @@ func sort_machines(owned:Dictionary) -> Array:
     var item := copy_dict(owned[key])
     item["id"] = key
     item.erase("amount")
-    for i in range(owned[key]["amount"]):
+    for _i in range(owned[key]["amount"]):
       items.append(item)
   items.sort_custom(MachineSorter, "sort_descending_levels")
   return items

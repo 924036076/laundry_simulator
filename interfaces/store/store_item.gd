@@ -1,38 +1,63 @@
 extends Control
 export var description = "default description for a default item"
 
-var out_of_stock := false
+var id := ""
+var type
 const stocked_text := "BUY"
 const out_of_stock_text := "OUT OF STOCK"
-var stocked_items := 10
-var cost := 200
+var price := 200.0
+var stocked_items := 0.0
+var owned := 0
 
 
 func _ready():
   set_button()
-  # TODO: load stock, price info
+
+
+func init(key, dictionary):
+  id = key
+  
+  print(dictionary)
+  var sprite_info = dictionary["sprite_info"]
+  $Sprite.texture = load(sprite_info["path"])
+  $Sprite.hframes = sprite_info["hframes"]
+  $Sprite.vframes = sprite_info["vframes"]
+  $Sprite.frame = sprite_info["frame"]
+  $Sprite.scale = sprite_info["scale"]
+
+  type = dictionary["type"]
+  description = dictionary["display_name"] + ": " + dictionary["description"]
+  price = dictionary["price"]
+  stocked_items = dictionary["amount"]
+  owned = dictionary["owned"]
+
+  $Owned/Amount.bbcode_text = str(owned)
+  $Price/Amount.text = "$" + str(price)
+
+  set_button()
+
+
+func check_can_purchase(funds):
+  var out_of_stock = stocked_items <= 0
+  var insufficient_funds = funds < price
+  $Button.disabled = out_of_stock or insufficient_funds
 
 
 func buy():
-  $HBoxContainer/Label2.bbcode_text = "[shake level=10]" + str(stocked_items)
-  EventHub.emit_signal("add_money", -cost)
+  $Owned/Amount.bbcode_text = "[shake level=10]" + str(owned)
+  EventHub.emit_signal("item_purchased", id)
   $Timer.start()
-
-
-func _on_StoreItem_mouse_entered():
-  pass
-  #EventHub.emit_signal("interactable_broadcasted", description)
 
 
 func _on_StoreItem_gui_input(event):
   if event.is_action_pressed("click"):
     EventHub.emit_signal("interactable_broadcasted", description)
-  if event.is_action_pressed("ui_accept"):
+  if event.is_action_pressed("ui_accept") and !$Button.disabled: # TODO: add noise/effect when trying to purchase with insufficient funds
     buy()
 
 
 func set_button():
-  if out_of_stock:
+  if stocked_items <= 0:
     $Button.text = out_of_stock_text
     $Button.disabled = true
   else:
@@ -50,4 +75,12 @@ func _on_StoreItem_focus_exited():
 
 
 func _on_Timer_timeout():
-  $HBoxContainer/Label2.bbcode_text = str(stocked_items)
+  $Owned/Amount.bbcode_text = str(owned)
+
+
+func _on_Button_pressed():
+  buy()
+
+
+func _on_StoreItem_mouse_entered():
+  EventHub.emit_signal("interactable_broadcasted", description)

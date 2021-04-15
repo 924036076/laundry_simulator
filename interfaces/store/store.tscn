@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interfaces/ninepatchtest2.png" type="Texture" id=2]
 [ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interfaces/store/store_item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interfaces/store/store.gd" type="Script" id=5]
+[ext_resource path="res://overlays/money_label.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -29,6 +30,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+StoreItem = ExtResource( 4 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_left = 0.5
@@ -64,23 +66,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/ScrollContainer"]
 margin_right = 300.0
-margin_bottom = 370.0
+margin_bottom = 310.0
 rect_min_size = Vector2( 300, 310 )
 custom_constants/separation = 17
-alignment = 1
-
-[node name="StoreItem2" parent="NinePatchRect/ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
-description = "Mouse toy: distract the cat!"
-
-[node name="StoreItem3" parent="NinePatchRect/ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 129.0
-margin_bottom = 241.0
-description = "store item 3"
-
-[node name="StoreItem4" parent="NinePatchRect/ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 258.0
-margin_bottom = 370.0
-description = "store item 4"
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( 83, 0 )
@@ -109,7 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CheckBox" type="CheckBox" parent="Label/VBoxContainer"]
+[node name="All" type="CheckBox" parent="Label/VBoxContainer"]
 margin_right = 152.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 2 )
@@ -118,12 +106,23 @@ custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 pressed = true
 group = SubResource( 3 )
-text = "machines"
+text = "all"
 
-[node name="CheckBox2" type="CheckBox" parent="Label/VBoxContainer"]
+[node name="MachineCheck" type="CheckBox" parent="Label/VBoxContainer"]
 margin_top = 34.0
 margin_right = 152.0
 margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+group = SubResource( 3 )
+text = "machines"
+
+[node name="ConsumableCheck" type="CheckBox" parent="Label/VBoxContainer"]
+margin_top = 68.0
+margin_right = 152.0
+margin_bottom = 98.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.290196, 0.290196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -168,4 +167,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MoneyLabel" parent="." instance=ExtResource( 6 )]
+margin_left = 337.476
+margin_top = -281.717
+margin_right = 487.476
+margin_bottom = -251.717
+money = 60
+
+[connection signal="pressed" from="Label/VBoxContainer/All" to="." method="_on_All_pressed"]
+[connection signal="pressed" from="Label/VBoxContainer/MachineCheck" to="." method="_on_MachineCheck_pressed"]
+[connection signal="pressed" from="Label/VBoxContainer/ConsumableCheck" to="." method="_on_ConsumableCheck_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
