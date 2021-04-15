@@ -54,11 +54,13 @@ func dehairify() -> void:
 func wash() -> void:
   dirty = false
   wet = true
+  folded = false
   update_visuals()
 
 
 func dry() -> void:
   wet = false
+  folded = false
   update_visuals()
 
 
