@@ -146,7 +146,6 @@ tracks/1/keys = {
 extents = Vector2( 41.1771, 47.3758 )
 
 [node name="LintMachine" instance=ExtResource( 1 )]
-gravity = 0.0
 script = ExtResource( 3 )
 
 [node name="Timer" parent="." index="0"]
@@ -166,7 +165,6 @@ parameters/StateMachine/playback = SubResource( 5 )
 stream = null
 
 [node name="Sprite" parent="." index="4"]
-position = Vector2( 0, 0 )
 texture = ExtResource( 4 )
 hframes = 7
 vframes = 1
@@ -176,16 +174,6 @@ frame = 0
 position = Vector2( -7.55099, 0.707905 )
 shape = SubResource( 6 )
 
-[node name="InteractableParticles" type="CPUParticles2D" parent="." index="6"]
-visible = false
-amount = 20
-lifetime = 0.3
-emission_shape = 1
-emission_sphere_radius = 15.0
-gravity = Vector2( 0, 0 )
-angular_velocity = 0.2
-angular_velocity_random = 0.32
-
 [node name="ClothesSprite" type="Sprite" parent="." index="7"]
 visible = false
 scale = Vector2( 3, 3 )
@@ -193,5 +181,5 @@ texture = ExtResource( 2 )
 hframes = 8
 frame = 3
 
-[node name="LaundryParent" parent="." index="8"]
+[node name="LaundryParent" parent="." index="10"]
 position = Vector2( -12.0416, 30.4956 )

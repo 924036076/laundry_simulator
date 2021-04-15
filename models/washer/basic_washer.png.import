@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite.png-261e2d79f6d48d99e5b7e751b61e142a.stex"
+path="res://.import/basic_washer.png-4590bde82d862e27ccb7456934e6e204.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/dryer/sprite.png"
-dest_files=[ "res://.import/sprite.png-261e2d79f6d48d99e5b7e751b61e142a.stex" ]
+source_file="res://models/washer/basic_washer.png"
+dest_files=[ "res://.import/basic_washer.png-4590bde82d862e27ccb7456934e6e204.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
