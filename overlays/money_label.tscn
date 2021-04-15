@@ -44,6 +44,7 @@ func _format_currency(value):
   parts.invert()
   return \"$\" + parts.join(\",\")
 
+
 func format_money(effect = \"\"):
   set_bbcode(\"[right]\" + effect + _format_currency(money))
 
