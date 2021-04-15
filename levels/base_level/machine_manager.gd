@@ -27,6 +27,7 @@ func sort_machines(owned:Dictionary) -> Array:
 
 func _ready() -> void:
   _refresh_machines()
+  EventHub.connect("inventory_updated", self, "_on_inventory_updated")
 
 
 func _refresh_machines() -> void:
@@ -43,8 +44,7 @@ func _refresh_machines() -> void:
       machines[i].hide()
 
 
-# TODO: Properly connect to purchasing
-func _on_purchase(purchase_info: Dictionary) -> void:
+func _on_inventory_updated() -> void:
   # TODO: check if the change affects us before trying to refresh the machines
   _refresh_machines()
 

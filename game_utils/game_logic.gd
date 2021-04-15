@@ -117,43 +117,43 @@ const STORE_ITEMS = {
   "basic_washer" : {
     "display_name" : "Maude",
     "description" : "Not much to look at, but she gets the job done.",
-    "price" : 500,
+    "price" : 5,
     "type" : ItemType.MACHINE,
   },
   "reasonable_washer" : {
     "display_name" : "Maude 2",
     "description" : "So much better than Maude.",
-    "price" : 1200,
+    "price" : 12,
     "type" : ItemType.MACHINE,
   },
   "basic_dryer" : {
     "display_name" : "Alvin",
     "description" : "Painfully unhip, but reliable and cuddly.",
-    "price" : 650,
+    "price" : 6,
     "type" : ItemType.MACHINE,
   },
   "reasonable_dryer": {
     "display_name": "Alvin 2",
     "description": "Even more unhip",
-    "price": 1300,
+    "price": 13,
     "type": ItemType.MACHINE,
   },
   "basic_linter" : {
     "display_name" : "Geoffrey",
     "description" : "Meticulous deflufferizer",
-    "price" : 1500,
+    "price" : 15,
     "type" : ItemType.MACHINE,
   },
   "basic_counter": {
     "display_name" : "shoyo hinata",
     "description" : "super eager fast moving short puppeh",
-    "price" : 500,
+    "price" : 5,
     "type" : ItemType.MACHINE,
   },
   "reasonable_counter": {
     "display_name" : "shoyo hinata 2",
     "description" : "super eager fast moving short puppeh",
-    "price" : 2500,
+    "price" : 25,
     "type" : ItemType.MACHINE,
   },
 }
@@ -181,8 +181,7 @@ var store_inventory = {
 
 var player_inventory = {
   "basic_toy" : 1,
-  "basic_washer" : 2,
-  "reasonable_washer": 1,
+  "basic_washer" : 1,
   "basic_dryer" : 1,
   "basic_linter": 0,
   "basic_counter" : 1,
@@ -334,5 +333,7 @@ func _on_item_purchased(item_key, amount = 1):
   EventHub.emit_signal("add_money", -STORE_ITEMS[item_key]["price"] * amount)
   if player_inventory.has(item_key):
     player_inventory[item_key] = player_inventory[item_key] + amount
-    store_inventory[item_key] = store_inventory[item_key] - amount
+  else:
+    player_inventory[item_key] = amount
+  store_inventory[item_key] = store_inventory[item_key] - amount
   EventHub.emit_signal("inventory_updated")

@@ -38,6 +38,7 @@ func _format_currency(value):
   var parts := PoolStringArray()
   while v >= 1000:
     parts.append(str(v % 1000))
+# warning-ignore:integer_division
     v = v / 1000
   if v > 0 or len(parts) == 0:
     parts.append(str(v))
