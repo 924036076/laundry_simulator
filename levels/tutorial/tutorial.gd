@@ -47,7 +47,7 @@ func increment_state():
       state = State.FOLD
     State.FOLD_PICKUP:
       state = State.MOM_ENTRY_2
-    
+
 
 
 func _on_Timer_timeout():
@@ -79,7 +79,7 @@ func _on_Timer_timeout():
 
 func _on_money_added(_money):
   if computer_bool: return
-  
+
   computer_bool = true
   yield(get_tree().create_timer(normal_buffer), "timeout")
   state = State.ENDING

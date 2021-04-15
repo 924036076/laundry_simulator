@@ -1,8 +1,8 @@
 extends BaseCharacter
 class_name BaseCustomer
 
-var return_destination : Vector2 
-var register : Vector2 
+var return_destination : Vector2
+var register : Vector2
 var my_laundry : Node2D
 var score_multiplier := 30
 var expression_offset := Vector2(0, -83)
@@ -71,7 +71,7 @@ func drop_off() -> void:
   $Bumper.interactable = false
   $Bumper/HandPos/Ticket.visible = true
   my_laundry.show_ticket()
-  $Timer.start()	
+  $Timer.start()
   leave_store()
   $PatienceMeter.on_drop_off()
   var visits = Global.Customers[customer_name]["visits"]
@@ -87,7 +87,7 @@ func receive_order() -> void:
   assess_laundry()
   var expression = emote(cleanliness_pct)
   # TODO: work on scoring and cleaniness pct logic to be better; redo this
-  if $PatienceMeter.is_max() and cleanliness_pct >= 1: 
+  if $PatienceMeter.is_max() and cleanliness_pct >= 1:
     happy_buff()
   yield(expression, "animation_finished")
   show_money_earned(score * score_multiplier, cleanliness_pct)
@@ -150,7 +150,7 @@ func last_call() -> void:
 
 
 func decrement_patience() -> void:
-  if received_laundry or walking: 
+  if received_laundry or walking:
     return
   modify_patience_points(-1)
 
