@@ -39,7 +39,7 @@ func load_sprite_sheet():
 
 
 func new_lint_roll():
-  durability = 0 
+  durability = 0
   load_sprite_sheet()
 
 

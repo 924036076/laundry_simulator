@@ -42,7 +42,7 @@ func update_ui():
 
 
 func start():
-  $MinuteTimer.start()	
+  $MinuteTimer.start()
 
 
 func stop():

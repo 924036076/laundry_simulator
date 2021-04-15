@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://levels/base_level/hud.gd" type="Script" id=16]
 [ext_resource path="res://tilesets/grate_upper.png" type="Texture" id=17]
 [ext_resource path="res://characters/player/transfer.wav" type="AudioStream" id=18]
+[ext_resource path="res://levels/base_level/machine_manager.gd" type="Script" id=19]
 [ext_resource path="res://tilesets/walls.png" type="Texture" id=20]
 [ext_resource path="res://tilesets/counter_floor.png" type="Texture" id=21]
 [ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=24]
@@ -1055,7 +1056,6 @@ scale = Vector2( 2.90518, 2.67858 )
 tile_set = SubResource( 18 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 2
-show_collision = false
 format = 1
 tile_data = PoolIntArray( 0, 35, 0, 1, 35, 0, 2, 35, 0, 3, 35, 0, 4, 35, 0, 5, 35, 0, 6, 35, 0, 7, 35, 0, 8, 35, 0, 9, 35, 0, 10, 36, 0, 65536, 34, 0, 65537, 34, 0, 65538, 34, 0, 65539, 34, 0, 65540, 34, 0, 65541, 34, 0, 65542, 34, 0, 65543, 34, 0, 65544, 34, 0, 65545, 34, 0, 65546, 37, 0, 196607, 29, 0, 131072, 29, 0, 131073, 29, 0, 131074, 29, 0, 131075, 30, 0, 131076, 30, 0, 131077, 30, 0, 131078, 31, 0, 131079, 31, 0, 131080, 29, 0, 131081, 29, 0, 131082, 4, 0, 196608, 8, 0, 196609, 29, 0, 196610, 29, 0, 196611, 29, 0, 196612, 29, 0, 196613, 29, 0, 196614, 29, 0, 196615, 29, 0, 196616, 29, 0, 196617, 29, 0, 196618, 4, 0, 262144, 8, 0, 262145, 29, 0, 262146, 29, 0, 262147, 25, 0, 262148, 24, 0, 262149, 24, 0, 262150, 24, 0, 262151, 27, 0, 262152, 29, 0, 262153, 29, 0, 262154, 4, 0, 327680, 8, 0, 327681, 29, 0, 327682, 29, 0, 327683, 32, 0, 327684, 33, 0, 327685, 33, 0, 327686, 33, 0, 327687, 28, 0, 327688, 29, 0, 327689, 29, 0, 327690, 4, 0, 393216, 7, 0, 393217, 3, 0, 393218, 3, 0, 393219, 3, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 393225, 3, 0, 393226, 5, 0 )
 
@@ -1092,20 +1092,29 @@ navpoly = SubResource( 22 )
 [node name="Machines" type="YSort" parent="Map"]
 pause_mode = 1
 position = Vector2( 0.0676003, 92.5666 )
+script = ExtResource( 19 )
 
-[node name="Washer" parent="Map/Machines" instance=ExtResource( 2 )]
+[node name="Washer1" parent="Map/Machines" groups=[
+"washers",
+] instance=ExtResource( 2 )]
 position = Vector2( 418.046, 54.2833 )
 scale = Vector2( 1, 1 )
 
-[node name="Washer2" parent="Map/Machines" instance=ExtResource( 2 )]
+[node name="Washer2" parent="Map/Machines" groups=[
+"washers",
+] instance=ExtResource( 2 )]
 position = Vector2( 511.146, 54.2833 )
 scale = Vector2( 1, 1 )
 
-[node name="Dryer" parent="Map/Machines" instance=ExtResource( 4 )]
+[node name="Dryer1" parent="Map/Machines" groups=[
+"dryers",
+] instance=ExtResource( 4 )]
 position = Vector2( 604.296, 54.2833 )
 rotation = -0.00659965
 
-[node name="Dryer2" parent="Map/Machines" instance=ExtResource( 4 )]
+[node name="Dryer2" parent="Map/Machines" groups=[
+"dryers",
+] instance=ExtResource( 4 )]
 position = Vector2( 697.396, 54.2833 )
 rotation = -0.00659965
 
@@ -1278,7 +1287,6 @@ pause_mode = 1
 
 [node name="CardDisplay" parent="CardHolder" instance=ExtResource( 15 )]
 visible = false
-
 [connection signal="mischief_wanted" from="Map/Objects/Cat" to="." method="_on_Cat_mischief_wanted"]
 [connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
 [connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]

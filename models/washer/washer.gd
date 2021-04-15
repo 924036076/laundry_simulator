@@ -3,6 +3,8 @@ class_name Washer
 
 var state_machine : AnimationNodeStateMachinePlayback
 
+var time := 5.0
+var level := 1
 
 func _ready() -> void:
   ._ready()
@@ -14,7 +16,7 @@ func _ready() -> void:
 func load_laundry(laundry_in : Node2D) -> void:
   .load_laundry(laundry_in)
   if !laundry: return
-  
+
   if !can_run(): return
   _start_load()
 
@@ -29,12 +31,17 @@ func can_run() -> bool:
   return laundry.can_wash()
 
 
+func load_params(params:Dictionary) -> void:
+  time = params["time"]
+  level = params["level"]
+
+
 func _start_load() -> void:
   laundry.visible = false
   set_interactable(false)
   state_machine.travel("running")
   $AudioStreamPlayer.play()
-  $Timer.start()
+  $Timer.start(time)
 
 
 func _finish_load() -> void:

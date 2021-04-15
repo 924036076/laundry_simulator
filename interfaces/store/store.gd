@@ -45,20 +45,23 @@ func _on_ExitButton_pressed():
 
 func _on_ConsumableCheck_pressed():
   for child in item_parent.get_children():
-    if child.is_consumable:
+    if child.type == GameLogic.ItemType.CONSUMABLE:
       child.visible = true
     else:
       child.visible = false
+  $Description.visible = false
 
 
 func _on_MachineCheck_pressed():
   for child in item_parent.get_children():
-    if child.is_machine:
+    if child.type == GameLogic.ItemType.MACHINE:
       child.visible = true
     else:
       child.visible = false
+  $Description.visible = false
 
 
 func _on_All_pressed():
   for child in item_parent.get_children():
     child.visible = true
+  $Description.visible = false

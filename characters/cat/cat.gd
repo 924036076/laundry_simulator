@@ -29,12 +29,12 @@ func _ready() -> void:
   money_label_offset = Vector2(0, -65)
   speed = 75
   assert($AnimationTree.active == true, "cat's Animation Tree is not active")
-  
+
   if patrol_path:
     patrol_points = get_node(patrol_path).curve.get_baked_points()
   if desk_path:
     desk = get_node(desk_path)
-  
+
   rng.randomize()
 
 
@@ -45,7 +45,7 @@ func _on_toy_released(play_loc : Vector2) -> void:
   $WaitTimer.stop()
   $ThoughtBubble.hide()
   set_target_location(global_position)
-  
+
   animationState.travel("Idle")
   yield(self, "idle")
   animationState.travel("excited")
@@ -57,7 +57,7 @@ func _on_toy_destroyed():
     animationState.travel("disappointed")
   else:
     animationState.travel("sleep")
-    
+
 
 
 func _on_end_of_path() -> void:
@@ -97,7 +97,7 @@ func shed() -> void:
 
 func _on_jump_start() -> void:
   if !action_enabled: return
-  
+
   global_position = target + Vector2(0,43) # TODO: smarter jumping behavior; vanquish magic number
   state = State.SLEEP
   $AnimationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
@@ -112,7 +112,7 @@ func _on_jump_end() -> void:
 
 func _on_play_end() -> void:
   EventHub.emit_signal("play_ended")
-  
+
 
 
 func _on_WaitTimer_timeout() -> void:
@@ -123,7 +123,7 @@ func _on_WaitTimer_timeout() -> void:
       animationState.travel("Idle")
       yield(self, "idle")
       EventHub.emit_signal("leave_object", target_id)
-      
+
   if action_enabled:
     choose_action()
 
@@ -131,7 +131,7 @@ func _on_WaitTimer_timeout() -> void:
 func manage_mischief(counter_pos : Vector2, id : int) -> void:
   target = counter_pos
   target_id = id
-  
+
   if target == Vector2.ZERO:
     animationState.travel("disappointed")
   else:
@@ -154,20 +154,20 @@ func _on_done_reacting() -> void:
 
 func office_work() -> void:
   set_target_location(desk.global_position)
-  
-  
+
+
 func choose_action() -> void:
   if !action_enabled: return
   if state == State.PLAY: return
-  
+
   target_id = 0
   $ThoughtBubble.hide()
-  
+
   # Wait until sprite has reached idle animation
   animationState.travel("Idle")
   yield(self, "idle")
   if state == State.PLAY: return
-  
+
   # Decide on action based on cutoff values
   var random = rng.randi_range(0, 100)
   if random < patrol_cutoff:
@@ -200,22 +200,22 @@ func _on_done_thinking() -> void:
 func set_random_destination() -> void:
   var patrol_index = rng.randi_range(0,  patrol_points.size()-1)
   set_target_location(patrol_points[patrol_index])
-  
-  
+
+
 func stop() -> void:
   action_enabled = false
   $WaitTimer.stop()
   $ThoughtBubble.hide()
   state = State.SLEEP
   animationState.travel("sleep")
-    
-    
+
+
 func start() -> void:
   $ThoughtBubble.hide()
   action_enabled = true
   choose_action()
-  
-  
+
+
 func _emit_idle() -> void:
   # Called from idle animation
   emit_signal("idle")

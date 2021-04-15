@@ -67,13 +67,13 @@ func _on_Cat_mischief_wanted():
   # Give cat location of counter with laundry
   var location := Vector2.ZERO
   var id : int
-  
+
   # TODO: better way of selecting location
   # (Like randomly choosing an occupied counter or having preference for clean laundry)
   for counter in counters:
     if counter.laundry_available:
       location = counter.get_jump_launch_position()
-      id = counter.get_instance_id()	
+      id = counter.get_instance_id()
   cat.manage_mischief(location, id)
 
 
