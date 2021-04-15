@@ -219,4 +219,4 @@ func _on_item_purchased(item_key, amount = 1):
   if player_inventory.has(item_key):
     player_inventory[item_key] = player_inventory[item_key] + amount
     store_inventory[item_key] = store_inventory[item_key] - amount
-  # TODO: send signal to update store values
+  EventHub.emit_signal("inventory_updated")
