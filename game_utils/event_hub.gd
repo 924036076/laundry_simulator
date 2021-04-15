@@ -60,6 +60,7 @@ signal item_purchased
 # Game Logic signals
 signal new_inventory
 signal money_updated
+signal inventory_updated
 
 # Misc
 signal day_over # spawner and clock
