@@ -13,41 +13,60 @@ var initial_velocity : Vector2
 var bounce_time := 1.0
 var gravity := -1000
 var max_frame
-var kick_strength := 150
+var kick_strength := 200
 
 var count := 0.0
 var bounces := 0
 var max_bounces := 5
+
+var cat_in_range := false
 
 enum State{CAGED, IDLE, TORTURE, KICK, BOUNCE, DEATH}
 var state = State.CAGED
 
 
 func release():
-  bounce()
+  reparent_to_root()
+  call_deferred("bounce")
+  add_to_group("active_toys")
 
+
+func reparent_to_root():
+  var old_parent = get_parent()
+  var new_parent = get_tree().get_root()
+  var current_global = global_position
+  old_parent.remove_child(self)
+  new_parent.call_deferred("add_child", self)
+  global_position = current_global
 
 
 func _ready():
   max_frame = $Sprite.vframes * $Sprite.hframes - 1
-  EventHub.connect("play_started", self, "_on_cat_play_started")
-  EventHub.connect("play_ended", self, "_on_cat_play_ended")
+  EventHub.connect("mauling_started", self, "_on_cat_play_started")
+  EventHub.connect("mauling_ended", self, "_on_cat_play_ended")
+  EventHub.connect("new_day", self, "_on_new_day")
   rng = RandomNumberGenerator.new()
+  rng.randomize()
   set_process(false)
   $Squeak.pitch_scale = 1
 
 
 func _on_cat_play_started():
+  if !cat_in_range or state == State.CAGED: return
   state = State.TORTURE
   $AnimationPlayer.play("torture")
 
 
 func _on_cat_play_ended():
+  if !cat_in_range or state == State.CAGED: return
   decrement_durability()
   bounce()
 
 
 func _on_Toy_body_entered(body):
+  if body.is_in_group("cat"):
+    cat_in_range = true
+  
   match state:
     State.CAGED:
       return
@@ -68,6 +87,11 @@ func _on_Toy_body_entered(body):
   EventHub.emit_signal("toy_bounced_on_body", body)
 
 
+func _on_Toy_body_exited(body):
+  if body.is_in_group("cat"):
+    cat_in_range = false
+
+
 func decrement_durability():
   if $Sprite.frame == max_frame:
     die()
@@ -80,7 +104,10 @@ func die():
   $AnimationPlayer.play("death")
   $Squeak.pitch_scale = 0.4
   $Squeak.play()
-  
+
+
+func get_play_position() -> Vector2:
+  return destination + Vector2(0, height_offset)
 
 
 func calculate_random_dest():
@@ -125,7 +152,6 @@ func kick(kick_loc : Vector2) -> void:
   calculate_kicked_dest(kick_loc)
   calculate_initial_velocity()
   EventHub.emit_signal("toy_released", destination + Vector2(0, height_offset))
-  #EventHub.emit_signal("toy_released", destination + Vector2(0, height_offset))
   set_process(true)
 
 
@@ -153,10 +179,6 @@ func bounce() -> void:
 
 func _process(delta):
   count += delta
-  #var new_x = initial_velocity.x * delta + global_position.x
-  #var new_y = -0.5 * gravity * (2 * delta + delta*delta) \
-#				+ initial_velocity.y * delta  + global_position.y
-
   var new_x = initial_velocity.x*count + initial_position.x
   var new_y = -0.5*gravity*count*count + initial_velocity.y*count + initial_position.y
         
@@ -177,3 +199,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
   if anim_name == "death":
     EventHub.emit_signal("toy_destroyed")
     queue_free()
+
+
+func _on_new_day():
+  if state != State.CAGED: queue_free()

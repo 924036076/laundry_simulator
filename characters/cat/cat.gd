@@ -7,7 +7,7 @@ export (NodePath) var desk_path
 var desk : Node2D
 var patrol_points : PoolVector2Array
 var rng := RandomNumberGenerator.new()
-enum State {PATROL, SLEEP, WORK, PLAY, MISCHIEF, JUMPING}
+enum State {PATROL, SLEEP, WORK, PLAY, MAULING, MISCHIEF, JUMPING}
 var state = State.PATROL
 var patrol_cutoff := 10
 var sleep_cutoff := 30
@@ -39,7 +39,7 @@ func _ready() -> void:
 
 
 func _on_toy_released(play_loc : Vector2) -> void:
-  if state == State.JUMPING or state == State.SLEEP: return
+  if state == State.JUMPING or state == State.SLEEP or state == State.MAULING: return
   target = play_loc
   state = State.PLAY
   $WaitTimer.stop()
@@ -57,7 +57,6 @@ func _on_toy_destroyed():
     animationState.travel("disappointed")
   else:
     animationState.travel("sleep")
-
 
 
 func _on_end_of_path() -> void:
@@ -85,8 +84,9 @@ func handle_state_transition() -> void:
     State.PLAY:
       if target.distance_to(global_position) < 10:
         $AnimationTree.set("parameters/Idle/blend_position", Vector2(0, 1))
-        EventHub.emit_signal("play_started")
-        animationState.travel("play")
+        EventHub.emit_signal("mauling_started")
+        animationState.travel("maul")
+        state = State.MAULING
 
 
 func shed() -> void:
@@ -110,9 +110,9 @@ func _on_jump_end() -> void:
   $ThoughtBubble.hide()
 
 
-func _on_play_end() -> void:
-  EventHub.emit_signal("play_ended")
-
+func _on_mauling_end() -> void:
+  state = State.PLAY
+  EventHub.emit_signal("mauling_ended")
 
 
 func _on_WaitTimer_timeout() -> void:

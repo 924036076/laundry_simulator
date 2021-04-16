@@ -7,9 +7,11 @@ onready var cat : Cat = $Map/Objects/Cat
 var counters
 enum State {TITLE, GAME_OVER, DAY_OVER, PLAYING}
 var state = State.TITLE
+var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+  rng.randomize()
   counters = $Map/Objects/Counters.get_children()
   initialize_level()
   EventHub.connect("new_day", self, "_on_new_day")
@@ -65,6 +67,14 @@ func _on_Cat_mischief_wanted():
   # Give cat location of counter with laundry
   var location := Vector2.ZERO
   var id : int
+
+  # Cat will prefer toy to laundry 
+  var toys = get_tree().get_nodes_in_group("active_toys")
+  if toys.size() > 0:
+    var index = rng.randi_range(0, toys.size() - 1)
+    location = toys[index].get_play_position()
+    EventHub.emit_signal("toy_released", location)
+    return
 
   # TODO: better way of selecting location
   # (Like randomly choosing an occupied counter or having preference for clean laundry)
