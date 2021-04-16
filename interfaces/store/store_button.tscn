@@ -61,7 +61,7 @@ Store = ExtResource( 2 )
 
 [node name="Exclamation" type="Sprite" parent="."]
 position = Vector2( 28, -29 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
