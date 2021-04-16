@@ -52,7 +52,7 @@ func new_lint_roll():
   durability = 0
   load_sprite_sheet()
   EventHub.emit_signal("consumable_used", consumable_id)
-  
+
   print("new lint roll called")
 
 

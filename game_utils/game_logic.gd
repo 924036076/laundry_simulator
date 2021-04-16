@@ -8,8 +8,6 @@ var previous_balance
 
 enum ItemType{MACHINE, CONSUMABLE}
 
-#TODO: confirm name for reasonable washer/dryer
-
 const WASHERS = {
   "basic_washer": {
     "time": 5.0,
@@ -201,7 +199,7 @@ var store_inventory = {
   "reasonable_counter": 4,
  }
 
-var player_inventory = {
+var player_inventory := {
   "basic_toy" : 0,
   "basic_washer" : 1,
   "basic_dryer" : 1,
@@ -223,6 +221,19 @@ func set_player_money(new_money):
 func reset_player_money(new_money):
   money = new_money
   EventHub.emit_signal("money_reset", money)
+
+
+func _get_group_of_item(item_id):
+  if item_id in WASHERS:
+    return "washers"
+  elif item_id in DRYERS:
+    return "dryers"
+  elif item_id in LINTERS:
+    return "linters"
+  elif item_id in COUNTERS:
+    return "counters"
+  else:
+    return "other"
 
 
 func update_unlocked_items() -> void:
@@ -339,7 +350,7 @@ func _on_tutorial_started():
 func _on_new_item_viewed(key):
   if newly_unlocked_items.has(key):
     newly_unlocked_items.erase(key)
-    EventHub.emit_signal("inventory_updated")
+    EventHub.emit_signal("inventory_updated", [_get_group_of_item(key)], ["newly_unlocked_items"])
 
 
 func _on_consumable_used(key):
@@ -403,4 +414,4 @@ func _on_item_purchased(item_key, amount = 1):
   else:
     player_inventory[item_key] = amount
   store_inventory[item_key] = store_inventory[item_key] - amount
-  EventHub.emit_signal("inventory_updated")
+  EventHub.emit_signal("inventory_updated", [_get_group_of_item(item_key)], ["player_inventory", "store_inventory"])

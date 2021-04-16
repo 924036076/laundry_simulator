@@ -33,12 +33,12 @@ func click_me():
 func _calculate_radius() -> void:
   # Default method for calculating interaction radius for rectangular interactables
   # Overridden for any interactables with circular colliders
-  
+
   var extents =  get_node("CollisionShape2D").shape.get_extents()
   # Halving the smallest extent by two for better controlability/feel
   radius = min(extents.x, extents.y)/2
-  
-  
+
+
 func set_target(boolean) -> void:
   is_target = boolean
   modulate()
@@ -65,27 +65,27 @@ func modulate() -> void:
 func _on_mouse_entered() -> void:
   mouse_over = true
   modulate()
-  
-  
+
+
 func _on_mouse_exited() -> void:
   mouse_over = false
   modulate()
-  
-  
+
+
 func set_interactable(boolean) -> void:
   interactable = boolean
   modulate()
-  
-  
+
+
 func _mouse_over(over : bool) -> void:
   mouse_over = over
-  
-  
+
+
 func _on_Interactable_input_event(_viewport, event, _shape_idx):
   #if !mouse_over: return
   if not event is InputEventMouseButton: return
   if event.button_index != BUTTON_LEFT: return
   if not event.is_pressed(): return
-  
+
   get_tree().set_input_as_handled()
   EventHub.emit_signal("click", self)
