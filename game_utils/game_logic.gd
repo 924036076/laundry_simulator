@@ -110,7 +110,7 @@ const ITEM_SPRITE_INFO = {
 const STORE_ITEMS = {
   "basic_toy" : {
     "display_name" : "Squeakers",
-    "description" : "Distracts the cat with its parabolic mouseyness",
+    "description" : "Distracts the cat with its parabolic mouseyness.",
     "price" : 25,
     "type" : ItemType.CONSUMABLE,
   },
@@ -122,37 +122,37 @@ const STORE_ITEMS = {
   },
   "reasonable_washer" : {
     "display_name" : "Maude Washer",
-    "description" : "Her friendship with Bessy washed out once Maude proved superior in every way that matters.",
+    "description" : "Better than Bessy, and she knows it!",
     "price" : 12,
     "type" : ItemType.MACHINE,
   },
-  "basic_dryer" : {
-    "display_name" : "Desmond Dryer",
-    "description" : "Painfully unhip, but reliable.",
-    "price" : 6,
-    "type" : ItemType.MACHINE,
-  },
-  "reasonable_dryer": {
+  "basic_dryer": {
     "display_name": "Simon Dryer",
-    "description": "Hates moisture with a passion",
-    "price": 13,
+    "description": "Dislikes moisture.",
+    "price": 5,
     "type": ItemType.MACHINE,
+  },
+  "reasonable_dryer" : {
+    "display_name" : "Desmond Dryer",
+    "description" : "Handsome and reliable.",
+    "price" : 16,
+    "type" : ItemType.MACHINE,
   },
   "basic_linter" : {
     "display_name" : "Geoffrey Linter",
-    "description" : "Meticulous deflufferizer",
+    "description" : "Meticulous deflufferizer.",
     "price" : 15,
     "type" : ItemType.MACHINE,
   },
   "basic_counter": {
-    "display_name" : "Sir Folds A Lot Counter",
-    "description" : "Turns around and sticks folded laundry out",
+    "display_name" : "Foldmemore Counter",
+    "description" : "Folds thrift store finds.",
     "price" : 5,
     "type" : ItemType.MACHINE,
   },
   "reasonable_counter": {
-    "display_name" : "Foldmemore Counter",
-    "description" : "Folds thrift store finds",
+    "display_name" : "Sir Folds A Lot Counter",
+    "description" : "Knighted for his folding services.",
     "price" : 25,
     "type" : ItemType.MACHINE,
   },
