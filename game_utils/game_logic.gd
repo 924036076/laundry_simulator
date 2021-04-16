@@ -166,6 +166,14 @@ var unlocked_items = [
   "basic_counter",
 ]
 
+var newly_unlocked_items = [
+  "basic_toy",
+  "basic_washer",
+  "basic_dryer",
+  "basic_linter",
+  "basic_counter",
+ ]
+
 # TODO: These amounts need to change based on the layout...
 #       Consider a mechanism to auto populate the amounts based on the layouts
 var store_inventory = {
@@ -206,12 +214,15 @@ func update_unlocked_items() -> void:
   if not "reasonable_washer" in unlocked_items:
     if store_inventory["basic_washer"] == 0:
       unlocked_items.append("reasonable_washer")
+      newly_unlocked_items.append("reasonable_washer")
   if not "reasonable_dryer" in unlocked_items:
     if store_inventory["basic_dryer"] == 0:
       unlocked_items.append("reasonable_dryer")
+      newly_unlocked_items.append("reasonable_dryer")
   if not "reasonable_counter" in unlocked_items:
     if store_inventory["basic_counter"] == 0:
       unlocked_items.append("reasonable_counter")
+      newly_unlocked_items.append("reasonable_counter")
 
 
 func get_unlocked_store_inventory():
@@ -224,6 +235,7 @@ func get_unlocked_store_inventory():
     unlocked_dic[key]["owned"] = player_inventory[key] if key in player_inventory else 0
     unlocked_dic[key]["amount"] = store_inventory[key]
     unlocked_dic[key]["sprite_info"] = ITEM_SPRITE_INFO[key]
+    unlocked_dic[key]["is_new"] = true if newly_unlocked_items.has(key) else false
   return unlocked_dic
 
 
@@ -273,6 +285,7 @@ func _ready():
   EventHub.connect("new_game", self, "_on_new_game")
   EventHub.connect("new_day", self, "_on_new_day")
   EventHub.connect("tutorial_started", self, "_on_tutorial_started")
+  EventHub.connect("new_item_viewed", self, "_on_new_item_viewed")
 
 
 func _on_day_over():
@@ -296,6 +309,12 @@ func _on_tutorial_started():
   reset_player_money(74998)
 
 
+func _on_new_item_viewed(key):
+  if newly_unlocked_items.has(key):
+    newly_unlocked_items.erase(key)
+    EventHub.emit_signal("inventory_updated")
+
+
 func get_probability_dist():
   return prob_dist
 
@@ -310,6 +329,10 @@ func get_previous_balance():
 
 func get_customer_list():
   return customers
+
+
+func has_new_unlocked_items() -> bool:
+  return newly_unlocked_items.size() > 0
 
 
 func calculate_probability_dist():

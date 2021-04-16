@@ -9,6 +9,7 @@ var price := 200.0
 var stocked_items := 0.0
 var owned := 0
 var shake_prefix := "[shake level=10]"
+var is_new := false
 
 
 func _ready():
@@ -25,6 +26,7 @@ func init(key, dictionary):
   $Sprite.frame = sprite_info["frame"]
   $Sprite.scale = sprite_info["scale"]
 
+  is_new = dictionary["is_new"]
   type = dictionary["type"]
   description = dictionary["display_name"] + ": " + dictionary["description"]
   price = dictionary["price"]
@@ -38,6 +40,7 @@ func init(key, dictionary):
   $Price/Amount.text = "$" + str(price)
 
   set_button()
+  $NewItemDot.visible = is_new
 
 
 func check_can_purchase(funds):
@@ -71,6 +74,10 @@ func set_button():
 func _on_StoreItem_focus_entered():
   $AnimationPlayer.play("focus")
   EventHub.emit_signal("interactable_broadcasted", description)
+  if is_new:
+    EventHub.emit_signal("new_item_viewed", id)
+    is_new = false
+  $NewItemDot.visible = is_new
 
 
 func _on_StoreItem_focus_exited():

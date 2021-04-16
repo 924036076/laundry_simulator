@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interfaces/ninepatchtest.png" type="Texture" id=2]
 [ext_resource path="res://icons/white_arrow.png" type="Texture" id=3]
 [ext_resource path="res://interfaces/store/store_item.gd" type="Script" id=4]
+[ext_resource path="res://interfaces/store/circle_for_button.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -92,8 +93,8 @@ tracks/1/keys = {
 
 [node name="StoreItem" type="Control"]
 margin_right = 300.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 180, 112 )
+margin_bottom = 120.0
+rect_min_size = Vector2( 180, 120 )
 focus_mode = 2
 script = ExtResource( 4 )
 __meta__ = {
@@ -104,8 +105,9 @@ __meta__ = {
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 self_modulate = Color( 0.972549, 0.972549, 0.972549, 1 )
 margin_left = 38.0
+margin_top = 6.0
 margin_right = 263.0
-margin_bottom = 100.0
+margin_bottom = 106.0
 texture = ExtResource( 2 )
 patch_margin_left = 15
 patch_margin_top = 15
@@ -117,9 +119,9 @@ __meta__ = {
 
 [node name="Owned" type="HBoxContainer" parent="."]
 margin_left = 134.0
-margin_top = 18.0
+margin_top = 24.0
 margin_right = 263.0
-margin_bottom = 65.0
+margin_bottom = 71.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -146,9 +148,9 @@ text = "10"
 
 [node name="Price" type="HBoxContainer" parent="."]
 margin_left = 134.0
-margin_top = 36.0
+margin_top = 42.0
 margin_right = 242.0
-margin_bottom = 83.0
+margin_bottom = 89.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -191,19 +193,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-visible = false
-margin_left = 128.0
-margin_top = 64.0
-margin_right = 164.0
-margin_bottom = 86.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.317647, 0.317647, 0.317647, 1 )
-text = "Buy"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/buy = SubResource( 2 )
@@ -212,14 +201,14 @@ anims/idle = SubResource( 4 )
 
 [node name="ArrowLeft" type="Sprite" parent="."]
 modulate = Color( 0.231373, 0.231373, 0.231373, 1 )
-position = Vector2( 20.8536, 45.8891 )
+position = Vector2( 20.8536, 51.8891 )
 scale = Vector2( 0.5, 1 )
 texture = ExtResource( 3 )
 offset = Vector2( -10, 0 )
 
 [node name="ArrowRight" type="Sprite" parent="."]
 modulate = Color( 0.231373, 0.231373, 0.231373, 1 )
-position = Vector2( 279.854, 46.3891 )
+position = Vector2( 279.854, 52.3891 )
 scale = Vector2( 0.5, 1 )
 texture = ExtResource( 3 )
 offset = Vector2( 10, 0 )
@@ -229,11 +218,17 @@ flip_h = true
 wait_time = 0.8
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 84, 45 )
+position = Vector2( 84, 51 )
 scale = Vector2( 2, 2 )
 hframes = 2
 vframes = 3
 frame = 5
+
+[node name="NewItemDot" type="Sprite" parent="."]
+modulate = Color( 0.831373, 0.121569, 0.121569, 1 )
+position = Vector2( 50.5534, 14.3036 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
 
 [connection signal="focus_entered" from="." to="." method="_on_StoreItem_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_StoreItem_focus_exited"]

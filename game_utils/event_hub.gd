@@ -56,6 +56,7 @@ signal customer_card_removed
 
 # Store / Store Item signals
 signal item_purchased
+signal new_item_viewed
 
 # Game Logic signals
 signal new_inventory

@@ -12,6 +12,7 @@ func _ready():
 
   var item_list = GameLogic.get_unlocked_store_inventory()
   populate_store(item_list)
+  order_children()
   if .get_child_count() > 0:
     item_parent.get_child(0).grab_focus()
 
@@ -35,6 +36,15 @@ func update_inventory(item_list):
 func check_funds(funds):
   for child in item_parent.get_children():
     child.check_can_purchase(funds)
+
+
+func order_children():
+  var last_place = item_parent.get_child_count() - 1
+  for child in item_parent.get_children():
+    if child.is_new:
+      item_parent.move_child(child, 0)
+    if child.stocked_items <= 0:
+      item_parent.move_child(child, last_place)
 
 
 func _on_money_updated(new_value):
