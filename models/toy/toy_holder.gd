@@ -2,21 +2,17 @@ extends Interactable
 var nav_node
 export (PackedScene) var Toy
 var toy
+var consumable_id = "basic_toy"
 
 
 func _ready():
   ._ready()
   nav_node = get_node("../ToyNav")
-  toy = Toy.instance()
-  toy.nav_node = nav_node
-  add_child(toy)
   EventHub.connect("new_day", self, "_on_new_day")
-  
+  check_stock()
+
 
 func new_toy():
-  if is_instance_valid(toy):
-    toy.queue_free()
-    
   toy = Toy.instance()
   toy.nav_node = nav_node
   add_child(toy)
@@ -24,13 +20,24 @@ func new_toy():
   interactable = true
 
 
+func check_stock():
+  var stock = GameLogic.get_consumable_inventory(consumable_id)
+  if stock > 0 and toy == null:
+    new_toy()
+  $Label.text = str(stock)
+  visible = stock > 0
+
+
 func interact():
   if !interactable: return
   if !toy: return
   
   toy.release()
+  toy = null
   interactable = false
   $Sprite.visible = false
+  EventHub.emit_signal("consumable_used", consumable_id)
+  call_deferred("check_stock")
 
 
 func disallowed_action():
@@ -49,4 +56,4 @@ func modulate() -> void:
 
 
 func _on_new_day():
-  new_toy()
+  check_stock()

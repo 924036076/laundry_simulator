@@ -29,8 +29,8 @@ signal occupy_object
 signal leave_object
 signal cat_cuddled
 signal cuddles_stopped
-signal play_started
-signal play_ended
+signal mauling_started
+signal mauling_ended
 
 # Toy signals
 signal toy_released
@@ -57,6 +57,9 @@ signal customer_card_removed
 # Store / Store Item signals
 signal item_purchased
 signal new_item_viewed
+
+# Consumable signals
+signal consumable_used
 
 # Game Logic signals
 signal new_inventory

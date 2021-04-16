@@ -188,7 +188,7 @@ var store_inventory = {
  }
 
 var player_inventory = {
-  "basic_toy" : 1,
+  "basic_toy" : 0,
   "basic_washer" : 1,
   "basic_dryer" : 1,
   "basic_linter": 0,
@@ -278,6 +278,13 @@ func get_player_machines() -> Dictionary:
   return machines
 
 
+func get_consumable_inventory(key):
+  if player_inventory.has(key):
+    return player_inventory[key]
+  else:
+    return 0
+
+
 func _ready():
   EventHub.connect("day_over", self, "_on_day_over")
   EventHub.connect("item_purchased", self, "_on_item_purchased")
@@ -286,6 +293,7 @@ func _ready():
   EventHub.connect("new_day", self, "_on_new_day")
   EventHub.connect("tutorial_started", self, "_on_tutorial_started")
   EventHub.connect("new_item_viewed", self, "_on_new_item_viewed")
+  EventHub.connect("consumable_used", self, "_on_consumable_used")
 
 
 func _on_day_over():
@@ -313,6 +321,10 @@ func _on_new_item_viewed(key):
   if newly_unlocked_items.has(key):
     newly_unlocked_items.erase(key)
     EventHub.emit_signal("inventory_updated")
+
+
+func _on_consumable_used(key):
+  player_inventory[key] = player_inventory[key] - 1
 
 
 func get_probability_dist():
