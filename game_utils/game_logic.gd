@@ -89,7 +89,7 @@ const ITEM_SPRITE_INFO = {
     "hframes" : 7,
     "vframes" : 1,
     "scale" : Vector2(2,2),
-    "frame" : 5,
+    "frame" : 0,
   },
   "basic_counter": {
     "path" : "res://models/counter/basic_counter.png",
@@ -100,6 +100,13 @@ const ITEM_SPRITE_INFO = {
   },
   "reasonable_counter": {
     "path" : "res://models/counter/reasonable_counter.png",
+    "hframes" : 1,
+    "vframes" : 1,
+    "scale" : Vector2(2,2),
+    "frame" : 0,
+  },
+  "basic_lint_roll": {
+    "path" : "res://models/lint_machine/lint_roll.png",
     "hframes" : 1,
     "vframes" : 1,
     "scale" : Vector2(2,2),
@@ -144,6 +151,12 @@ const STORE_ITEMS = {
     "price" : 15,
     "type" : ItemType.MACHINE,
   },
+  "basic_lint_roll" : {
+    "display_name" : "Lint roll refill",
+    "description" : "Good for a few more loads of furry laundry",
+    "price" : 5,
+    "type" : ItemType.CONSUMABLE,
+  },
   "basic_counter": {
     "display_name" : "Foldmemore Counter",
     "description" : "Folds thrift store finds.",
@@ -178,6 +191,7 @@ var newly_unlocked_items = [
 #       Consider a mechanism to auto populate the amounts based on the layouts
 var store_inventory = {
   "basic_toy" : INF,
+  "basic_lint_roll" : INF,
   "basic_washer" : 1,
   "reasonable_washer": 2,
   "basic_dryer" : 1,
@@ -191,8 +205,9 @@ var player_inventory = {
   "basic_toy" : 0,
   "basic_washer" : 1,
   "basic_dryer" : 1,
-  "basic_linter": 0,
+  "basic_linter": 1,
   "basic_counter" : 1,
+  "basic_lint_roll" : 0,
  }
 
 
@@ -223,6 +238,10 @@ func update_unlocked_items() -> void:
     if store_inventory["basic_counter"] == 0:
       unlocked_items.append("reasonable_counter")
       newly_unlocked_items.append("reasonable_counter")
+  if not "basic_lint_roll" in unlocked_items:
+    if player_inventory["basic_linter"] >= 1:
+      unlocked_items.append("basic_lint_roll")
+      newly_unlocked_items.append("basic_lint_roll")
 
 
 func get_unlocked_store_inventory():

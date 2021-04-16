@@ -2,12 +2,19 @@ extends Washer
 var durability = 0
 var durability_limit = 3
 var sprite_sheet_dir = "res://models/lint_machine/machine_sprite_sheets/"
-
+var consumable_id = "basic_lint_roll"
 
 func _ready():
   ._ready()
   load_sprite_sheet()
   EventHub.connect("new_day", self, "_on_new_day")
+
+
+func check_stock():
+  var stock = GameLogic.get_consumable_inventory(consumable_id)
+  if stock > 0 and durability >= durability_limit:
+    state_machine.travel("roll_change")
+  $Label.text = str(stock)
 
 
 func _change_laundry_state() -> void:
@@ -27,6 +34,8 @@ func _finish_load():
 func decrement_durability():
   durability = min(durability + 1, durability_limit)
   load_sprite_sheet()
+  if durability >= durability_limit:
+    check_stock()
 
 
 func load_sprite_sheet():
@@ -41,7 +50,10 @@ func load_sprite_sheet():
 func new_lint_roll():
   durability = 0
   load_sprite_sheet()
+  EventHub.emit_signal("consumable_used", consumable_id)
+  
+  print("new lint roll called")
 
 
 func _on_new_day():
-  new_lint_roll()
+  check_stock()
