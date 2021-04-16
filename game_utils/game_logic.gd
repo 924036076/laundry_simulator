@@ -110,49 +110,49 @@ const ITEM_SPRITE_INFO = {
 const STORE_ITEMS = {
   "basic_toy" : {
     "display_name" : "Squeakers",
-    "description" : "Distract the cat with the good stuff",
+    "description" : "Distracts the cat with its parabolic mouseyness.",
     "price" : 25,
     "type" : ItemType.CONSUMABLE,
   },
   "basic_washer" : {
-    "display_name" : "Maude",
+    "display_name" : "Bessy Washer",
     "description" : "Not much to look at, but she gets the job done.",
     "price" : 5,
     "type" : ItemType.MACHINE,
   },
   "reasonable_washer" : {
-    "display_name" : "Maude 2",
-    "description" : "So much better than Maude.",
+    "display_name" : "Maude Washer",
+    "description" : "Better than Bessy, and she knows it!",
     "price" : 12,
     "type" : ItemType.MACHINE,
   },
-  "basic_dryer" : {
-    "display_name" : "Alvin",
-    "description" : "Painfully unhip, but reliable and cuddly.",
-    "price" : 6,
-    "type" : ItemType.MACHINE,
-  },
-  "reasonable_dryer": {
-    "display_name": "Alvin 2",
-    "description": "Even more unhip",
-    "price": 13,
+  "basic_dryer": {
+    "display_name": "Simon Dryer",
+    "description": "Dislikes moisture.",
+    "price": 5,
     "type": ItemType.MACHINE,
   },
+  "reasonable_dryer" : {
+    "display_name" : "Desmond Dryer",
+    "description" : "Handsome and reliable.",
+    "price" : 16,
+    "type" : ItemType.MACHINE,
+  },
   "basic_linter" : {
-    "display_name" : "Geoffrey",
-    "description" : "Meticulous deflufferizer",
+    "display_name" : "Geoffrey Linter",
+    "description" : "Meticulous deflufferizer.",
     "price" : 15,
     "type" : ItemType.MACHINE,
   },
   "basic_counter": {
-    "display_name" : "shoyo hinata",
-    "description" : "super eager fast moving short puppeh",
+    "display_name" : "Foldmemore Counter",
+    "description" : "Folds thrift store finds.",
     "price" : 5,
     "type" : ItemType.MACHINE,
   },
   "reasonable_counter": {
-    "display_name" : "shoyo hinata 2",
-    "description" : "super eager fast moving short puppeh",
+    "display_name" : "Sir Folds A Lot Counter",
+    "description" : "Knighted for his folding services.",
     "price" : 25,
     "type" : ItemType.MACHINE,
   },
@@ -235,7 +235,7 @@ func get_unlocked_store_inventory():
     unlocked_dic[key]["owned"] = player_inventory[key] if key in player_inventory else 0
     unlocked_dic[key]["amount"] = store_inventory[key]
     unlocked_dic[key]["sprite_info"] = ITEM_SPRITE_INFO[key]
-    unlocked_dic[key]["is_new"] = true if newly_unlocked_items.has(key) else false
+    unlocked_dic[key]["is_new"] = newly_unlocked_items.has(key)
   return unlocked_dic
 
 
