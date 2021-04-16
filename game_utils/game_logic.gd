@@ -202,6 +202,18 @@ func reset_player_money(new_money):
   EventHub.emit_signal("money_reset", money)
 
 
+func update_unlocked_items() -> void:
+  if not "reasonable_washer" in unlocked_items:
+    if store_inventory["basic_washer"] == 0:
+      unlocked_items.append("reasonable_washer")
+  if not "reasonable_dryer" in unlocked_items:
+    if store_inventory["basic_dryer"] == 0:
+      unlocked_items.append("reasonable_dryer")
+  if not "reasonable_counter" in unlocked_items:
+    if store_inventory["basic_counter"] == 0:
+      unlocked_items.append("reasonable_counter")
+
+
 func get_unlocked_store_inventory():
   var unlocked_dic = {}
   for key in unlocked_items:
@@ -264,6 +276,7 @@ func _ready():
 
 
 func _on_day_over():
+  update_unlocked_items()
   if Global.day == 1:
     add_customer("influencer", 8)
   if Global.day == 2:
