@@ -6,6 +6,8 @@ var consumable_id = "basic_lint_roll"
 
 func _ready():
   ._ready()
+  state_machine.start("idle")
+  state_machine.travel("idle")
   load_sprite_sheet()
   EventHub.connect("new_day", self, "_on_new_day")
 

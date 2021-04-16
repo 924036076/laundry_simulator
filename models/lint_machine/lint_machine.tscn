@@ -57,6 +57,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("CloudSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "roll_change"
@@ -227,20 +239,19 @@ parameters/StateMachine/playback = SubResource( 5 )
 stream = null
 
 [node name="Sprite" parent="." index="4"]
-position = Vector2( 5, 0 )
 texture = ExtResource( 4 )
 hframes = 7
 vframes = 1
-frame = 1
+frame = 0
 
 [node name="CollisionShape2D" parent="." index="5"]
 position = Vector2( -7.55099, 0.707905 )
 shape = SubResource( 6 )
 
 [node name="ClothesSprite" type="Sprite" parent="." index="7"]
+visible = false
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
-offset = Vector2( 5, 0 )
 hframes = 8
 
 [node name="LaundryParent" parent="." index="9"]
@@ -260,7 +271,7 @@ __meta__ = {
 }
 
 [node name="CloudSprite" type="Sprite" parent="." index="14"]
-modulate = Color( 1, 1, 1, 0 )
+visible = false
 position = Vector2( -12.7374, -34.4971 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
