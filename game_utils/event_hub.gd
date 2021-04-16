@@ -58,10 +58,8 @@ signal customer_card_removed
 signal item_purchased
 signal new_item_viewed
 
-
 # Consumable signals
 signal consumable_used
-
 
 # Game Logic signals
 signal new_inventory
