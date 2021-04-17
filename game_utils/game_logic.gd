@@ -8,8 +8,6 @@ var previous_balance
 
 enum ItemType{MACHINE, CONSUMABLE}
 
-#TODO: confirm name for reasonable washer/dryer
-
 const WASHERS = {
   "basic_washer": {
     "time": 5.0,
@@ -89,7 +87,7 @@ const ITEM_SPRITE_INFO = {
     "hframes" : 7,
     "vframes" : 1,
     "scale" : Vector2(2,2),
-    "frame" : 5,
+    "frame" : 0,
   },
   "basic_counter": {
     "path" : "res://models/counter/basic_counter.png",
@@ -100,6 +98,13 @@ const ITEM_SPRITE_INFO = {
   },
   "reasonable_counter": {
     "path" : "res://models/counter/reasonable_counter.png",
+    "hframes" : 1,
+    "vframes" : 1,
+    "scale" : Vector2(2,2),
+    "frame" : 0,
+  },
+  "basic_lint_roll": {
+    "path" : "res://models/lint_machine/lint_roll.png",
     "hframes" : 1,
     "vframes" : 1,
     "scale" : Vector2(2,2),
@@ -144,6 +149,12 @@ const STORE_ITEMS = {
     "price" : 15,
     "type" : ItemType.MACHINE,
   },
+  "basic_lint_roll" : {
+    "display_name" : "Lint roll refill",
+    "description" : "Good for a few more loads of furry laundry",
+    "price" : 5,
+    "type" : ItemType.CONSUMABLE,
+  },
   "basic_counter": {
     "display_name" : "Foldmemore Counter",
     "description" : "Folds thrift store finds.",
@@ -178,6 +189,7 @@ var newly_unlocked_items = [
 #       Consider a mechanism to auto populate the amounts based on the layouts
 var store_inventory = {
   "basic_toy" : INF,
+  "basic_lint_roll" : INF,
   "basic_washer" : 1,
   "reasonable_washer": 2,
   "basic_dryer" : 1,
@@ -187,12 +199,13 @@ var store_inventory = {
   "reasonable_counter": 4,
  }
 
-var player_inventory = {
+var player_inventory := {
   "basic_toy" : 0,
   "basic_washer" : 1,
   "basic_dryer" : 1,
   "basic_linter": 0,
   "basic_counter" : 1,
+  "basic_lint_roll" : 0,
  }
 
 
@@ -210,6 +223,19 @@ func reset_player_money(new_money):
   EventHub.emit_signal("money_reset", money)
 
 
+func _get_group_of_item(item_id):
+  if item_id in WASHERS:
+    return "washers"
+  elif item_id in DRYERS:
+    return "dryers"
+  elif item_id in LINTERS:
+    return "linters"
+  elif item_id in COUNTERS:
+    return "counters"
+  else:
+    return "other"
+
+
 func update_unlocked_items() -> void:
   if not "reasonable_washer" in unlocked_items:
     if store_inventory["basic_washer"] == 0:
@@ -223,6 +249,10 @@ func update_unlocked_items() -> void:
     if store_inventory["basic_counter"] == 0:
       unlocked_items.append("reasonable_counter")
       newly_unlocked_items.append("reasonable_counter")
+  if not "basic_lint_roll" in unlocked_items:
+    if player_inventory["basic_linter"] >= 1:
+      unlocked_items.append("basic_lint_roll")
+      newly_unlocked_items.append("basic_lint_roll")
 
 
 func get_unlocked_store_inventory():
@@ -320,7 +350,7 @@ func _on_tutorial_started():
 func _on_new_item_viewed(key):
   if newly_unlocked_items.has(key):
     newly_unlocked_items.erase(key)
-    EventHub.emit_signal("inventory_updated")
+    EventHub.emit_signal("inventory_updated", [_get_group_of_item(key)], ["newly_unlocked_items"])
 
 
 func _on_consumable_used(key):
@@ -384,4 +414,4 @@ func _on_item_purchased(item_key, amount = 1):
   else:
     player_inventory[item_key] = amount
   store_inventory[item_key] = store_inventory[item_key] - amount
-  EventHub.emit_signal("inventory_updated")
+  EventHub.emit_signal("inventory_updated", [_get_group_of_item(item_key)], ["player_inventory", "store_inventory"])

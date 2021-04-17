@@ -56,7 +56,7 @@ func _on_interactable_broadcasted(description):
   $Description.visible = true
 
 
-func _on_inventory_updated():
+func _on_inventory_updated(_groups, _tables):
   var item_list = GameLogic.get_unlocked_store_inventory()
   update_inventory(item_list)
   call_deferred("check_funds", GameLogic.get_player_money())

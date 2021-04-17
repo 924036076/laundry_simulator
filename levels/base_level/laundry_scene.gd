@@ -68,7 +68,7 @@ func _on_Cat_mischief_wanted():
   var location := Vector2.ZERO
   var id : int
 
-  # Cat will prefer toy to laundry 
+  # Cat will prefer toy to laundry
   var toys = get_tree().get_nodes_in_group("active_toys")
   if toys.size() > 0:
     var index = rng.randi_range(0, toys.size() - 1)

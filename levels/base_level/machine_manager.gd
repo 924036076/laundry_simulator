@@ -1,5 +1,8 @@
 extends YSort
 
+var _cache: Dictionary = {}
+
+var MACHINE_GROUPS := ["washers", "dryers", "counters", "linters"]
 
 class MachineSorter:
   static func sort_descending_levels(a, b):
@@ -30,10 +33,12 @@ func _ready() -> void:
   EventHub.connect("inventory_updated", self, "_on_inventory_updated")
 
 
-func _refresh_machines() -> void:
+func _refresh_machines(groups := MACHINE_GROUPS) -> void:
   var owned_machines := GameLogic.get_player_machines()
-  var groups := ["washers", "dryers", "counters", "linters"]
   for g in groups:
+    # Skip groups we don't care about
+    if not g in MACHINE_GROUPS:
+      continue
     var machines := get_tree().get_nodes_in_group(g)
     var sorted_owned := sort_machines(owned_machines[g])
     var num_machines_to_slot = min(len(machines), len(sorted_owned))
@@ -44,8 +49,10 @@ func _refresh_machines() -> void:
       machines[i].hide()
 
 
-func _on_inventory_updated() -> void:
-  # TODO: check if the change affects us before trying to refresh the machines
-  _refresh_machines()
+func _on_inventory_updated(groups, categories) -> void:
+  # only refresh machines for the specified groups if the change involves
+  # the player inventory
+  if "player_inventory" in categories:
+    _refresh_machines(groups)
 
 
