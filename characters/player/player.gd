@@ -122,8 +122,7 @@ func _unhandled_input(event: InputEvent) -> void:
   match event.button_index:
     BUTTON_RIGHT:
       EventHub.emit_signal("test_signal")
-      pass
-      # Commands for debug purposes
+      # Signal for debug purposes
 
     BUTTON_LEFT:
       # Send player to clicked location and reset player's target object
