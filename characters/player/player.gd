@@ -121,7 +121,7 @@ func _unhandled_input(event: InputEvent) -> void:
   
   match event.button_index:
     BUTTON_RIGHT:
-      #EventHub.emit_signal("add_money", 2.0)
+      EventHub.emit_signal("test_signal")
       pass
       # Commands for debug purposes
 

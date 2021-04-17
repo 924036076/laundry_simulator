@@ -49,6 +49,7 @@ signal folding_anim_completed
 
 # Player signals
 signal player_picked_up_laundry
+signal test_signal
 
 # Card signals
 signal customer_card_displayed

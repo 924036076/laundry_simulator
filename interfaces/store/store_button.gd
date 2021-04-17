@@ -17,7 +17,7 @@ func check_for_new_items():
     $AnimationPlayer.play("idle")
 
 
-func _on_inventory_updated():
+func _on_inventory_updated(_groups, _tables):
   check_for_new_items()
 
 

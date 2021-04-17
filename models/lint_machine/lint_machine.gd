@@ -9,12 +9,13 @@ func _ready():
   state_machine.start("idle")
   load_sprite_sheet()
   EventHub.connect("new_day", self, "_on_new_day")
+  EventHub.connect("test_signal", self, "decrement_durability")
 
 
 func check_stock():
   var stock = GameLogic.get_consumable_inventory(consumable_id)
   if stock > 0 and durability >= durability_limit:
-    state_machine.travel("roll_change")
+    state_machine.call_deferred("travel", "roll_change")
   $Label.text = str(stock)
 
 
@@ -53,8 +54,6 @@ func new_lint_roll():
   load_sprite_sheet()
   EventHub.emit_signal("consumable_used", consumable_id)
 
-  print("new lint roll called")
-
 
 func _on_new_day():
-  check_stock()
+  call_deferred("check_stock")
