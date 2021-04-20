@@ -478,29 +478,22 @@ navpoly = SubResource( 7 )
 [node name="Machines" type="YSort" parent="."]
 position = Vector2( 88.0182, 43.2775 )
 
-[node name="Washer" parent="Machines" groups=[
-"interactables",
-] instance=ExtResource( 4 )]
+[node name="Washer" parent="Machines" instance=ExtResource( 4 )]
 position = Vector2( 450, 200 )
-gravity = 0.0
 description = "Ol' Bessy, my faithful washer"
 
-[node name="Dryer" parent="Machines" groups=[
-"laundry_holder",
-] instance=ExtResource( 3 )]
-pause_mode = 1
+[node name="Dryer" parent="Machines" instance=ExtResource( 3 )]
 position = Vector2( 534, 200 )
-rotation = -0.00659965
 description = "Desmond, the undeniably handsome dryer"
 
 [node name="Computer" parent="Machines" instance=ExtResource( 10 )]
-position = Vector2( 623.145, 204.301 )
+position = Vector2( 623, 204 )
 
 [node name="Objects" type="YSort" parent="."]
 position = Vector2( 88.0181, 43.2776 )
 
 [node name="Bed" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 623.37, 360.407 )
+position = Vector2( 623, 360 )
 description = "My old toddler bed is the only bed that fits down here, but I don't mind."
 
 [node name="Sprite" type="Sprite" parent="Objects/Bed"]
@@ -513,7 +506,7 @@ position = Vector2( -0.0892334, 1.81845 )
 shape = SubResource( 8 )
 
 [node name="Stairs" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 192.152, 249.389 )
+position = Vector2( 192.2, 250 )
 description = "The stairs...but they lead away from my machines"
 
 [node name="Sprite" type="Sprite" parent="Objects/Stairs"]
@@ -526,12 +519,8 @@ flip_h = true
 position = Vector2( -0.396851, -6.15115 )
 shape = SubResource( 9 )
 
-[node name="Counter" parent="Objects" groups=[
-"interactables",
-] instance=ExtResource( 5 )]
-position = Vector2( 326.384, 319.957 )
-scale = Vector2( 1.05748, 1.05748 )
-gravity = 0.0
+[node name="Counter" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( 327, 320 )
 description = "Sir Folds A Lot <3"
 
 [node name="TextDisplay" parent="Objects" instance=ExtResource( 6 )]

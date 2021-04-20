@@ -1096,48 +1096,29 @@ position = Vector2( 0.0676003, 92.5666 )
 script = ExtResource( 19 )
 
 [node name="Washer1" parent="Map/Machines" groups=[
-"interactables",
 "washers",
 ] instance=ExtResource( 2 )]
 position = Vector2( 418, 55 )
-gravity = 0.0
 
 [node name="Washer2" parent="Map/Machines" groups=[
-"interactables",
 "washers",
 ] instance=ExtResource( 2 )]
 position = Vector2( 511, 55 )
-gravity = 0.0
 
 [node name="Dryer1" parent="Map/Machines" groups=[
 "dryers",
-"interactables",
-"laundry_holder",
 ] instance=ExtResource( 4 )]
-pause_mode = 1
 position = Vector2( 604, 55 )
-rotation = -0.00659965
-gravity = 0.0
 
 [node name="Dryer2" parent="Map/Machines" groups=[
 "dryers",
-"interactables",
-"laundry_holder",
 ] instance=ExtResource( 4 )]
-pause_mode = 1
 position = Vector2( 697, 55 )
-rotation = -0.00659965
-scale = Vector2( 1.05748, 1.05748 )
-gravity = 0.0
 
 [node name="LintMachine" parent="Map/Machines" groups=[
-"interactables",
-"laundry_holder",
 "linters",
 ] instance=ExtResource( 34 )]
-pause_mode = 1
 position = Vector2( 819, 61 )
-gravity = 0.0
 
 [node name="WashLabel" type="Label" parent="Map/Machines"]
 visible = false
@@ -1189,33 +1170,21 @@ position = Vector2( -2, 31 )
 [node name="Counters" type="YSort" parent="Map/Objects"]
 position = Vector2( -41.0415, -147.419 )
 
-[node name="Counter1" parent="Map/Objects/Counters" groups=[
-"interactables",
-] instance=ExtResource( 8 )]
+[node name="Counter1" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
 pause_mode = 0
 position = Vector2( 410.498, 527.759 )
-gravity = 0.0
 
-[node name="Counter2" parent="Map/Objects/Counters" groups=[
-"interactables",
-] instance=ExtResource( 8 )]
+[node name="Counter2" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
 pause_mode = 0
 position = Vector2( 506.104, 527.759 )
-gravity = 0.0
 
-[node name="Counter3" parent="Map/Objects/Counters" groups=[
-"interactables",
-] instance=ExtResource( 8 )]
+[node name="Counter3" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
 pause_mode = 0
 position = Vector2( 601.589, 527.759 )
-gravity = 0.0
 
-[node name="Counter4" parent="Map/Objects/Counters" groups=[
-"interactables",
-] instance=ExtResource( 8 )]
+[node name="Counter4" parent="Map/Objects/Counters" instance=ExtResource( 8 )]
 pause_mode = 0
 position = Vector2( 697.415, 527.759 )
-gravity = 0.0
 
 [node name="Cat" parent="Map/Objects" instance=ExtResource( 6 )]
 position = Vector2( 467.077, 304.742 )
