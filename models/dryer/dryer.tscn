@@ -20,6 +20,7 @@ parameters/StateMachine/playback = SubResource( 1 )
 stream = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="4"]
+position = Vector2( 5, 0 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="5"]
