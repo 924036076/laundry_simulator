@@ -34,16 +34,11 @@ func _on_money_updated(new_value):
 
 
 func _format_currency(value):
-  var v := int(value)
-  var parts := PoolStringArray()
-  while v >= 1000:
-    parts.append(str(v % 1000))
-# warning-ignore:integer_division
-    v = v / 1000
-  if v > 0 or len(parts) == 0:
-    parts.append(str(v))
-  parts.invert()
-  return \"$\" + parts.join(\",\")
+  # Assumes value is a non-negative integer
+  var v := str(value)
+  for i in range(v.length() - 3, 0, -3):
+    v = v.insert(i, \",\")
+  return \"$\" + v
 
 
 func format_money(effect = \"\"):
