@@ -4,8 +4,6 @@ var savegame = File.new()
 var save_path = "user://savegame.save"
 var save_data = {"highscore": 0}
 
-var day := 0
-
 var max_multiplier = 100
 var min_multiplier = 20
 

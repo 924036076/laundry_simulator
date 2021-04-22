@@ -326,15 +326,24 @@ func _ready():
   EventHub.connect("consumable_used", self, "_on_consumable_used")
 
 
+func update_laundry_weekly():
+  if day == 1:
+    EventHub.emit_signal("laundry_weekly_unlocked", 0)
+  if day == 6:
+    EventHub.emit_signal("laundry_weekly_unlocked", 1)
+
+
 func _on_day_over():
   update_unlocked_items()
-  if Global.day == 1:
+  update_laundry_weekly()
+  if day == 1:
     add_customer("influencer", 8)
-  if Global.day == 2:
+  if day == 2:
     add_customer("old_lady", 5)
 
 
 func _on_new_day():
+  day += 1
   previous_balance = money
 
 

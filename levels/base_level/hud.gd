@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name HUD
 
 var overlay : Control
+var story_key = null
 
 
 func _ready() -> void:
@@ -9,6 +10,8 @@ func _ready() -> void:
   EventHub.connect("restart", self, "_on_restart")
   EventHub.connect("game_over", self, "_on_game_over")
   EventHub.connect("day_over", self, "_on_day_over")
+  EventHub.connect("laundry_weekly_closed", self, "_on_laundry_weekly_closed")
+  EventHub.connect("laundry_weekly_unlocked", self, "_on_laundry_weekly_unlocked")
 
 
 func check_high_score(score: int) -> void:
@@ -29,7 +32,6 @@ func show_game_over(score : int) -> void:
 
 func show_title_screen() -> void:
   if is_instance_valid(overlay):
-    print("overlay name: ", overlay.get_name())
     if overlay.get_name() == "TitleScreen":
       return
     else:
@@ -66,6 +68,27 @@ func show_day_end(total : int, prev_balance : int, day_count : int):
 
 
 func _on_next_day_pressed() -> void:
+  if story_key != null:
+    _open_laundry_weekly()
+    return
+  EventHub.emit_signal("new_day")
+  $AudioStreamPlayer.play()
+  hide_overlay()
+
+
+func _on_laundry_weekly_unlocked(key):
+  story_key = key
+
+
+func _open_laundry_weekly() -> void:
+  hide_overlay()
+  var laundry_weekly = preload("res://laundry_weekly/laundry_weekly.tscn").instance()
+  add_child(laundry_weekly)
+  laundry_weekly.initialize(story_key)
+  story_key = null
+
+
+func _on_laundry_weekly_closed(_key) -> void:
   EventHub.emit_signal("new_day")
   $AudioStreamPlayer.play()
   hide_overlay()

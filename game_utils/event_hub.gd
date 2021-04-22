@@ -41,6 +41,10 @@ signal toy_bounced_on_body
 signal new_game
 signal new_day
 
+# Laundry Weekly signals
+signal laundry_weekly_closed
+signal laundry_weekly_clicked # from interactable_laundry_weekly
+
 # Options signals
 signal restart
 
@@ -67,6 +71,7 @@ signal new_inventory
 signal money_updated  # when money increases or decreases
 signal money_reset # when money is reset; eg with new day / tutorial
 signal inventory_updated
+signal laundry_weekly_unlocked
 
 # Misc
 signal day_over # spawner and clock

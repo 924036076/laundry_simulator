@@ -70,6 +70,8 @@ func fold() -> void:
 
 
 func update_visuals() -> void:
+  if !folded:
+    $AnimationPlayer.play("idle")
   update_modulation()
   update_particles()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://maps/basement_map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://overlays/text_display.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://overlays/Options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://overlays/money_label.tscn" type="PackedScene" id=6]
 [ext_resource path="res://characters/cat/cat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://laundry_weekly/interactable_laundry_weekly.tscn" type="PackedScene" id=8]
+[ext_resource path="res://laundry_weekly/laundry_weekly_spawner.gd" type="Script" id=9]
 
 [node name="Tutorial" type="YSort"]
 script = ExtResource( 4 )
@@ -52,6 +54,13 @@ margin_bottom = 140.052
 
 [node name="Cat" parent="." instance=ExtResource( 7 )]
 pause_mode = 0
-position = Vector2( 437.322, 292.927 )
+position = Vector2( 302.393, 425.475 )
+
+[node name="LaundryWeeklyHolder" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+
+[node name="InteractableLaundryWeekly" parent="." instance=ExtResource( 8 )]
+position = Vector2( 425.413, 217.758 )
+description = "still can't believe it..."
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
