@@ -186,7 +186,7 @@ func decrement_patience() -> void:
 func _on_toy_bouncing(body) -> void:
   if body != self: return
   $AnimationPlayer.play("shake")
-  emote("mad")
+  emote(Types.Emotion.MAD)
   modify_patience_points(toy_bounce_effect)
 
 
