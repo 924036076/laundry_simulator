@@ -45,8 +45,8 @@ func _on_add_money(addition : float):
 
   format_money("[wave]" + color_string)
   $AudioStreamPlayer.play()
+  $Timer.start()
 
 
-func _on_AudioStreamPlayer_finished():
-  yield(get_tree().create_timer(1.3), "timeout")
+func _on_Timer_timeout():
   format_money()
