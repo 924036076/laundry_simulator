@@ -15,6 +15,8 @@ var work_cutoff := 50
 var mischief_cutoff := 100
 var action_enabled := false
 var target_id : int
+var money_min := 1.0
+var money_max := 12.0
 
 
 signal mischief_wanted
@@ -118,7 +120,7 @@ func _on_mauling_end() -> void:
 func _on_WaitTimer_timeout() -> void:
   match state:
     State.WORK:
-      show_money_earned(rng.randf_range(10.0, 50.0))
+      show_money_earned(rng.randf_range(money_min, money_max))
     State.SLEEP:
       animationState.travel("Idle")
       yield(self, "idle")
