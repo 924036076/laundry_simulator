@@ -7,8 +7,8 @@
 [ext_resource path="res://overlays/Options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://overlays/money_label.tscn" type="PackedScene" id=6]
 [ext_resource path="res://characters/cat/cat.tscn" type="PackedScene" id=7]
-[ext_resource path="res://laundry_weekly/interactable_laundry_weekly.tscn" type="PackedScene" id=8]
-[ext_resource path="res://laundry_weekly/laundry_weekly_spawner.gd" type="Script" id=9]
+[ext_resource path="res://laundry_times/interactable_laundry_times.tscn" type="PackedScene" id=8]
+[ext_resource path="res://laundry_times/laundry_times_spawner.gd" type="Script" id=9]
 
 [node name="Tutorial" type="YSort"]
 script = ExtResource( 4 )
@@ -57,9 +57,11 @@ pause_mode = 0
 position = Vector2( 302.393, 425.475 )
 
 [node name="LaundryWeeklyHolder" type="CanvasLayer" parent="."]
+pause_mode = 2
 script = ExtResource( 9 )
 
 [node name="InteractableLaundryWeekly" parent="." instance=ExtResource( 8 )]
+pause_mode = 2
 position = Vector2( 425.413, 217.758 )
 description = "still can't believe it..."
 

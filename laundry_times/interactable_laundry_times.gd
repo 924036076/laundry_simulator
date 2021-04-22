@@ -4,5 +4,5 @@ export var story_key = "tutorial"
 
 func interact():
   .interact()
-  EventHub.emit_signal("laundry_weekly_clicked", story_key)
+  EventHub.emit_signal("laundry_times_clicked", story_key)
   

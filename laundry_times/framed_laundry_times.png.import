@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/framed_laundry_weekly.png-591c899bd294a8dd43e1eb2487e8f714.stex"
+path="res://.import/framed_laundry_times.png-cc7b3a9a4f23b35d3595b7a196106186.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://laundry_weekly/framed_laundry_weekly.png"
-dest_files=[ "res://.import/framed_laundry_weekly.png-591c899bd294a8dd43e1eb2487e8f714.stex" ]
+source_file="res://laundry_times/framed_laundry_times.png"
+dest_files=[ "res://.import/framed_laundry_times.png-cc7b3a9a4f23b35d3595b7a196106186.stex" ]
 
 [params]
 

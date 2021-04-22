@@ -84,5 +84,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _exit():
-  EventHub.emit_signal("laundry_weekly_closed", story_key)
+  EventHub.emit_signal("laundry_times_closed", story_key)
   queue_free()
