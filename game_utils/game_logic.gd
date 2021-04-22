@@ -328,9 +328,9 @@ func _ready():
 
 func update_laundry_weekly():
   if day == 1:
-    EventHub.emit_signal("laundry_weekly_unlocked", 0)
+    EventHub.emit_signal("laundry_times_unlocked", 0)
   if day == 6:
-    EventHub.emit_signal("laundry_weekly_unlocked", 1)
+    EventHub.emit_signal("laundry_times_unlocked", 1)
 
 
 func _on_day_over():
