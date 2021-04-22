@@ -98,22 +98,26 @@ func receive_order() -> void:
   leave_store()
 
 
-func get_emotion(happiness_pct) -> String:
+func get_emotion(happiness_pct):
   if happiness_pct >= happy_cutoff:
-    return "happy"
+    return Types.Emotion.HAPPY
   elif happiness_pct < mad_cutoff:
-    return "mad"
+    return Types.Emotion.MAD
   else:
-    return "twitchy"
+    return Types.Emotion.TWITCHY
 
 
-func leave_review(emotion : String):
+func leave_review(emotion):
   match emotion:
-    "happy":
+    Types.Emotion.HAPPY:
       EventHub.emit_signal("good_review")
-    "mad":
+    Types.Emotion.MAD:
       EventHub.emit_signal("very_bad_review")
+    Types.Emotion.TWITCHY:
+      EventHub.emit_signal("bad_review")
     _:
+      push_error("unrecognized emotion for review")
+      print("emotion: ", emotion)
       EventHub.emit_signal("bad_review")
 
 
@@ -150,8 +154,8 @@ func storm_off() -> void:
   $PatienceMeter.hide()
   received_laundry = true
   if score == 0:
-    var expression = emote("mad")
-    leave_review("mad")
+    var expression = emote(Types.Emotion.MAD)
+    leave_review(Types.Emotion.MAD)
     yield(expression, "animation_finished")
   leave_store()
 
@@ -162,7 +166,6 @@ func _on_Timer_timeout() -> void:
 
 func back_to_store() -> void:
   EventHub.emit_signal("customer_entering", self)
-  #$Bumper.monitoring = true
   $Bumper.interactable = true
   $Bumper.set_state_pickup()
 

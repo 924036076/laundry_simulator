@@ -6,15 +6,20 @@ func _on_animation_finished():
   queue_free()
 
 
-func set_and_play(emotion : String) -> void:
+func set_and_play(emotion) -> void:
   match emotion:
-    "happy":
+    Types.Emotion.HAPPY:
       play("happy")
       $HappySoundPlayer.play()
-    "mad":
+    Types.Emotion.MAD:
       play("mad")
       $MadSoundPlayer.play()
-    "twitchy":
+    Types.Emotion.TWITCHY:
       play("twitchy")
       $MehSoundPlayer.play()
+    _:
+      play("twitchy")
+      $MehSoundPlayer.play()
+      push_error("unrecognized emotion to emote")
+      print("emotion: ", str(emotion))
 
