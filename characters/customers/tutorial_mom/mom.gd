@@ -73,7 +73,7 @@ func _on_Bumper_returned():
 
 
 func show_money_earned(money : float, percent : float = 1) -> void:
-  var label = preload("res://models/money_label/money_label.tscn").instance()
+  var label = preload("res://models/money_add/money_add.tscn").instance()
   add_child(label)
   label.position = money_label_offset
   label.display("$" + str(round(money)), percent)
@@ -84,7 +84,7 @@ func emote() -> AnimatedSprite:
   var expression = preload("res://characters/emote/emote.tscn").instance()
   expression.position = expression_offset
   add_child(expression)
-  expression.set_and_play(1)
+  expression.set_and_play(Types.Emotion.HAPPY)
   return expression
 
 

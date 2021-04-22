@@ -69,11 +69,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/customers/effects/love_aura/love_aura.gd"
 }, {
-"base": "RichTextLabel",
-"class": "MoneyLabel",
-"language": "GDScript",
-"path": "res://overlays/money_label.gd"
-}, {
 "base": "BaseCustomer",
 "class": "OldLady",
 "language": "GDScript",
@@ -122,7 +117,6 @@ _global_script_class_icons={
 "LaundryHolder": "",
 "LaundryScene": "",
 "LoveAura": "",
-"MoneyLabel": "",
 "OldLady": "",
 "PatiencePoint": "",
 "Player": "",
