@@ -1,0 +1,303 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://laundry_weekly/laundry_weekly_title.png" type="Texture" id=2]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://laundry_weekly/laundry_weekly.gd" type="Script" id=4]
+[ext_resource path="res://interfaces/82377__gynation__paper-flip-1.wav" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 262, 25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -160.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ColorRect/ExitButton:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "audio"
+tracks/5/path = NodePath("AudioStreamPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "disappear"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect/ExitButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="LaundryWeekly" type="Control"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.666667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 262.0
+margin_top = 25.0
+margin_right = 762.0
+margin_bottom = 575.0
+rect_rotation = -53.3333
+color = Color( 0.952941, 0.87451, 0.756863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="laundry_weekly_title" type="Sprite" parent="ColorRect"]
+position = Vector2( 229.494, 59.1442 )
+texture = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="ColorRect"]
+position = Vector2( 19.491, 93.3831 )
+points = PoolVector2Array( 0, 0, 450, 0 )
+width = 3.0
+default_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+
+[node name="Line2D2" type="Line2D" parent="ColorRect"]
+position = Vector2( 19.491, 21.3831 )
+points = PoolVector2Array( 0, 0, 450, 0 )
+width = 3.0
+default_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+
+[node name="StandardLayout" type="Node2D" parent="ColorRect"]
+
+[node name="FluffStory" type="Node2D" parent="ColorRect/StandardLayout"]
+
+[node name="Title" type="Label" parent="ColorRect/StandardLayout/FluffStory"]
+margin_left = 31.748
+margin_top = 128.213
+margin_right = 231.748
+margin_bottom = 175.213
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+custom_colors/font_color_shadow = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "Laundrocorp valued at Four Trillion Billion"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="Label" parent="ColorRect/StandardLayout/FluffStory"]
+margin_left = 31.748
+margin_top = 184.213
+margin_right = 231.748
+margin_bottom = 256.213
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Does it make economic sense? No. Is it true? Yes."
+align = 3
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoStory" type="Node2D" parent="ColorRect/StandardLayout"]
+
+[node name="Title" type="Label" parent="ColorRect/StandardLayout/InfoStory"]
+margin_left = 31.748
+margin_top = 313.103
+margin_right = 231.748
+margin_bottom = 360.103
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Cats + Machines = enemies?"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="Label" parent="ColorRect/StandardLayout/InfoStory"]
+margin_left = 31.748
+margin_top = 369.103
+margin_right = 231.748
+margin_bottom = 491.103
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Keep clothes safe from fur! New study finds that some cats refuse to sleep on machines."
+align = 3
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainStory" type="Node2D" parent="ColorRect/StandardLayout"]
+
+[node name="Title" type="Label" parent="ColorRect/StandardLayout/MainStory"]
+margin_left = 263.748
+margin_top = 128.213
+margin_right = 463.748
+margin_bottom = 175.213
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "New Laundromat Makes Waves"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="Label" parent="ColorRect/StandardLayout/MainStory"]
+margin_left = 263.748
+margin_top = 184.213
+margin_right = 463.748
+margin_bottom = 481.213
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Grandchild to the late, great Landon Washerman, <Player Name> is the latest to enter the laundry game, albeit with a humble store. Will they rise to the occasion or be next in line to sell to Laundrocorp?"
+align = 3
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" parent="ColorRect" instance=ExtResource( 1 )]
+visible = false
+self_modulate = Color( 0.952941, 0.87451, 0.756863, 1 )
+margin_left = 517.0
+margin_top = -13.0
+margin_right = 557.0
+margin_bottom = 27.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/appear = SubResource( 2 )
+anims/disappear = SubResource( 3 )
+anims/idle = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[connection signal="pressed" from="ColorRect/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
