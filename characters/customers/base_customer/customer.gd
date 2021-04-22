@@ -9,7 +9,6 @@ var expression_offset := Vector2(0, -83)
 var buff_offset := Vector2(0, -17)
 var score := 0.0
 var cleanliness_pct := 0.0
-const FURIOUS := 0.0
 var max_patience := 1.0
 var patience_unit := 0.02
 var received_laundry := false
@@ -18,6 +17,8 @@ var customer_name = "influencer"
 var happy_effect = ""
 var mad_effect = ""
 
+var happy_cutoff := 0.9
+var mad_cutoff := 0.25
 
 signal leaving
 signal returning
@@ -26,7 +27,6 @@ signal returning
 func _ready() -> void:
   ._ready()
   set_physics_process(false)
-  speed = 100 # TODO: have different levels of speed and remove this magic number
   my_laundry = preload("res://models/laundry/laundry.tscn").instance()
   $Bumper.load_laundry(my_laundry)
   $Bumper/HandPos/Ticket.visible = false
@@ -85,7 +85,10 @@ func receive_order() -> void:
   $Bumper/HandPos/Ticket.visible = false
   $PatienceMeter.hide()
   assess_laundry()
-  var expression = emote(cleanliness_pct)
+  var emotion = get_emotion(cleanliness_pct)
+  var expression = emote(emotion)
+  leave_review(emotion)
+  
   # TODO: work on scoring and cleaniness pct logic to be better; redo this
   if $PatienceMeter.is_max() and cleanliness_pct >= 1:
     happy_buff()
@@ -93,6 +96,25 @@ func receive_order() -> void:
   show_money_earned(score * score_multiplier, cleanliness_pct)
   received_laundry = true
   leave_store()
+
+
+func get_emotion(happiness_pct) -> String:
+  if happiness_pct >= happy_cutoff:
+    return "happy"
+  elif happiness_pct < mad_cutoff:
+    return "mad"
+  else:
+    return "twitchy"
+
+
+func leave_review(emotion : String):
+  match emotion:
+    "happy":
+      EventHub.emit_signal("good_review")
+    "mad":
+      EventHub.emit_signal("very_bad_review")
+    _:
+      EventHub.emit_signal("bad_review")
 
 
 func happy_buff() -> void:
@@ -116,11 +138,11 @@ func assess_laundry() -> void:
   $PatienceMeter.hide()
 
 
-func emote(happiness_pct: float) -> AnimatedSprite:
+func emote(emotion : String) -> AnimatedSprite:
   var expression = preload("res://characters/emote/emote.tscn").instance()
   expression.position = expression_offset
   add_child(expression)
-  expression.set_and_play(happiness_pct)
+  expression.set_and_play(emotion)
   return expression
 
 
@@ -128,7 +150,8 @@ func storm_off() -> void:
   $PatienceMeter.hide()
   received_laundry = true
   if score == 0:
-    var expression = emote(FURIOUS)
+    var expression = emote("mad")
+    leave_review("mad")
     yield(expression, "animation_finished")
   leave_store()
 
@@ -158,7 +181,7 @@ func decrement_patience() -> void:
 func _on_toy_bouncing(body) -> void:
   if body != self: return
   $AnimationPlayer.play("shake")
-  emote(0)
+  emote("mad")
   modify_patience_points(toy_bounce_effect)
 
 
