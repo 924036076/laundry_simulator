@@ -10,17 +10,26 @@ var game_over = false
 
 
 func _ready():
-  EventHub.connect("bad_review", self, "_on_bad_review")
-  EventHub.connect("very_bad_review", self, "_on_very_bad_review")
-  EventHub.connect("good_review", self, "_on_good_review")
+  EventHub.connect("new_review", self, "_on_new_review")
   
   EventHub.connect("new_game", self, "_on_new_game")
   EventHub.connect("game_over", self, "_on_game_over")
   visible = false
 
 
-func _on_good_review() -> void:
-  rect_size.x = min(rect_size.x + (decrement / 2), max_length)
+func _on_new_review(review_type):
+  match review_type:
+    Types.Review.GOOD:
+      rect_size.x = min(rect_size.x + (decrement / 2), max_length)
+    Types.Review.VERY_BAD:
+      rect_size.x = max(rect_size.x - (large_decrement), 0)
+      check_rating()
+    Types.Review.BAD:
+      rect_size.x = max(rect_size.x - decrement, 0)
+      check_rating()
+    _:
+      push_error("unrecognized review type in star_rating")
+      print("review type: ", str(review_type))
 
 
 func _on_bad_review() -> void:

@@ -12,17 +12,13 @@ signal customer_leaving
 signal customer_entering
 signal new_rating
 signal new_customer
+signal new_review
 
 # Machine & counter signals
 signal laundry_washed
 signal laundry_dried
 signal laundry_folded
 signal laundry_delinted
-
-# Emote signals
-signal good_review
-signal bad_review
-signal very_bad_review
 
 # Cat signals
 signal occupy_object

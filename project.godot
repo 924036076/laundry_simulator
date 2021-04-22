@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://levels/base_level/sound_toggle.gd"
 }, {
+"base": "Node",
+"class": "Types",
+"language": "GDScript",
+"path": "res://game_utils/types.gd"
+}, {
 "base": "LaundryHolder",
 "class": "Washer",
 "language": "GDScript",
@@ -123,6 +128,7 @@ _global_script_class_icons={
 "Player": "",
 "RestartDay": "",
 "SoundToggle": "",
+"Types": "",
 "Washer": ""
 }
 
