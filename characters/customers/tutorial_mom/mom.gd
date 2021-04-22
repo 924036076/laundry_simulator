@@ -104,8 +104,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
       $AnimationPlayer.play_backwards("appear")
       $AudioStreamPlayer.play()
     "stairs_down":
-      $Bumper.interactable = true
-      $Timer.start()
+      if $Bumper.interactable == true:
+        $Timer.start()
     _:
       pass
 
