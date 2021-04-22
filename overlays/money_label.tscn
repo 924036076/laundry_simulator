@@ -32,4 +32,7 @@ stream = ExtResource( 2 )
 volume_db = -10.0
 bus = "soundfx"
 
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

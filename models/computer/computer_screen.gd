@@ -49,4 +49,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
       close_screen()
     "success":
       EventHub.emit_signal("laundromat_purchased")
-      # TODO: load regular laundry scene

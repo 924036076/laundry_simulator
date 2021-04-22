@@ -1,6 +1,7 @@
 extends Interactable
 
 export (PackedScene) var Screen
+export var secondary_description = "omg"
 var can_buy := false
 
 
@@ -36,3 +37,4 @@ func enable_light(boolean = true):
 
 func _on_new_option():
   enable_light()
+  description = secondary_description
