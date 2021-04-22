@@ -47,3 +47,4 @@ texture = ExtResource( 6 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource( 7 )
+bus = "soundfx"
