@@ -234,12 +234,15 @@ anims/success = SubResource( 6 )
 [node name="On" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 autoplay = true
+bus = "soundfx"
 
 [node name="Off" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "soundfx"
 
 [node name="Error" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+bus = "soundfx"
 
 [connection signal="pressed" from="Screen/Ad/BuyButton" to="." method="_on_BuyButton_pressed"]
 [connection signal="mouse_entered" from="Screen/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
