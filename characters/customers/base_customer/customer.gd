@@ -108,17 +108,19 @@ func get_emotion(happiness_pct):
 
 
 func leave_review(emotion):
+  var review_type
   match emotion:
     Types.Emotion.HAPPY:
-      EventHub.emit_signal("good_review")
+      review_type = Types.Review.GOOD
     Types.Emotion.MAD:
-      EventHub.emit_signal("very_bad_review")
+      review_type = Types.Review.VERY_BAD
     Types.Emotion.TWITCHY:
-      EventHub.emit_signal("bad_review")
+      review_type = Types.Review.BAD
     _:
       push_error("unrecognized emotion for review")
       print("emotion: ", emotion)
-      EventHub.emit_signal("bad_review")
+      review_type = Types.Review.BAD
+  EventHub.emit_signal("new_review", review_type)
 
 
 func happy_buff() -> void:
@@ -142,7 +144,7 @@ func assess_laundry() -> void:
   $PatienceMeter.hide()
 
 
-func emote(emotion : String) -> AnimatedSprite:
+func emote(emotion) -> AnimatedSprite:
   var expression = preload("res://characters/emote/emote.tscn").instance()
   expression.position = expression_offset
   add_child(expression)
