@@ -1,7 +1,11 @@
 extends CanvasLayer
 
 export (PackedScene) var StoreItem
+export (PackedScene) var FilterCheckbox
 onready var item_parent = $NinePatchRect/ScrollContainer/VBoxContainer
+onready var checkbox_parent = $Label/VBoxContainer
+var item_types := []
+var highlight_types := []
 
 
 func _ready():
@@ -25,6 +29,17 @@ func populate_store(list):
     var new_item = StoreItem.instance()
     new_item.init(item, list[item])
     item_parent.add_child(new_item)
+    if !list[item]["type"] in item_types:
+      item_types.append(list[item]["type"])
+    if list[item]["is_new"] and !list[item]["type"] in highlight_types:
+      highlight_types.append(list[item]["type"])
+  
+  for type in item_types:
+    var new_checkbox = FilterCheckbox.instance()
+    checkbox_parent.add_child(new_checkbox)
+    new_checkbox.init(type, highlight_types.has(type))
+    new_checkbox.connect("filter_activated", self, "_on_filter_activated")
+    new_checkbox.group = $Label/VBoxContainer/All.group
 
 
 func update_inventory(item_list):
@@ -66,22 +81,18 @@ func _on_ExitButton_pressed():
   queue_free()
 
 
-func _on_ConsumableCheck_pressed():
+func _on_filter_activated(filter):
+  var first_item = null
   for child in item_parent.get_children():
-    if child.type == GameLogic.ItemType.CONSUMABLE:
+    if child.type == filter:
       child.visible = true
+      if first_item == null:
+        first_item = child
     else:
       child.visible = false
   $Description.visible = false
-
-
-func _on_MachineCheck_pressed():
-  for child in item_parent.get_children():
-    if child.type == GameLogic.ItemType.MACHINE:
-      child.visible = true
-    else:
-      child.visible = false
-  $Description.visible = false
+  #first_item.grab_focus()
+  
 
 
 func _on_All_pressed():

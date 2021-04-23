@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interfaces/ninepatchtest2.png" type="Texture" id=2]
 [ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interfaces/store/store_item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interfaces/store/store.gd" type="Script" id=5]
+[ext_resource path="res://interfaces/store/checkbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -23,6 +24,7 @@ font_data = ExtResource( 1 )
 [node name="Store" type="CanvasLayer"]
 script = ExtResource( 5 )
 StoreItem = ExtResource( 4 )
+FilterCheckbox = ExtResource( 6 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 self_modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -84,14 +86,15 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Label"]
 anchor_top = 1.5
 anchor_bottom = 1.5
-margin_right = 40.0
+margin_left = 16.0
+margin_right = 64.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="All" type="CheckBox" parent="Label/VBoxContainer"]
-margin_right = 152.0
+margin_right = 48.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
@@ -100,28 +103,6 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 pressed = true
 group = SubResource( 3 )
 text = "all"
-
-[node name="MachineCheck" type="CheckBox" parent="Label/VBoxContainer"]
-margin_top = 34.0
-margin_right = 152.0
-margin_bottom = 64.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-group = SubResource( 3 )
-text = "machines"
-
-[node name="ConsumableCheck" type="CheckBox" parent="Label/VBoxContainer"]
-margin_top = 68.0
-margin_right = 152.0
-margin_bottom = 98.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.290196, 0.290196, 0.290196, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-group = SubResource( 3 )
-text = "consumables"
 
 [node name="ExitButton" parent="." instance=ExtResource( 3 )]
 anchor_top = 1.0
@@ -161,6 +142,4 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Label/VBoxContainer/All" to="." method="_on_All_pressed"]
-[connection signal="pressed" from="Label/VBoxContainer/MachineCheck" to="." method="_on_MachineCheck_pressed"]
-[connection signal="pressed" from="Label/VBoxContainer/ConsumableCheck" to="." method="_on_ConsumableCheck_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
