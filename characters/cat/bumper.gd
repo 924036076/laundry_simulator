@@ -19,6 +19,8 @@ func interact() -> void:
   $LoveParticles.emitting = true
   EventHub.emit_signal("cat_cuddled")
   $CuddleTimer.start(cuddle_length)
+  if $AudioStreamPlayer.is_playing(): return
+  $AudioStreamPlayer.play()
 
 
 func _on_Bumper_body_exited(body):
