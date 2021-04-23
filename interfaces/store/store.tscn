@@ -7,15 +7,15 @@
 [ext_resource path="res://interfaces/store/store.gd" type="Script" id=5]
 [ext_resource path="res://interfaces/store/checkbox.tscn" type="PackedScene" id=6]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="ButtonGroup" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
@@ -45,6 +45,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Checkboxes" type="VBoxContainer" parent="NinePatchRect"]
+anchor_top = 1.5
+anchor_bottom = 1.5
+margin_left = 36.0
+margin_top = -539.0
+margin_right = 84.0
+margin_bottom = -499.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="All" type="CheckBox" parent="NinePatchRect/Checkboxes"]
+margin_right = 48.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+pressed = true
+group = SubResource( 3 )
+text = "all"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect"]
 anchor_left = 0.42
 anchor_top = 0.07
@@ -65,6 +87,14 @@ margin_bottom = 310.0
 rect_min_size = Vector2( 300, 310 )
 custom_constants/separation = 12
 
+[node name="ExitButton" parent="NinePatchRect" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 564.0
+margin_top = -411.109
+margin_right = 604.0
+margin_bottom = -371.109
+
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( 595, 296 )
 points = PoolVector2Array( -202.381, -176.011, -202.381, 176.84 )
@@ -82,35 +112,6 @@ text = "Item Types"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Label"]
-anchor_top = 1.5
-anchor_bottom = 1.5
-margin_left = 16.0
-margin_right = 64.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="All" type="CheckBox" parent="Label/VBoxContainer"]
-margin_right = 48.0
-margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.368627, 0.368627, 0.368627, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-pressed = true
-group = SubResource( 3 )
-text = "all"
-
-[node name="ExitButton" parent="." instance=ExtResource( 3 )]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 776.0
-margin_top = -511.109
-margin_right = 816.0
-margin_bottom = -471.109
 
 [node name="Description" type="NinePatchRect" parent="."]
 margin_left = 322.0
@@ -141,5 +142,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Label/VBoxContainer/All" to="." method="_on_All_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/Checkboxes/All" to="." method="_on_All_pressed"]
+[connection signal="pressed" from="NinePatchRect/ExitButton" to="." method="_on_ExitButton_pressed"]

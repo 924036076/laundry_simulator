@@ -3,7 +3,7 @@ extends CanvasLayer
 export (PackedScene) var StoreItem
 export (PackedScene) var FilterCheckbox
 onready var item_parent = $NinePatchRect/ScrollContainer/VBoxContainer
-onready var checkbox_parent = $Label/VBoxContainer
+onready var checkbox_parent = $NinePatchRect/Checkboxes
 var item_types := []
 var highlight_types := []
 
@@ -39,7 +39,7 @@ func populate_store(list):
     checkbox_parent.add_child(new_checkbox)
     new_checkbox.init(type, highlight_types.has(type))
     new_checkbox.connect("filter_activated", self, "_on_filter_activated")
-    new_checkbox.group = $Label/VBoxContainer/All.group
+    new_checkbox.group = checkbox_parent.get_node("All").group
 
 
 func update_inventory(item_list):
@@ -91,8 +91,7 @@ func _on_filter_activated(filter):
     else:
       child.visible = false
   $Description.visible = false
-  #first_item.grab_focus()
-  
+  first_item.grab_focus()
 
 
 func _on_All_pressed():
