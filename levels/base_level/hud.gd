@@ -57,7 +57,7 @@ func _on_day_over():
 
 func show_day_end(total : int, prev_balance : int, day_count : int):
   if is_instance_valid(overlay):
-    if overlay.get_name() == "DayEndScreen":
+    if overlay.get_name() == "DayEndScreen" or overlay.get_name() == "GameOverScreen":
       return
     else:
       overlay.queue_free()
