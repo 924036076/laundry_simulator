@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/194926__soundmary__cat-purr.mp3-e3c6dfeecaf980b2d29b871d1ce8dfb2.mp3str"
+
+[deps]
+
+source_file="res://characters/cat/194926__soundmary__cat-purr.mp3"
+dest_files=[ "res://.import/194926__soundmary__cat-purr.mp3-e3c6dfeecaf980b2d29b871d1ce8dfb2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

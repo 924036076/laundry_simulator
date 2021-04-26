@@ -1256,7 +1256,7 @@ texture = ExtResource( 35 )
 
 [node name="Spawner" type="YSort" parent="."]
 light_mask = 3
-position = Vector2( -130.11, 211.015 )
+position = Vector2( -55.11, 211.015 )
 script = ExtResource( 11 )
 
 [node name="CustomerTimer" type="Timer" parent="Spawner"]
@@ -1268,16 +1268,16 @@ wait_time = 10.0
 position = Vector2( -1.05262, -1.05261 )
 
 [node name="1" type="Node2D" parent="Spawner/WaitingSpots"]
-position = Vector2( 390.932, 1.05261 )
+position = Vector2( 318.932, 1.05261 )
 
 [node name="2" type="Node2D" parent="Spawner/WaitingSpots"]
-position = Vector2( 313.281, 1.05263 )
+position = Vector2( 241.281, 1.05263 )
 
 [node name="3" type="Node2D" parent="Spawner/WaitingSpots"]
-position = Vector2( 234.467, -1.26316 )
+position = Vector2( 162.467, -1.26316 )
 
 [node name="4" type="Node2D" parent="Spawner/WaitingSpots"]
-position = Vector2( 155.617, -1.26315 )
+position = Vector2( 83.617, -1.26315 )
 
 [node name="WaitTimer" type="Timer" parent="Spawner"]
 pause_mode = 1

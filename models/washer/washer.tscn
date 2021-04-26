@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://models/washer/basic_washer.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
@@ -43,6 +43,9 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+
+[sub_resource type="Animation" id=15]
+resource_name = "roll_change"
 
 [sub_resource type="Animation" id=2]
 resource_name = "running"
@@ -100,6 +103,9 @@ animation = "shake"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "idle"
 
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "roll_change"
+
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "running"
 
@@ -107,15 +113,25 @@ animation = "running"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=9]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=10]
 states/idle/node = SubResource( 6 )
 states/idle/position = Vector2( 210, 42 )
+states/roll_change/node = SubResource( 16 )
+states/roll_change/position = Vector2( 343, 172 )
 states/running/node = SubResource( 7 )
 states/running/position = Vector2( 386, 42 )
-transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
+transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ), "idle", "roll_change", SubResource( 17 ), "roll_change", "idle", SubResource( 18 ) ]
+start_node = "idle"
+graph_offset = Vector2( -188.184, -20.132 )
 
 [sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( 0, 122.5 )
+graph_offset = Vector2( 0, -135.5 )
 nodes/Blend/node = SubResource( 4 )
 nodes/Blend/position = Vector2( 340, 140 )
 nodes/Shake/node = SubResource( 5 )
@@ -148,6 +164,7 @@ one_shot = true
 autoplay = "idle"
 playback_speed = 2.0
 anims/idle = SubResource( 1 )
+anims/roll_change = SubResource( 15 )
 anims/running = SubResource( 2 )
 anims/shake = SubResource( 3 )
 
