@@ -40,7 +40,6 @@ func decrement_durability():
 
 
 func load_sprite_sheet():
-  print("load_sprite_sheet")
   var path = sprite_sheet_dir + "state" + str(durability) + ".png"
   $Sprite.texture = load(path)
 
@@ -57,7 +56,3 @@ func new_lint_roll():
 
 func _on_new_day():
   call_deferred("check_stock")
-
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-  print("finished this anim!: ", anim_name)
