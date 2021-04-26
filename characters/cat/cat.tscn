@@ -388,7 +388,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=78]
 resource_name = "maul"
 length = 2.9
 step = 0.05
@@ -533,7 +533,7 @@ tracks/8/keys = {
 "values": [ -15.0, -15.0, -17.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=79]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -549,7 +549,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0, 1 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=80]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -565,7 +565,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 4 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=81]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -581,7 +581,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=82]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -996,11 +996,11 @@ anims/idle_left = SubResource( 6 )
 anims/idle_right = SubResource( 7 )
 anims/idle_up = SubResource( 8 )
 anims/jump_forward = SubResource( 9 )
-anims/maul = SubResource( 10 )
-anims/mov_down = SubResource( 11 )
-anims/mov_left = SubResource( 12 )
-anims/mov_right = SubResource( 13 )
-anims/mov_up = SubResource( 14 )
+anims/maul = SubResource( 78 )
+anims/mov_down = SubResource( 79 )
+anims/mov_left = SubResource( 80 )
+anims/mov_right = SubResource( 81 )
+anims/mov_up = SubResource( 82 )
 anims/patrol = SubResource( 15 )
 anims/rude_awakening = SubResource( 16 )
 anims/sleep = SubResource( 17 )

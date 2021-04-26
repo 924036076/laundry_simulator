@@ -482,13 +482,8 @@ position = Vector2( 88.0182, 43.2775 )
 position = Vector2( 450, 200 )
 description = "Ol' Bessy, my faithful washer"
 
-[node name="Dryer" parent="Machines" groups=[
-"interactables",
-"laundry_holder",
-] instance=ExtResource( 3 )]
-pause_mode = 1
+[node name="Dryer" parent="Machines" instance=ExtResource( 3 )]
 position = Vector2( 534, 200 )
-gravity = 0.0
 description = "Simon the dryer, a gift for my 16th birthday"
 
 [node name="Computer" parent="Machines" instance=ExtResource( 10 )]

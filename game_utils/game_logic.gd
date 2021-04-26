@@ -201,9 +201,9 @@ var player_inventory := {
   "basic_toy" : 0,
   "basic_washer" : 1,
   "basic_dryer" : 1,
-  "basic_linter": 0,
+  "basic_linter": 1,
   "basic_counter" : 1,
-  "basic_lint_roll" : 0,
+  "basic_lint_roll" : 100,
  }
 
 
