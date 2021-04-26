@@ -9,11 +9,6 @@ func _ready():
   ._ready()
   load_sprite_sheet()
   EventHub.connect("new_day", self, "_on_new_day")
-  EventHub.connect("test_signal", self, "_on_test_signal")
-
-
-func _on_test_signal():
-  decrement_durability()
 
 
 func check_stock():
