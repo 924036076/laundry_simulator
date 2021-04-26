@@ -27,7 +27,6 @@ signal idle
 func _ready() -> void:
   EventHub.connect("toy_released", self, "_on_toy_released")
   EventHub.connect("toy_destroyed", self, "_on_toy_destroyed")
-  EventHub.connect("test_signal", self, "_on_test_signal")
   animationState = $AnimationTree["parameters/playback"]
   money_label_offset = Vector2(0, -65)
   speed = 75
@@ -39,11 +38,6 @@ func _ready() -> void:
     desk = get_node(desk_path)
 
   rng.randomize()
-
-
-func _on_test_signal():
-  print(animationState.get_current_node())
-  print("current state: ", State.keys()[state])
 
 
 func _on_toy_released(play_loc : Vector2) -> void:
