@@ -39,9 +39,11 @@ const LINTERS = {
 const COUNTERS = {
   "basic_counter": {
     "level": 1,
+    "anim_speed": 0.4,
   },
   "reasonable_counter": {
     "level": 2,
+    "anim_speed": 0.6,
   },
 }
 
