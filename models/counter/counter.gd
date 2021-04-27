@@ -82,4 +82,3 @@ func selective_click_me(type : String):
 func load_state(state:Dictionary) -> void:
   $Sprite.texture = load(state["sprite_info"]["path"])
   folding_speed = state["params"]["anim_speed"]
-  print(state["params"])
