@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://levels/base_level/machine_manager.gd" type="Script" id=19]
 [ext_resource path="res://tilesets/walls.png" type="Texture" id=20]
 [ext_resource path="res://tilesets/counter_floor.png" type="Texture" id=21]
+[ext_resource path="res://overlays/day_label.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=24]
 [ext_resource path="res://levels/base_level/tile_floor.png" type="Texture" id=26]
 [ext_resource path="res://tilesets/sidewalk_middle.png" type="Texture" id=27]
@@ -1203,31 +1204,6 @@ gravity = 98.0
 
 [node name="YSort" type="YSort" parent="Map"]
 
-[node name="MoneyLabel" parent="." instance=ExtResource( 7 )]
-margin_left = 777.476
-margin_right = 927.476
-bbcode_text = "[wave][right]$5000"
-
-[node name="Clock" type="Node2D" parent="."]
-position = Vector2( 932.255, 0 )
-script = ExtResource( 12 )
-
-[node name="MinuteTimer" type="Timer" parent="Clock"]
-pause_mode = 1
-wait_time = 1.5
-
-[node name="RichTextLabel" type="Label" parent="Clock"]
-margin_left = 13.3579
-margin_top = 54.2833
-margin_right = 63.3579
-margin_bottom = 91.2833
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "13:50"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HUD" type="CanvasLayer" parent="."]
 pause_mode = 2
 script = ExtResource( 16 )
@@ -1235,6 +1211,56 @@ script = ExtResource( 16 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 18 )
 bus = "soundfx"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+anchor_left = 0.9
+anchor_right = 0.99
+margin_left = -267.0
+margin_top = 47.0
+margin_bottom = 47.0
+custom_constants/separation = 20
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoneyLabel" parent="HUD/HBoxContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+margin_left = 92.0
+margin_top = 0.0
+margin_right = 192.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 100, 0 )
+bbcode_text = "[right][wave]$5000[/wave][/right]"
+
+[node name="DayLabel" parent="HUD/HBoxContainer" instance=ExtResource( 22 )]
+margin_left = 212.0
+margin_right = 264.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 50, 0 )
+align = 2
+
+[node name="Clock" type="Control" parent="HUD/HBoxContainer"]
+margin_left = 284.0
+margin_right = 359.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 75, 0 )
+script = ExtResource( 12 )
+
+[node name="MinuteTimer" type="Timer" parent="HUD/HBoxContainer/Clock"]
+pause_mode = 1
+wait_time = 1.5
+
+[node name="RichTextLabel" type="Label" parent="HUD/HBoxContainer/Clock"]
+margin_right = 50.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "13:50"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Options" parent="." instance=ExtResource( 10 )]
 restart_enabled = true
@@ -1288,8 +1314,8 @@ pause_mode = 1
 visible = false
 
 [connection signal="mischief_wanted" from="Map/Objects/Cat" to="." method="_on_Cat_mischief_wanted"]
-[connection signal="almost_closing" from="Clock" to="Spawner" method="_on_Clock_almost_closing"]
-[connection signal="new_hour" from="Clock" to="Spawner" method="_on_Clock_new_hour"]
-[connection signal="timeout" from="Clock/MinuteTimer" to="Clock" method="_on_MinuteTimer_timeout"]
+[connection signal="almost_closing" from="HUD/HBoxContainer/Clock" to="Spawner" method="_on_Clock_almost_closing"]
+[connection signal="new_hour" from="HUD/HBoxContainer/Clock" to="Spawner" method="_on_Clock_new_hour"]
+[connection signal="timeout" from="HUD/HBoxContainer/Clock/MinuteTimer" to="HUD/HBoxContainer/Clock" method="_on_MinuteTimer_timeout"]
 [connection signal="timeout" from="Spawner/CustomerTimer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Spawner/WaitTimer" to="Spawner" method="_on_WaitTimer_timeout"]

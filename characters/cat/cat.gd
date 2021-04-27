@@ -7,7 +7,7 @@ export (NodePath) var desk_path
 var desk : Node2D
 var patrol_points : PoolVector2Array
 var rng := RandomNumberGenerator.new()
-enum State {PATROL, SLEEP, WORK, PLAY, MAULING, MISCHIEF, JUMPING}
+enum State {PATROL, SLEEP, HIBERNATE, WORK, PLAY, MAULING, MISCHIEF, JUMPING}
 var state = State.PATROL
 var patrol_cutoff := 10
 var sleep_cutoff := 30
@@ -107,14 +107,17 @@ func _on_jump_start() -> void:
 
 
 func _on_jump_end() -> void:
+  if !action_enabled: return
+  
   EventHub.emit_signal("occupy_object", target_id)
   handle_state_transition()
   $ThoughtBubble.hide()
 
 
 func _on_mauling_end() -> void:
-  state = State.PLAY
   EventHub.emit_signal("mauling_ended")
+  if action_enabled and state != State.HIBERNATE:
+    state = State.PLAY
 
 
 func _on_WaitTimer_timeout() -> void:
@@ -131,6 +134,7 @@ func _on_WaitTimer_timeout() -> void:
 
 
 func manage_mischief(counter_pos : Vector2, id : int) -> void:
+  if !action_enabled or state != State.MISCHIEF: return
   target = counter_pos
   target_id = id
 
@@ -206,9 +210,10 @@ func set_random_destination() -> void:
 
 func stop() -> void:
   action_enabled = false
+  set_target_location(global_position)
   $WaitTimer.stop()
   $ThoughtBubble.hide()
-  state = State.SLEEP
+  state = State.HIBERNATE
   animationState.travel("sleep")
 
 

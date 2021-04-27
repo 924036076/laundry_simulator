@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://overlays/day_label.gd" type="Script" id=1]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="DayLabel" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Day 2
+"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

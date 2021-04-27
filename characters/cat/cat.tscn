@@ -388,7 +388,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=78]
+[sub_resource type="Animation" id=10]
 resource_name = "maul"
 length = 2.9
 step = 0.05
@@ -533,7 +533,7 @@ tracks/8/keys = {
 "values": [ -15.0, -15.0, -17.0 ]
 }
 
-[sub_resource type="Animation" id=79]
+[sub_resource type="Animation" id=11]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -549,7 +549,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0, 1 ]
 }
 
-[sub_resource type="Animation" id=80]
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -565,7 +565,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 4 ]
 }
 
-[sub_resource type="Animation" id=81]
+[sub_resource type="Animation" id=13]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -581,7 +581,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=82]
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -934,7 +934,7 @@ states/dance/position = Vector2( 661.632, 128.26 )
 states/disappointed/node = SubResource( 34 )
 states/disappointed/position = Vector2( 557.632, 374 )
 states/excited/node = SubResource( 35 )
-states/excited/position = Vector2( 533.632, 173 )
+states/excited/position = Vector2( 557.632, 185 )
 states/jump_forward/node = SubResource( 36 )
 states/jump_forward/position = Vector2( 767.632, -49.7399 )
 states/maul/node = SubResource( 37 )
@@ -948,7 +948,7 @@ states/shake/position = Vector2( 243.632, 149.26 )
 states/sleep/node = SubResource( 41 )
 states/sleep/position = Vector2( 77, -75 )
 states/thinking/node = SubResource( 42 )
-states/thinking/position = Vector2( 342.632, 272.26 )
+states/thinking/position = Vector2( 297.632, 349.26 )
 states/uncurl/node = SubResource( 43 )
 states/uncurl/position = Vector2( 201, 53 )
 states/wake_up/node = SubResource( 44 )
@@ -996,11 +996,11 @@ anims/idle_left = SubResource( 6 )
 anims/idle_right = SubResource( 7 )
 anims/idle_up = SubResource( 8 )
 anims/jump_forward = SubResource( 9 )
-anims/maul = SubResource( 78 )
-anims/mov_down = SubResource( 79 )
-anims/mov_left = SubResource( 80 )
-anims/mov_right = SubResource( 81 )
-anims/mov_up = SubResource( 82 )
+anims/maul = SubResource( 10 )
+anims/mov_down = SubResource( 11 )
+anims/mov_left = SubResource( 12 )
+anims/mov_right = SubResource( 13 )
+anims/mov_up = SubResource( 14 )
 anims/patrol = SubResource( 15 )
 anims/rude_awakening = SubResource( 16 )
 anims/sleep = SubResource( 17 )
@@ -1080,7 +1080,7 @@ frame = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 11 )
-volume_db = -17.0
+volume_db = -15.0
 
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Bumper_body_exited"]

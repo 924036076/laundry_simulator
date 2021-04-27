@@ -82,7 +82,7 @@ const ITEM_SPRITE_INFO = {
     "frame" : 5,
   },
   "basic_linter": {
-    "path" : "res://models/lint_machine/machine_sprite_sheets/0.png",
+    "path" : "res://models/lint_machine/machine_sprite_sheets/state0.png",
     "hframes" : 7,
     "vframes" : 1,
     "scale" : Vector2(2,2),
