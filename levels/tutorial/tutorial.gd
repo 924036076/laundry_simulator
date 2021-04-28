@@ -52,8 +52,6 @@ func increment_state():
 
 
 func _on_Timer_timeout():
-  print("timer time out in base tutorial script!")
-  print("current state is: ", state)
   match state:
     State.BEGINNING:
       $Mom.go_downstairs()
