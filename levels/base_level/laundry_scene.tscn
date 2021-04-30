@@ -1195,7 +1195,6 @@ desk_path = NodePath("../../Machines/Desk/DeskLocation")
 
 [node name="Player" parent="Map/Objects" instance=ExtResource( 5 )]
 position = Vector2( 342.008, 332.822 )
-scale = Vector2( 0.75, 0.75 )
 navNodePath = NodePath("../../Navigation2D")
 
 [node name="ToyHolder" parent="Map" instance=ExtResource( 37 )]
