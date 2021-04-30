@@ -12,17 +12,13 @@ signal customer_leaving
 signal customer_entering
 signal new_rating
 signal new_customer
+signal new_review
 
 # Machine & counter signals
 signal laundry_washed
 signal laundry_dried
 signal laundry_folded
 signal laundry_delinted
-
-# Emote signals
-signal good_review
-signal bad_review
-signal very_bad_review
 
 # Cat signals
 signal occupy_object
@@ -40,6 +36,10 @@ signal toy_bounced_on_body
 # HUD signals
 signal new_game
 signal new_day
+
+# Laundry Times signals
+signal laundry_times_closed
+signal laundry_times_clicked # from interactable_laundry_times
 
 # Options signals
 signal restart
@@ -67,6 +67,7 @@ signal new_inventory
 signal money_updated  # when money increases or decreases
 signal money_reset # when money is reset; eg with new day / tutorial
 signal inventory_updated
+signal laundry_times_unlocked
 
 # Misc
 signal day_over # spawner and clock

@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://characters/cat/cat_sheet.png" type="Texture" id=1]
 [ext_resource path="res://characters/base_character/base_character.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://characters/cat/CatCloud_32x32.png" type="Texture" id=10]
 [ext_resource path="res://characters/cat/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=11]
 [ext_resource path="res://characters/cat/118513__thefsoundman__punch-02.wav" type="AudioStream" id=12]
+[ext_resource path="res://characters/cat/194926__soundmary__cat-purr.mp3" type="AudioStream" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.46046
@@ -387,7 +388,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 resource_name = "maul"
 length = 2.9
 step = 0.05
@@ -532,7 +533,7 @@ tracks/8/keys = {
 "values": [ -15.0, -15.0, -17.0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -548,7 +549,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0, 1 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -564,7 +565,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 4 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -580,7 +581,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -596,7 +597,7 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -821,10 +822,10 @@ animation = "excited"
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "jump_forward"
 
-[sub_resource type="AnimationNodeAnimation" id=78]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "maul"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "patrol"
 
 [sub_resource type="AnimationNodeAnimation" id=39]
@@ -912,13 +913,13 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=74]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=79]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=80]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id=75]
@@ -933,12 +934,12 @@ states/dance/position = Vector2( 661.632, 128.26 )
 states/disappointed/node = SubResource( 34 )
 states/disappointed/position = Vector2( 557.632, 374 )
 states/excited/node = SubResource( 35 )
-states/excited/position = Vector2( 533.632, 173 )
+states/excited/position = Vector2( 557.632, 185 )
 states/jump_forward/node = SubResource( 36 )
 states/jump_forward/position = Vector2( 767.632, -49.7399 )
-states/maul/node = SubResource( 78 )
+states/maul/node = SubResource( 37 )
 states/maul/position = Vector2( 136.632, 277.26 )
-states/patrol/node = SubResource( 37 )
+states/patrol/node = SubResource( 38 )
 states/patrol/position = Vector2( 543.632, -54.74 )
 states/rude_awakening/node = SubResource( 39 )
 states/rude_awakening/position = Vector2( -11, 53 )
@@ -947,14 +948,14 @@ states/shake/position = Vector2( 243.632, 149.26 )
 states/sleep/node = SubResource( 41 )
 states/sleep/position = Vector2( 77, -75 )
 states/thinking/node = SubResource( 42 )
-states/thinking/position = Vector2( 342.632, 272.26 )
+states/thinking/position = Vector2( 297.632, 349.26 )
 states/uncurl/node = SubResource( 43 )
 states/uncurl/position = Vector2( 201, 53 )
 states/wake_up/node = SubResource( 44 )
 states/wake_up/position = Vector2( 77, -13 )
 states/working/node = SubResource( 45 )
 states/working/position = Vector2( 380, -49.7399 )
-transitions = [ "Idle", "Move", SubResource( 46 ), "Move", "Idle", SubResource( 47 ), "Idle", "curl_up", SubResource( 48 ), "curl_up", "sleep", SubResource( 49 ), "sleep", "wake_up", SubResource( 50 ), "wake_up", "rude_awakening", SubResource( 51 ), "wake_up", "uncurl", SubResource( 52 ), "rude_awakening", "uncurl", SubResource( 53 ), "uncurl", "Idle", SubResource( 54 ), "Idle", "working", SubResource( 55 ), "working", "Idle", SubResource( 56 ), "Idle", "patrol", SubResource( 57 ), "patrol", "Idle", SubResource( 58 ), "Idle", "thinking", SubResource( 59 ), "disappointed", "Idle", SubResource( 60 ), "excited", "Idle", SubResource( 61 ), "thinking", "Idle", SubResource( 62 ), "thinking", "excited", SubResource( 63 ), "thinking", "disappointed", SubResource( 64 ), "jump_forward", "Idle", SubResource( 65 ), "Idle", "jump_forward", SubResource( 66 ), "Idle", "shake", SubResource( 67 ), "shake", "Idle", SubResource( 68 ), "Idle", "dance", SubResource( 69 ), "dance", "Idle", SubResource( 70 ), "Idle", "excited", SubResource( 73 ), "Idle", "disappointed", SubResource( 74 ), "Idle", "maul", SubResource( 79 ), "maul", "Idle", SubResource( 80 ) ]
+transitions = [ "Idle", "Move", SubResource( 46 ), "Move", "Idle", SubResource( 47 ), "Idle", "curl_up", SubResource( 48 ), "curl_up", "sleep", SubResource( 49 ), "sleep", "wake_up", SubResource( 50 ), "wake_up", "rude_awakening", SubResource( 51 ), "wake_up", "uncurl", SubResource( 52 ), "rude_awakening", "uncurl", SubResource( 53 ), "uncurl", "Idle", SubResource( 54 ), "Idle", "working", SubResource( 55 ), "working", "Idle", SubResource( 56 ), "Idle", "patrol", SubResource( 57 ), "patrol", "Idle", SubResource( 58 ), "Idle", "thinking", SubResource( 59 ), "disappointed", "Idle", SubResource( 60 ), "excited", "Idle", SubResource( 61 ), "thinking", "Idle", SubResource( 62 ), "thinking", "excited", SubResource( 63 ), "thinking", "disappointed", SubResource( 64 ), "jump_forward", "Idle", SubResource( 65 ), "Idle", "jump_forward", SubResource( 66 ), "Idle", "shake", SubResource( 67 ), "shake", "Idle", SubResource( 68 ), "Idle", "dance", SubResource( 69 ), "dance", "Idle", SubResource( 70 ), "Idle", "excited", SubResource( 71 ), "Idle", "disappointed", SubResource( 72 ), "Idle", "maul", SubResource( 73 ), "maul", "Idle", SubResource( 74 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -147.368, -106.74 )
 
@@ -995,12 +996,12 @@ anims/idle_left = SubResource( 6 )
 anims/idle_right = SubResource( 7 )
 anims/idle_up = SubResource( 8 )
 anims/jump_forward = SubResource( 9 )
-anims/maul = SubResource( 15 )
-anims/mov_down = SubResource( 10 )
-anims/mov_left = SubResource( 11 )
-anims/mov_right = SubResource( 12 )
-anims/mov_up = SubResource( 13 )
-anims/patrol = SubResource( 14 )
+anims/maul = SubResource( 10 )
+anims/mov_down = SubResource( 11 )
+anims/mov_left = SubResource( 12 )
+anims/mov_right = SubResource( 13 )
+anims/mov_up = SubResource( 14 )
+anims/patrol = SubResource( 15 )
 anims/rude_awakening = SubResource( 16 )
 anims/sleep = SubResource( 17 )
 anims/thinking = SubResource( 18 )
@@ -1054,6 +1055,10 @@ initial_velocity = 10.0
 [node name="CuddleTimer" type="Timer" parent="Bumper" index="2"]
 wait_time = 3.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Bumper" index="6"]
+stream = ExtResource( 13 )
+bus = "soundfx"
+
 [node name="Cloud" type="Sprite" parent="." index="8"]
 visible = false
 position = Vector2( 0, -26.1409 )
@@ -1075,7 +1080,7 @@ frame = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 11 )
-volume_db = -17.0
+volume_db = -15.0
 
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Bumper_body_exited"]

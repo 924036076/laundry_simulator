@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/0.png-25b8d14f5a82c6303184750425ff5361.stex"
+path="res://.import/laundry_times_title.png-b40ed25d08fd766db986823a04d814e0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/lint_machine/machine_sprite_sheets/0.png"
-dest_files=[ "res://.import/0.png-25b8d14f5a82c6303184750425ff5361.stex" ]
+source_file="res://laundry_times/laundry_times_title.png"
+dest_files=[ "res://.import/laundry_times_title.png-b40ed25d08fd766db986823a04d814e0.stex" ]
 
 [params]
 

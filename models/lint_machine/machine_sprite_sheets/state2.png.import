@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/drop_texture.png-e57e9af9c42ae1a713a4c086fb112e95.stex"
+path="res://.import/state2.png-d193faaefd8f70793f5d0d574dfa236f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/laundry/drop_texture.png"
-dest_files=[ "res://.import/drop_texture.png-e57e9af9c42ae1a713a4c086fb112e95.stex" ]
+source_file="res://models/lint_machine/machine_sprite_sheets/state2.png"
+dest_files=[ "res://.import/state2.png-d193faaefd8f70793f5d0d574dfa236f.stex" ]
 
 [params]
 

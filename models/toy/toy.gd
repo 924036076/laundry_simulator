@@ -44,7 +44,6 @@ func _ready():
   max_frame = $Sprite.vframes * $Sprite.hframes - 1
   EventHub.connect("mauling_started", self, "_on_cat_play_started")
   EventHub.connect("mauling_ended", self, "_on_cat_play_ended")
-  EventHub.connect("new_day", self, "_on_new_day")
   rng = RandomNumberGenerator.new()
   rng.randomize()
   set_process(false)
@@ -199,7 +198,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
   if anim_name == "death":
     EventHub.emit_signal("toy_destroyed")
     queue_free()
-
-
-func _on_new_day():
-  if state != State.CAGED: queue_free()

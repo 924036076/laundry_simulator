@@ -67,7 +67,7 @@ func _on_end_of_path() -> void:
   animationState.travel("Idle")
     
 func show_money_earned(money : float, percent : float = 1) -> void:
-  var label = preload("res://models/money_label/money_label.tscn").instance()
+  var label = preload("res://models/money_add/money_add.tscn").instance()
   add_child(label)
   label.position = money_label_offset
   label.display("$" + str(round(money)), percent)

@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 var hours : int
 var minutes : int
@@ -27,9 +27,6 @@ func _on_MinuteTimer_timeout():
     emit_signal("new_hour", hours)
     if hours >= CLOSING_HOUR - 2:
       emit_signal("almost_closing")
-    if hours >= CLOSING_HOUR:
-      print("day over signal!")
-      EventHub.emit_signal("day_over")
   update_ui()
 
 

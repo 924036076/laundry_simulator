@@ -573,6 +573,7 @@ anims/simple_show = SubResource( 9 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+bus = "soundfx"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 visible = false

@@ -2,6 +2,7 @@ extends LaundryHolder
 class_name Counter
 var laundry_folding = false
 var cat_occupant = false
+var folding_speed := 0.4
 
 
 func load_laundry(laundry_in : Node2D) -> void:
@@ -12,14 +13,11 @@ func load_laundry(laundry_in : Node2D) -> void:
 
 
 func fold_laundry() -> void:
-  print("trying to fold")
-  if laundry.can_fold():
-    laundry.fold()
-    print("folding!")
-    laundry_folding = true
-    determine_interactability()
-  else:
-    print("laundry not foldable")
+  if !laundry.can_fold(): return
+  
+  laundry.fold(folding_speed)
+  laundry_folding = true
+  determine_interactability()
 
 
 func _ready() -> void:
@@ -83,3 +81,4 @@ func selective_click_me(type : String):
 
 func load_state(state:Dictionary) -> void:
   $Sprite.texture = load(state["sprite_info"]["path"])
+  folding_speed = state["params"]["anim_speed"]

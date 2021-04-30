@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://models/washer/basic_washer.png" type="Texture" id=1]
 [ext_resource path="res://models/laundry_holder/laundry_holder.tscn" type="PackedScene" id=2]
@@ -45,7 +45,9 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "running"
+resource_name = "roll_change"
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -73,8 +75,7 @@ tracks/1/keys = {
 "values": [ Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "shake"
+[sub_resource type="Animation" id=4]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -90,47 +91,60 @@ tracks/0/keys = {
 "values": [ Vector2( 5, 0 ), Vector2( -5, 0 ), Vector2( 5, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeBlend2" id=4]
+[sub_resource type="AnimationNodeBlend2" id=5]
 filter_enabled = true
 filters = [ "Sprite:position" ]
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "shake"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "roll_change"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "running"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
-[sub_resource type="AnimationNodeStateMachine" id=10]
-states/idle/node = SubResource( 6 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/idle/node = SubResource( 7 )
 states/idle/position = Vector2( 210, 42 )
-states/running/node = SubResource( 7 )
+states/roll_change/node = SubResource( 8 )
+states/roll_change/position = Vector2( 343, 172 )
+states/running/node = SubResource( 9 )
 states/running/position = Vector2( 386, 42 )
-transitions = [ "idle", "running", SubResource( 8 ), "running", "idle", SubResource( 9 ) ]
+transitions = [ "idle", "running", SubResource( 10 ), "running", "idle", SubResource( 11 ), "idle", "roll_change", SubResource( 12 ), "roll_change", "idle", SubResource( 13 ) ]
+start_node = "idle"
+graph_offset = Vector2( -188.184, -20.132 )
 
-[sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( 0, 122.5 )
-nodes/Blend/node = SubResource( 4 )
+[sub_resource type="AnimationNodeBlendTree" id=15]
+graph_offset = Vector2( 0, -135.5 )
+nodes/Blend/node = SubResource( 5 )
 nodes/Blend/position = Vector2( 340, 140 )
-nodes/Shake/node = SubResource( 5 )
+nodes/Shake/node = SubResource( 6 )
 nodes/Shake/position = Vector2( 100, 220 )
-nodes/StateMachine/node = SubResource( 10 )
+nodes/StateMachine/node = SubResource( 14 )
 nodes/StateMachine/position = Vector2( 20, -60 )
 nodes/output/position = Vector2( 540, 200 )
 node_connections = [ "output", 0, "Blend", "Blend", 0, "StateMachine", "Blend", 1, "Shake" ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 35.7068, 47.3758 )
 
-[sub_resource type="OccluderPolygon2D" id=14]
+[sub_resource type="OccluderPolygon2D" id=18]
 polygon = PoolVector2Array( -35.994, -47.6055, 35.5732, -47.2079, 35.9708, 47.0221, -35.994, 47.0221 )
 
 [node name="Washer" groups=[
@@ -148,15 +162,16 @@ one_shot = true
 autoplay = "idle"
 playback_speed = 2.0
 anims/idle = SubResource( 1 )
-anims/running = SubResource( 2 )
-anims/shake = SubResource( 3 )
+anims/roll_change = SubResource( 2 )
+anims/running = SubResource( 3 )
+anims/shake = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource( 11 )
+tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Blend/blend_amount = 0.0
-parameters/StateMachine/playback = SubResource( 12 )
+parameters/StateMachine/playback = SubResource( 16 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 4 )
@@ -171,7 +186,7 @@ vframes = 3
 frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
-shape = SubResource( 13 )
+shape = SubResource( 17 )
 
 [node name="InteractableParticles" type="CPUParticles2D" parent="." index="6"]
 visible = false
@@ -190,6 +205,6 @@ position = Vector2( 0, -18 )
 visible = false
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="11"]
-occluder = SubResource( 14 )
+occluder = SubResource( 18 )
 
 [connection signal="timeout" from="Timer" to="." method="_finish_load"]

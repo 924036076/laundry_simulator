@@ -82,10 +82,9 @@ func _mouse_over(over : bool) -> void:
 
 
 func _on_Interactable_input_event(_viewport, event, _shape_idx):
-  #if !mouse_over: return
+  if get_tree().is_input_handled(): return
   if not event is InputEventMouseButton: return
   if event.button_index != BUTTON_LEFT: return
   if not event.is_pressed(): return
-
   get_tree().set_input_as_handled()
   EventHub.emit_signal("click", self)

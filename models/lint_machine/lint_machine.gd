@@ -4,9 +4,9 @@ var durability_limit = 3
 var sprite_sheet_dir = "res://models/lint_machine/machine_sprite_sheets/"
 var consumable_id = "basic_lint_roll"
 
+
 func _ready():
   ._ready()
-  state_machine.start("idle")
   load_sprite_sheet()
   EventHub.connect("new_day", self, "_on_new_day")
 
@@ -14,7 +14,7 @@ func _ready():
 func check_stock():
   var stock = GameLogic.get_consumable_inventory(consumable_id)
   if stock > 0 and durability >= durability_limit:
-    state_machine.call_deferred("travel", "roll_change")
+    state_machine.call_deferred("travel", "roll_change")    
   $Label.text = str(stock)
 
 
@@ -36,16 +36,16 @@ func decrement_durability():
   durability = min(durability + 1, durability_limit)
   load_sprite_sheet()
   if durability >= durability_limit:
-    check_stock()
+    call_deferred("check_stock")
 
 
 func load_sprite_sheet():
-  var path = sprite_sheet_dir + "/" + str(durability) + ".png"
-  var file = File.new()
-  if file.file_exists(path):
-    $Sprite.texture = load(path)
-  else:
-    print("ERROR: file not found")
+  var path = sprite_sheet_dir + "state" + str(durability) + ".png"
+  $Sprite.texture = load(path)
+
+
+func load_state(_state:Dictionary) -> void:
+  load_sprite_sheet()
 
 
 func new_lint_roll():

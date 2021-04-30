@@ -6,7 +6,6 @@ var day := 1
 var money := 0 setget set_player_money, get_player_money
 var previous_balance
 
-enum ItemType{MACHINE, CONSUMABLE}
 
 const WASHERS = {
   "basic_washer": {
@@ -40,9 +39,11 @@ const LINTERS = {
 const COUNTERS = {
   "basic_counter": {
     "level": 1,
+    "anim_speed": 0.4,
   },
   "reasonable_counter": {
     "level": 2,
+    "anim_speed": 0.6,
   },
 }
 
@@ -83,7 +84,7 @@ const ITEM_SPRITE_INFO = {
     "frame" : 5,
   },
   "basic_linter": {
-    "path" : "res://models/lint_machine/machine_sprite_sheets/0.png",
+    "path" : "res://models/lint_machine/machine_sprite_sheets/state0.png",
     "hframes" : 7,
     "vframes" : 1,
     "scale" : Vector2(2,2),
@@ -112,60 +113,61 @@ const ITEM_SPRITE_INFO = {
   },
 }
 
-const STORE_ITEMS = {
+# TODO: rename? cannot use Types here while having STORE_ITEMS as constant
+var STORE_ITEMS = {
   "basic_toy" : {
     "display_name" : "Squeakers",
     "description" : "Distracts the cat with its parabolic mouseyness.",
     "price" : 25,
-    "type" : ItemType.CONSUMABLE,
+    "type" : Types.ItemType.TOY,
   },
   "basic_washer" : {
     "display_name" : "Bessy Washer",
     "description" : "Not much to look at, but she gets the job done.",
     "price" : 5,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.WASHER,
   },
   "reasonable_washer" : {
     "display_name" : "Maude Washer",
     "description" : "Better than Bessy, and she knows it!",
     "price" : 12,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.WASHER,
   },
   "basic_dryer": {
     "display_name": "Simon Dryer",
     "description": "Dislikes moisture.",
     "price": 5,
-    "type": ItemType.MACHINE,
+    "type": Types.ItemType.DRYER,
   },
   "reasonable_dryer" : {
     "display_name" : "Desmond Dryer",
     "description" : "Handsome and reliable.",
     "price" : 16,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.DRYER,
   },
   "basic_linter" : {
     "display_name" : "Geoffrey Linter",
     "description" : "Meticulous deflufferizer.",
     "price" : 15,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.DELINTER,
   },
   "basic_lint_roll" : {
     "display_name" : "Lint roll refill",
     "description" : "Good for a few more loads of furry laundry",
     "price" : 5,
-    "type" : ItemType.CONSUMABLE,
+    "type" : Types.ItemType.DELINTER,
   },
   "basic_counter": {
     "display_name" : "Foldmemore Counter",
     "description" : "Folds thrift store finds.",
     "price" : 5,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.COUNTER,
   },
   "reasonable_counter": {
     "display_name" : "Sir Folds A Lot Counter",
     "description" : "Knighted for his folding services.",
     "price" : 25,
-    "type" : ItemType.MACHINE,
+    "type" : Types.ItemType.COUNTER,
   },
 }
 
@@ -173,7 +175,6 @@ var unlocked_items = [
   "basic_toy",
   "basic_washer",
   "basic_dryer",
-  "basic_linter",
   "basic_counter",
 ]
 
@@ -181,7 +182,6 @@ var newly_unlocked_items = [
   "basic_toy",
   "basic_washer",
   "basic_dryer",
-  "basic_linter",
   "basic_counter",
  ]
 
@@ -253,6 +253,10 @@ func update_unlocked_items() -> void:
     if player_inventory["basic_linter"] >= 1:
       unlocked_items.append("basic_lint_roll")
       newly_unlocked_items.append("basic_lint_roll")
+  if not "basic_linter" in unlocked_items:
+    if player_inventory["basic_toy"] >= 1:
+      unlocked_items.append("basic_linter")
+      newly_unlocked_items.append("basic_linter")
 
 
 func get_unlocked_store_inventory():
@@ -326,15 +330,24 @@ func _ready():
   EventHub.connect("consumable_used", self, "_on_consumable_used")
 
 
+func update_laundry_weekly():
+  if day == 1:
+    EventHub.emit_signal("laundry_times_unlocked", 0)
+  if day == 6:
+    EventHub.emit_signal("laundry_times_unlocked", 1)
+
+
 func _on_day_over():
   update_unlocked_items()
-  if Global.day == 1:
+  update_laundry_weekly()
+  if day == 1:
     add_customer("influencer", 8)
-  if Global.day == 2:
+  if day == 2:
     add_customer("old_lady", 5)
 
 
 func _on_new_day():
+  day += 1
   previous_balance = money
 
 

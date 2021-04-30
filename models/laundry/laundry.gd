@@ -7,7 +7,6 @@ var soiled := false
 var hairy := false
 var folded := false
 var starting_cleanliness := 1.0
-const highest_unfinished_score := 0.25
 const washable_modulation := Color(0.67, 0.67, 0.67)
 const dryable_modulation := Color(0.85, 0.85, 0.85)
 const default_modulation := Color(1, 1, 1)
@@ -64,12 +63,15 @@ func dry() -> void:
   update_visuals()
 
 
-func fold() -> void:
+func fold(speed := 1.0) -> void:
+  $AnimationPlayer.playback_speed = speed
   $AnimationPlayer.play("fold")
   folded = true
 
 
 func update_visuals() -> void:
+  if !folded:
+    $AnimationPlayer.play("idle")
   update_modulation()
   update_particles()
 
@@ -96,21 +98,18 @@ func update_particles() -> void:
 
 
 func assess_cleanliness() -> float:
-  var conditions = [wet, dirty, bloody, soiled, hairy]
+  var conditions = [wet, dirty, bloody, soiled, hairy, !folded]
   var max_score : int = conditions.size()
   var score : float = 0.0
   
   for state in conditions:
     if !state: score += 1
   var cleanliness = score/max_score
-  if cleanliness < 1:
-    cleanliness = min(cleanliness, highest_unfinished_score)
   return cleanliness
 
 
+# Currently not used by customer
 func score_laundry() -> float:
-  # TODO: Better laundry scoring
-  # (Currently doesn't make sense if more variables are introduced in gameplay)
   var score : float = 0.0
   var current_cleanliness = assess_cleanliness()
   if current_cleanliness > starting_cleanliness:

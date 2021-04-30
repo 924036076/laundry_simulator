@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name HUD
 
 var overlay : Control
+var story_key = null
 
 
 func _ready() -> void:
@@ -9,6 +10,8 @@ func _ready() -> void:
   EventHub.connect("restart", self, "_on_restart")
   EventHub.connect("game_over", self, "_on_game_over")
   EventHub.connect("day_over", self, "_on_day_over")
+  EventHub.connect("laundry_times_closed", self, "_on_laundry_times_closed")
+  EventHub.connect("laundry_times_unlocked", self, "_on_laundry_times_unlocked")
 
 
 func check_high_score(score: int) -> void:
@@ -29,7 +32,6 @@ func show_game_over(score : int) -> void:
 
 func show_title_screen() -> void:
   if is_instance_valid(overlay):
-    print("overlay name: ", overlay.get_name())
     if overlay.get_name() == "TitleScreen":
       return
     else:
@@ -55,7 +57,7 @@ func _on_day_over():
 
 func show_day_end(total : int, prev_balance : int, day_count : int):
   if is_instance_valid(overlay):
-    if overlay.get_name() == "DayEndScreen":
+    if overlay.get_name() == "DayEndScreen" or overlay.get_name() == "GameOverScreen":
       return
     else:
       overlay.queue_free()
@@ -66,6 +68,27 @@ func show_day_end(total : int, prev_balance : int, day_count : int):
 
 
 func _on_next_day_pressed() -> void:
+  if story_key != null:
+    _open_laundry_times()
+    return
+  EventHub.emit_signal("new_day")
+  $AudioStreamPlayer.play()
+  hide_overlay()
+
+
+func _on_laundry_times_unlocked(key):
+  story_key = key
+
+
+func _open_laundry_times() -> void:
+  hide_overlay()
+  var laundry_times = preload("res://laundry_times/laundry_times.tscn").instance()
+  add_child(laundry_times)
+  laundry_times.initialize(story_key)
+  story_key = null
+
+
+func _on_laundry_times_closed(_key) -> void:
   EventHub.emit_signal("new_day")
   $AudioStreamPlayer.play()
   hide_overlay()

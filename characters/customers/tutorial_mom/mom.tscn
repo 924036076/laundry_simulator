@@ -159,7 +159,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 2, 0 )
 hframes = 3
 vframes = 4
-frame = 5
+frame = 6
 
 [node name="Bumper" parent="." instance=ExtResource( 1 )]
 position = Vector2( 7.42407, -5.07996 )
@@ -190,6 +190,7 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "soundfx"
 
 [connection signal="disallowed_customer_action" from="Bumper" to="." method="_on_Bumper_disallowed_customer_action"]
 [connection signal="modulate" from="Bumper" to="." method="_on_Bumper_modulate"]
