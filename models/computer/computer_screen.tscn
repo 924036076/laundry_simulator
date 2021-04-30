@@ -202,11 +202,20 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Screen/SearchBar"]
+visible = false
 margin_left = 6.0
 margin_top = 7.0
 margin_right = 46.0
 margin_bottom = 21.0
 custom_fonts/font = SubResource( 2 )
+text = "http://totally-legit-business-schemes.laundry"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Screen/SearchBar"]
+margin_right = 385.0
+margin_bottom = 24.0
 text = "http://totally-legit-business-schemes.laundry"
 __meta__ = {
 "_edit_use_anchors_": false

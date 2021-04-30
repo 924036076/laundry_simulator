@@ -50,3 +50,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
     "success":
       EventHub.emit_signal("laundromat_purchased")
       # TODO: load regular laundry scene
+
+
+func _on_Label_gui_input(event: InputEvent) -> void:
+  print(event)
