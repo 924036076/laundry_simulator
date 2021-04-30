@@ -57,13 +57,15 @@ texture = ExtResource( 1 )
 hframes = 13
 
 [node name="Drip Particles" type="CPUParticles2D" parent="."]
-amount = 5
+emitting = false
+amount = 6
 speed_scale = 0.4
 local_coords = false
 texture = ExtResource( 5 )
 emission_shape = 2
-emission_rect_extents = Vector2( 15, 2 )
+emission_rect_extents = Vector2( 13, 10 )
 scale_amount = 2.0
+scale_amount_random = 0.52
 color = Color( 0.231373, 0.415686, 0.67451, 1 )
 
 [node name="Blood Particles" type="CPUParticles2D" parent="."]
@@ -77,12 +79,15 @@ emission_rect_extents = Vector2( 15, 2 )
 color = Color( 0.682353, 0.160784, 0.145098, 1 )
 
 [node name="Dirt Particles" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 5
+position = Vector2( 0, -6.4 )
+scale = Vector2( 1.5, 1.5 )
+amount = 20
+lifetime = 1.7
 speed_scale = 0.5
+local_coords = false
 emission_shape = 2
-emission_rect_extents = Vector2( 15, 8 )
-gravity = Vector2( 0, 0 )
+emission_rect_extents = Vector2( 12, 8 )
+gravity = Vector2( 0, 10 )
 scale_amount = 3.0
 scale_amount_curve = SubResource( 1 )
 color = Color( 0.470588, 0.341176, 0.137255, 1 )

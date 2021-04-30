@@ -193,7 +193,7 @@ alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer/ButtonContainer"]
 margin_left = 87.0
 margin_right = 187.0
-margin_bottom = 28.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 50, 28 )
 custom_fonts/font = ExtResource( 2 )
 text = "Next Day"

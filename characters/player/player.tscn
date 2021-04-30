@@ -75,7 +75,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.201, -62 ) ]
+"values": [ Vector2( -3.201, -47 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -114,7 +114,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.804, -63 ) ]
+"values": [ Vector2( 0.804, -47 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -153,7 +153,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.535, -63 ) ]
+"values": [ Vector2( -3.535, -47 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -192,7 +192,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.535, -62 ) ]
+"values": [ Vector2( -3.535, -47 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -229,10 +229,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -2.86726, -71.7864 ), Vector2( -2.86726, -71.7864 ), Vector2( -2.86726, -78.1247 ), Vector2( -2.86726, -71.9295 ), Vector2( -3.53468, -77.8636 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -2.867, -50 ), Vector2( -2.867, -50 ), Vector2( -2.867, -55 ), Vector2( -2.867, -47 ), Vector2( -2.867, -50 ), Vector2( -2.867, -55 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -271,8 +271,8 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -3.22081, -74.2979 ), Vector2( -2.38012, -63.4094 ), Vector2( -3.55077, -59.6774 ), Vector2( -4.06932, -80.0449 ), Vector2( -2.5844, -82.5804 ), Vector2( -3.22081, -73.2979 ) ]
+"update": 1,
+"values": [ Vector2( -3.221, -50 ), Vector2( -2.38, -47 ), Vector2( -3.551, -45 ), Vector2( -4.069, -52 ), Vector2( -2.584, -65 ), Vector2( -3.221, -50 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -311,8 +311,8 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -2.29085, -71.8584 ), Vector2( -0.40096, -71.8584 ), Vector2( 1.23692, -66.8187 ), Vector2( 1.32094, -67.4282 ), Vector2( 1.40494, -83.0927 ), Vector2( 0.488902, -75.8981 ) ]
+"update": 1,
+"values": [ Vector2( -2.291, -58 ), Vector2( -0.401, -55 ), Vector2( 1.237, -44 ), Vector2( 1.321, -48 ), Vector2( 1.405, -55 ), Vector2( 0, -60 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -351,8 +351,8 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -3.55077, -71.2284 ), Vector2( -2.88335, -81.1866 ), Vector2( -3.55077, -69.1614 ), Vector2( -3.55077, -62.341 ), Vector2( -3.55077, -69.5205 ), Vector2( -3.55077, -77.5272 ), Vector2( -3.07885, -72.5658 ) ]
+"update": 1,
+"values": [ Vector2( -3.551, -50 ), Vector2( -2.883, -60 ), Vector2( -3.551, -62 ), Vector2( -3.551, -58 ), Vector2( -3.551, -50 ), Vector2( -3.551, -62 ), Vector2( -3.079, -58 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -390,12 +390,12 @@ position = Vector2( 0, -8.13969 )
 shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2( -1.19055, -28.1449 )
-scale = Vector2( 4, 4 )
+position = Vector2( -1.19055, -20.1449 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 hframes = 8
 vframes = 7
-frame = 3
+frame = 47
 
 [node name="TransferSoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource( 3 )
@@ -421,13 +421,13 @@ anims/sleep = SubResource( 11 )
 [node name="Face" type="Sprite" parent="." index="5"]
 modulate = Color( 0.721569, 0.705882, 0.705882, 1 )
 show_behind_parent = true
-position = Vector2( -1.19055, -28.1449 )
-scale = Vector2( 4, 4 )
+position = Vector2( -1.19055, -20.1449 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 flip_h = true
 hframes = 5
 vframes = 5
-frame = 3
+frame = 7
 
 [node name="AnimationTree" parent="." index="6"]
 parameters/playback = SubResource( 12 )
@@ -435,7 +435,7 @@ parameters/Idle/blend_position = Vector2( -0.285599, 0.161207 )
 parameters/Move/blend_position = Vector2( -0.245374, 0.184047 )
 
 [node name="laundry_pos" type="Node2D" parent="." index="7"]
-position = Vector2( 0.804, -63 )
+position = Vector2( 0.804, -47 )
 
 [node name="Area2D" type="Area2D" parent="." index="8"]
 position = Vector2( -1.19055, -32.1449 )
@@ -445,6 +445,7 @@ position = Vector2( 0, 2 )
 shape = SubResource( 13 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="9"]
+scale = Vector2( 0.75, 0.75 )
 occluder = SubResource( 14 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
