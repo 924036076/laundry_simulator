@@ -67,7 +67,7 @@ func _on_LineEdit_text_changed(new_text: String) -> void:
   line_edit.caret_position = new_text.length()
 
 
-func _on_LineEdit_text_entered(new_text: String) -> void:
+func _on_LineEdit_text_entered(_new_text: String) -> void:
   var line_edit = $Screen/SearchBar/LineEdit
   line_edit.text = LAUNDRY_SITE
   line_edit.caret_position = LAUNDRY_SITE.length()
