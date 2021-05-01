@@ -72,6 +72,7 @@ func _on_LineEdit_text_entered(_new_text: String) -> void:
   var line_edit = $Screen/SearchBar/LineEdit
   line_edit.text = LAUNDRY_SITE
   line_edit.caret_position = LAUNDRY_SITE.length()
+  $Screen/LaundryLove/VideoPlayer.play()
   $Screen/Ad.visible = false
   $Screen/LaundryLove.visible = true
   $Screen/BackButton.disabled = false
@@ -92,4 +93,5 @@ func _on_BackButton_pressed() -> void:
   $Screen/BackButton.disabled = true
   $Screen/Ad.visible = true
   $Screen/LaundryLove.visible = false
+  $Screen/LaundryLove/VideoPlayer.stop()
 
