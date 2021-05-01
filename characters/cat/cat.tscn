@@ -1081,6 +1081,7 @@ frame = 3
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 11 )
 volume_db = -15.0
+bus = "soundfx"
 
 [connection signal="timeout" from="WaitTimer" to="." method="_on_WaitTimer_timeout"]
 [connection signal="body_exited" from="Bumper" to="Bumper" method="_on_Bumper_body_exited"]
