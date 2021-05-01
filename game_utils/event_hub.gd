@@ -14,6 +14,10 @@ signal new_rating
 signal new_customer
 signal new_review
 
+# Lawyer Cat signals
+signal lawyer_cat_created
+signal lawyer_cat_messaged
+
 # Machine & counter signals
 signal laundry_washed
 signal laundry_dried

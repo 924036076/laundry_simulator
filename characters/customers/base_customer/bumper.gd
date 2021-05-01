@@ -5,6 +5,7 @@ signal released
 signal returned
 signal disallowed_customer_action
 signal modulate
+signal interacted
 var initialized := false
 
 
@@ -41,6 +42,11 @@ func set_state_pickup() -> void:
 
 func disallowed_action() -> void:
   emit_signal("disallowed_customer_action")
+
+
+func interact() -> void:
+  .interact()
+  emit_signal("interacted")
 
 
 func modulate() -> void:

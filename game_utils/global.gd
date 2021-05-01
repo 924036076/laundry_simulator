@@ -17,7 +17,7 @@ var Customers = {
     "sprite_path": "res://characters/customers/old_lady/sprite.png",
     "ability": "Love Hearts",
     "ability_description": "When very happy, makes surrounding customers happier.",
-    "speed": 50,
+    "speed": 45,
     "score_multiplier": 20,
     "patience_unit": 0.01,
     "type": "Uncommon",
@@ -27,7 +27,7 @@ var Customers = {
     "name": "Young Man",
     "sprite_path": "res://characters/customers/young_man/Male 10-1.png",
     "description": "Utterly unremarkable in every way. Favorite color is cyan.",
-    "speed": 35,
+    "speed": 55,
     "score_multiplier": 35,
     "patience_unit": 0.018,
     "type": "Common",
@@ -37,10 +37,20 @@ var Customers = {
     "name": "Influencer",
     "sprite_path": "res://characters/customers/base_customer/sprite.png",
     "description": "She's late for her goat cafe appointment.",
-    "speed": 50,
+    "speed": 60,
     "score_multiplier": 30,
     "patience_unit": 0.021,
     "type": "Common",
+    "visits": 0
+  },
+  "lawyer_cat": {
+    "name": "Lawyer Cat",
+    "sprite_path": "res://characters/customers/lawyer_cat/pipo-nekonin009.png",
+    "description": "You do not want to ",
+    "speed": 65,
+    "score_multiplier": 50,
+    "patience_unit": 0.025,
+    "type": "Rare",
     "visits": 0
   }
 

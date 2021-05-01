@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/customers/base_customer/customer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/customers/lawyer_cat/lawyer_cat.gd" type="Script" id=2]
+[ext_resource path="res://characters/customers/lawyer_cat/pipo-nekonin009.png" type="Texture" id=3]
+[ext_resource path="res://characters/customers/lawyer_cat/paper-1.png.png" type="Texture" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="LawyerCat" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="AnimationTree" parent="." index="4"]
+parameters/playback = SubResource( 1 )
+
+[node name="Ticket" parent="Bumper/HandPos" index="0"]
+visible = false
+
+[node name="Letter" type="Sprite" parent="Bumper/HandPos" index="1"]
+texture = ExtResource( 4 )
+
+[connection signal="interacted" from="Bumper" to="." method="_on_Bumper_interacted"]
