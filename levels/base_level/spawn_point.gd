@@ -1,6 +1,6 @@
 extends Node2D
 
-var navNode : Navigation2D 
+var navNode : Navigation2D
 var player : KinematicBody2D
 const NEXT_CUSTOMER_MAX := 20.0
 var next_id := 0
@@ -49,13 +49,13 @@ func create_customer(type = null) -> KinematicBody2D:
   # Change to common/uncommon/rare? and use rng?
   customer = preload("res://characters/customers/base_customer/customer.tscn").instance()
   $Customers.add_child(customer)
-  
+
   if type == null:
     type = get_random_customer_type()
 
   customer.init(navNode, next_id, rand_range(customer_wait_min, customer_wait_max), type)
   customer.add_to_group("dropping_off")
-  
+
   next_id += 1
   customers_created += 1
   return customer
@@ -66,7 +66,7 @@ func get_random_customer_type() -> String:
   var prob_dist = GameLogic.get_probability_dist()
   var customer_types = GameLogic.get_customer_list()
   var rand = rng.randf()
-  
+
   for i in len(prob_dist):
     if rand <= prob_dist[i]:
       type = customer_types[i]
@@ -116,7 +116,7 @@ func reset() -> void:
   adjust_difficulty()
   for child in $Customers.get_children():
     child.queue_free()
-  
+
   waiting_customers = []
   queued_customers = []
   next_id = 0
@@ -140,8 +140,8 @@ func restart() -> void:
   call_deferred("start")
   print("next customer max time now: ", next_customer_max)
   print("max customers now: ", max_customers)
-  
-  
+
+
 func stop() -> void:
   $CustomerTimer.stop()
   $WaitTimer.stop()
@@ -153,10 +153,10 @@ func adjust_difficulty() -> void:
   if ratings_count == 0:
     print("nevermind! Already did or at default")
     return
-    
+
   var average_score = rating_sum / ratings_count
   print("average score: ", average_score)
-  
+
   if average_score > 1.1:
     max_customers = ratings_count + 3
     next_customer_max = max(4, next_customer_max - 3)
@@ -174,7 +174,7 @@ func adjust_difficulty() -> void:
 # warning-ignore:narrowing_conversion
     max_customers = max(ratings_count - 4, 2)
     next_customer_max = min(30, next_customer_max + 4)
-  
+
   ratings_count = 0
   rating_sum = 0
 

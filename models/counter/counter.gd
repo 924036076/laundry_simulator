@@ -14,7 +14,7 @@ func load_laundry(laundry_in : Node2D) -> void:
 
 func fold_laundry() -> void:
   if !laundry.can_fold(): return
-  
+
   laundry.fold(folding_speed)
   laundry_folding = true
   determine_interactability()

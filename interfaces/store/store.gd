@@ -33,7 +33,7 @@ func populate_store(list):
       item_types.append(list[item]["type"])
     if list[item]["is_new"] and !list[item]["type"] in highlight_types:
       highlight_types.append(list[item]["type"])
-  
+
   for type in item_types:
     var new_checkbox = FilterCheckbox.instance()
     checkbox_parent.add_child(new_checkbox)

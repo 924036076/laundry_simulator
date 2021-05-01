@@ -14,7 +14,7 @@ func _ready():
 func check_stock():
   var stock = GameLogic.get_consumable_inventory(consumable_id)
   if stock > 0 and durability >= durability_limit:
-    state_machine.call_deferred("travel", "roll_change")    
+    state_machine.call_deferred("travel", "roll_change")
   $Label.text = str(stock)
 
 

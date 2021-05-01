@@ -3,6 +3,10 @@ var highlight_modulate = Color(.93, .86, .65)
 var normal_modulate = Color(1,1,1)
 var can_buy := false
 
+const LAUNDRY_SITE = "http://rubitout.xxx"
+const BUSINESS_SITE = "http://totally-legit-business-schemes.laundry"
+const LAUNDRY_SITE_MESSAGE = "oh baby"
+
 
 func _ready():
   $Screen/ExitButton.modulate = normal_modulate
@@ -49,3 +53,43 @@ func _on_AnimationPlayer_animation_finished(anim_name):
       close_screen()
     "success":
       EventHub.emit_signal("laundromat_purchased")
+      # TODO: load regular laundry scene
+
+
+func _on_LineEdit_focus_entered() -> void:
+  var line_edit = $Screen/SearchBar/LineEdit
+  line_edit.text = "http://"
+  line_edit.caret_position = line_edit.text.length()
+
+
+func _on_LineEdit_text_changed(new_text: String) -> void:
+  var line_edit = $Screen/SearchBar/LineEdit
+  line_edit.text = LAUNDRY_SITE.substr(0, new_text.length())
+  line_edit.caret_position = new_text.length()
+
+
+func _on_LineEdit_text_entered(_new_text: String) -> void:
+  var line_edit = $Screen/SearchBar/LineEdit
+  line_edit.text = LAUNDRY_SITE
+  line_edit.caret_position = LAUNDRY_SITE.length()
+  $Screen/Ad.visible = false
+  $Screen/LaundryLove.visible = true
+  $Screen/BackButton.disabled = false
+  EventHub.emit_signal("interactable_broadcasted", LAUNDRY_SITE_MESSAGE)
+
+
+func _on_BackButton_mouse_entered():
+  $Screen/BackButton.modulate = highlight_modulate
+
+
+func _on_BackButton_mouse_exited():
+  $Screen/BackButton.modulate = normal_modulate
+
+
+func _on_BackButton_pressed() -> void:
+  var line_edit = $Screen/SearchBar/LineEdit
+  line_edit.text = BUSINESS_SITE
+  $Screen/BackButton.disabled = true
+  $Screen/Ad.visible = true
+  $Screen/LaundryLove.visible = false
+
