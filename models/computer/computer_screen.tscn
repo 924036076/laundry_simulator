@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://tilesets/x_out_red.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://models/computer/519981__timbre__simulated-crt-tv-power-off-on-remix-of-freesound-519627_2.wav" type="AudioStream" id=6]
 [ext_resource path="res://models/computer/519981__timbre__simulated-crt-tv-power-off-on-remix-of-freesound-519627_1.wav" type="AudioStream" id=7]
 [ext_resource path="res://models/computer/327737__distillerystudio__error-02.wav" type="AudioStream" id=8]
+[ext_resource path="res://models/computer/rubitout.webm" type="VideoStream" id=9]
+[ext_resource path="res://models/computer/looper.gd" type="Script" id=10]
+[ext_resource path="res://models/computer/2021-04-30.png" type="Texture" id=12]
+[ext_resource path="res://models/computer/2021-04-30 (1).png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -15,10 +19,7 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 1 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "error"
 length = 2.7
 tracks/0/type = "value"
@@ -34,7 +35,7 @@ tracks/0/keys = {
 "values": [ "insufficient funds", "", "insufficient funds", "", "insufficient funds", "", "insufficient funds" ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Screen:rect_scale")
@@ -85,7 +86,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Screen/Ad/BuyButton:text")
@@ -112,7 +113,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "success"
 length = 0.75
 tracks/0/type = "value"
@@ -186,9 +187,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BackButton" type="TextureButton" parent="Screen"]
+modulate = Color( 0.933333, 0.862745, 0.654902, 1 )
+margin_left = 15.41
+margin_top = 5.94421
+margin_right = 47.41
+margin_bottom = 37.9442
+disabled = true
+texture_normal = ExtResource( 12 )
+texture_disabled = ExtResource( 13 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SearchBar" type="NinePatchRect" parent="Screen"]
 self_modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
-margin_left = 12.0
+margin_left = 60.0
 margin_top = 10.0
 margin_right = 399.0
 margin_bottom = 35.0
@@ -201,25 +216,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Screen/SearchBar"]
-visible = false
-margin_left = 6.0
-margin_top = 7.0
-margin_right = 46.0
-margin_bottom = 21.0
-custom_fonts/font = SubResource( 2 )
+[node name="LineEdit" type="LineEdit" parent="Screen/SearchBar"]
+margin_left = -9.0
+margin_top = 1.0
+margin_right = 344.0
+margin_bottom = 25.0
 text = "http://totally-legit-business-schemes.laundry"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineEdit" type="LineEdit" parent="Screen/SearchBar"]
-margin_right = 385.0
-margin_bottom = 24.0
-text = "http://totally-legit-business-schemes.laundry"
+[node name="LaundryLove" type="PanelContainer" parent="Screen"]
+visible = false
+margin_left = 14.0
+margin_top = 49.0
+margin_right = 433.0
+margin_bottom = 279.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VideoPlayer" type="VideoPlayer" parent="Screen/LaundryLove"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 412.0
+margin_bottom = 223.0
+stream = ExtResource( 9 )
+autoplay = true
+script = ExtResource( 10 )
 
 [node name="ExitButton" type="TextureButton" parent="Screen"]
 modulate = Color( 0.933333, 0.862745, 0.654902, 1 )
@@ -235,10 +259,10 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "expand"
-anims/error = SubResource( 3 )
-anims/expand = SubResource( 4 )
-anims/pending = SubResource( 5 )
-anims/success = SubResource( 6 )
+anims/error = SubResource( 2 )
+anims/expand = SubResource( 3 )
+anims/pending = SubResource( 4 )
+anims/success = SubResource( 5 )
 
 [node name="On" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -254,6 +278,12 @@ stream = ExtResource( 8 )
 bus = "soundfx"
 
 [connection signal="pressed" from="Screen/Ad/BuyButton" to="." method="_on_BuyButton_pressed"]
+[connection signal="mouse_entered" from="Screen/BackButton" to="." method="_on_BackButton_mouse_entered"]
+[connection signal="mouse_exited" from="Screen/BackButton" to="." method="_on_BackButton_mouse_exited"]
+[connection signal="pressed" from="Screen/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="focus_entered" from="Screen/SearchBar/LineEdit" to="." method="_on_LineEdit_focus_entered"]
+[connection signal="text_changed" from="Screen/SearchBar/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Screen/SearchBar/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="mouse_entered" from="Screen/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
 [connection signal="mouse_exited" from="Screen/ExitButton" to="." method="_on_ExitButton_mouse_exited"]
 [connection signal="pressed" from="Screen/ExitButton" to="." method="_on_ExitButton_pressed"]
