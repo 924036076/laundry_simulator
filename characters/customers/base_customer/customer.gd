@@ -88,7 +88,7 @@ func receive_order() -> void:
   var emotion = get_emotion(cleanliness_pct)
   var expression = emote(emotion)
   leave_review(emotion)
-  
+
   # TODO: work on scoring and cleaniness pct logic to be better; redo this
   if $PatienceMeter.is_max() and cleanliness_pct >= 1:
     happy_buff()

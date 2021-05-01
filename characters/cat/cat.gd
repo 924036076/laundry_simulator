@@ -108,7 +108,7 @@ func _on_jump_start() -> void:
 
 func _on_jump_end() -> void:
   if !action_enabled: return
-  
+
   EventHub.emit_signal("occupy_object", target_id)
   handle_state_transition()
   $ThoughtBubble.hide()

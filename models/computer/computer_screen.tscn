@@ -10,8 +10,8 @@
 [ext_resource path="res://models/computer/327737__distillerystudio__error-02.wav" type="AudioStream" id=8]
 [ext_resource path="res://models/computer/rubitout.webm" type="VideoStream" id=9]
 [ext_resource path="res://models/computer/looper.gd" type="Script" id=10]
-[ext_resource path="res://models/computer/2021-04-30.png" type="Texture" id=12]
-[ext_resource path="res://models/computer/2021-04-30 (1).png" type="Texture" id=13]
+[ext_resource path="res://models/computer/back_arrow.png" type="Texture" id=12]
+[ext_resource path="res://models/computer/disabled_back_arrow.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
