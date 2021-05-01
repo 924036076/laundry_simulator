@@ -242,7 +242,6 @@ margin_top = 7.0
 margin_right = 412.0
 margin_bottom = 223.0
 stream = ExtResource( 9 )
-autoplay = true
 script = ExtResource( 10 )
 
 [node name="ExitButton" type="TextureButton" parent="Screen"]
