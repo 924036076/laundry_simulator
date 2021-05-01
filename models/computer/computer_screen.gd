@@ -3,8 +3,9 @@ var highlight_modulate = Color(.93, .86, .65)
 var normal_modulate = Color(1,1,1)
 var can_buy := false
 
-const LAUNDRY_SITE = "http://rubitout.xyz"
+const LAUNDRY_SITE = "http://rubitout.xxx"
 const BUSINESS_SITE = "http://totally-legit-business-schemes.laundry"
+const LAUNDRY_SITE_MESSAGE = "oh baby"
 
 
 func _ready():
@@ -74,6 +75,7 @@ func _on_LineEdit_text_entered(_new_text: String) -> void:
   $Screen/Ad.visible = false
   $Screen/LaundryLove.visible = true
   $Screen/BackButton.disabled = false
+  EventHub.emit_signal("interactable_broadcasted", LAUNDRY_SITE_MESSAGE)
 
 
 func _on_BackButton_mouse_entered():
