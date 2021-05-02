@@ -106,10 +106,8 @@ func _set_letter(_key):
 
 
 func _set_buttons():
-  print("lawyer level is ", GameLogic.get_lawyer_level())
   if GameLogic.get_lawyer_level() <= 0:
     $ColorRect/LetterLayout/Buttons/Challenge.disable_button()
-    print("can't fight this")
   $ColorRect/LetterLayout/Buttons/Accept.grab_focus()
   
 

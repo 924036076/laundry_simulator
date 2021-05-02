@@ -27,7 +27,6 @@ func _on_No_pressed():
 
 
 func _on_Yes_pressed():
-  print("player pressed yes")
   # TODO: something for challenge code
   match state:
     State.QUIT:
