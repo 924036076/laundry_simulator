@@ -395,7 +395,8 @@ func _on_lawyer_cat_created():
 
 
 func _on_lawyer_cat_messaged():
-  add_customer("lawyer_cat", 1)
+  if !customers.has("lawyer_cat"):
+    add_customer("lawyer_cat", 1)
   lawyer_letter += 1
 
 

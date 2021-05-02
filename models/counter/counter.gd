@@ -7,7 +7,6 @@ var folding_speed := 0.4
 
 func load_laundry(laundry_in : Node2D) -> void:
   .load_laundry(laundry_in)
-  print("no laundry :(")
   if laundry:
     fold_laundry()
 
