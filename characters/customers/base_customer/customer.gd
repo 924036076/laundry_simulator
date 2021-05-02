@@ -26,6 +26,10 @@ signal returning
 
 func _ready() -> void:
   ._ready()
+  _on_ready()
+
+
+func _on_ready() -> void:
   set_physics_process(false)
   my_laundry = preload("res://models/laundry/laundry.tscn").instance()
   $Bumper.load_laundry(my_laundry)
@@ -196,7 +200,7 @@ func _on_Bumper_disallowed_customer_action() -> void:
 
 func _on_end_of_path() -> void:
   ._on_end_of_path()
-  if global_position.distance_to(return_destination) <= 5 and received_laundry:
+  if global_position.distance_to(return_destination) <= 5 and is_in_group("satisfied_customers"):
     queue_free()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://models/washer/washer.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://tilesets/walls.png" type="Texture" id=20]
 [ext_resource path="res://tilesets/counter_floor.png" type="Texture" id=21]
 [ext_resource path="res://overlays/day_label.tscn" type="PackedScene" id=22]
+[ext_resource path="res://notice/notice.tscn" type="PackedScene" id=23]
 [ext_resource path="res://levels/base_level/white_floor.png" type="Texture" id=24]
 [ext_resource path="res://levels/base_level/tile_floor.png" type="Texture" id=26]
 [ext_resource path="res://tilesets/sidewalk_middle.png" type="Texture" id=27]
@@ -1206,6 +1207,7 @@ gravity = 98.0
 [node name="HUD" type="CanvasLayer" parent="."]
 pause_mode = 2
 script = ExtResource( 16 )
+Notice = ExtResource( 23 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 18 )

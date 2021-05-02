@@ -395,7 +395,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 hframes = 8
 vframes = 7
-frame = 47
+frame = 3
 
 [node name="TransferSoundPlayer" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource( 3 )
@@ -427,7 +427,7 @@ texture = ExtResource( 5 )
 flip_h = true
 hframes = 5
 vframes = 5
-frame = 7
+frame = 3
 
 [node name="AnimationTree" parent="." index="6"]
 parameters/playback = SubResource( 12 )

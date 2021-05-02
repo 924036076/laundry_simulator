@@ -1,17 +1,22 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=1]
-[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://laundry_times/laundry_times.gd" type="Script" id=3]
-[ext_resource path="res://interfaces/82377__gynation__paper-flip-1.wav" type="AudioStream" id=4]
-[ext_resource path="res://laundry_times/laundry_times_title.png" type="Texture" id=5]
+[ext_resource path="res://font/Awake/Awake.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://interfaces/exit_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interfaces/82377__gynation__paper-flip-1.wav" type="AudioStream" id=3]
+[ext_resource path="res://notice/notice.gd" type="Script" id=4]
+[ext_resource path="res://notice/laundry_times_title.png" type="Texture" id=5]
+[ext_resource path="res://interfaces/tooltip_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://notice/dialog/dialog.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "appear"
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:visible")
@@ -83,13 +88,12 @@ tracks/5/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 4 )
+"stream": ExtResource( 3 )
 } ],
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "disappear"
+[sub_resource type="Animation" id=4]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -129,8 +133,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle"
+[sub_resource type="Animation" id=5]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:visible")
@@ -145,15 +148,15 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="LaundryWeekly" type="Control"]
+[node name="Notice" type="Control"]
 pause_mode = 2
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Dialog = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.666667 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -162,29 +165,32 @@ margin_left = 262.0
 margin_top = 25.0
 margin_right = 762.0
 margin_bottom = 575.0
-rect_rotation = -53.3333
-color = Color( 0.952941, 0.87451, 0.756863, 1 )
+color = Color( 0.976471, 0.976471, 0.976471, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="laundry_weekly_title" type="Sprite" parent="ColorRect"]
+[node name="LaundryTimesHeader" type="Node2D" parent="ColorRect"]
+visible = false
+
+[node name="laundry_times_title" type="Sprite" parent="ColorRect/LaundryTimesHeader"]
 position = Vector2( 229.494, 59.1442 )
 texture = ExtResource( 5 )
 
-[node name="Line2D" type="Line2D" parent="ColorRect"]
+[node name="Line2D" type="Line2D" parent="ColorRect/LaundryTimesHeader"]
 position = Vector2( 19.491, 93.3831 )
 points = PoolVector2Array( 0, 0, 450, 0 )
 width = 3.0
 default_color = Color( 0.101961, 0.109804, 0.101961, 1 )
 
-[node name="Line2D2" type="Line2D" parent="ColorRect"]
+[node name="Line2D2" type="Line2D" parent="ColorRect/LaundryTimesHeader"]
 position = Vector2( 19.491, 21.3831 )
 points = PoolVector2Array( 0, 0, 450, 0 )
 width = 3.0
 default_color = Color( 0.101961, 0.109804, 0.101961, 1 )
 
 [node name="StandardLayout" type="Node2D" parent="ColorRect"]
+visible = false
 
 [node name="FluffStory" type="Node2D" parent="ColorRect/StandardLayout"]
 
@@ -282,24 +288,147 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" parent="ColorRect" instance=ExtResource( 1 )]
-visible = false
+[node name="ExitButton" parent="ColorRect" instance=ExtResource( 2 )]
 self_modulate = Color( 0.952941, 0.87451, 0.756863, 1 )
 margin_left = 517.0
 margin_top = -13.0
 margin_right = 557.0
 margin_bottom = 27.0
 
+[node name="LetterLayout" type="Node2D" parent="ColorRect"]
+position = Vector2( -262, -25 )
+
+[node name="ReturnAddress" type="Node2D" parent="ColorRect/LetterLayout"]
+position = Vector2( 50.433, -31.2438 )
+
+[node name="CompanyName" type="Label" parent="ColorRect/LetterLayout/ReturnAddress"]
+margin_left = 331.612
+margin_top = 74.1624
+margin_right = 377.612
+margin_bottom = 96.1624
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "Laundrocorp"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Label" parent="ColorRect/LetterLayout/ReturnAddress"]
+margin_left = 316.706
+margin_top = 118.329
+margin_right = 592.706
+margin_bottom = 140.329
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "All for laundry, laundry for all"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Salutation" type="Label" parent="ColorRect/LetterLayout"]
+margin_left = 319.0
+margin_top = 153.0
+margin_right = 489.0
+margin_bottom = 175.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "Dear Washerman,"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="Label" parent="ColorRect/LetterLayout"]
+margin_left = 319.0
+margin_top = 206.0
+margin_right = 719.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 400, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "You are in violation of Laundrocorp’s copyright of the term “laundry.” 
+
+Please cease operations or agree to our payment scheme."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Closing" type="Node2D" parent="ColorRect/LetterLayout"]
+position = Vector2( 6, -67 )
+
+[node name="Regards" type="Label" parent="ColorRect/LetterLayout/Closing"]
+margin_left = 313.0
+margin_top = 438.0
+margin_right = 713.0
+margin_bottom = 488.0
+rect_min_size = Vector2( 400, 0 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "Sincerely,"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Signature" type="Label" parent="ColorRect/LetterLayout/Closing"]
+margin_left = 313.0
+margin_top = 470.0
+margin_right = 713.0
+margin_bottom = 520.0
+rect_min_size = Vector2( 400, 50 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.109804, 0.101961, 1 )
+text = "Biggus Moneybaggus II, CEO"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="HBoxContainer" parent="ColorRect/LetterLayout"]
+margin_left = 316.0
+margin_top = 498.0
+margin_right = 706.0
+margin_bottom = 548.0
+custom_constants/separation = 72
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" parent="ColorRect/LetterLayout/Buttons" instance=ExtResource( 6 )]
+margin_left = 3.0
+margin_right = 57.0
+tooltip_enabled = "close up shop"
+
+[node name="Challenge" parent="ColorRect/LetterLayout/Buttons" instance=ExtResource( 6 )]
+margin_left = 129.0
+margin_right = 233.0
+text = "Challenge"
+tooltip_enabled = "take 'em to court!"
+tooltip_disabled = "No lawyer cat available :("
+
+[node name="Accept" parent="ColorRect/LetterLayout/Buttons" instance=ExtResource( 6 )]
+margin_left = 305.0
+margin_right = 387.0
+text = "Accept"
+tooltip_enabled = "pay them"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/appear = SubResource( 2 )
-anims/disappear = SubResource( 3 )
-anims/idle = SubResource( 4 )
+anims/appear = SubResource( 3 )
+anims/disappear = SubResource( 4 )
+anims/idle = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 3 )
 volume_db = -10.0
 bus = "soundfx"
 
+[node name="DialogParent" type="Position2D" parent="."]
+position = Vector2( 510.729, 292.712 )
+
 [connection signal="pressed" from="ColorRect/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="ColorRect/LetterLayout/Buttons/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="ColorRect/LetterLayout/Buttons/Challenge" to="." method="_on_Challenge_pressed"]
+[connection signal="pressed" from="ColorRect/LetterLayout/Buttons/Accept" to="." method="_on_Accept_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

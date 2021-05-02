@@ -92,6 +92,8 @@ func manage_queue() -> void:
 
 
 func _on_Timer_timeout() -> void:
+  if GameLogic.check_lawyer_cat_message():
+    create_and_send_lawyer()
   if queued_customers.size() >= 2 or next_id >= max_customers:
     print("not generating another customer now")
   else:
@@ -112,6 +114,15 @@ func create_and_send_customer(num : int) -> void:
     call_deferred("send_customer", customer)
 
 
+func create_and_send_lawyer() -> void:
+  var lawyer = preload("res://characters/customers/lawyer_cat/lawyer_cat.tscn").instance()
+  $Customers.add_child(lawyer)
+  lawyer.init_nav(navNode)
+  customers_created += 1
+  lawyer.add_to_group("dropping_off")
+  call_deferred("send_customer", lawyer)
+
+
 func reset() -> void:
   adjust_difficulty()
   for child in $Customers.get_children():
@@ -125,9 +136,11 @@ func reset() -> void:
 
 
 func _on_new_game() -> void:
+  reset()
   next_customer_max = NEXT_CUSTOMER_MAX
   start()
   # TODO: do same re-anchoring for max_customers
+
 
 func start() -> void:
   create_and_send_customer(starting_customers)
@@ -181,7 +194,8 @@ func adjust_difficulty() -> void:
 
 func get_angry() -> void:
   for customer in waiting_customers:
-    customer.storm_off()
+    if !customer.is_in_group("satisfied_customers"):
+      customer.storm_off()
   waiting_customers = []
 
 
@@ -212,6 +226,10 @@ func handle_entering(customer : KinematicBody2D) -> void:
 
 
 func change_customer_group(customer : KinematicBody2D) -> void:
+  if customer.is_in_group("lawyers"):
+    customer.remove_from_group("dropping_off")
+    customer.add_to_group("satisfied_customers")
+    customers_served += 1
   if customer.is_in_group("dropping_off"):
     customer.remove_from_group("dropping_off")
     customer.add_to_group("limbo")
@@ -222,8 +240,9 @@ func change_customer_group(customer : KinematicBody2D) -> void:
     customer.remove_from_group("picking_up")
     customer.add_to_group("satisfied_customers")
     customers_served += 1
-    if customers_served >= customers_created:
-      EventHub.emit_signal("day_over")
+
+  if customers_served >= customers_created:
+    EventHub.emit_signal("day_over")
 
 
 func _on_Clock_almost_closing() -> void:
@@ -239,9 +258,11 @@ func _on_game_over():
   get_angry()
   stop()
 
+
 func _on_restart():
   stop()
   reset()
+
 
 func _on_new_day():
   restart()

@@ -1,5 +1,14 @@
 extends Control
 var story_key
+var story_type
+var laundry_times_color := Color(0.95, 0.87, 0.76)
+var letter_color := Color(0.98, 0.98, 0.98)
+export (PackedScene) var Dialog
+
+
+func _ready():
+  _set_buttons()
+  $AnimationPlayer.play("appear")
 
 
 # TODO: personalize main story in first issue
@@ -42,8 +51,37 @@ const SPECIAL_STORIES = {
    }
  }
 
+const LAWYER_LETTERS = {
+  0: {
+    "content" : "You are in violation of Laundrocorp’s copyright of the term \"laundry\" \n\n" \
+        + "Please cease operations or agree to our payment scheme, unless you " \
+        + "have your own highly trained lawyer cat and wish to take this to court, "\
+        + "in what could only be a very expensive battle."
+   }
+ }
 
-func initialize(key):
+
+func initialize(key, notice_type := "laundry_times"):
+  story_type = notice_type
+
+  if notice_type == "letter":
+    $ColorRect/ExitButton.visible = false
+    $ColorRect/LaundryTimesHeader.visible = false
+    $ColorRect/StandardLayout.visible = false
+    $ColorRect/LetterLayout.visible = true
+    $ColorRect.color = letter_color
+    $ColorRect/ExitButton.self_modulate = letter_color
+    _set_buttons()
+    _set_letter(key)
+    return
+
+  # Not a letter, must be Laundry Times
+  $ColorRect/LaundryTimesHeader.visible = true
+  $ColorRect/StandardLayout.visible = true
+  $ColorRect/LetterLayout.visible = false
+  $ColorRect.color = laundry_times_color
+  $ColorRect/ExitButton.self_modulate = laundry_times_color
+  $ColorRect/ExitButton.visible = true
   match typeof(key):
     TYPE_STRING:
       if SPECIAL_STORIES.has(key):
@@ -61,6 +99,17 @@ func initialize(key):
       print("unknown key type for Laundry Weekly, exiting")
       _exit()
 
+
+func _set_letter(_key):
+  # TODO: hook up to letter dictionary and/or array
+  $AnimationPlayer.play("appear")
+
+
+func _set_buttons():
+  if GameLogic.get_lawyer_level() <= 0:
+    $ColorRect/LetterLayout/Buttons/Challenge.disable_button()
+  $ColorRect/LetterLayout/Buttons/Accept.grab_focus()
+  
 
 func _set_stories(key, location):
   # TODO: cache stories already shown? So can look back on them?
@@ -84,5 +133,39 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _exit():
-  EventHub.emit_signal("laundry_times_closed", story_key)
+  print("exiting")
+  EventHub.emit_signal("notice_closed", story_key, story_type)
   queue_free()
+
+
+func _make_dialog() -> Control:
+  var dialog = Dialog.instance()
+  $DialogParent.add_child(dialog)
+  dialog.connect("dialog_closed", self, "_on_dialog_closed")
+  $ColorRect/LetterLayout/Buttons.visible = false
+  return dialog
+
+
+func _on_Quit_pressed():
+  var dialog = _make_dialog()
+  dialog.init_quit()
+
+
+func _on_Challenge_pressed():
+  pass # TODO: something here when haz lawyer cat
+
+
+func _on_Accept_pressed():
+  var dialog = _make_dialog()
+  dialog.init_accept(100) # TODO: logical way of keeping track of new payments
+  dialog.connect("payment_accepted", self, "_on_payment_accepted")
+
+
+func _on_dialog_closed():
+  $ColorRect/LetterLayout/Buttons.visible = true
+
+
+func _on_payment_accepted():
+  _exit()
+
+

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laundry_times_title.png-b40ed25d08fd766db986823a04d814e0.stex"
+path="res://.import/framed_laundry_times.png-35779dc0a9b6441d92a94042436a7974.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://laundry_times/laundry_times_title.png"
-dest_files=[ "res://.import/laundry_times_title.png-b40ed25d08fd766db986823a04d814e0.stex" ]
+source_file="res://notice/framed_laundry_times.png"
+dest_files=[ "res://.import/framed_laundry_times.png-35779dc0a9b6441d92a94042436a7974.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
