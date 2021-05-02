@@ -46,7 +46,7 @@ var Customers = {
   "lawyer_cat": {
     "name": "Lawyer Cat",
     "sprite_path": "res://characters/customers/lawyer_cat/pipo-nekonin009.png",
-    "description": "You do not want to ",
+    "description": "You do not want to get on their bad side.",
     "speed": 65,
     "score_multiplier": 50,
     "patience_unit": 0.025,

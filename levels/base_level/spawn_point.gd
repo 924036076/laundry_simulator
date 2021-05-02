@@ -136,9 +136,11 @@ func reset() -> void:
 
 
 func _on_new_game() -> void:
+  reset()
   next_customer_max = NEXT_CUSTOMER_MAX
   start()
   # TODO: do same re-anchoring for max_customers
+
 
 func start() -> void:
   create_and_send_customer(starting_customers)
@@ -224,7 +226,7 @@ func handle_entering(customer : KinematicBody2D) -> void:
 
 
 func change_customer_group(customer : KinematicBody2D) -> void:
-  if customer.customer_name == "lawyer_cat":
+  if customer.is_in_group("lawyers"):
     customer.remove_from_group("dropping_off")
     customer.add_to_group("satisfied_customers")
     customers_served += 1
@@ -256,9 +258,11 @@ func _on_game_over():
   get_angry()
   stop()
 
+
 func _on_restart():
   stop()
   reset()
+
 
 func _on_new_day():
   restart()

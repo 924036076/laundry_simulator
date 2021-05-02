@@ -12,7 +12,6 @@ func _on_ready():
   set_physics_process(false)
   $AnimationTree.active = true
   EventHub.emit_signal("lawyer_cat_created")
-  print("I'm a lawyer cat!")
 
 
 func decrement_patience() -> void:
@@ -25,7 +24,7 @@ func init_nav(node : Navigation2D) -> void:
 
 
 func _on_Bumper_interacted():
-  print("lawyer cat leaving!")
+  EventHub.emit_signal("lawyer_cat_messaged")
   set_physics_process(false)
   $Bumper.interactable = false
   $Bumper/HandPos/Letter.visible = false

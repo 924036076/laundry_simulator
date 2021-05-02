@@ -41,9 +41,9 @@ signal toy_bounced_on_body
 signal new_game
 signal new_day
 
-# Laundry Times signals
-signal laundry_times_closed
-signal laundry_times_clicked # from interactable_laundry_times
+# Notice / Laundry Times signals
+signal notice_closed
+signal notice_clicked # from interactable_laundry_times
 
 # Options signals
 signal restart

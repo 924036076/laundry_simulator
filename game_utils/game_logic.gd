@@ -6,6 +6,8 @@ var day := 1
 var money := 0 setget set_player_money, get_player_money
 var previous_balance
 var has_lawyer_cat_message = true
+var lawyer_letter := 0
+var lawyer_level := 0
 
 
 const WASHERS = {
@@ -324,6 +326,14 @@ func check_lawyer_cat_message() -> bool:
   return has_lawyer_cat_message
 
 
+func get_lawyer_message() -> int:
+  return lawyer_letter
+
+
+func get_lawyer_level() -> int:
+  return lawyer_level
+
+
 func _ready():
   EventHub.connect("day_over", self, "_on_day_over")
   EventHub.connect("item_purchased", self, "_on_item_purchased")
@@ -349,7 +359,6 @@ func _on_day_over():
   update_laundry_weekly()
   if day == 1:
     add_customer("influencer", 8)
-    has_lawyer_cat_message = true
   if day == 2:
     add_customer("old_lady", 5)
 
@@ -360,8 +369,10 @@ func _on_new_day():
 
 
 func _on_new_game():
+  # TODO: reset inventory / store items
   reset_player_money(0)
   previous_balance = 0
+  lawyer_level = 0
 
 
 func _on_tutorial_started():
@@ -380,10 +391,12 @@ func _on_consumable_used(key):
 
 func _on_lawyer_cat_created():
   has_lawyer_cat_message = false
+  print("no more lawyer cat message")
 
 
 func _on_lawyer_cat_messaged():
-  add_customer("lawyer_cat", 2)
+  add_customer("lawyer_cat", 1)
+  lawyer_letter += 1
 
 
 func get_probability_dist():
